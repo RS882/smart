@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import Container from '../Container';
 import Flex from '../Flex';
-import Logo from './Logo/Logo';
+import Logo from '../Logo/Logo';
 
 
 interface HeaderProps {
@@ -15,8 +15,7 @@ const StyledHeader = styled.header`
  left: 0;
  max-height:60px;
  z-index:100;
- 
-  width: 100%;
+   width: 100%;
  
 `;
 
