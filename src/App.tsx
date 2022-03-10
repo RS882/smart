@@ -1,19 +1,19 @@
 import React from 'react';
 import styled from 'styled-components'
-
+import Header from './components/Header/Header';
 
 const AppWrapper = styled.div`
-color: ;
-font-family:;
-font-size: ;
+  
 `
 
 
 const App = () => {
   return (
-    <AppWrapper>
+    <div>
+      <Header />
       Работает!
-    </AppWrapper>
+
+    </div>
   );
 };
 

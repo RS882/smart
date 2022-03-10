@@ -14,6 +14,30 @@ declare module 'styled-components' {
 			tablet?: string,
 			desktop?: string,
 
+		},
+		font: {
+			family: {
+				main: string,
+				input?: string,
+				userCab?: string,
+			}
+			size: string
+		},
+		color: {
+			text: {
+				main: string,
+				second?: string,
+			},
+			blue?: string,
+			darkBlue?: string,
+			red?: string,
+			lightBlue?: string,
+			yellow?: string,
+			divider?: string,
+			menuBlue?: string,
+			cardBorder?: string,
+			ligthYellow?: string,
+
 		}
 		// borderRadius: string;
 		// colors: {

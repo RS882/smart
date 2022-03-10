@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 
 export const Global = createGlobalStyle`
+
 * {
 	padding: 0px;
 	margin: 0px;
@@ -23,10 +24,13 @@ a:active {
 html,
 body {
 	height: 100%;
-	min-width: $minWidth + px;
+	min-width: ${props => props.theme.width?.min}
 }
 body {
+	
 	line-height: 1;
+	font-family: ${props => props.theme.font.family.main};
+	font-size: ${props => props.theme.font.size};
 	text-rendering: optimizeLegibility;
 	-ms-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
@@ -37,12 +41,14 @@ body {
 input,
 button,
 textarea {
-	font-family:;
+	font-family: ${props => props.theme.font.family.input};
 	font-size: inherit;
 	outline: none;
-  resize: none;
+	resize: none;
 }
 button {
+	font-family: ${props => props.theme.font.family.main};
+	
 	cursor: pointer;
 	color: inherit;
 	background-color: inherit;
