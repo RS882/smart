@@ -3,11 +3,11 @@ import 'styled-components';
 // and extend them!
 declare module 'styled-components' {
 	export interface DefaultTheme {
-		width?: {
+		width: {
 			min: string,
 			max: string,
-			maxContainer: string,
-			containerPadding?: string,
+			maxContainer: number,
+			containerPadding?: number,
 		},
 		media?: {
 			phone?: string,
@@ -24,6 +24,9 @@ declare module 'styled-components' {
 			size: string
 		},
 		color: {
+			bg: {
+				main: string,
+			},
 			text: {
 				main: string,
 				second?: string,

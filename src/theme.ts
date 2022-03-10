@@ -5,11 +5,12 @@ export const theme: DefaultTheme = {
 	width: {
 		min: '320px',
 		max: '1920px',
-		maxContainer: '1300px',
-		containerPadding: '20px',
+		maxContainer: 1300,
+		containerPadding: 20,
 	},
 	media: {
-		tablet: '767.98px',
+		tablet: '(min-width: 767.98px)',
+		desktop: `(min-width: 991.98px)`,
 	},
 	font: {
 		family: {
@@ -21,18 +22,22 @@ export const theme: DefaultTheme = {
 
 	},
 	color: {
-		text: {
-			main: '070C11',
-			second: '838688',
+
+		bg: {
+			main: '#fff',
 		},
-		blue: '4878A6',
-		darkBlue: '2A5275',
-		red: 'F15152',
-		lightBlue: 'EDF2F6',
-		yellow: 'FBB13C',
-		divider: 'C8CACB',
-		menuBlue: '0E1821',
-		cardBorder: 'EAEAF0',
-		ligthYellow: 'FFF7E3',
+		text: {
+			main: '#070C11',
+			second: '#838688',
+		},
+		blue: '#4878A6',
+		darkBlue: '#2A5275',
+		red: '#F15152',
+		lightBlue: '#EDF2F6',
+		yellow: '#FBB13C',
+		divider: '#C8CACB',
+		menuBlue: '#0E1821',
+		cardBorder: '#EAEAF0',
+		ligthYellow: '#FFF7E3',
 	},
 }

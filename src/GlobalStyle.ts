@@ -24,7 +24,7 @@ a:active {
 html,
 body {
 	height: 100%;
-	min-width: ${props => props.theme.width?.min}
+	min-width: ${props => props.theme.width.min}
 }
 body {
 	

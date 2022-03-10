@@ -1,24 +1,41 @@
 import React, { FC } from 'react';
+import styled from 'styled-components';
+import Container from '../Container';
+import Flex from '../Flex';
+import Logo from './Logo/Logo';
+
 
 interface HeaderProps {
 
-}
+};
 
+const StyledHeader = styled.header`
+ position:fixed;
+ top: 0;
+ left: 0;
+ max-height:60px;
+ z-index:100;
+ 
+  width: 100%;
+ 
+`;
 
+const ContainerHeader = styled(Container)`
+
+`;
 
 const Header: FC<HeaderProps> = () => {
-	return (
-		<div className="_icon-facebook">
+	return (<>
+		<StyledHeader>
+			<ContainerHeader>
+				<Flex margin={'10px 10px 10px 15px'} justufy={'space-between'}>
+					<Logo />
 
-			{/* <span className="path1">
-			</span><span className="path2"></span><span className="path3"></span>
-			<span className="path4"></span><span className="path5"></span>
-			<span className="path6"></span><span className="path7"></span>
-			<span className="path8"></span><span className="path9"></span>
-			<span className="path10"></span><span className="path11"></span> */}
+				</Flex>
+			</ContainerHeader>
+		</StyledHeader>
 
-
-		</div>
+	</>
 	);
 };
 
