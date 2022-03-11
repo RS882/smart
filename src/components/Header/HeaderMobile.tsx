@@ -6,12 +6,13 @@ import Flex from '../Flex';
 import LaguageBtn from '../LanguageChoose/LaguageBtn';
 
 import Logo from './../Logo/Logo';
+import { ILanguages } from './../redux/appSlice';
 
 
 
 
-interface HeaderMobileProps {
-	strings: IHeaderStings,
+interface HeaderMobileProps extends ILanguages {
+	strings: IHeaderStings;
 }
 
 const StyledHeaderMobele = styled(Flex)`

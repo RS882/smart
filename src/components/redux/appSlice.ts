@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
-
-interface IApp {
+export interface ILanguages {
 	activeLanguage: string,
 	languages: string[],
+}
+
+interface IApp extends ILanguages {
+
 }
 
 const initialState: IApp = {

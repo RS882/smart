@@ -6,12 +6,14 @@ import HeaderBottom from './HeaderBottom';
 
 import HeaderMobile from './HeaderMobile';
 import { strings } from './../../localization/localization';
+import { useAppSelector } from '../redux/hooks';
+import { selectActiveLanguage, selectLanguages } from '../redux/appSlice';
 
 interface HeaderProps {
 
 };
 
-const StyledHeader = styled.header`
+const StyledHeader = styled.header<HeaderProps>`
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -20,16 +22,22 @@ const StyledHeader = styled.header`
    width: 100%;
  `;
 
-const ContainerHeader = styled(Container)`
-`;
+
 
 const Header: FC<HeaderProps> = (props) => {
 
+	const activeLanguage = useAppSelector(selectActiveLanguage);
+	const languages = useAppSelector(selectLanguages);
+	console.log(languages);
+
+
 	return (<>
 		<StyledHeader>
-			<ContainerHeader>
-				<HeaderMobile strings={strings.header} />
-			</ContainerHeader>
+			<Container>
+				<HeaderMobile strings={strings.header}
+					activeLanguage={activeLanguage}
+					languages={languages} />
+			</Container>
 			<HeaderBottom />
 		</StyledHeader>
 

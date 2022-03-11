@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components'
 import Flex from './components/Flex';
 import Header from './components/Header/Header';
+import { setActiveLanguage, setLanguages } from './components/redux/appSlice';
+import { useAppDispatch } from './components/redux/hooks';
 import { strings } from './localization/localization';
+import store from './components/redux/store';
 
 const AppWrapper = styled(Flex)`
   border: 1px solid #000;
@@ -16,10 +19,18 @@ const AppWrapper = styled(Flex)`
 		flex: 1 1 auto;
 	}
 `
-console.log(strings.getAvailableLanguages());
-console.log(strings.getLanguage());
+
 
 const App = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setActiveLanguage(strings.getLanguage()))
+    dispatch(setLanguages(strings.getAvailableLanguages()))
+  });
+
+
+
   return (
     <AppWrapper direction={'column'}>
       <Header />
