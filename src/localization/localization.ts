@@ -17,7 +17,7 @@ export let strings: IStrings = new LocalizedStrings({
 			btnEnter: 'login',
 		},
 	},
-	uk: {
+	ua: {
 		header: {
 			btnEnter: 'увійти',
 		},

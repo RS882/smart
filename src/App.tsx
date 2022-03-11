@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import Flex from './components/Flex';
 import Header from './components/Header/Header';
+import { strings } from './localization/localization';
 
 const AppWrapper = styled(Flex)`
   border: 1px solid #000;
@@ -15,7 +16,8 @@ const AppWrapper = styled(Flex)`
 		flex: 1 1 auto;
 	}
 `
-
+console.log(strings.getAvailableLanguages());
+console.log(strings.getLanguage());
 
 const App = () => {
   return (
