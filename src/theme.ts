@@ -28,6 +28,7 @@ export const theme: DefaultTheme = {
 		},
 		text: {
 			main: '#070C11',
+			mainLight: '#fff',
 			second: '#838688',
 		},
 		blue: '#4878A6',

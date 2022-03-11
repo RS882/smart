@@ -29,6 +29,7 @@ declare module 'styled-components' {
 			},
 			text: {
 				main: string,
+				mainLight: string,
 				second?: string,
 			},
 			blue?: string,
