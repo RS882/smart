@@ -3,10 +3,11 @@ import styled from 'styled-components';
 
 
 interface FlexProps {
-	direction?: string,
-	justufy?: string,
-	align?: string,
-	margin?: string,
+	direction?: string;
+	justufy?: string;
+	align?: string;
+	margin?: string;
+	className?: string;
 };
 
 const StyledFlex = styled.div<FlexProps>`

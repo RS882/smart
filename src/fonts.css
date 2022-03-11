@@ -97,91 +97,91 @@
 	color: rgb(14, 24, 33);
 }
 ._icon-e_skate .path8:before {
-	content: "\e907";
-	margin-left: -1em;
-	color: rgb(255, 255, 255);
-}
-._icon-e_skate .path9:before {
-	content: "\e908";
-	margin-left: -1em;
-	color: rgb(14, 24, 33);
-}
-._icon-e_skate .path10:before {
 	content: "\e909";
 	margin-left: -1em;
 	color: rgb(255, 255, 255);
 }
-._icon-e_skate .path11:before {
+._icon-e_skate .path9:before {
 	content: "\e90a";
+	margin-left: -1em;
+	color: rgb(14, 24, 33);
+}
+._icon-e_skate .path10:before {
+	content: "\e90b";
+	margin-left: -1em;
+	color: rgb(255, 255, 255);
+}
+._icon-e_skate .path11:before {
+	content: "\e90c";
 	margin-left: -1em;
 	color: rgb(241, 81, 82);
 }
 ._icon-segway .path1:before {
-	content: "\e90b";
+	content: "\e90d";
 	color: rgb(72, 120, 166);
 }
 ._icon-segway .path2:before {
-	content: "\e90c";
-	margin-left: -1em;
-	color: rgb(14, 24, 33);
-}
-._icon-segway .path3:before {
-	content: "\e90d";
-	margin-left: -1em;
-	color: rgb(255, 255, 255);
-}
-._icon-segway .path4:before {
 	content: "\e90e";
 	margin-left: -1em;
 	color: rgb(14, 24, 33);
 }
-._icon-segway .path5:before {
+._icon-segway .path3:before {
 	content: "\e90f";
-	margin-left: -1em;
-	color: rgb(14, 24, 33);
-}
-._icon-segway .path6:before {
-	content: "\e910";
 	margin-left: -1em;
 	color: rgb(255, 255, 255);
 }
-._icon-segway .path7:before {
+._icon-segway .path4:before {
+	content: "\e910";
+	margin-left: -1em;
+	color: rgb(14, 24, 33);
+}
+._icon-segway .path5:before {
 	content: "\e911";
 	margin-left: -1em;
 	color: rgb(14, 24, 33);
 }
-._icon-segway .path8:before {
+._icon-segway .path6:before {
 	content: "\e912";
+	margin-left: -1em;
+	color: rgb(255, 255, 255);
+}
+._icon-segway .path7:before {
+	content: "\e913";
+	margin-left: -1em;
+	color: rgb(14, 24, 33);
+}
+._icon-segway .path8:before {
+	content: "\e914";
 	margin-left: -1em;
 	color: none;
 }
 ._icon-segway .path9:before {
-	content: "\e913";
+	content: "\e915";
 	margin-left: -1em;
 	color: rgb(42, 82, 117);
 }
 ._icon-segway .path10:before {
-	content: "\e914";
+	content: "\e916";
 	margin-left: -1em;
 	color: rgb(14, 24, 33);
 }
 ._icon-segway .path11:before {
-	content: "\e915";
+	content: "\e917";
 	margin-left: -1em;
 	color: rgb(72, 120, 166);
 }
 ._icon-segway .path12:before {
-	content: "\e916";
+	content: "\e918";
 	margin-left: -1em;
 	color: rgb(241, 81, 82);
 }
 ._icon-segway .path13:before {
-	content: "\e917";
+	content: "\e9a1";
 	margin-left: -1em;
 	color: rgb(241, 81, 82);
 }
 ._icon-segway .path14:before {
-	content: "\e918";
+	content: "\e9a2";
 	margin-left: -1em;
 	color: rgb(255, 255, 255);
 }
@@ -781,11 +781,20 @@
 	margin-left: -1em;
 	color: none;
 }
+._icon-arrow-right:before {
+	content: "\e907";
+}
+._icon-arrow-left:before {
+	content: "\e908";
+}
 ._icon-eye1:before {
 	content: "\e99e";
 }
 ._icon-eye_off:before {
 	content: "\e99f";
+}
+._icon-change:before {
+	content: "\e9a3";
 }
 ._icon-search:before {
 	content: "\e99d";

@@ -22,7 +22,6 @@ export const theme: DefaultTheme = {
 
 	},
 	color: {
-
 		bg: {
 			main: '#fff',
 		},

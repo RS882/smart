@@ -1,38 +1,36 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Button from '../Button';
-import Container from '../Container';
-import Flex from '../Flex';
-import Logo from '../Logo/Logo';
 
+import Container from '../Container';
+import HeaderBottom from './HeaderBottom';
+
+import HeaderMobile from './HeaderMobile';
+import { strings } from './../../localization/localization';
 
 interface HeaderProps {
 
 };
 
 const StyledHeader = styled.header`
-	position:fixed;
+	position: fixed;
 	top: 0;
 	left: 0;
 	max-height:60px;
 	z-index:100;
    width: 100%;
- 
-`;
+ `;
 
 const ContainerHeader = styled(Container)`
-
 `;
 
-const Header: FC<HeaderProps> = () => {
+const Header: FC<HeaderProps> = (props) => {
+
 	return (<>
 		<StyledHeader>
 			<ContainerHeader>
-				<Flex margin={'10px 10px 10px 15px'} justufy={'space-between'}>
-					<Logo />
-					<Button>Войти</Button>
-				</Flex>
+				<HeaderMobile strings={strings.header} />
 			</ContainerHeader>
+			<HeaderBottom />
 		</StyledHeader>
 
 	</>

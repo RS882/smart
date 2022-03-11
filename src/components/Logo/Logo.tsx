@@ -4,9 +4,7 @@ import Image from '../Img';
 
 const Logo = () => {
 	return (
-
 		<Image src={logo} alt='logo' width='124' height='40' />
-
 	);
 };
 
