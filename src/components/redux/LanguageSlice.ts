@@ -34,16 +34,16 @@ const LanguageSlice = createSlice({
 		setLanguages: (state, action: PayloadAction<ILanguages>) => {
 			state.language = action.payload;
 		},
-		toggleShowMenu: (state) => {
+		toggleShowMenuLng: (state) => {
 			state.isMenu = !state.isMenu;
 		},
-		closeMenu: (state) => {
+		closeMenuLng: (state) => {
 			state.isMenu = false;
 		},
 	},
 })
 
-export const { setActiveLanguage, setLanguages, toggleShowMenu, } = LanguageSlice.actions;
+export const { setActiveLanguage, setLanguages, toggleShowMenuLng, closeMenuLng } = LanguageSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 

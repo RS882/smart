@@ -7,11 +7,16 @@ import { theme } from './../../theme';
 import { ArrowFn } from '../types';
 
 interface ILanguageMenu extends ILanguages {
-	isMenu: boolean;
+	isMenu?: boolean;
 	cnahgeActiveLng: ArrowFn;
 };
 
-const StyledLanguagesMenu = styled.div`
+interface ILanguageMenuStyled extends ILanguages {
+	isMenu?: boolean;
+
+};
+
+const StyledLanguagesMenu = styled.div<ILanguageMenuStyled>`
 	position: absolute;
 	top: 100%;
 	left: -1px;
@@ -20,14 +25,17 @@ const StyledLanguagesMenu = styled.div`
 	border-radius: 0 0 4px 4px ;
 	border: 1px solid  ${props => props.theme.color.darkBlue};
 	border-top:none;
-
+	transition: all 0.3s ease 0s;
+	
+		opacity: ${props => props.isMenu ? '1' : '0'};
+		visibility: ${props => props.isMenu ? 'visible' : 'hidden'};
+		
 `;
 const StyledLngBtnWrapper = styled.div`
 	padding-bottom: 10px ;
 `;
 
 const LanguageMenu: FC<ILanguageMenu> = (props) => {
-
 
 	const languageBtns = props.languages?.map((el, i) =>
 		<StyledLngBtnWrapper key={el + i}>
@@ -39,7 +47,7 @@ const LanguageMenu: FC<ILanguageMenu> = (props) => {
 	);
 
 	return (
-		<StyledLanguagesMenu>
+		<StyledLanguagesMenu isMenu={props.isMenu}>
 			<Flex direction='column'>
 				{languageBtns}
 			</Flex>

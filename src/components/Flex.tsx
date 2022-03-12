@@ -1,14 +1,17 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { ArrowFn } from './types';
 
 
 interface FlexProps {
+	onClick?: ArrowFn;
 	direction?: string;
 	justufy?: string;
 	align?: string;
 	margin?: string;
 	className?: string;
 };
+
 
 const StyledFlex = styled.div<FlexProps>`
 	display: flex;

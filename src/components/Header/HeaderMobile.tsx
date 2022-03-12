@@ -17,7 +17,7 @@ interface HeaderMobileProps {
 }
 
 const StyledHeaderMobele = styled(Flex)`
-	/* padding: 10px 0; */
+	
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		//display:none;
 	};

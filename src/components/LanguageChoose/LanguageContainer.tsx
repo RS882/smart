@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { selectIsLangMenu, selectLanguage, setActiveLanguage, toggleShowMenu } from '../redux/LanguageSlice';
+import { closeMenuLng, selectIsLangMenu, selectLanguage, setActiveLanguage, toggleShowMenuLng } from '../redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import Languages from './Languages';
 import { strings } from '../../localization/localization';
@@ -11,18 +11,18 @@ const LanguageContainer = () => {
 	const language = useAppSelector(selectLanguage);
 	const isMenu = useAppSelector(selectIsLangMenu);
 
-	const onClickBtn = () => {
-		dispatch(toggleShowMenu());
+	const onClickBtnLng = () => {
+		dispatch(toggleShowMenuLng());
 	};
 
 	const cnahgeActiveLng = (e: any) => {
 		strings.setLanguage(e);
 		dispatch(setActiveLanguage(e));
+		dispatch(closeMenuLng());
 	};
-	console.log(strings);
 
 	return (
-		<Languages {...language} onClickBtn={onClickBtn}
+		<Languages {...language} onClickBtnLng={onClickBtnLng}
 			cnahgeActiveLng={cnahgeActiveLng} isMenu={isMenu} />
 
 	);

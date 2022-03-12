@@ -1,16 +1,15 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
+
 import Flex from '../Flex';
 import Button, { ButtonProps } from './../Button';
 
 
-interface LanguageBtn extends ButtonProps {
+interface ILanguageBtn extends ButtonProps {
 
 }
 
 
-
-const LanguageBtn: FC<LanguageBtn> = (props) => {
+const LanguageBtn: FC<ILanguageBtn> = (props) => {
 	return (
 		<Button {...props} width='40px' texTransform='uppercase'>
 			<Flex margin='0 10px' >{props.children}</Flex>
