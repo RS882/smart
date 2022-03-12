@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import styled from 'styled-components';
 
 import Flex from '../Flex';
 import Button, { ButtonProps } from './../Button';
@@ -9,11 +10,18 @@ interface ILanguageBtn extends ButtonProps {
 }
 
 
+const StyledLanguageBtn = styled(Button)`
+	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+		width: 48px;
+		height: 48px;
+	};
+`;
+
 const LanguageBtn: FC<ILanguageBtn> = (props) => {
 	return (
-		<Button {...props} width='40px' texTransform='uppercase'>
+		<StyledLanguageBtn {...props} width='40px' texTransform='uppercase'>
 			<Flex margin='0 10px' >{props.children}</Flex>
-		</Button>
+		</StyledLanguageBtn>
 	);
 };
 

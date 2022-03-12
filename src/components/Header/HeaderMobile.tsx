@@ -25,6 +25,10 @@ const StyledHeaderMobele = styled(Flex)`
 
 const StyledLoginBtn = styled(Button)`
 		margin-right:10px;
+		@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+			width: 99px;
+			height: 48px;
+		};
 	`
 
 const HeaderMobile: FC<HeaderMobileProps> = (props) => {

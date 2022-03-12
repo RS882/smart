@@ -26,8 +26,7 @@ const StyledLanguagesMenu = styled.div<ILanguageMenuStyled>`
 	border: 1px solid  ${props => props.theme.color.darkBlue};
 	border-top:none;
 	transition: all 0.3s ease 0s;
-	
-		opacity: ${props => props.isMenu ? '1' : '0'};
+			opacity: ${props => props.isMenu ? '1' : '0'};
 		visibility: ${props => props.isMenu ? 'visible' : 'hidden'};
 		
 `;
