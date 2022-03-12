@@ -6,8 +6,8 @@ declare module 'styled-components' {
 		width: {
 			min: string,
 			max: string,
-			maxContainer: number,
-			containerPadding?: number,
+			maxContainer: string,
+			containerPadding?: string,
 		},
 		media?: {
 			phone?: string,

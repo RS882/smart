@@ -5,8 +5,8 @@ export const theme: DefaultTheme = {
 	width: {
 		min: '320px',
 		max: '1920px',
-		maxContainer: 1300,
-		containerPadding: 20,
+		maxContainer: '1300px',
+		containerPadding: '20px',
 	},
 	media: {
 		tablet: '(min-width: 767.98px)',

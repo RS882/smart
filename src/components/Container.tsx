@@ -7,19 +7,16 @@ interface ContainerProps {
 };
 
 const StyledContainer = styled.div<ContainerProps>`
-/* border: 1px solid ${props => props.bgColor || props.theme.color.bg.main || `#fff`}; */
+
 margin: 0 auto;
 box-sizing: content-box;
 max-width: none;
-
-background-color: ${props => props.bgColor || props.theme.color.bg.main || `#fff`};
+width: 100%;
+height: 100%;
 @media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-		max-width: ${props => props.theme.width.maxContainer + 'px' || '1300px'};
-		padding: 0 ${props => props.theme.width.containerPadding + 'px' || '20px'};
+		max-width: ${props => props.theme.width.maxContainer || '1300px'};
 };
 `;
-
-
 const Container: FC<ContainerProps> = (props) => {
 	return <StyledContainer {...props} />;
 };
