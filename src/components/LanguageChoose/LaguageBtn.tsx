@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import Flex from '../Flex';
-import Button from './../Button';
+import Button, { ButtonProps } from './../Button';
 
 
-const LaguageBtn = () => {
+interface LanguageBtn extends ButtonProps {
+
+}
+
+
+
+const LanguageBtn: FC<LanguageBtn> = (props) => {
 	return (
-		<Button width='auto' texTransform='uppercase'>
-			<Flex margin='0 10px' >ua</Flex>
+		<Button {...props} width='40px' texTransform='uppercase'>
+			<Flex margin='0 10px' >{props.children}</Flex>
 		</Button>
 	);
 };
 
-export default LaguageBtn;
+export default LanguageBtn;

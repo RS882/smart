@@ -12,7 +12,6 @@ interface IStrings extends LocalizedStringsMethods {
 
 export let strings: IStrings = new LocalizedStrings({
 	en: {
-
 		header: {
 			btnEnter: 'login',
 		},
@@ -22,7 +21,6 @@ export let strings: IStrings = new LocalizedStrings({
 			btnEnter: 'увійти',
 		},
 	},
-
 	ru: {
 		header: {
 			btnEnter: 'войти',

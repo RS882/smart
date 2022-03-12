@@ -1,8 +1,13 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import Flex from './Flex';
+import { ArrowFn } from './types';
 
-interface ButtonProps {
+
+
+
+export interface ButtonProps {
+	onClick?: ArrowFn,
 	width?: string;
 	height?: string;
 	color?: string;
@@ -29,7 +34,9 @@ const StyledButton = styled.button<ButtonProps>`
 	text-transform: ${props => props.texTransform || 'capitalize'};
 	transition: all 0.3s ease 0s;
 	&:hover{
-		background-color: ${props => props.hover?.bgColor || props.theme.color.blue}
+		background-color: ${props => props.hover?.bgColor || props.theme.color.blue};
+		color: ${props => props.theme.color.text.mainLight || props.color};
+		border: none;
 	}
 `;
 

@@ -3,22 +3,23 @@ import styled from 'styled-components';
 import { IHeaderStings } from '../../localization/localization';
 import Button from '../Button';
 import Flex from '../Flex';
-import LaguageBtn from '../LanguageChoose/LaguageBtn';
+
+import LanguageContainer from '../LanguageChoose/LanguageContainer';
 
 import Logo from './../Logo/Logo';
-import { ILanguages } from './../redux/appSlice';
 
 
 
 
-interface HeaderMobileProps extends ILanguages {
+
+interface HeaderMobileProps {
 	strings: IHeaderStings;
 }
 
 const StyledHeaderMobele = styled(Flex)`
-	padding: 10px 0;
+	/* padding: 10px 0; */
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-		display:none;
+		//display:none;
 	};
 	`
 
@@ -32,7 +33,7 @@ const HeaderMobile: FC<HeaderMobileProps> = (props) => {
 			<Logo />
 			<Flex>
 				<StyledLoginBtn>{props.strings.btnEnter}</StyledLoginBtn>
-				<LaguageBtn />
+				<LanguageContainer />
 			</Flex>
 		</StyledHeaderMobele>
 	);

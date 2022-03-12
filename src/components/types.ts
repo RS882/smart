@@ -1,0 +1,1 @@
+export type ArrowFn = () => void;

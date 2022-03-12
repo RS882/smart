@@ -25,8 +25,10 @@ const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(setActiveLanguage(strings.getLanguage()))
-    dispatch(setLanguages(strings.getAvailableLanguages()))
+    dispatch(setLanguages({
+      languages: strings.getAvailableLanguages(),
+      activeLanguage: strings.getLanguage(),
+    }))
   });
 
 
