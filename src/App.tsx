@@ -2,17 +2,18 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components'
 import Flex from './components/Flex';
 import Header from './components/Header/Header';
-import { setActiveLanguage, setLanguages } from './components/redux/appSlice';
-import { useAppDispatch } from './components/redux/hooks';
+import { selectIsChangeLng, selectLanguage, setLanguages } from './components/redux/LanguageSlice';
+import { useAppDispatch, useAppSelector } from './components/redux/hooks';
 import { strings } from './localization/localization';
-import store from './components/redux/store';
+
+
 
 const AppWrapper = styled(Flex)`
-  border: 1px solid #000;
+
   min-height: 100%;
 	overflow: hidden;
 	position: relative;
-  color:${props => props.theme.color.text.main || `#000`};
+  color:${props => props.theme.color.text.main || `#070C11`};
   line-height: 130%;
   background-color: ${props => props.theme.color.bg.main || `#fff`};
   > main {
@@ -22,6 +23,7 @@ const AppWrapper = styled(Flex)`
 
 
 const App = () => {
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const App = () => {
     }))
   });
 
-
+  const isChangeLng = useAppSelector(selectIsChangeLng);
 
   return (
     <AppWrapper direction={'column'}>

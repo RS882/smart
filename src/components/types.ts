@@ -1,1 +1,1 @@
-export type ArrowFn = () => void;
+export type ArrowFn = (e?: any) => void;

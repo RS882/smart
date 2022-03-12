@@ -7,9 +7,11 @@ import HeaderBottom from './HeaderBottom';
 import HeaderMobile from './HeaderMobile';
 import { strings } from './../../localization/localization';
 
+import { ILanguages } from '../redux/LanguageSlice';
+
 
 interface HeaderProps {
-
+	language?: ILanguages;
 };
 
 const StyledHeader = styled.header<HeaderProps>`
@@ -21,9 +23,9 @@ const StyledHeader = styled.header<HeaderProps>`
    width: 100%;
  `;
 
+
+
 const Header: FC<HeaderProps> = (props) => {
-
-
 
 	return (<>
 		<StyledHeader>

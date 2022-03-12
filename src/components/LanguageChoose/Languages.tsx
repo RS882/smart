@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import Flex from '../Flex';
-import { ILanguages } from '../redux/appSlice';
+import { ILanguages } from '../redux/LanguageSlice';
 import { ArrowFn } from '../types';
 import LanguageBtn from './LaguageBtn';
 
@@ -11,6 +11,8 @@ import LanguageMenu from './LanguageMenu';
 
 interface ILanguage extends ILanguages {
 	onClickBtn: ArrowFn,
+	cnahgeActiveLng: ArrowFn,
+	isMenu: boolean,
 };
 
 const LanguageWrapper = styled.div`
@@ -31,7 +33,7 @@ const Languages: FC<ILanguage> = (props) => {
 	return (
 		<LanguageWrapper>
 			<LanguageBtn onClick={props.onClickBtn}> {props.activeLanguage}</LanguageBtn>
-			<LanguageMenu languages={props.languages?.filter(e => e !== props.activeLanguage)} />
+			<LanguageMenu cnahgeActiveLng={props.cnahgeActiveLng} isMenu={props.isMenu} languages={props.languages?.filter(e => e !== props.activeLanguage)} />
 		</LanguageWrapper>
 	);
 };

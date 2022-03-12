@@ -1,10 +1,15 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import Flex from '../Flex';
-import { ILanguages } from '../redux/appSlice';
+import { ILanguages } from '../redux/LanguageSlice';
 import LanguageBtn from './LaguageBtn';
 import { theme } from './../../theme';
+import { ArrowFn } from '../types';
 
+interface ILanguageMenu extends ILanguages {
+	isMenu: boolean;
+	cnahgeActiveLng: ArrowFn;
+};
 
 const StyledLanguagesMenu = styled.div`
 	position: absolute;
@@ -15,27 +20,23 @@ const StyledLanguagesMenu = styled.div`
 	border-radius: 0 0 4px 4px ;
 	border: 1px solid  ${props => props.theme.color.darkBlue};
 	border-top:none;
-	
-`;
 
+`;
 const StyledLngBtnWrapper = styled.div`
-
-padding-bottom: 10px ;
+	padding-bottom: 10px ;
 `;
 
-const LanguageMenu: FC<ILanguages> = (props) => {
+const LanguageMenu: FC<ILanguageMenu> = (props) => {
 
 
-	const languageBtns = props.languages?.map((el, i) => {
-		return (
-			<StyledLngBtnWrapper key={el + i}>
-				<LanguageBtn bgColor={theme.color.bg.main}
-					color={theme.color.darkBlue}
-					border={`1px solid ${theme.color.darkBlue}`} >
-					{el}</LanguageBtn>
-			</StyledLngBtnWrapper >
-		)
-	})
+	const languageBtns = props.languages?.map((el, i) =>
+		<StyledLngBtnWrapper key={el + i}>
+			<LanguageBtn onClick={() => props.cnahgeActiveLng(el)} bgColor={theme.color.bg.main}
+				color={theme.color.darkBlue}
+				border={`1px solid ${theme.color.darkBlue}`} >
+				{el}</LanguageBtn>
+		</StyledLngBtnWrapper >
+	);
 
 	return (
 		<StyledLanguagesMenu>
