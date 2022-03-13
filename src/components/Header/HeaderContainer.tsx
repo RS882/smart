@@ -7,7 +7,7 @@ import HeaderBottom from './HeaderBottom';
 
 import { strings } from '../../localization/localization';
 
-import { ILanguages } from '../redux/LanguageSlice';
+import { ILanguages } from '../../redux/LanguageSlice';
 import Header from './Header';
 
 

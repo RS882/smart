@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import Flex from '../Flex';
-import { ILanguages } from '../redux/LanguageSlice';
+import { ILanguages } from '../../redux/LanguageSlice';
 import LanguageBtn from './LaguageBtn';
 import { theme } from './../../theme';
 import { ArrowFn } from '../types';

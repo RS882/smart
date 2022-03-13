@@ -4,7 +4,7 @@ import Flex from './../Flex';
 
 
 interface IHeaderAction {
-	HeaderActionClassName: string;
+	HeaderActionClassName?: string;
 }
 
 const StyledHeaderAction = styled.div`

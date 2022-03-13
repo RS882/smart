@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 
-import { ILanguages } from '../redux/LanguageSlice';
+import { ILanguages } from '../../redux/LanguageSlice';
 import { ArrowFn } from '../types';
 import LanguageBtn from './LaguageBtn';
 

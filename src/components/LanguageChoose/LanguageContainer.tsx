@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { closeMenuLng, selectIsLangMenu, selectLanguage, setActiveLanguage, toggleShowMenuLng } from '../redux/LanguageSlice';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { closeMenuLng, selectIsLangMenu, selectLanguage, setActiveLanguage, toggleShowMenuLng } from '../../redux/LanguageSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import Languages from './Languages';
 import { strings } from '../../localization/localization';
 
