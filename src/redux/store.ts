@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import LanguageReducer from "./LanguageSlice"
+import LanguageReducer from "./LanguageSlice";
+import ActionReducer from "./ActionSlice";
 
 const store = configureStore({
 	reducer: {
 		languages: LanguageReducer,
+		action: ActionReducer,
 	}
 })
 

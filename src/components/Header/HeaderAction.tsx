@@ -4,7 +4,8 @@ import Flex from './../Flex';
 
 
 interface IHeaderAction {
-	HeaderActionClassName?: string;
+	headerActionClassName?: string;
+	count?: number;
 }
 
 const StyledHeaderAction = styled.div`
@@ -16,7 +17,7 @@ border: 1px solid #000;
 const HeaderAction: FC<IHeaderAction> = (props) => {
 	return (
 
-		<StyledHeaderAction className={props.HeaderActionClassName} />
+		<StyledHeaderAction className={props.headerActionClassName} />
 
 	);
 };
