@@ -1,18 +1,18 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
-interface IAction {
-	count: {
+export interface IAction {
+	counts: {
 		viewed: number;
 		favorites: number;
 		compare: number;
 	}
 };
 const initialState: IAction = {
-	count: {
+	counts: {
 		viewed: 0,
-		favorites: 0,
-		compare: 0,
+		favorites: 5,
+		compare: 25,
 	}
 };
 
@@ -21,12 +21,12 @@ const ActionSlice = createSlice({
 	name: 'action',
 	initialState,
 	reducers: {
-		addViewedCount: (state) => { ++state.count.viewed },
-		addFavoritesCount: (state) => { ++state.count.favorites },
-		addCompareCount: (state) => { ++state.count.compare },
+		addViewedCount: (state) => { ++state.counts.viewed },
+		addFavoritesCount: (state) => { ++state.counts.favorites },
+		addCompareCount: (state) => { ++state.counts.compare },
 		clearCounts: (state) => {
-			let key: keyof typeof state.count;
-			for (key in state.count) { state.count[key] = 0; }
+			let key: keyof typeof state.counts;
+			for (key in state.counts) { state.counts[key] = 0; }
 		},
 
 	}
@@ -38,7 +38,8 @@ export const { addViewedCount, addFavoritesCount, addCompareCount, clearCounts, 
 
 // Other code such as selectors can use the imported `RootState` type
 
-export const selectViewedCount = (state: RootState) => state.action.count.viewed;
-export const selectFavoritesCount = (state: RootState) => state.action.count.favorites;
-export const selectCompareCount = (state: RootState) => state.action.count.compare;
+export const selectViewedCount = (state: RootState) => state.action.counts.viewed;
+export const selectFavoritesCount = (state: RootState) => state.action.counts.favorites;
+export const selectCompareCount = (state: RootState) => state.action.counts.compare;
+export const selectActionCount = (state: RootState) => state.action.counts;
 export default ActionSlice.reducer
