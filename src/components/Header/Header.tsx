@@ -7,7 +7,8 @@ import Flex from '../Flex';
 import LanguageContainer from '../LanguageChoose/LanguageContainer';
 
 import Logo from '../Logo/Logo';
-import HeaderActionsContainer from './HeaderActionsContainer';
+import HeaderActionsContainer from './HeaderAction/HeaderActionsContainer';
+
 
 
 

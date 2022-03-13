@@ -1,8 +1,8 @@
 import React from 'react';
-import Flex from '../Flex';
+import Flex from '../../Flex';
 import HeaderAction from './HeaderAction';
 import { useSelector } from 'react-redux';
-import { selectActionCount } from './../../redux/ActionSlice';
+import { selectActionCount } from './../../../redux/ActionSlice';
 
 interface IActionArray {
 	name: string,
