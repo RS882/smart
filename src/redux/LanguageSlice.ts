@@ -9,8 +9,6 @@ export interface ILanguages {
 interface ILang {
 	language: ILanguages;
 	isMenu: boolean;
-	isChange: boolean;
-
 }
 
 const initialState: ILang = {
@@ -19,7 +17,6 @@ const initialState: ILang = {
 		languages: [],
 	},
 	isMenu: false,
-	isChange: false,
 }
 
 const LanguageSlice = createSlice({
@@ -29,7 +26,6 @@ const LanguageSlice = createSlice({
 	reducers: {
 		setActiveLanguage: (state, action: PayloadAction<string>) => {
 			state.language.activeLanguage = action.payload;
-			state.isChange = !state.isChange;
 		},
 		setLanguages: (state, action: PayloadAction<ILanguages>) => {
 			state.language = action.payload;
@@ -49,5 +45,5 @@ export const { setActiveLanguage, setLanguages, toggleShowMenuLng, closeMenuLng 
 
 export const selectLanguage = (state: RootState) => state.languages.language;
 export const selectIsLangMenu = (state: RootState) => state.languages.isMenu;
-export const selectIsChangeLng = (state: RootState) => state.languages.isChange;
+export const selectActivLng = (state: RootState) => state.languages.language.activeLanguage;
 export default LanguageSlice.reducer

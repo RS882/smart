@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Container from '../Container';
 import HeaderBottom from './HeaderBottom';
 
-
 import { strings } from '../../localization/localization';
 
 import { ILanguages } from '../../redux/LanguageSlice';

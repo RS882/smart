@@ -10,7 +10,7 @@ export const theme: DefaultTheme = {
 	},
 	media: {
 		tablet: '(min-width: 767.98px)',
-		desktop: `(min-width: 991.98px)`,
+		desktop: '(min-width: 991.98px)',
 	},
 	font: {
 		family: {

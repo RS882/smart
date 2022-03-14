@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import styled from 'styled-components'
 import Flex from './components/Flex';
 
-import { closeMenuLng, selectIsChangeLng, selectIsLangMenu, setLanguages } from './redux/LanguageSlice';
+import { closeMenuLng, selectActivLng, selectIsLangMenu, setLanguages } from './redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { strings } from './localization/localization';
 import { ArrowFn } from './components/types';
@@ -12,11 +12,11 @@ import Compare from './components/Compare/Compare';
 import Viewed from './components/Viewed/Viewed';
 import Favorites from './components/Favorites/Favorites';
 import FooterContainer from './components/Footer/FooterContainer';
+import Cart from './components/Cart/Cart';
 
 interface IAppWrapper {
-  // onClick: ArrowFn;
   onClickApp?: ArrowFn;
-}
+};
 
 const AppWrapper = styled(Flex)`
 
@@ -43,7 +43,7 @@ const App: FC<IAppWrapper> = (props) => {
     }))
   });
 
-  const isChangeLng = useAppSelector(selectIsChangeLng);
+  const isChangeLng = useAppSelector(selectActivLng);
   useEffect(() => {
   }, [isChangeLng]);
 
@@ -65,6 +65,7 @@ const App: FC<IAppWrapper> = (props) => {
         <Route path='/compare' element={<Compare />} />
         <Route path='/viewed' element={<Viewed />} />
         <Route path='/favorites' element={<Favorites />} />
+        <Route path='/cart' element={<Cart />} />
       </Routes>
 
       <FooterContainer />

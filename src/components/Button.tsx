@@ -16,11 +16,9 @@ export interface ButtonProps {
 	bgColor?: string;
 	borderRadius?: string;
 	texTransform?: string;
-	hover?: {
-		bgColor?: string;
-		color?: string;
-		border?: string;
-	}
+	hoverBgColor?: string;
+	hoverColor?: string;
+	hoverBorder?: string;
 };
 
 const StyledButton = styled.button<ButtonProps>`
@@ -34,9 +32,9 @@ const StyledButton = styled.button<ButtonProps>`
 	text-transform: ${props => props.texTransform || 'capitalize'};
 	transition: all 0.3s ease 0s;
 	&:hover{
-		background-color: ${props => props.hover?.bgColor || props.theme.color.blue};
-		color: ${props => props.theme.color.text.mainLight || props.color};
-		border: none;
+		background-color: ${props => props.hoverBgColor || props.theme.color.blue};
+		color: ${props => props.hoverColor || props.theme.color.text.mainLight};
+		border: ${props => props.hoverBorder || 'none'};
 	}
 `;
 
