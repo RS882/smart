@@ -5,8 +5,8 @@ import Button from '../../Button';
 
 import { theme } from './../../../theme';
 
-interface IHeaderSeach extends IHeaderStings {
-
+interface IHeaderSeach {
+	btnSearch: string;
 }
 
 const StyledHeaderSeachWrapper = styled.div`

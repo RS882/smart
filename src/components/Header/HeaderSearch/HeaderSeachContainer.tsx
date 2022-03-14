@@ -4,8 +4,8 @@ import { IHeaderStings } from '../../../localization/localization';
 import Flex from '../../Flex';
 import HeaderSeach from './HeaderSeach';
 
-interface IHeaderSeachContainer extends IHeaderStings {
-
+interface IHeaderSeachContainer {
+	btnSearch: string;
 }
 
 const StyledHeaderSeachContainer = styled(Flex)`
