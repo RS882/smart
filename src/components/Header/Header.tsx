@@ -10,7 +10,8 @@ import Logo from '../Logo/Logo';
 import HeaderActionsContainer from './HeaderAction/HeaderActionsContainer';
 import HeaderCartContainer from './HeaderCart/HeaderCartContainer';
 import HeaderSeachContainer from './HeaderSearch/HeaderSeachContainer';
-import HeaderTel from './HeaderTel/HeaderTel';
+import HeaderTelContainer from './HeaderTel/HeaderTelContainer';
+
 
 
 
@@ -45,7 +46,7 @@ const Header: FC<HeaderProps> = (props) => {
 		<StyledHeader justufy={'space-between'}>
 			<Logo />
 			<Flex>
-				<HeaderTel workTime={props.strings.workTime} />
+				<HeaderTelContainer workTime={props.strings.workTime} />
 				<HeaderSeachContainer btnSearch={props.strings.btnSearch} />
 				<HeaderActionsContainer />
 				<HeaderCartContainer />

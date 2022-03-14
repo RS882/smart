@@ -2,11 +2,13 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { IHeaderStings } from '../../../localization/localization';
 import Button from '../../Button';
+import { ArrowFn } from '../../types';
 
 import { theme } from './../../../theme';
 
 interface IHeaderSeach {
 	btnSearch: string;
+	onClickSearch: ArrowFn;
 }
 
 const StyledHeaderSeachWrapper = styled.div`
@@ -23,7 +25,7 @@ const StyledScearchIcon = styled.div`
 const HeaderSeach: FC<IHeaderSeach> = (props) => {
 	return (
 		<StyledHeaderSeachWrapper>
-			<Button width='100%' height='36px' color={theme.color.text.second}
+			<Button onClick={props.onClickSearch} width='100%' height='36px' color={theme.color.text.second}
 				border='none' lineHeight='130%' bgColor=' transparent'
 				borderRadius='none' hoverBgColor='none ' hoverColor='none' >
 				<StyledScearchIcon className='_icon-search'></StyledScearchIcon>

@@ -9,6 +9,8 @@ export interface IAction {
 		cart: number;
 	}
 };
+
+
 const initialState: IAction = {
 	counts: {
 		viewed: 0,

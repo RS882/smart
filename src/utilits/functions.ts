@@ -1,4 +1,4 @@
-type telFn = (phoneNum: string | undefined) => string;
+export type telFn = (phoneNum: string | undefined) => string;
 
 //преобразуем шаблон пока тел номера из +3801111111 в +38 (011) 111 11 11
 export const showPhoneNum: telFn = phoneNum => {
