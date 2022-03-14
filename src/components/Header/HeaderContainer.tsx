@@ -1,13 +1,10 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-
 import Container from '../Container';
-import HeaderBottom from './HeaderBottom';
-
 import { strings } from '../../localization/localization';
-
 import { ILanguages } from '../../redux/LanguageSlice';
 import Header from './Header';
+import HeaderBottomContainer from './HeaderBottomContainer/HeaderBottomContainer';
 
 
 interface HeaderContainerProps {
@@ -40,7 +37,7 @@ const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 			<Container>
 				<Header strings={strings.header} />
 			</Container>
-			<HeaderBottom />
+			<HeaderBottomContainer />
 		</StyledHeader>
 
 	</>

@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Flex from '../Flex';
+import Flex from '../../Flex';
 
 
-const StyledHeaderBottom = styled(Flex)`
+const StyledHeaderBottomContainer = styled(Flex)`
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -19,14 +19,14 @@ const StyledHeaderBottom = styled(Flex)`
 	};
 	`
 
-const HeaderBottom = () => {
+const HeaderBottomContainer = () => {
 	return (
-		<StyledHeaderBottom justufy={'space-between'}>
+		<StyledHeaderBottomContainer justufy={'space-between'}>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero unde voluptatem dolorum temporibus est molestiae placeat nulla et nesciunt dignissimos. Ad accusamus suscipit iure rem commodi a eum rerum dicta.
-		</StyledHeaderBottom>
+		</StyledHeaderBottomContainer>
 
 
 	);
 };
 
-export default HeaderBottom;
+export default HeaderBottomContainer;
