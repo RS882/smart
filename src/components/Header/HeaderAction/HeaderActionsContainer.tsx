@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectActionCount } from './../../../redux/ActionSlice';
 import styled from 'styled-components';
 
-interface IActionArray {
+export interface IActionArray {
 	name: string,
 	classIcon: string;
 	classIconActive?: string;
@@ -18,7 +18,10 @@ const StyledHeaderAC = styled(Flex)`
 	margin-right:20px;
 	display: none;
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-			display: flex;
+		display: flex;
+	};
+	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
+		margin-right:0px;
 	};
 `
 

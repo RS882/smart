@@ -12,14 +12,14 @@ interface IHeaderAction {
 	name?: string;
 }
 
-const StyledHeaderAction = styled(Flex) <IHeaderAction>`
+export const StyledHeaderAction = styled(Flex) <IHeaderAction>`
 position: relative;
 width: 48px;
 height: 48px;
 color: ${props => props.className === '_icon-hart_full' ?
 		(props.theme.color.red || '#F15152') :
 		(props.theme.color.text.second || '#838688')};
-transition: color 0.3s ease 0s;
+
 `
 
 const HeaderAction: FC<IHeaderAction> = (props) => {

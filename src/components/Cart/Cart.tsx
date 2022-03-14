@@ -7,7 +7,7 @@ const Margin1 = styled.div`
 const Cart = () => {
 	return (
 		<Margin1>
-			Compare
+			cart
 		</Margin1>
 	);
 };

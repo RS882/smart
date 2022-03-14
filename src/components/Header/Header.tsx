@@ -8,6 +8,7 @@ import LanguageContainer from '../LanguageChoose/LanguageContainer';
 
 import Logo from '../Logo/Logo';
 import HeaderActionsContainer from './HeaderAction/HeaderActionsContainer';
+import HeaderCartContainer from './HeaderCart/HeaderCartContainer';
 import HeaderSeachContainer from './HeaderSearch/HeaderSeachContainer';
 
 
@@ -38,7 +39,6 @@ const StyledLoginBtn = styled(Button)`
 	`;
 
 
-
 const Header: FC<HeaderProps> = (props) => {
 	return (
 		<StyledHeader justufy={'space-between'}>
@@ -46,6 +46,7 @@ const Header: FC<HeaderProps> = (props) => {
 			<Flex>
 				<HeaderSeachContainer btnSearch={props.strings.btnSearch} />
 				<HeaderActionsContainer />
+				<HeaderCartContainer />
 				<StyledLoginBtn>{props.strings.btnEnter}</StyledLoginBtn>
 				<LanguageContainer />
 			</Flex>

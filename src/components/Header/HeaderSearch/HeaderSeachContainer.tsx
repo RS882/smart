@@ -9,12 +9,11 @@ interface IHeaderSeachContainer extends IHeaderStings {
 }
 
 const StyledHeaderSeachContainer = styled(Flex)`
-
-margin: 22px 8px 16px 0px;
-display: none;
-@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
-	display: flex;
-};
+	margin: 22px 8px 16px 0px;
+	display: none;
+	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
+		display: flex;
+	};
 `;
 
 const HeaderSeachContainer: FC<IHeaderSeachContainer> = (props) => {
