@@ -3,12 +3,10 @@ import styled from 'styled-components';
 import { IHeaderStings } from '../../localization/localization';
 import Button from '../Button';
 import Flex from '../Flex';
-
 import LanguageContainer from '../LanguageChoose/LanguageContainer';
-
-import Logo from '../Logo/Logo';
 import HeaderActionsContainer from './HeaderAction/HeaderActionsContainer';
 import HeaderCartContainer from './HeaderCart/HeaderCartContainer';
+import HeaderLogo from './HeaderLogo';
 import HeaderSeachContainer from './HeaderSearch/HeaderSeachContainer';
 import HeaderTelContainer from './HeaderTel/HeaderTelContainer';
 
@@ -44,7 +42,7 @@ const StyledLoginBtn = styled(Button)`
 const Header: FC<HeaderProps> = (props) => {
 	return (
 		<StyledHeader justufy={'space-between'}>
-			<Logo />
+			<HeaderLogo />
 			<Flex>
 				<HeaderTelContainer workTime={props.strings.workTime} />
 				<HeaderSeachContainer btnSearch={props.strings.btnSearch} />

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { IHeaderStings } from '../../../localization/localization';
+
 import Flex from '../../Flex';
 import { ArrowFn } from '../../types';
 import HeaderSeach from './HeaderSeach';
