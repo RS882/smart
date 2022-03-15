@@ -26,6 +26,9 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+._icon-dots:before {
+	content: "\e9a4";
+}
 ._icon-search_rev:before {
 	content: "\e9a0";
 }

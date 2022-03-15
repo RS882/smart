@@ -38,7 +38,7 @@ const HeaderBottomContainer: FC<IHeaderBottom> = (props) => {
 
 	const BtnArray: IHeaderBottomItem[] =
 		[{ name: 'search', classItem: '_icon-search_rev', },
-		{ name: 'more', classItem: '', },]
+		{ name: 'more', classItem: '_icon-dots', },]
 			.map((e) => ({ ...e, itemText: props.strings[e.name || 'home'] }));
 
 	return (

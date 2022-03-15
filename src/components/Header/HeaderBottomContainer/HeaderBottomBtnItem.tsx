@@ -15,6 +15,7 @@ interface IHeaderBottomBtnItem extends ButtonProps, IHeaderBottomItem {
 
 const StyledHeaderBottomItem = styled(Button)`
 	font-size:13px;
+	
 	&:focus{
 		color:${props => props.theme.color.text.mainLight || '#FFF'};
 	}
@@ -29,15 +30,11 @@ const StyledHBItemIcon = styled.div`
 	margin-bottom:5px;
 `
 
-const StyledDots = styled(Flex)`
-	width:100%;	
-	margin-bottom:8px;
-	margin-top:20px;
-`
+
 
 const HeaderBottomBtnItem: FC<IHeaderBottomBtnItem> = (props) => {
 
-	const dots: JSX.Element[] = ['1', '1', '1'].map((e, i) => <Dot key={'dot' + e + i} />);
+
 
 	return (
 
@@ -46,9 +43,7 @@ const HeaderBottomBtnItem: FC<IHeaderBottomBtnItem> = (props) => {
 			bgColor={theme.color.darkBlue || '#2A5275'} borderRadius='none'
 			hoverBgColor='none' hoverColor={theme.color.text.mainLight || '#FFF'}>
 			<Flex direction='column' >
-				{props.classItem ?
-					<StyledHBItemIcon className={props.classItem}></StyledHBItemIcon>
-					: <StyledDots justufy='space-between'>{dots}</StyledDots>}
+				<StyledHBItemIcon className={props.classItem}></StyledHBItemIcon>
 				<StyledHBItemText>{props.itemText}</StyledHBItemText>
 			</Flex>
 		</StyledHeaderBottomItem>
