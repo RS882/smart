@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { theme } from '../../../theme';
 import Button, { ButtonProps } from '../../Button';
 import Flex from '../../Flex';
-import Dot from './Dot';
+
 
 import { IHeaderBottomItem } from './HeaderBottom';
 

@@ -3,13 +3,14 @@ import styled from 'styled-components';
 
 interface IDot {
 	bgColor?: string;
+	size?: string;
 }
 
 const StyledDot = styled.div<IDot>`
-	width: 4px;
-	height:4px;
-	border-radius:50%;
-	background-color:${props => props.bgColor || '#BFCBD6'};
+	width: ${props => props.size || '8px'};
+	height: ${props => props.size || '8px'};
+	border-radius: 50%;
+	background-color: ${props => props.theme.color.yellow || '#FBB13C'};
 `
 
 
