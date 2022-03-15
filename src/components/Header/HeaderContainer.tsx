@@ -37,7 +37,7 @@ const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 			<Container>
 				<Header strings={strings.header} />
 			</Container>
-			<HeaderBottomContainer />
+			<HeaderBottomContainer strings={strings.header.bottomBtn} />
 		</StyledHeader>
 
 	</>

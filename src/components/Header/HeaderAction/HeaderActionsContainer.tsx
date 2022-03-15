@@ -20,7 +20,7 @@ const StyledHeaderAC = styled(Flex)`
 		display: flex;
 	};
 	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
-		margin-right:0px;
+		/* margin-right:0px; */
 	};
 `
 
@@ -28,10 +28,13 @@ const StyledHeaderAC = styled(Flex)`
 const HeaderActionsContainer = () => {
 
 	const conuts = useSelector(selectActionCount);
+	const actionArray: IActionArray[] = [{ name: 'viewed', classIcon: '_icon-eye1' },
+	{ name: 'favorites', classIcon: '_icon-hart_empty', classIconActive: '_icon-hart_full', },
+	{ name: 'compare', classIcon: '_icon-compare', }, { name: 'cart', classIcon: '_icon-cart' },];
 
 	return (
 		<StyledHeaderAC>
-			<HeaderActions conuts={conuts} />
+			<HeaderActions conuts={conuts} actionArray={actionArray} />
 		</StyledHeaderAC>
 	);
 };

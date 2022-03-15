@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import Flex from '../../Flex';
+import HeaderBottom, { IHeaderBottomItem } from './HeaderBottom';
+
+
+
+interface IHeaderBottom {
+	strings: any;
+};
+
 
 
 const StyledHeaderBottomContainer = styled(Flex)`
@@ -9,8 +17,10 @@ const StyledHeaderBottomContainer = styled(Flex)`
 	bottom: 0;
 	left: 0;
 	max-height: 64px;
+	z-index:100;
+   width: 100%;
 	background-color: ${props => props.theme.color.darkBlue || '#2A5275'};
-	color: ${props => props.theme.color.text.mainLight || '#FFF'};
+	
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		padding: 0 104px;
 	};
@@ -19,10 +29,21 @@ const StyledHeaderBottomContainer = styled(Flex)`
 	};
 	`
 
-const HeaderBottomContainer = () => {
+const HeaderBottomContainer: FC<IHeaderBottom> = (props) => {
+
+	const NlArray: IHeaderBottomItem[] = [{ name: '', classItem: '_icon-home', },
+	{ name: 'catalog', classItem: '_icon-catalog', },
+	{ name: 'cart', classItem: '_icon-cart', },]
+		.map((e) => ({ ...e, itemText: props.strings[e.name || 'home'] }))
+
+	const BtnArray: IHeaderBottomItem[] =
+		[{ name: 'search', classItem: '_icon-search_rev', },
+		{ name: 'more', classItem: '', },]
+			.map((e) => ({ ...e, itemText: props.strings[e.name || 'home'] }));
+
 	return (
 		<StyledHeaderBottomContainer justufy={'space-between'}>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero unde voluptatem dolorum temporibus est molestiae placeat nulla et nesciunt dignissimos. Ad accusamus suscipit iure rem commodi a eum rerum dicta.
+			<HeaderBottom NlArray={NlArray} BtnArray={BtnArray} />
 		</StyledHeaderBottomContainer>
 
 

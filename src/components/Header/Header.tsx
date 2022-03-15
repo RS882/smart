@@ -5,7 +5,7 @@ import Button from '../Button';
 import Flex from '../Flex';
 import LanguageContainer from '../LanguageChoose/LanguageContainer';
 import HeaderActionsContainer from './HeaderAction/HeaderActionsContainer';
-import HeaderCartContainer from './HeaderCart/HeaderCartContainer';
+
 import HeaderLogo from './HeaderLogo';
 import HeaderSeachContainer from './HeaderSearch/HeaderSeachContainer';
 import HeaderTelContainer from './HeaderTel/HeaderTelContainer';
@@ -47,7 +47,6 @@ const Header: FC<HeaderProps> = (props) => {
 				<HeaderTelContainer workTime={props.strings.workTime} />
 				<HeaderSeachContainer btnSearch={props.strings.btnSearch} />
 				<HeaderActionsContainer />
-				<HeaderCartContainer />
 				<StyledLoginBtn>{props.strings.btnEnter}</StyledLoginBtn>
 				<LanguageContainer />
 			</Flex>
