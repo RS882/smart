@@ -19,11 +19,14 @@ const StyledHBItemIcon = styled.div`
 
 
 const HeaderBottomItem: FC<IHeaderBottomItem> = (props) => {
+
+	const isShowDot = (props.name === 'cart' && props.isCartFull) || (props.name === 'more' && props.isMoreFull);
+
 	return (
 		<Flex direction='column'>
 			<StyledHBItemIcon className={props.classItem}></StyledHBItemIcon>
 			<StyledHBItemText>{props.itemText}</StyledHBItemText>
-			{props.name === 'cart' && <HeaderYelllowDot />}
+			{isShowDot && < HeaderYelllowDot />}
 		</Flex>
 
 

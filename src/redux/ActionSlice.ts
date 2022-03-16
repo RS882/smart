@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
-interface IActionFull {
+export interface IIsActionFull {
 	isCartFull?: boolean,
 	isMoreFull?: boolean,
 }
 
-export interface IAction extends IActionFull {
+export interface IAction extends IIsActionFull {
 	counts: {
 		viewed: number;
 		favorites: number;
@@ -24,8 +24,8 @@ const initialState: IAction = {
 		compare: 25,
 		cart: 15,
 	},
-	isCartFull: false,
-	isMoreFull: false,
+	isCartFull: true,
+	isMoreFull: true,
 };
 
 const ActionSlice = createSlice({
@@ -33,16 +33,39 @@ const ActionSlice = createSlice({
 	name: 'action',
 	initialState,
 	reducers: {
-		addViewedCount: (state) => { ++state.counts.viewed },
-		addFavoritesCount: (state) => { ++state.counts.favorites },
-		reduceFavoritesCount: (state) => { state.counts.favorites && --state.counts.favorites },
-		addCompareCount: (state) => { ++state.counts.compare },
-		reduceCompareCount: (state) => { state.counts.compare && --state.counts.compare },
-		addCartCount: (state) => { ++state.counts.cart },
-		reduceCartCount: (state) => { state.counts.cart && --state.counts.cart },
+		addViewedCount: (state) => {
+			++state.counts.viewed;
+			state.isMoreFull = true;
+		},
+		addFavoritesCount: (state) => {
+			++state.counts.favorites;
+			state.isMoreFull = true;
+		},
+		reduceFavoritesCount: (state) => {
+			state.counts.favorites && --state.counts.favorites;
+			state.isMoreFull = state.counts.favorites !== 0;
+		},
+		addCompareCount: (state) => {
+			++state.counts.compare;
+			state.isMoreFull = true;
+		},
+		reduceCompareCount: (state) => {
+			state.counts.compare && --state.counts.compare;
+			state.isMoreFull = state.counts.compare !== 0;
+		},
+		addCartCount: (state) => {
+			++state.counts.cart;
+			state.isCartFull = true;
+		},
+		reduceCartCount: (state) => {
+			state.counts.cart && --state.counts.cart;
+			state.isCartFull = state.counts.cart !== 0;
+		},
 		clearCounts: (state) => {
 			let key: keyof typeof state.counts;
 			for (key in state.counts) { state.counts[key] = 0; }
+			state.isCartFull = false;
+			state.isMoreFull = false;
 		},
 	}
 })
@@ -58,5 +81,7 @@ export const selectViewedCount = (state: RootState) => state.action.counts.viewe
 export const selectFavoritesCount = (state: RootState) => state.action.counts.favorites;
 export const selectCompareCount = (state: RootState) => state.action.counts.compare;
 export const selectCartCount = (state: RootState) => state.action.counts.cart;
+export const selectIsCartFull = (state: RootState) => state.action.isCartFull;
+export const selectIsMoreFull = (state: RootState) => state.action.isMoreFull;
 export const selectActionCount = (state: RootState) => state.action.counts;
 export default ActionSlice.reducer
