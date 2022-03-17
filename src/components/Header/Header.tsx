@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { IHeaderStings } from '../../localization/localization';
+import { ISundry } from '../../localization/localization';
 import Button from '../Button';
 import Flex from '../Flex';
 import LanguageContainer from '../LanguageChoose/LanguageContainer';
@@ -14,7 +14,7 @@ import HeaderTelContainer from './HeaderTel/HeaderTelContainer';
 
 
 interface HeaderProps {
-	strings: IHeaderStings;
+	strings: ISundry;
 
 }
 

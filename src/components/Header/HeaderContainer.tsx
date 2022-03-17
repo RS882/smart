@@ -5,6 +5,8 @@ import { strings } from '../../localization/localization';
 import { ILanguages } from '../../redux/LanguageSlice';
 import Header from './Header';
 import HeaderBottomContainer from './HeaderBottomContainer/HeaderBottomContainer';
+import Flex from '../Flex';
+import HeaderMenuContainer from './HeaderMenu/HeaderMenuContainer';
 
 
 interface HeaderContainerProps {
@@ -18,6 +20,7 @@ const StyledHeader = styled.header<HeaderContainerProps>`
 	height:60px;
 	z-index:100;
    width: 100%;
+	
 	background-color: ${props => props.theme.color.bg.main || `#fff`};
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		height: 72px;
@@ -34,9 +37,12 @@ const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 
 	return (<>
 		<StyledHeader>
-			<Container>
-				<Header strings={strings.header} />
-			</Container>
+			<Flex direction='column'>
+				<Container>
+					<Header strings={strings.header.sundry} />
+				</Container>
+				<HeaderMenuContainer strings={strings.header.menuItem} />
+			</Flex>
 			<HeaderBottomContainer strings={strings.header.bottomBtn} />
 		</StyledHeader>
 

@@ -15,6 +15,12 @@ import FooterContainer from './components/Footer/FooterContainer';
 import Cart from './components/Cart/Cart';
 import Catalog from './components/Catalog/Catalog';
 import Main from './components/Main/Main';
+import About from './components/About/About';
+import Stock from './components/Stock/Stock';
+import Installment from './components/Installment/Installment';
+import Servise from './components/Servise/Servise';
+import Wholesale from './components/Wholesale/Wholesale';
+import Contacts from './components/Contacts/Contacts';
 
 interface IAppWrapper {
   onClickApp?: ArrowFn;
@@ -53,6 +59,13 @@ const App: FC<IAppWrapper> = (props) => {
   const onClickApp = () => {
     isMenu && dispatch(closeMenuLng());
   }
+  // catalog: string;
+  // about: string;
+  // stock: string;
+  // installment: string;
+  // servise: string;
+  // wholesale: string;
+  // contacts: string;
 
 
   return (
@@ -65,6 +78,12 @@ const App: FC<IAppWrapper> = (props) => {
         <Route path='/favorites' element={<Favorites />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/catalog' element={<Catalog />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/stock' element={<Stock />} />
+        <Route path='/installment' element={<Installment />} />
+        <Route path='/servise' element={<Servise />} />
+        <Route path='/wholesale' element={<Wholesale />} />
+        <Route path='/contacts' element={<Contacts />} />
       </Routes>
 
       <FooterContainer />

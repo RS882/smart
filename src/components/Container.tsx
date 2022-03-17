@@ -7,15 +7,15 @@ interface ContainerProps {
 };
 
 const StyledContainer = styled.div<ContainerProps>`
-
-margin: 0 auto;
-box-sizing: content-box;
-max-width: none;
-width: 100%;
-height: 100%;
-@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-		max-width: ${props => props.theme.width.maxContainer || '1300px'};
-};
+	border: 1px solid #fff;
+	margin: 0 auto;
+	box-sizing: content-box;
+	max-width: none;
+	width: 100%;
+	height: 100%;
+	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+			max-width: ${props => props.theme.width.maxContainer || '1300px'};
+	};
 `;
 const Container: FC<ContainerProps> = (props) => {
 	return <StyledContainer {...props} />;
