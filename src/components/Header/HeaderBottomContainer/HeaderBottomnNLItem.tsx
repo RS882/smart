@@ -1,9 +1,12 @@
 import React, { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { theme } from '../../../theme';
 import Flex from '../../Flex';
 import { IHeaderBottomItem } from './HeaderBottom';
 import HeaderBottomItem from './HeaderBottomItem';
+
+
 
 
 const StyledHeaderBottomItem = styled(Flex)`
@@ -17,9 +20,14 @@ position: relative;
 
 
 const HeaderBottomNLItem: FC<IHeaderBottomItem> = (props) => {
+
+	let location = useLocation();
+	const itemName: string = `/${props.name}`;
+	const itemColor: string = location.pathname === itemName ? theme.color.text.mainLight : '#BFCBD6';
+
 	return (
 		<StyledHeaderBottomItem>
-			<NavLink to={`/${props.name}`} style={{ color: '#BFCBD6' }}>
+			<NavLink to={itemName} style={{ color: itemColor }}>
 				<HeaderBottomItem {...props} />
 			</NavLink>
 		</StyledHeaderBottomItem>

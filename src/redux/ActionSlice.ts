@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
 export interface IIsActionFull {
@@ -6,14 +6,15 @@ export interface IIsActionFull {
 	isMoreFull?: boolean,
 }
 
-export interface IAction extends IIsActionFull {
-	counts: {
-		viewed: number;
-		favorites: number;
-		compare: number;
-		cart: number;
-	},
+interface IActions {
+	viewed: number;
+	favorites: number;
+	compare: number;
+	cart: number;
+}
 
+export interface IAction extends IIsActionFull {
+	counts: IActions,
 };
 
 
@@ -33,6 +34,11 @@ const ActionSlice = createSlice({
 	name: 'action',
 	initialState,
 	reducers: {
+		loadCounts: (state, action: PayloadAction<IActions>) => {
+			state.counts = action.payload;
+			state.isCartFull = state.counts.cart !== 0;
+			state.isMoreFull = (state.counts.viewed + state.counts.compare + state.counts.favorites) !== 0;
+		},
 		addViewedCount: (state) => {
 			++state.counts.viewed;
 			state.isMoreFull = true;
@@ -72,7 +78,7 @@ const ActionSlice = createSlice({
 
 
 export const { addViewedCount, addFavoritesCount, reduceFavoritesCount,
-	addCompareCount, reduceCompareCount, addCartCount, reduceCartCount, clearCounts, }
+	addCompareCount, reduceCompareCount, addCartCount, reduceCartCount, clearCounts, loadCounts }
 	= ActionSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
