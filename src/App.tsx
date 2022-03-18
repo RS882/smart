@@ -59,13 +59,6 @@ const App: FC<IAppWrapper> = (props) => {
   const onClickApp = () => {
     isMenu && dispatch(closeMenuLng());
   }
-  // catalog: string;
-  // about: string;
-  // stock: string;
-  // installment: string;
-  // servise: string;
-  // wholesale: string;
-  // contacts: string;
 
 
   return (

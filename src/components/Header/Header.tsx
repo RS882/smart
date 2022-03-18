@@ -27,6 +27,7 @@ const StyledHeader = styled(Flex)`
 	};
 	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
 		box-shadow: none;
+		padding: 0;
 	}; 
 	`;
 

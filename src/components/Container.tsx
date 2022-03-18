@@ -7,7 +7,7 @@ interface ContainerProps {
 };
 
 const StyledContainer = styled.div<ContainerProps>`
-	border: 1px solid #fff;
+
 	margin: 0 auto;
 	box-sizing: content-box;
 	max-width: none;
