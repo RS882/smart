@@ -16,7 +16,7 @@ const StyledHeaderBottomContainer = styled(Flex)`
 	position: fixed;
 	bottom: 0;
 	left: 0;
-	max-height: 64px;
+	height: 64px;
 	z-index:100;
    width: 100%;
 	background-color: ${props => props.theme.color.darkBlue || '#2A5275'};

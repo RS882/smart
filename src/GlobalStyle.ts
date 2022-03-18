@@ -27,6 +27,9 @@ body {
 	height: 100%;
 	min-width: ${props => props.theme.width.min}
 }
+#root{
+	height: 100%;
+}
 body {
 	
 	line-height: 1;

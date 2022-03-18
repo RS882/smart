@@ -19,7 +19,7 @@ interface HeaderProps {
 }
 
 const StyledHeader = styled(Flex)`
-	padding: 0 10px 0 15px;
+	padding: 0 10px;
 	box-shadow:0px 4px 6px rgba(42, 82, 117, 0.06);
 	height: 100%;
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
