@@ -6,17 +6,26 @@ import Flex from '../../Flex';
 import { IHeaderTel } from './HeaderTelContainer';
 
 
-interface IHTel extends IHeaderTel {
+interface IHeaderTelProps {
+	direction?: string;
+	fontSize?: string;
+	fontWeight?: string;
+}
+
+interface IHTel extends IHeaderTel, IHeaderTelProps {
 	showPhoneNum: telFn;
 }
+
+
 
 const StyledWorkTime = styled.div`
 	color: ${props => props.theme.color.text.second || '#838688'};
 	
 `;
 
-const StyledHT = styled(Flex)`
+const StyledHT = styled(Flex) <IHeaderTelProps>`
 	width: 100%;
+	
 `
 
 const HeaderTel: FC<IHTel> = (props) => {
@@ -27,7 +36,7 @@ const HeaderTel: FC<IHTel> = (props) => {
 
 
 	return (
-		<StyledHT justufy='space-between'>
+		<StyledHT justufy='space-between' direction={props.direction}>
 			{telElems}
 			<StyledWorkTime> {props.workTime[0] + time[0] + props.workTime[1] + time[1]}</StyledWorkTime>
 		</StyledHT>
