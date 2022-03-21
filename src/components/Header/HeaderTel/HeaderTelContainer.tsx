@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 
 import styled from 'styled-components';
-
 import Flex from '../../Flex';
 import { showPhoneNum } from '../../../utilits/functions';
 import HeaderTel from './HeaderTel';

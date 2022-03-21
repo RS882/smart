@@ -20,6 +20,8 @@ export interface ButtonProps {
 	hoverBorder?: string;
 };
 
+
+
 const StyledButton = styled.button<ButtonProps>`
 	width: ${props => props.width || '80px'};
 	height: ${props => props.height || '40px'};

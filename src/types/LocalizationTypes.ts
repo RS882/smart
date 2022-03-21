@@ -12,5 +12,4 @@ export interface ISundry {
 	btnEnter: string;
 	btnSearch: string;
 	workTime: string[];
-
 };

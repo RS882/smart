@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
+import { strings } from '../../localization/localization';
 import Container from '../Container';
+import FooterLogoAdressBlock from './FooterLogoAdressBlock/FooterLogoAdressBlock';
 
 
 const StyledFooterContainer = styled.div`
@@ -32,9 +34,6 @@ const StyledFooterWrapper = styled.div`
 	};
 `
 
-const Span1 = styled.span`
-	
-`
 const Span2 = styled.span`
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		grid-column: 1/2; 
@@ -57,16 +56,16 @@ const SpanFooter = styled.span`
   	};
 	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
 		grid-column: 1/5; 
-  		
+  
 	};
 `
 
-const FooterContainer = () => {
+const FooterContainer: FC = () => {
 	return (
 		<StyledFooterContainer>
 			<Container>
 				<StyledFooterWrapper>
-					<Span1>footer1</Span1>
+					<FooterLogoAdressBlock workTime={strings.header.sundry.workTime} />
 					<Span2>footer2</Span2>
 					<Span3>footer3</Span3>
 					<Span4>footer4</Span4>

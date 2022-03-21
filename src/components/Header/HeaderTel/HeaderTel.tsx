@@ -16,18 +16,31 @@ const StyledWorkTime = styled.div`
 	
 `;
 
-const StyledHT = styled(Flex) <IHeaderTelProps>`
+const StyledHT = styled(Flex)`
 	width: 100%;
-	font-size:${props => props.fontSize || '16px'};
+	
+`;
+
+const StledTelLink = styled.a<IHeaderTelProps>`
+	font-size:${props => {
+		console.log(props.fontSize || '16px');
+		console.log(props.fontSize);
+
+		return props.fontSize || '16px'
+	}};
 	font-weight:${props => props.fontSize || '500'};
+	color:red;
+	
 `
 
 const HeaderTel: FC<IHTel> = (props) => {
+
 	const tels: string[] = ['+380000000000', '+380000000001'];
 	const time: string[] = ['10:00', '21:00'];
-	const telElems: JSX.Element[] = tels.map((e, i) => <a key={e + i} href={`tel: ${e}`} >{props.showPhoneNum(e)}</a>)
+	const telElems: JSX.Element[] = tels.map((e, i) =>
+		<StledTelLink key={e + i} href={`tel: ${e}`} >{props.showPhoneNum(e)}</StledTelLink>)
 
-
+	debugger
 	return (
 		<StyledHT justufy='space-between' direction={props.direction} >
 			{telElems}
