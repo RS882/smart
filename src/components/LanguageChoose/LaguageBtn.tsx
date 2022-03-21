@@ -5,10 +5,6 @@ import Flex from '../Flex';
 import Button, { ButtonProps } from './../Button';
 
 
-interface ILanguageBtn extends ButtonProps {
-
-}
-
 
 const StyledLanguageBtn = styled(Button)`
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
@@ -17,7 +13,7 @@ const StyledLanguageBtn = styled(Button)`
 	};
 `;
 
-const LanguageBtn: FC<ILanguageBtn> = (props) => {
+const LanguageBtn: FC<ButtonProps> = (props) => {
 	return (
 		<StyledLanguageBtn {...props} width='40px' texTransform='uppercase'>
 			<Flex margin='0 10px' >{props.children}</Flex>

@@ -1,16 +1,13 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { ISundry } from '../../localization/localization';
+import { ISundry } from '../../types/LocalizationTypes';
 import Button from '../Button';
 import Flex from '../Flex';
 import LanguageContainer from '../LanguageChoose/LanguageContainer';
 import HeaderActionsContainer from './HeaderAction/HeaderActionsContainer';
-
 import HeaderLogo from './HeaderLogo';
 import HeaderSeachContainer from './HeaderSearch/HeaderSeachContainer';
 import HeaderTelContainer from './HeaderTel/HeaderTelContainer';
-
-
 
 
 interface HeaderProps {

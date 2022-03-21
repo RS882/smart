@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import Flex from '../../Flex';
-import HeaderBottom, { IHeaderBottomItem } from './HeaderBottom';
+import { IHeaderBottomItem } from '../../../types/HeaderTypes';
+import HeaderBottom from './HeaderBottom';
 
 
 

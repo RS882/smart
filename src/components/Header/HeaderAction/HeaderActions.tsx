@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { IAction } from '../../../redux/ActionSlice';
 import Flex from '../../Flex';
+import { IActionArray } from '../../../types/HeaderTypes';
 import HeaderAction from './HeaderAction';
-import { IActionArray } from './HeaderActionsContainer';
+
 
 interface IHeaderActions {
 	conuts: IAction["counts"];
@@ -10,9 +11,6 @@ interface IHeaderActions {
 }
 
 const HeaderActions: FC<IHeaderActions> = (props) => {
-
-
-
 
 	const actionElements: JSX.Element[] = props.actionArray.map((e, i) => {
 		const countAction: number = Object.entries(props.conuts).filter(el => e.name === el[0])[0][1];

@@ -4,11 +4,12 @@ import Flex from '../Flex';
 import { ILanguages } from '../../redux/LanguageSlice';
 import LanguageBtn from './LaguageBtn';
 import { theme } from './../../theme';
-import { ArrowFn } from '../types';
+import { LngFn } from '../../types/fnTypes';
+
 
 interface ILanguageMenu extends ILanguages {
 	isMenu?: boolean;
-	cnahgeActiveLng: ArrowFn;
+	cnahgeActiveLng: LngFn;
 };
 
 interface ILanguageMenuStyled extends ILanguages {
@@ -36,12 +37,12 @@ const StyledLngBtnWrapper = styled.div`
 
 const LanguageMenu: FC<ILanguageMenu> = (props) => {
 
-	const languageBtns = props.languages?.map((el, i) =>
-		<StyledLngBtnWrapper key={el + i}>
-			<LanguageBtn onClick={() => props.cnahgeActiveLng(el)} bgColor={theme.color.bg.main}
+	const languageBtns = props.languages?.map((e, i) =>
+		<StyledLngBtnWrapper key={e + i}>
+			<LanguageBtn onClick={() => props.cnahgeActiveLng(e)} bgColor={theme.color.bg.main}
 				color={theme.color.darkBlue}
 				border={`1px solid ${theme.color.darkBlue}`} >
-				{el}</LanguageBtn>
+				{e}</LanguageBtn>
 		</StyledLngBtnWrapper >
 	);
 

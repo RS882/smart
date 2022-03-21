@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { ArrowFn } from '../../../types/fnTypes';
 
 import Flex from '../../Flex';
-import { ArrowFn } from '../../types';
+
 import HeaderSeach from './HeaderSeach';
 
 interface IHeaderSeachContainer {

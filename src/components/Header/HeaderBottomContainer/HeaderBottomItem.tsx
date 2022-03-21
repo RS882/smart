@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { IHeaderBottomItem } from '../../../types/HeaderTypes';
 import Flex from './../../Flex';
-import { IHeaderBottomItem } from './HeaderBottom';
+
 import HeaderYelllowDot from './HeaderYelllowDot';
 
 

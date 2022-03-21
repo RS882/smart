@@ -5,7 +5,6 @@ import Flex from './components/Flex';
 import { closeMenuLng, selectActivLng, selectIsLangMenu, setLanguages } from './redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { strings } from './localization/localization';
-import { ArrowFn } from './components/types';
 import HeaderContainer from './components/Header/HeaderContainer';
 import { Route, Routes } from 'react-router-dom';
 import Compare from './components/Compare/Compare';
@@ -21,6 +20,7 @@ import Installment from './components/Installment/Installment';
 import Servise from './components/Servise/Servise';
 import Wholesale from './components/Wholesale/Wholesale';
 import Contacts from './components/Contacts/Contacts';
+import { ArrowFn } from './types/fnTypes';
 
 interface IAppWrapper {
   onClickApp?: ArrowFn;

@@ -5,11 +5,7 @@ import styled from 'styled-components';
 import Flex from '../../Flex';
 import { showPhoneNum } from '../../../utilits/functions';
 import HeaderTel from './HeaderTel';
-
-
-export interface IHeaderTel {
-	workTime: string[];
-}
+import { IHeaderTel } from '../../../types/HeaderTypes';
 
 const StyledHeaderTel = styled(Flex)`
 	width: 486px;
@@ -20,7 +16,6 @@ const StyledHeaderTel = styled(Flex)`
 	};
 	
 `;
-
 
 const HeaderTelContainer: FC<IHeaderTel> = (props) => {
 

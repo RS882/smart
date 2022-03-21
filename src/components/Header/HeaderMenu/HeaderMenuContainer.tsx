@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { IMenuItem } from '../../../localization/localization';
+import { IMenuItem } from '../../../types/LocalizationTypes';
 import Container from '../../Container';
 import HeaderMenuItems from './HeaderMenuItems';
 

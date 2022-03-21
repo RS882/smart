@@ -15,7 +15,7 @@ const LanguageContainer = () => {
 		dispatch(toggleShowMenuLng());
 	};
 
-	const cnahgeActiveLng = (e: any) => {
+	const cnahgeActiveLng = (e: string) => {
 		strings.setLanguage(e);
 		dispatch(setActiveLanguage(e));
 		dispatch(closeMenuLng());

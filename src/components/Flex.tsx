@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { ArrowFn } from './types';
+import { ArrowFn } from '../types/fnTypes';
+
 
 
 interface FlexProps {

@@ -3,7 +3,8 @@ import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { theme } from '../../../theme';
 import Flex from '../../Flex';
-import { IHeaderBottomItem } from './HeaderBottom';
+import { IHeaderBottomItem } from '../../../types/HeaderTypes';
+
 import HeaderBottomItem from './HeaderBottomItem';
 
 

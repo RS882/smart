@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
 export interface IIsActionFull {
-	isCartFull?: boolean,
-	isMoreFull?: boolean,
+	isCartFull: boolean,
+	isMoreFull: boolean,
 }
 
 interface IActions {

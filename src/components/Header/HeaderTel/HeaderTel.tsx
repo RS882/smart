@@ -3,19 +3,15 @@ import styled from 'styled-components';
 import { telFn } from '../../../utilits/functions';
 
 import Flex from '../../Flex';
-import { IHeaderTel } from './HeaderTelContainer';
+import { IHeaderTel, IHeaderTelProps } from '../../../types/HeaderTypes';
 
 
-interface IHeaderTelProps {
-	direction?: string;
-	fontSize?: string;
-	fontWeight?: string;
-}
+
+
 
 interface IHTel extends IHeaderTel, IHeaderTelProps {
 	showPhoneNum: telFn;
 }
-
 
 
 const StyledWorkTime = styled.div`

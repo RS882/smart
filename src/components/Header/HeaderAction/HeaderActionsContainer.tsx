@@ -1,16 +1,10 @@
 import React, { FC } from 'react';
 import Flex from '../../Flex';
-import HeaderAction from './HeaderAction';
 import { useSelector } from 'react-redux';
 import { selectActionCount } from './../../../redux/ActionSlice';
 import styled from 'styled-components';
 import HeaderActions from './HeaderActions';
-
-export interface IActionArray {
-	name: string,
-	classIcon: string;
-	classIconActive?: string;
-};
+import { IActionArray } from '../../../types/HeaderTypes';
 
 
 const StyledHeaderAC = styled(Flex)`
@@ -18,9 +12,6 @@ const StyledHeaderAC = styled(Flex)`
 	display: none;
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		display: flex;
-	};
-	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
-		/* margin-right:0px; */
 	};
 `
 

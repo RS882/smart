@@ -5,14 +5,9 @@ import HeaderBottomBtnItem from './HeaderBottomBtnItem';
 import HeaderBottomNLItem from './HeaderBottomnNLItem';
 import { useSelector } from 'react-redux';
 import { selectIsMoreFull, selectIsCartFull } from './../../../redux/ActionSlice';
+import { IHeaderBottomItem } from '../../../types/HeaderTypes';
 
-export interface IHeaderBottomItem {
-	classItem: string;
-	itemText?: string | any;
-	name: string;
-	isCartFull?: boolean;
-	isMoreFull?: boolean;
-};
+
 
 
 interface IHeaderBottom {
@@ -23,8 +18,8 @@ interface IHeaderBottom {
 
 const HeaderBottom: FC<IHeaderBottom> = (props) => {
 
-	const isMoreFull = useSelector(selectIsMoreFull);
-	const isCartFull = useSelector(selectIsCartFull);
+	const isMoreFull: boolean = useSelector(selectIsMoreFull);
+	const isCartFull: boolean = useSelector(selectIsCartFull);
 
 
 	const onClickBottomItem = (name: string) => {

@@ -16,7 +16,7 @@ const StyledDot = styled.div<IDot>`
 
 const Dot: FC<IDot> = (props) => {
 	return (
-		<StyledDot />
+		<StyledDot {...props} />
 
 	);
 };

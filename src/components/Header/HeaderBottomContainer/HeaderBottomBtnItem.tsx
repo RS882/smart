@@ -2,19 +2,19 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { theme } from '../../../theme';
 import Button, { ButtonProps } from '../../Button';
-import { IHeaderBottomItem } from './HeaderBottom';
+import { IHeaderBottomItem } from '../../../types/HeaderTypes';
+
 import HeaderBottomItem from './HeaderBottomItem';
+import { ArrowFn } from '../../../types/fnTypes';
 
 
 interface IHeaderBottomBtnItem extends ButtonProps, IHeaderBottomItem {
-	onClickBottomItem: (name?: string) => void;
+	onClickBottomItem: ArrowFn;
 }
 
 const StyledHeaderBottomItem = styled(Button)`
 	font-size:13px;
-position: relative;
-
-	
+	position: relative;
 	&:focus{
 		color:${props => props.theme.color.text.mainLight || '#FFF'};
 	}

@@ -1,9 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { IHeaderStings } from '../../../localization/localization';
+import { ArrowFn } from '../../../types/fnTypes';
 import Button from '../../Button';
-import { ArrowFn } from '../../types';
-
 import { theme } from './../../../theme';
 
 interface IHeaderSeach {
