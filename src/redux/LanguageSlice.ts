@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
 export interface ILanguages {
-	activeLanguage?: string;
-	languages?: string[];
+	activeLanguage: string;
+	languages: string[];
 }
 
 interface ILang {

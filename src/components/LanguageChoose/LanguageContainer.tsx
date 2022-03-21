@@ -3,15 +3,16 @@ import { closeMenuLng, selectIsLangMenu, selectLanguage, setActiveLanguage, togg
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import Languages from './Languages';
 import { strings } from '../../localization/localization';
+import { ArrowFn } from '../../types/fnTypes';
 
 
-const LanguageContainer = () => {
+const LanguageContainer: FC = () => {
 
 	const dispatch = useAppDispatch();
 	const language = useAppSelector(selectLanguage);
 	const isMenu = useAppSelector(selectIsLangMenu);
 
-	const onClickBtnLng = () => {
+	const onClickBtnLng: ArrowFn = () => {
 		dispatch(toggleShowMenuLng());
 	};
 

@@ -1,23 +1,20 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import Flex from '../Flex';
-import { ILanguages } from '../../redux/LanguageSlice';
 import LanguageBtn from './LaguageBtn';
 import { theme } from './../../theme';
 import { LngFn } from '../../types/fnTypes';
 
 
-interface ILanguageMenu extends ILanguages {
-	isMenu?: boolean;
+
+
+interface ILanguageMenu {
 	cnahgeActiveLng: LngFn;
+	languages: string[];
+	isMenu: boolean;
 };
 
-interface ILanguageMenuStyled extends ILanguages {
-	isMenu?: boolean;
-
-};
-
-const StyledLanguagesMenu = styled.div<ILanguageMenuStyled>`
+const StyledLanguagesMenu = styled.div<ILanguageMenu>`
 	position: absolute;
 	top: 100%;
 	left: -1px;
@@ -37,7 +34,7 @@ const StyledLngBtnWrapper = styled.div`
 
 const LanguageMenu: FC<ILanguageMenu> = (props) => {
 
-	const languageBtns = props.languages?.map((e, i) =>
+	const languageBtns = props.languages.map((e, i) =>
 		<StyledLngBtnWrapper key={e + i}>
 			<LanguageBtn onClick={() => props.cnahgeActiveLng(e)} bgColor={theme.color.bg.main}
 				color={theme.color.darkBlue}
@@ -47,7 +44,7 @@ const LanguageMenu: FC<ILanguageMenu> = (props) => {
 	);
 
 	return (
-		<StyledLanguagesMenu isMenu={props.isMenu}>
+		<StyledLanguagesMenu {...props} >
 			<Flex direction='column'>
 				{languageBtns}
 			</Flex>

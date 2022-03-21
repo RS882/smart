@@ -25,7 +25,6 @@ const HeaderBottom: FC<IHeaderBottom> = (props) => {
 	const onClickBottomItem = (name: string) => {
 		name === 'search' && console.log('search');
 		name === 'more' && console.log('more');
-
 	};
 
 	const NlElements: JSX.Element[] = props.NlArray.map((e, i) =>

@@ -1,12 +1,11 @@
 import React, { FC, useEffect } from 'react';
 import styled from 'styled-components'
 import Flex from './components/Flex';
-
 import { closeMenuLng, selectActivLng, selectIsLangMenu, setLanguages } from './redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { strings } from './localization/localization';
-import HeaderContainer from './components/Header/HeaderContainer';
 import { Route, Routes } from 'react-router-dom';
+import HeaderContainer from './components/Header/HeaderContainer';
 import Compare from './components/Compare/Compare';
 import Viewed from './components/Viewed/Viewed';
 import Favorites from './components/Favorites/Favorites';
@@ -22,12 +21,8 @@ import Wholesale from './components/Wholesale/Wholesale';
 import Contacts from './components/Contacts/Contacts';
 import { ArrowFn } from './types/fnTypes';
 
-interface IAppWrapper {
-  onClickApp?: ArrowFn;
-};
 
 const AppWrapper = styled(Flex)`
-
   min-height: 100%;
 	overflow: hidden;
 	position: relative;
@@ -40,7 +35,7 @@ const AppWrapper = styled(Flex)`
 `
 
 
-const App: FC<IAppWrapper> = (props) => {
+const App: FC = (props) => {
 
   const dispatch = useAppDispatch();
 
@@ -49,16 +44,16 @@ const App: FC<IAppWrapper> = (props) => {
       languages: strings.getAvailableLanguages(),
       activeLanguage: strings.getLanguage(),
     }))
-  });
+  }, []);
 
   const isChangeLng = useAppSelector(selectActivLng);
   useEffect(() => {
   }, [isChangeLng]);
 
   const isMenu = useAppSelector(selectIsLangMenu);
-  const onClickApp = () => {
+  const onClickApp: ArrowFn = () => {
     isMenu && dispatch(closeMenuLng());
-  }
+  };
 
 
   return (
