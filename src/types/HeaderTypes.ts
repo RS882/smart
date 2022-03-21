@@ -1,7 +1,8 @@
 
 export interface IHeaderBottomItem {
+
 	classItem: string;
-	itemText?: string | any;
+	itemText: string;
 	name: string;
 	isCartFull?: boolean;
 	isMoreFull?: boolean;

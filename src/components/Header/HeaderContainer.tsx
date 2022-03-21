@@ -13,15 +13,14 @@ interface HeaderContainerProps {
 	language?: ILanguages;
 };
 
-const StyledHeader = styled.header<HeaderContainerProps>`
+const StyledHeader = styled.header`
 	position: fixed;
 	top: 0;
 	left: 0;
 	height:60px;
 	z-index:100;
    width: 100%;
-	
-	background-color: ${props => props.theme.color.bg.main || `#fff`};
+		background-color: ${props => props.theme.color.bg.main || `#fff`};
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		height: 72px;
 		

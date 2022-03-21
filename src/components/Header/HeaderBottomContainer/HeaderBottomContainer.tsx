@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import Flex from '../../Flex';
 import { IHeaderBottomItem } from '../../../types/HeaderTypes';
 import HeaderBottom from './HeaderBottom';
+import { IBottomBtn } from './../../../types/LocalizationTypes';
 
 
 
 interface IHeaderBottom {
-	strings: any;
+	strings: IBottomBtn;
 };
 
 

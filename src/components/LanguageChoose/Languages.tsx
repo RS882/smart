@@ -32,11 +32,12 @@ const LanguageWrapper = styled.div<ILanguageWrapperProps>`
 `;
 
 const Languages: FC<ILanguage> = (props) => {
-
+	const { onClickBtnLng, activeLanguage, ...reastProps } = props;
+	const restLanguages: string[] = reastProps.languages.filter(e => e !== activeLanguage);
 	return (
-		<LanguageWrapper isMenu={props.isMenu} >
-			<LanguageBtn onClick={props.onClickBtnLng}> {props.activeLanguage}</LanguageBtn>
-			<LanguageMenu cnahgeActiveLng={props.cnahgeActiveLng} isMenu={props.isMenu} languages={props.languages.filter(e => e !== props.activeLanguage)} />
+		<LanguageWrapper isMenu={reastProps.isMenu} >
+			<LanguageBtn onClick={onClickBtnLng}> {activeLanguage}</LanguageBtn>
+			<LanguageMenu {...reastProps} languages={restLanguages} />
 		</LanguageWrapper>
 	);
 };

@@ -1,20 +1,11 @@
 
 export interface IBottomBtn {
-	home: string;
-	catalog: string;
-	cart: string;
-	search: string;
-	more: string;
+	[property: string]: string
+
 };
 
 export interface IMenuItem {
-	catalog: string;
-	about: string;
-	stock: string;
-	installment: string;
-	servise: string;
-	wholesale: string;
-	contacts: string;
+	[property: string]: string
 };
 
 export interface ISundry {
