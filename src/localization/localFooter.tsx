@@ -73,7 +73,7 @@ export const footerTextRu: IFooterStings = {
 			reviews: 'Отзывы',
 			advantages: 'Наши преимущества',
 			about: 'История компании',
-			ooperation: 'Сотрудничество',
+			cooperation: 'Сотрудничество',
 			affiliate: 'Партнёрская программа',
 			vacancies: 'Вакансии',
 		},

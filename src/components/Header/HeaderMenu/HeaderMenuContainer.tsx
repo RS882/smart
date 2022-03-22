@@ -25,13 +25,12 @@ const StyledHeaderMenuContainer = styled.div`
 
 const HeaderMenuContainer: FC<IHeaderMenuContainer> = (props) => {
 
-	const menuItemArray = Object.entries(props.strings).map(e => ({ itemName: e[0], itemText: e[1] }))
 
 
 	return (
 		<StyledHeaderMenuContainer>
 			<Container>
-				<HeaderMenuItems menuItemArray={menuItemArray} />
+				<HeaderMenuItems strings={props.strings} />
 			</Container>
 
 		</StyledHeaderMenuContainer>

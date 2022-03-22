@@ -24,7 +24,11 @@ const StledTelLink = styled.a<IHeaderTelProps>`
 	font-size:${props => props.fontSize || '16px'};
 	font-weight:${props => props.fontWeight || '500'};
 	margin-bottom:${props => props.marginBottom || '0'};
-`
+	transition:color 0.3s ease 0s;
+	&:hover{
+		color:${props => props.theme.color.yellow}
+	}
+`;
 
 const HeaderTel: FC<IHTel> = (props) => {
 

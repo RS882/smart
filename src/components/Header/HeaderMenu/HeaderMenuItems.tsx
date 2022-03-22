@@ -1,16 +1,14 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { IMenuItem } from '../../../types/LocalizationTypes';
 import Flex from '../../Flex';
+import MenuItemHOC from '../../HOC/MenuItemHOC';
 import HeaderMenuItem from './HeaderMenuItem';
 
 
-export interface IMenuItem {
-	itemName: string;
-	itemText: string;
-};
-
 interface IHeaderMenuItems {
-	menuItemArray: IMenuItem[];
+	strings: IMenuItem;
+
 };
 
 const StyledHeaderMenuItems = styled(Flex)`
@@ -19,18 +17,11 @@ position: relative;
 	width: 100%;
 `;
 
-
-
 const HeaderMenuItems: FC<IHeaderMenuItems> = (props) => {
 
-	const MenuItemElem = props.menuItemArray.map((e, i) => {
-		const attrFirst = i === 0 || false;
-
-		return <HeaderMenuItem key={e.itemName + i} itemName={e.itemName} itemText={e.itemText} attrFirst={attrFirst} />
-	})
 	return (
 		<StyledHeaderMenuItems justufy='flex-start' >
-			{MenuItemElem}
+			<MenuItemHOC items={props.strings} Component={HeaderMenuItem} />
 		</StyledHeaderMenuItems>
 	);
 };

@@ -33,7 +33,7 @@ const Credit = React.lazy(() => import('./components/Credit/Credit'));
 const PrivacyPolicy = React.lazy(() => import('./components/PrivacyPolicy/PrivacyPolicy'));
 const Faq = React.lazy(() => import('./components/Faq/Faq'));
 const Wholesale = React.lazy(() => import('./components/Wholesale/Wholesale'));
-const Dropshipping = React.lazy(() => import('./components/Faq/Faq'));
+const Dropshipping = React.lazy(() => import('./components/Dropshipping/Dropshipping'));
 
 
 

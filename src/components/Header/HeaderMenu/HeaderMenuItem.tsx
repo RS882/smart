@@ -1,15 +1,12 @@
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { IMenuItemProps } from '../../../types/globalTypes';
 import Flex from '../../Flex';
-import { IMenuItem } from './HeaderMenuItems';
 
 
-interface IHeaderMenuItem extends IMenuItem {
-	attrFirst: boolean;
-};
 
-const StyledHeaderMenuItem = styled(Flex) <IHeaderMenuItem>`
+const StyledHeaderMenuItem = styled(Flex) <IMenuItemProps>`
 	color:${props => props.theme.color.text.mainLight || '#fff'};
 	margin-right:${props => props.attrFirst ? '24px' : '20px'};
 	padding:${props => props.attrFirst ? '0px ' : '0 10px'};
@@ -33,13 +30,13 @@ const StyledIcon = styled.div`
 	margin: 0 10px 0 20px;
 `
 
-const HeaderMenuItem: FC<IHeaderMenuItem> = (props) => {
+const HeaderMenuItem: FC<IMenuItemProps> = (props) => {
 
 	return (
-		<StyledLink to={`/${props.itemName}`} >
+		<StyledLink to={`/${props.item_name}`} >
 			<StyledHeaderMenuItem {...props} justufy='flex-start'>
 				{props.attrFirst && <StyledIcon className='_icon-catalog'></StyledIcon>}
-				{props.itemText}
+				{props.item_text}
 			</StyledHeaderMenuItem>
 		</StyledLink>
 	);

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { strings } from '../../localization/localization';
 import Container from '../Container';
 import FooterLogoAdressBlock from './FooterLogoAdressBlock/FooterLogoAdressBlock';
+import FooterMenu from './FooterMenu';
 
 
 const StyledFooterContainer = styled.div`
@@ -38,7 +39,7 @@ const StyledFooterWrapper = styled.div`
 	};
 `
 
-const Span2 = styled.span`
+const StyledFooterMenu2 = styled.div`
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		grid-column: 1/2; 
   		grid-row: 2/3;
@@ -48,12 +49,7 @@ const Span2 = styled.span`
   		grid-row: 1/2;
 	};
 `
-const Span3 = styled.span`
-	
-`
-const Span4 = styled.span`
-	
-`
+
 const SpanFooter = styled.span`
 		@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		grid-column: 1/3; 
@@ -65,14 +61,18 @@ const SpanFooter = styled.span`
 `
 
 const FooterContainer: FC = () => {
+
+
 	return (
 		<StyledFooterContainer>
 			<Container>
 				<StyledFooterWrapper>
 					<FooterLogoAdressBlock workTime={strings.header.sundry.workTime} address={strings.footer.address} />
-					<Span2>footer2</Span2>
-					<Span3>footer3</Span3>
-					<Span4>footer4</Span4>
+					<StyledFooterMenu2>
+						<FooterMenu items={strings.footer.store} />
+					</StyledFooterMenu2>
+					<FooterMenu items={strings.footer.client} />
+					<FooterMenu items={strings.footer.cooperation} />
 					<SpanFooter>footerFooter</SpanFooter>
 				</StyledFooterWrapper>
 			</Container>
