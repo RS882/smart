@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import { theme } from '../../../theme';
 import Flex from '../../Flex';
 import { IHeaderBottomItem } from '../../../types/HeaderTypes';
-
 import HeaderBottomItem from './HeaderBottomItem';
 
-
+interface INavLinkProps {
+	itemColor: string;
+}
 
 
 const StyledHeaderBottomItem = styled(Flex)`
@@ -18,8 +19,13 @@ position: relative;
 	color:'#BFCBD6';
 `;
 
-
-
+const StyledNavLink = styled(NavLink) <INavLinkProps>`
+	color:${props => props.itemColor};
+	transition: color 0.3s ease 0s;
+	&:hover{
+		color:${props => props.theme.color.text.mainLight || '#fff'}
+	}
+`;
 
 const HeaderBottomNLItem: FC<IHeaderBottomItem> = (props) => {
 
@@ -29,9 +35,9 @@ const HeaderBottomNLItem: FC<IHeaderBottomItem> = (props) => {
 
 	return (
 		<StyledHeaderBottomItem>
-			<NavLink to={itemName} style={{ color: itemColor }}>
+			<StyledNavLink to={itemName} itemColor={itemColor}>
 				<HeaderBottomItem {...props} />
-			</NavLink>
+			</StyledNavLink>
 		</StyledHeaderBottomItem>
 	);
 };

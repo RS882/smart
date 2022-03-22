@@ -1,27 +1,36 @@
 import LocalizedStrings, { LocalizedStringsMethods } from "react-localization";
-import { IBottomBtn, IMenuItem, ISundry } from "../types/LocalizationTypes";
+import { IAddress, IBottomBtn, IFooterMenu, IMenuItem, ISundry } from "../types/LocalizationTypes";
 import { headerTextEn, headerTextRu, headerTextUa } from "./localHeader";
+import { footerTextEn, footerTextRu, footerTextUa } from './localFooter';
 
 export interface IHeaderStings {
 	sundry: ISundry;
-	bottomBtn: IBottomBtn | any;
+	bottomBtn: IBottomBtn;
 	menuItem: IMenuItem;
 };
 
+export interface IFooterStings extends IAddress {
+	store: IFooterMenu;
+};
+
 interface IStrings extends LocalizedStringsMethods {
-	header: IHeaderStings,
+	header: IHeaderStings;
+	footer: IFooterStings;
 };
 
 
 export let strings: IStrings = new LocalizedStrings({
 	en: {
 		header: headerTextEn,
+		footer: footerTextEn,
 	},
 	ua: {
 		header: headerTextUa,
+		footer: footerTextUa,
 	},
 	ru: {
 		header: headerTextRu,
+		footer: footerTextRu,
 	},
 });
 

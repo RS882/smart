@@ -21,6 +21,11 @@ const Installment = React.lazy(() => import('./components/Installment/Installmen
 const Servise = React.lazy(() => import('./components/Servise/Servise'));
 const Wholesale = React.lazy(() => import('./components/Wholesale/Wholesale'));
 const Contacts = React.lazy(() => import('./components/Contacts/Contacts'));
+const Reviews = React.lazy(() => import('./components/Reviews/Reviews'));
+const Advantages = React.lazy(() => import('./components/Advantages/Advantages'));
+const Cooperation = React.lazy(() => import('./components/Cooperation/Cooperation'));
+const Affiliate = React.lazy(() => import('./components/Affiliate/Affiliate'));
+const Vacancies = React.lazy(() => import('./components/Vacancies/Vacancies'));
 
 
 const AppWrapper = styled(Flex)`
@@ -73,8 +78,12 @@ const App: FC = (props) => {
           <Route path='/servise' element={<Servise />} />
           <Route path='/wholesale' element={<Wholesale />} />
           <Route path='/contacts' element={<Contacts />} />
+          <Route path='/reviews' element={<Reviews />} />
+          <Route path='/advantages' element={<Advantages />} />
+          <Route path='/cooperation' element={<Cooperation />} />
+          <Route path='/affiliate' element={<Affiliate />} />
+          <Route path='/vacancies' element={<Vacancies />} />
         </Routes>
-
         <FooterContainer />
       </Suspense>
     </AppWrapper>
