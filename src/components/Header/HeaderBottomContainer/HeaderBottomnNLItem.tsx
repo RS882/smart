@@ -7,7 +7,7 @@ import { IHeaderBottomItem } from '../../../types/HeaderTypes';
 import HeaderBottomItem from './HeaderBottomItem';
 
 interface INavLinkProps {
-	itemColor: string;
+	itemcolor: string;
 }
 
 
@@ -20,7 +20,7 @@ position: relative;
 `;
 
 const StyledNavLink = styled(NavLink) <INavLinkProps>`
-	color:${props => props.itemColor};
+	color:${props => props.itemcolor};
 	transition: color 0.3s ease 0s;
 	&:hover{
 		color:${props => props.theme.color.text.mainLight || '#fff'}
@@ -35,7 +35,7 @@ const HeaderBottomNLItem: FC<IHeaderBottomItem> = (props) => {
 
 	return (
 		<StyledHeaderBottomItem>
-			<StyledNavLink to={itemName} itemColor={itemColor}>
+			<StyledNavLink to={itemName} itemcolor={itemColor}>
 				<HeaderBottomItem {...props} />
 			</StyledNavLink>
 		</StyledHeaderBottomItem>

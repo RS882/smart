@@ -3,7 +3,7 @@ import { IFooterStings } from "./localization";
 export const footerTextEn: IFooterStings = {
 	address: [' Miru avenue , 78', ' Vishneva street, 35 k.2', 'Peremogy avenue, 44',],
 	store: {
-		name: 'About Store',
+		titleName: 'About Store',
 		item: {
 			reviews: 'Reviews',
 			advantages: 'Our advantages',
@@ -14,7 +14,7 @@ export const footerTextEn: IFooterStings = {
 		},
 	},
 	client: {
-		name: 'For client',
+		titleName: 'For client',
 		item: {
 			howToBuy: 'How to buy',
 			shippingAndPayment: 'Shipping and payment',
@@ -25,7 +25,7 @@ export const footerTextEn: IFooterStings = {
 		},
 	},
 	cooperation: {
-		name: 'Cooperation',
+		titleName: 'Cooperation',
 		item: {
 			wholesale: 'Wholesale',
 			dropshipping: 'Dropshipping',
@@ -36,7 +36,7 @@ export const footerTextEn: IFooterStings = {
 export const footerTextUa: IFooterStings = {
 	address: ['проспект Миру, 78', ' вулиця Вишнева, 35 к.2', 'проспект Перемоги, 44',],
 	store: {
-		name: 'Про магазин',
+		titleName: 'Про магазин',
 		item: {
 			reviews: 'Відгуки',
 			advantages: 'Наши переваги',
@@ -47,7 +47,7 @@ export const footerTextUa: IFooterStings = {
 		},
 	},
 	client: {
-		name: 'Для клієнтів',
+		titleName: 'Для клієнтів',
 		item: {
 			howToBuy: 'Як купити',
 			shippingAndPayment: 'Доставка і оплата',
@@ -58,7 +58,7 @@ export const footerTextUa: IFooterStings = {
 		},
 	},
 	cooperation: {
-		name: 'Співробітництво',
+		titleName: 'Співробітництво',
 		item: {
 			wholesale: 'Оптом',
 			dropshipping: 'Дропшипінг',
@@ -68,7 +68,7 @@ export const footerTextUa: IFooterStings = {
 export const footerTextRu: IFooterStings = {
 	address: ['проспект Мира, 78', ' улица Вишневая, 35 к.2', 'проспект Победы, 44',],
 	store: {
-		name: 'О магазине',
+		titleName: 'О магазине',
 		item: {
 			reviews: 'Отзывы',
 			advantages: 'Наши преимущества',
@@ -79,7 +79,7 @@ export const footerTextRu: IFooterStings = {
 		},
 	},
 	client: {
-		name: 'Для клиента',
+		titleName: 'Для клиента',
 		item: {
 			howToBuy: 'Как купить',
 			shippingAndPayment: 'Доставка и оплата',
@@ -90,7 +90,7 @@ export const footerTextRu: IFooterStings = {
 		},
 	},
 	cooperation: {
-		name: 'Сотрудничество',
+		titleName: 'Сотрудничество',
 		item: {
 			wholesale: 'Оптом',
 			dropshipping: 'Дропшиппинг',

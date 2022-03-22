@@ -18,7 +18,7 @@ export interface IAddress {
 	address: string[];
 }
 export interface IFooterMenu {
-	name: string;
+	titleName: string;
 	item: { [property: string]: string; };
 
 };

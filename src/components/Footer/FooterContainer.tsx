@@ -6,7 +6,6 @@ import FooterLogoAdressBlock from './FooterLogoAdressBlock/FooterLogoAdressBlock
 
 
 const StyledFooterContainer = styled.div`
-	border: 1px solid #000;
 	width: 100%;
 	margin-bottom:64px;
 	padding: 0 10px;
