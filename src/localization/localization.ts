@@ -11,6 +11,8 @@ export interface IHeaderStings {
 
 export interface IFooterStings extends IAddress {
 	store: IFooterMenu;
+	client: IFooterMenu;
+	cooperation: IFooterMenu;
 };
 
 interface IStrings extends LocalizedStringsMethods {

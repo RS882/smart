@@ -7,6 +7,7 @@ import { strings } from './localization/localization';
 import { Route, Routes } from 'react-router-dom';
 import { ArrowFn } from './types/fnTypes';
 
+
 const Main = React.lazy(() => import('./components/Main/Main'));
 const HeaderContainer = React.lazy(() => import('./components/Header/HeaderContainer'));
 const Compare = React.lazy(() => import('./components/Compare/Compare'));
@@ -19,13 +20,21 @@ const About = React.lazy(() => import('./components/About/About'));
 const Stock = React.lazy(() => import('./components/Stock/Stock'));
 const Installment = React.lazy(() => import('./components/Installment/Installment'));
 const Servise = React.lazy(() => import('./components/Servise/Servise'));
-const Wholesale = React.lazy(() => import('./components/Wholesale/Wholesale'));
+const WholesaleDropshipping = React.lazy(() => import('./components/WholesaleDropshipping/WholesaleDropshipping'));
 const Contacts = React.lazy(() => import('./components/Contacts/Contacts'));
 const Reviews = React.lazy(() => import('./components/Reviews/Reviews'));
 const Advantages = React.lazy(() => import('./components/Advantages/Advantages'));
 const Cooperation = React.lazy(() => import('./components/Cooperation/Cooperation'));
 const Affiliate = React.lazy(() => import('./components/Affiliate/Affiliate'));
 const Vacancies = React.lazy(() => import('./components/Vacancies/Vacancies'));
+const HowToBuy = React.lazy(() => import('./components/HowToBuy/HowToBuy'));
+const ShippingAndPayment = React.lazy(() => import('./components/ShippingAndPayment/ShippingAndPayment'));
+const Credit = React.lazy(() => import('./components/Credit/Credit'));
+const PrivacyPolicy = React.lazy(() => import('./components/PrivacyPolicy/PrivacyPolicy'));
+const Faq = React.lazy(() => import('./components/Faq/Faq'));
+const Wholesale = React.lazy(() => import('./components/Wholesale/Wholesale'));
+const Dropshipping = React.lazy(() => import('./components/Faq/Faq'));
+
 
 
 const AppWrapper = styled(Flex)`
@@ -76,18 +85,27 @@ const App: FC = (props) => {
           <Route path='/stock' element={<Stock />} />
           <Route path='/installment' element={<Installment />} />
           <Route path='/servise' element={<Servise />} />
-          <Route path='/wholesale' element={<Wholesale />} />
+          <Route path='/wholesaleDropshipping' element={<WholesaleDropshipping />} />
           <Route path='/contacts' element={<Contacts />} />
           <Route path='/reviews' element={<Reviews />} />
           <Route path='/advantages' element={<Advantages />} />
           <Route path='/cooperation' element={<Cooperation />} />
           <Route path='/affiliate' element={<Affiliate />} />
           <Route path='/vacancies' element={<Vacancies />} />
+          <Route path='/howToBuy' element={<HowToBuy />} />
+          <Route path='/shippingAndPayment' element={<ShippingAndPayment />} />
+          <Route path='/credit' element={<Credit />} />
+          <Route path='/privacyPolicy' element={<PrivacyPolicy />} />
+          <Route path='/faq' element={<Faq />} />
+          <Route path='/wholesale' element={<Wholesale />} />
+          <Route path='/dropshipping' element={<Dropshipping />} />
         </Routes>
+
         <FooterContainer />
       </Suspense>
     </AppWrapper>
   );
 };
+
 
 export default App;
