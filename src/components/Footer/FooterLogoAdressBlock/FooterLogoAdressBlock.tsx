@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import Flex from '../../Flex';
-import FoorerTelContainer from './FoorerTelContainer';
+
+import FooterTelContainer from './FooterTelContainer';
 import FooterLogo from './FooterLogo';
 
 interface IFooterTelProps {
@@ -10,14 +11,15 @@ interface IFooterTelProps {
 
 const StyledFooterLogoAdressBlock = styled(Flex)`
 	border: 1px solid #000;
+	
 `;
 
 
 const FooterLogoAdressBlock: FC<IFooterTelProps> = (props) => {
 	return (
-		<StyledFooterLogoAdressBlock justufy='flex-start' direction='column'>
+		<StyledFooterLogoAdressBlock justufy='flex-start' direction='column' align='flex-start'>
 			<FooterLogo />
-			<FoorerTelContainer workTime={props.workTime} />
+			<FooterTelContainer workTime={props.workTime} />
 		</StyledFooterLogoAdressBlock>
 	);
 };

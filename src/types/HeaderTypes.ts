@@ -18,6 +18,7 @@ export interface IHeaderTelProps {
 	direction?: string;
 	fontSize?: string;
 	fontWeight?: string;
+	marginBottom?: string;
 };
 
 export interface IHeaderTel {

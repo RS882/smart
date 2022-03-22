@@ -24,9 +24,11 @@ const StyledFooterWrapper = styled.div`
 
 	display: grid;
 	grid-template-columns: 1fr ;
+	margin-top:50px;
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		grid-template-columns: repeat(2,1fr) ;
 		grid-template-rows:repeat(3,auto) ;
+		margin-top:40px;
 	};
 	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
 		grid-template-columns: repeat(4,1fr) ;

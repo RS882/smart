@@ -5,8 +5,8 @@ import HeaderLogo from '../../Header/HeaderLogo';
 
 const StyledFooterLogo = styled.div`
 	margin-bottom:30px;
-	border: 1px solid red;
-`
+	
+`;
 const FooterLogo = () => {
 	return (
 		<StyledFooterLogo>
