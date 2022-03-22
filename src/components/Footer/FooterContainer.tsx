@@ -4,6 +4,7 @@ import { strings } from '../../localization/localization';
 import Container from '../Container';
 import FooterLogoAdressBlock from './FooterLogoAdressBlock/FooterLogoAdressBlock';
 import FooterMenu from './FooterMenu';
+import FooterSocialContainer from './FooterSocial.tsx/FooterSocialContainer';
 
 
 const StyledFooterContainer = styled.div`
@@ -50,15 +51,7 @@ const StyledFooterMenu2 = styled.div`
 	};
 `
 
-const SpanFooter = styled.span`
-		@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-		grid-column: 1/3; 
-  	};
-	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
-		grid-column: 1/5; 
-  
-	};
-`
+
 
 const FooterContainer: FC = () => {
 
@@ -73,7 +66,7 @@ const FooterContainer: FC = () => {
 					</StyledFooterMenu2>
 					<FooterMenu items={strings.footer.client} />
 					<FooterMenu items={strings.footer.cooperation} />
-					<SpanFooter>footerFooter</SpanFooter>
+					<FooterSocialContainer />
 				</StyledFooterWrapper>
 			</Container>
 		</StyledFooterContainer>
