@@ -10,26 +10,37 @@ interface IHeaderAction {
 	headerActionClassName?: string;
 	count?: number;
 	name?: string;
+
 }
 
 export const StyledHeaderAction = styled(Flex) <IHeaderAction>`
-position: relative;
-width: 48px;
-height: 48px;
-color: ${props => props.className === '_icon-hart_full' ?
+	position: relative;
+	width: 48px;
+	height: 48px;
+	color: ${props => props.className === '_icon-hart_full' ?
 		(props.theme.color.red || '#F15152') :
 		(props.theme.color.text.second || '#838688')};
 
-`
+`;
+
+const StyledNavLinkAction = styled(NavLink) <IHeaderAction>`
+	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+		display:${props => props.name === 'cart' && 'none'}
+	};
+	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
+		display:${props => props.name === 'cart' && 'block'}
+	};
+`;
 
 const HeaderAction: FC<IHeaderAction> = (props) => {
+	const { headerActionClassName, ...rest } = props;
 
 	return (
-		<NavLink to={'/' + props.name}>
-			<StyledHeaderAction className={props.headerActionClassName}>
-				<HeaderActionCount count={props.count} />
+		<StyledNavLinkAction {...rest} to={'/' + rest.name}>
+			<StyledHeaderAction className={headerActionClassName}>
+				<HeaderActionCount count={rest.count} />
 			</StyledHeaderAction>
-		</NavLink>
+		</StyledNavLinkAction>
 	);
 };
 
