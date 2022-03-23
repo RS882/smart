@@ -4,13 +4,15 @@ import { RootState } from "./store";
 interface IModalState {
 	isModal: boolean;
 	isBodyLock: boolean;
-	scrollWidth: null | number;
+	scrollWidth: number;
+	opacity: string;
 }
 
 const initialState: IModalState = {
 	isModal: false,
 	isBodyLock: false,
-	scrollWidth: null,
+	scrollWidth: 0,
+	opacity: '0.8',
 };
 
 export const modalSlice = createSlice({
@@ -30,11 +32,17 @@ export const modalSlice = createSlice({
 		setScrollWidth: (state, action: PayloadAction<number>) => {
 			state.scrollWidth = action.payload
 		},
+		// устанавливаем ширину полосы прокрутки
+		setOpacity: (state, action: PayloadAction<string>) => {
+			state.opacity = action.payload
+		},
 	},
 })
-export const { changeIsModal, changeIsBodyLock, setScrollWidth } = modalSlice.actions;
+export const { changeIsModal, changeIsBodyLock, setScrollWidth, setOpacity } = modalSlice.actions;
 
 export const selectIsModal = (state: RootState) => state.modal.isModal;
 export const selectIsBodyLock = (state: RootState) => state.modal.isBodyLock;
 export const selectScrollWidth = (state: RootState) => state.modal.scrollWidth;
+export const selectModalOpacity = (state: RootState) => state.modal.opacity;
+
 export default modalSlice.reducer;

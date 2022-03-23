@@ -6,8 +6,9 @@ import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { strings } from './localization/localization';
 import { Route, Routes } from 'react-router-dom';
 import { ArrowFn } from './types/fnTypes';
-import { setScrollWidth } from './redux/ModalSlice';
+import { selectIsBodyLock, selectModalOpacity, selectScrollWidth, setScrollWidth } from './redux/ModalSlice';
 import store from './redux/store';
+import Modal from './components/Modal/Modal';
 
 
 const Main = React.lazy(() => import('./components/Main/Main'));
@@ -37,7 +38,10 @@ const Faq = React.lazy(() => import('./components/Faq/Faq'));
 const Wholesale = React.lazy(() => import('./components/Wholesale/Wholesale'));
 const Dropshipping = React.lazy(() => import('./components/Dropshipping/Dropshipping'));
 
-
+interface IAppProps {
+  ref: React.RefObject<HTMLDivElement>;
+  appScroll: string;
+}
 
 const AppWrapper = styled(Flex)`
   min-height: 100%;
@@ -51,30 +55,31 @@ const AppWrapper = styled(Flex)`
 	}
 `;
 
+const StyledAppRef = styled.div.attrs(props => ({ ref: props.ref, })) <IAppProps>`
+  margin-right: ${props => props.appScroll || '0px'};
+`;
+
 const App: FC = (props) => {
 
   const dispatch = useAppDispatch();
-
+  //заносим в стейт данные о языках
   useEffect(() => {
     dispatch(setLanguages({
       languages: strings.getAvailableLanguages(),
       activeLanguage: strings.getLanguage(),
     }))
   }, []);
-
+  // ререндерим при смене языка
   const isChangeLng = useAppSelector(selectActivLng);
   useEffect(() => {
   }, [isChangeLng]);
-
+  // закряваем меню выбора языка при клике на любой точке
   const isMenu = useAppSelector(selectIsLangMenu);
   const onClickApp: ArrowFn = () => {
     isMenu && dispatch(closeMenuLng());
   };
 
   const appRef = useRef<HTMLDivElement>(null);
-
-  console.log(store.getState());
-
   useEffect(() => {
     // определяем ширину полосы прокрутки и диспачим ее в стейт
     const elem = appRef.current;
@@ -84,9 +89,22 @@ const App: FC = (props) => {
       elem.style.overflowY = `auto`;
     };
   }, []);
+  // прозрачность модальго окна
+  const modalOpacity: string = useAppSelector(selectModalOpacity)
+  // лочим страницу если isBodyLock true( сработало модальное окно) 
+  const isBodyLock: boolean = useAppSelector(selectIsBodyLock);
+  document.body.style.overflow = isBodyLock ? 'hidden' : 'auto';
 
+  // получаем значение ширины полосы прокрутки
+  const scrollWidth: number = useAppSelector(selectScrollWidth);
+  //+ убираем сдивиг при пропадении полосу прокрутки
+  const appScroll: string = (isBodyLock ? scrollWidth : 0) + 'px';
+
+
+  console.log(store.getState());
   return (
-    <div ref={appRef}>
+    <StyledAppRef ref={appRef} appScroll={appScroll}>
+      <Modal opacity={modalOpacity} />
       <AppWrapper onClick={onClickApp} direction={'column'}>
         <Suspense fallback={<div>Загрузка...</div>}>
           <HeaderContainer />
@@ -119,7 +137,7 @@ const App: FC = (props) => {
           <FooterContainer />
         </Suspense>
       </AppWrapper>
-    </div>
+    </StyledAppRef>
   );
 };
 
