@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { IMenuItemProps } from './../../types/globalTypes';
+
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { IMenuItemProps } from '../../../types/globalTypes';
 
 interface IFooterMenuItemProps {
 	$attr_last: boolean;

@@ -1,5 +1,5 @@
 import LocalizedStrings, { LocalizedStringsMethods } from "react-localization";
-import { IAddress, IBottomBtn, IFooterMenu, IMenuItem, ISundry } from "../types/LocalizationTypes";
+import { IAddress, IBottomBtn, IFooter, IFooterMenu, IMenuItem, ISundry } from "../types/LocalizationTypes";
 import { headerTextEn, headerTextRu, headerTextUa } from "./localHeader";
 import { footerTextEn, footerTextRu, footerTextUa } from './localFooter';
 
@@ -13,6 +13,7 @@ export interface IFooterStings extends IAddress {
 	store: IFooterMenu;
 	client: IFooterMenu;
 	cooperation: IFooterMenu;
+	footer: IFooter;
 };
 
 interface IStrings extends LocalizedStringsMethods {

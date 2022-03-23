@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { strings } from '../../localization/localization';
 import Container from '../Container';
 import FooterLogoAdressBlock from './FooterLogoAdressBlock/FooterLogoAdressBlock';
-import FooterMenu from './FooterMenu';
-import FooterSocialContainer from './FooterSocial.tsx/FooterSocialContainer';
+import FooterMenu from './FooterMenu/FooterMenu';
+
+import FooterFooterContainer from './FooterFooter/FooterFooterContainer';
 
 
 const StyledFooterContainer = styled.div`
@@ -66,7 +67,7 @@ const FooterContainer: FC = () => {
 					</StyledFooterMenu2>
 					<FooterMenu items={strings.footer.client} />
 					<FooterMenu items={strings.footer.cooperation} />
-					<FooterSocialContainer />
+					<FooterFooterContainer items={strings.footer.footer} />
 				</StyledFooterWrapper>
 			</Container>
 		</StyledFooterContainer>

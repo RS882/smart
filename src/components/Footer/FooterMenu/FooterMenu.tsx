@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Flex from '../Flex';
-import { IFooterMenu } from '../../types/LocalizationTypes';
-import MenuItemHOC from '../HOC/MenuItemHOC';
+import Flex from '../../Flex';
+import { IFooterMenu } from '../../../types/LocalizationTypes';
+import MenuItemHOC from '../../HOC/MenuItemHOC';
 import FooterMenuItem from './FooterMenuItem';
 
 interface FooterMenuProps {

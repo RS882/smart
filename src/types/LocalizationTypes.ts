@@ -20,5 +20,7 @@ export interface IAddress {
 export interface IFooterMenu {
 	titleName: string;
 	item: { [property: string]: string; };
-
+};
+export interface IFooter {
+	[property: string]: string;
 };

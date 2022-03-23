@@ -21,7 +21,7 @@ export const footerTextEn: IFooterStings = {
 			credit: 'Credit',
 			privacyPolicy: 'Privacy Policy',
 			faq: 'Questions and Answers (F.A.Q.)',
-			servis: 'Service and Warranty',
+			servise: 'Service and Warranty',
 		},
 	},
 	cooperation: {
@@ -30,6 +30,10 @@ export const footerTextEn: IFooterStings = {
 			wholesale: 'Wholesale',
 			dropshipping: 'Dropshipping',
 		},
+	},
+	footer: {
+		rights: 'All rights reserved',
+		dev: 'Development',
 	},
 };
 
@@ -54,7 +58,7 @@ export const footerTextUa: IFooterStings = {
 			credit: 'Кредит',
 			privacyPolicy: 'Політика конфіденційності',
 			faq: 'Питання та відповіді (F.A.Q.)',
-			servis: 'Сервіс та гарантія',
+			servise: 'Сервіс та гарантія',
 		},
 	},
 	cooperation: {
@@ -63,6 +67,10 @@ export const footerTextUa: IFooterStings = {
 			wholesale: 'Оптом',
 			dropshipping: 'Дропшипінг',
 		},
+	},
+	footer: {
+		rights: 'Всі права захищені',
+		dev: 'Розробка',
 	},
 };
 export const footerTextRu: IFooterStings = {
@@ -86,7 +94,7 @@ export const footerTextRu: IFooterStings = {
 			credit: 'Кредит',
 			privacyPolicy: 'Политика конфиденциальности',
 			faq: 'Вопросы и ответы (F.A.Q.)',
-			servis: 'Сервис и гарантия',
+			servise: 'Сервис и гарантия',
 		},
 	},
 	cooperation: {
@@ -95,6 +103,10 @@ export const footerTextRu: IFooterStings = {
 			wholesale: 'Оптом',
 			dropshipping: 'Дропшиппинг',
 		},
+	},
+	footer: {
+		rights: 'Все права защищены',
+		dev: 'Разработка',
 	},
 }
 
