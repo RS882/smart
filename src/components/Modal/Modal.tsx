@@ -1,7 +1,13 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-interface ModalProps {
+
+export interface IModal {
+	opacity: string;
+	isModal: boolean;
+};
+
+export interface ModalProps {
 	opacity: string;
 }
 
@@ -14,14 +20,14 @@ const StyledModal = styled.div<ModalProps>`
 	background-color:${props => props.theme.color.darkBlue || '#2A5275'};
 	opacity:${props => props.opacity || '0.8'};
 	z-index:200;
-`
+`;
 
-
-const Modal: FC<ModalProps> = (props) => {
+const Modal: FC<IModal> = (props) => {
+	const { isModal, ...rest } = props;
 	return (
-		<StyledModal {...props}>
-
-		</StyledModal>
+		<>
+			{isModal && <StyledModal {...rest} />}
+		</>
 	);
 };
 

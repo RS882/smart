@@ -3,9 +3,11 @@ import React, { FC } from 'react';
 import HeaderBottomBtnItem from './HeaderBottomBtnItem';
 
 import HeaderBottomNLItem from './HeaderBottomnNLItem';
-import { useSelector } from 'react-redux';
 import { selectIsMoreFull, selectIsCartFull } from './../../../redux/ActionSlice';
 import { IHeaderBottomItem } from '../../../types/HeaderTypes';
+import { useAppSelector } from '../../../redux/hooks';
+import { useAppDispatch } from './../../../redux/hooks';
+import { changeIsModal } from '../../../redux/ModalSlice';
 
 
 
@@ -18,11 +20,13 @@ interface IHeaderBottom {
 
 const HeaderBottom: FC<IHeaderBottom> = (props) => {
 
-	const isMoreFull: boolean = useSelector(selectIsMoreFull);
-	const isCartFull: boolean = useSelector(selectIsCartFull);
+	const isMoreFull: boolean = useAppSelector(selectIsMoreFull);
+	const isCartFull: boolean = useAppSelector(selectIsCartFull);
 
+	const disptch = useAppDispatch();
 
 	const onClickBottomItem = (name: string) => {
+		disptch(changeIsModal(true));
 		name === 'search' && console.log('search');
 		name === 'more' && console.log('more');
 	};

@@ -8,7 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ArrowFn } from './types/fnTypes';
 import { selectIsBodyLock, selectModalOpacity, selectScrollWidth, setScrollWidth } from './redux/ModalSlice';
 import store from './redux/store';
-import Modal from './components/Modal/Modal';
+import ModalContainer from './components/Modal/ModalContainer';
 
 
 const Main = React.lazy(() => import('./components/Main/Main'));
@@ -98,13 +98,13 @@ const App: FC = (props) => {
   // получаем значение ширины полосы прокрутки
   const scrollWidth: number = useAppSelector(selectScrollWidth);
   //+ убираем сдивиг при пропадении полосу прокрутки
-  const appScroll: string = (isBodyLock ? scrollWidth : 0) + 'px';
+  const appScroll: string = `${isBodyLock ? scrollWidth : 0}px`;
 
 
   console.log(store.getState());
   return (
     <StyledAppRef ref={appRef} appScroll={appScroll}>
-      <Modal opacity={modalOpacity} />
+      <ModalContainer opacity={modalOpacity} />
       <AppWrapper onClick={onClickApp} direction={'column'}>
         <Suspense fallback={<div>Загрузка...</div>}>
           <HeaderContainer />
