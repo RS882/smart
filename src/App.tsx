@@ -1,4 +1,4 @@
-import React, { FC, Suspense, useEffect } from 'react';
+import React, { FC, Suspense, useEffect, useRef } from 'react';
 import styled from 'styled-components'
 import Flex from './components/Flex';
 import { closeMenuLng, selectActivLng, selectIsLangMenu, setLanguages } from './redux/LanguageSlice';
@@ -6,6 +6,8 @@ import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { strings } from './localization/localization';
 import { Route, Routes } from 'react-router-dom';
 import { ArrowFn } from './types/fnTypes';
+import { setScrollWidth } from './redux/ModalSlice';
+import store from './redux/store';
 
 
 const Main = React.lazy(() => import('./components/Main/Main'));
@@ -69,41 +71,55 @@ const App: FC = (props) => {
     isMenu && dispatch(closeMenuLng());
   };
 
+  const appRef = useRef<HTMLDivElement>(null);
+
+  console.log(store.getState());
+
+  useEffect(() => {
+    // определяем ширину полосы прокрутки и диспачим ее в стейт
+    const elem = appRef.current;
+    if (elem !== null) {
+      elem.style.overflowY = `scroll`;
+      dispatch(setScrollWidth(elem.offsetWidth - elem.clientWidth));
+      elem.style.overflowY = `auto`;
+    };
+  }, []);
 
   return (
-    <AppWrapper onClick={onClickApp} direction={'column'}>
-      <Suspense fallback={<div>Загрузка...</div>}>
-        <HeaderContainer />
-        <Routes>
-          <Route index element={<Main />} />
-          <Route path='/compare' element={<Compare />} />
-          <Route path='/viewed' element={<Viewed />} />
-          <Route path='/favorites' element={<Favorites />} />
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/catalog' element={<Catalog />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/stock' element={<Stock />} />
-          <Route path='/installment' element={<Installment />} />
-          <Route path='/servise' element={<Servise />} />
-          <Route path='/wholesaleDropshipping' element={<WholesaleDropshipping />} />
-          <Route path='/contacts' element={<Contacts />} />
-          <Route path='/reviews' element={<Reviews />} />
-          <Route path='/advantages' element={<Advantages />} />
-          <Route path='/cooperation' element={<Cooperation />} />
-          <Route path='/affiliate' element={<Affiliate />} />
-          <Route path='/vacancies' element={<Vacancies />} />
-          <Route path='/howToBuy' element={<HowToBuy />} />
-          <Route path='/shippingAndPayment' element={<ShippingAndPayment />} />
-          <Route path='/credit' element={<Credit />} />
-          <Route path='/privacyPolicy' element={<PrivacyPolicy />} />
-          <Route path='/faq' element={<Faq />} />
-          <Route path='/wholesale' element={<Wholesale />} />
-          <Route path='/dropshipping' element={<Dropshipping />} />
-        </Routes>
-
-        <FooterContainer />
-      </Suspense>
-    </AppWrapper>
+    <div ref={appRef}>
+      <AppWrapper onClick={onClickApp} direction={'column'}>
+        <Suspense fallback={<div>Загрузка...</div>}>
+          <HeaderContainer />
+          <Routes>
+            <Route index element={<Main />} />
+            <Route path='/compare' element={<Compare />} />
+            <Route path='/viewed' element={<Viewed />} />
+            <Route path='/favorites' element={<Favorites />} />
+            <Route path='/cart' element={<Cart />} />
+            <Route path='/catalog' element={<Catalog />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/stock' element={<Stock />} />
+            <Route path='/installment' element={<Installment />} />
+            <Route path='/servise' element={<Servise />} />
+            <Route path='/wholesaleDropshipping' element={<WholesaleDropshipping />} />
+            <Route path='/contacts' element={<Contacts />} />
+            <Route path='/reviews' element={<Reviews />} />
+            <Route path='/advantages' element={<Advantages />} />
+            <Route path='/cooperation' element={<Cooperation />} />
+            <Route path='/affiliate' element={<Affiliate />} />
+            <Route path='/vacancies' element={<Vacancies />} />
+            <Route path='/howToBuy' element={<HowToBuy />} />
+            <Route path='/shippingAndPayment' element={<ShippingAndPayment />} />
+            <Route path='/credit' element={<Credit />} />
+            <Route path='/privacyPolicy' element={<PrivacyPolicy />} />
+            <Route path='/faq' element={<Faq />} />
+            <Route path='/wholesale' element={<Wholesale />} />
+            <Route path='/dropshipping' element={<Dropshipping />} />
+          </Routes>
+          <FooterContainer />
+        </Suspense>
+      </AppWrapper>
+    </div>
   );
 };
 

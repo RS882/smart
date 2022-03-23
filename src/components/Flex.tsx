@@ -11,6 +11,7 @@ interface FlexProps {
 	align?: string;
 	margin?: string;
 	className?: string;
+
 };
 
 
