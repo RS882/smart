@@ -9,7 +9,8 @@ import { ArrowFn } from './types/fnTypes';
 import { selectIsBodyLock, selectModalOpacity, selectScrollWidth, setScrollWidth } from './redux/ModalSlice';
 import store from './redux/store';
 import ModalContainer from './components/Modal/ModalContainer';
-import DropDownMenuHOC from './components/HOC/DropDownMenuHOC';
+import DropDownMenu from './components/Header/DropDownMenu/DropDownMenuContainer';
+
 
 
 
@@ -43,6 +44,7 @@ const Dropshipping = React.lazy(() => import('./components/Dropshipping/Dropship
 interface IAppProps {
   ref: React.RefObject<HTMLDivElement>;
   appScroll: string;
+  isBodyLock: boolean;
 }
 
 const AppWrapper = styled(Flex)`
@@ -58,7 +60,7 @@ const AppWrapper = styled(Flex)`
 `;
 
 const StyledAppRef = styled.div.attrs(props => ({ ref: props.ref, })) <IAppProps>`
-  margin-right: ${props => props.appScroll || '0px'};
+  margin-right: ${props => props.isBodyLock ? props.appScroll : '0px'};
 `;
 
 const App: FC = (props) => {
@@ -105,11 +107,11 @@ const App: FC = (props) => {
 
   console.log(store.getState());
   return (
-    <StyledAppRef ref={appRef} appScroll={appScroll}>
+    <StyledAppRef ref={appRef} appScroll={appScroll} isBodyLock>
 
       <AppWrapper onClick={onClickApp} direction={'column'}>
-        <DropDownMenuHOC />
-        <ModalContainer opacity={modalOpacity} />
+        <DropDownMenu />
+        <ModalContainer opacity={modalOpacity} isMenu />
         <Suspense fallback={<div>Загрузка...</div>}>
           <HeaderContainer />
           <Routes>

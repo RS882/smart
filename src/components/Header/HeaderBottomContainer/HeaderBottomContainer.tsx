@@ -10,20 +10,23 @@ import { selectIsCartFull, selectIsMoreFull } from '../../../redux/ActionSlice';
 import { useNavigate } from 'react-router';
 import { changeIsModal } from '../../../redux/ModalSlice';
 import HeaderBottomBtnItem from './HeaderBottomBtnItem';
+import { closeMenu, openCatalog, openMore, openScearch } from '../../../redux/MenuSlice';
+import store from '../../../redux/store';
 
 
 
 interface IHeaderBottom {
 	strings: IBottomBtn;
-
 };
+
+
 
 const StyledHeaderBottomContainer = styled(Flex)`
 	position: fixed;
 	bottom: 0;
 	left: 0;
 	height: 64px;
-	z-index:100;
+	z-index:150;
    width: 100%;
 	background-color: ${props => props.theme.color.darkBlue || '#2A5275'};
 		@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
@@ -36,35 +39,53 @@ const StyledHeaderBottomContainer = styled(Flex)`
 
 const HeaderBottomContainer: FC<IHeaderBottom> = (props) => {
 
-
-	const btnArray: IHeaderBottomItem[] =
-		[{ name: '', classItem: '_icon-home', },
-		{ name: 'catalog', classItem: '_icon-catalog', },
-		{ name: 'cart', classItem: '_icon-cart', },
-		{ name: 'search', classItem: '_icon-search_rev', },
-		{ name: 'more', classItem: '_icon-dots', },]
-			.map((e) => ({ ...e, itemText: props.strings[e.name || 'home'] }));
-
-	const exceptionsItem: string[] = ['catalog', 'search', 'more',]
-
 	const isMoreFull: boolean = useAppSelector(selectIsMoreFull);
 	const isCartFull: boolean = useAppSelector(selectIsCartFull);
 
-	const disptch = useAppDispatch();
+	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
+
+
+	const onClickOpenCatalog = () => {
+		dispatch(changeIsModal(true));
+		dispatch(openCatalog(true));
+
+	}
+	const onClickOpenSearch = () => {
+		dispatch(changeIsModal(true));
+		dispatch(openScearch(true));
+
+	}
+	const onClickOpenMore = () => {
+		dispatch(changeIsModal(true));
+		dispatch(openMore(true));
+
+	}
+
+	const btnArray: IHeaderBottomItem[] =
+		[{ name: '', classItem: '_icon-home', },
+		{ name: 'catalog', classItem: '_icon-catalog', fnItem: onClickOpenCatalog, },
+		{ name: 'cart', classItem: '_icon-cart', },
+		{ name: 'search', classItem: '_icon-search_rev', fnItem: onClickOpenSearch, },
+		{ name: 'more', classItem: '_icon-dots', fnItem: onClickOpenMore, }]
+			.map((e) => ({ ...e, itemText: props.strings[e.name || 'home'] }));
+
 	//----------------------------------------
-	const getMenuItemsNav = (itemArray: IHeaderBottomItem[], btnArray: string[]): { [property: string]: () => void } => {
+	const getMenuItemsNav = (itemArray: IHeaderBottomItem[]): { [property: string]: () => void } => {
 		const obj: { [property: string]: () => void } = {};
 		itemArray.forEach(e => {
-			obj[e.name] = btnArray.includes(e.name) ? () => { } :
-				() => navigate(`/${e.name}`)
+			const navFn: () => void = () => {
+				dispatch(closeMenu());
+				dispatch(changeIsModal(false));
+				navigate(`/${e.name}`);
+			};
+			obj[e.name] = e.fnItem || navFn;
 		});
 		return obj;
 	};
 	//-------------------------------------
 	const onClickBottomItem = (name: string) => {
-		disptch(changeIsModal(true));
-		getMenuItemsNav(btnArray, exceptionsItem)[name]();
+		getMenuItemsNav(btnArray)[name]();
 	};
 
 	const btnElements: JSX.Element[] = btnArray.map((e, i): JSX.Element =>

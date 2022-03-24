@@ -3,6 +3,7 @@ export interface IHeaderBottomItem {
 	classItem: string;
 	itemText: string;
 	name: string;
+	fnItem?: () => void;
 	isCartFull?: boolean;
 	isMoreFull?: boolean;
 };
@@ -23,3 +24,4 @@ export interface IHeaderTelProps {
 export interface IHeaderTel {
 	workTime: string[];
 };
+

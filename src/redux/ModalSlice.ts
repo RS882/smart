@@ -30,11 +30,11 @@ export const modalSlice = createSlice({
 		},
 		// устанавливаем ширину полосы прокрутки
 		setScrollWidth: (state, action: PayloadAction<number>) => {
-			state.scrollWidth = action.payload
+			state.scrollWidth = action.payload;
 		},
 		// устанавливаем ширину полосы прокрутки
 		setOpacity: (state, action: PayloadAction<string>) => {
-			state.opacity = action.payload
+			state.opacity = action.payload;
 		},
 	},
 })

@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import LanguageReducer from "./LanguageSlice";
 import ActionReducer from "./ActionSlice";
 import ModalReducer from "./ModalSlice";
+import MenuReducer from "./MenuSlice";
 
 const store = configureStore({
 	reducer: {
 		languages: LanguageReducer,
 		action: ActionReducer,
 		modal: ModalReducer,
+		menu: MenuReducer,
 	}
 })
 
