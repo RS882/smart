@@ -1,6 +1,5 @@
 
 export interface IHeaderBottomItem {
-
 	classItem: string;
 	itemText: string;
 	name: string;

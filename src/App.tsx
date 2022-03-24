@@ -9,6 +9,8 @@ import { ArrowFn } from './types/fnTypes';
 import { selectIsBodyLock, selectModalOpacity, selectScrollWidth, setScrollWidth } from './redux/ModalSlice';
 import store from './redux/store';
 import ModalContainer from './components/Modal/ModalContainer';
+import DropDownMenuHOC from './components/HOC/DropDownMenuHOC';
+
 
 
 const Main = React.lazy(() => import('./components/Main/Main'));
@@ -69,16 +71,6 @@ const App: FC = (props) => {
       activeLanguage: strings.getLanguage(),
     }))
   }, []);
-  // ререндерим при смене языка
-  const isChangeLng = useAppSelector(selectActivLng);
-  useEffect(() => {
-  }, [isChangeLng]);
-  // закряваем меню выбора языка при клике на любой точке
-  const isMenu = useAppSelector(selectIsLangMenu);
-  const onClickApp: ArrowFn = () => {
-    isMenu && dispatch(closeMenuLng());
-  };
-
   const appRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     // определяем ширину полосы прокрутки и диспачим ее в стейт
@@ -89,6 +81,16 @@ const App: FC = (props) => {
       elem.style.overflowY = `auto`;
     };
   }, []);
+  //------------------------------------
+  // ререндерим при смене языка
+  const isChangeLng = useAppSelector(selectActivLng);
+  useEffect(() => {
+  }, [isChangeLng]);
+  // закрываем меню выбора языка при клике на любой точке
+  const isMenu = useAppSelector(selectIsLangMenu);
+  const onClickApp: ArrowFn = () => {
+    isMenu && dispatch(closeMenuLng());
+  };
   // прозрачность модальго окна
   const modalOpacity: string = useAppSelector(selectModalOpacity)
   // лочим страницу если isBodyLock true( сработало модальное окно) 
@@ -104,8 +106,10 @@ const App: FC = (props) => {
   console.log(store.getState());
   return (
     <StyledAppRef ref={appRef} appScroll={appScroll}>
-      <ModalContainer opacity={modalOpacity} />
+
       <AppWrapper onClick={onClickApp} direction={'column'}>
+        <DropDownMenuHOC />
+        <ModalContainer opacity={modalOpacity} />
         <Suspense fallback={<div>Загрузка...</div>}>
           <HeaderContainer />
           <Routes>
