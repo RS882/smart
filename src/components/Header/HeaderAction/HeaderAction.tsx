@@ -24,9 +24,7 @@ export const StyledHeaderAction = styled(Flex) <IHeaderAction>`
 `;
 
 const StyledNavLinkAction = styled(NavLink) <IHeaderAction>`
-	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-		display:${props => props.name === 'cart' && 'none'}
-	};
+	display:${props => props.name === 'cart' && 'none'};
 	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
 		display:${props => props.name === 'cart' && 'block'}
 	};

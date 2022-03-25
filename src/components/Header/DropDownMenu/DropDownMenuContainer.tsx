@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from './../../../redux/hooks';
 import { closeMenu } from '../../../redux/MenuSlice';
 import { selectIsMenu } from './../../../redux/MenuSlice';
 import { changeIsModal } from '../../../redux/ModalSlice';
+import More from './More/More';
 
 interface DropDownMenuProps {
 	isOpen?: boolean;
@@ -52,7 +53,7 @@ const DropDownMenu: FC<DropDownMenuProps> = (props) => {
 
 			{isMenuStatus.isCatalog && 'Catalog'}
 			{isMenuStatus.isScearch && 'Scearch'}
-			{isMenuStatus.isMore && 'More'}
+			{isMenuStatus.isMore && <More />}
 		</StyledDropDownMenu>
 	)
 }
