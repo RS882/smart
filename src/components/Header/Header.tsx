@@ -5,12 +5,13 @@ import Button from '../Button';
 import Flex from '../Flex';
 import LanguageContainer from '../LanguageChoose/LanguageContainer';
 import HeaderActionsContainer from './HeaderAction/HeaderActionsContainer';
+
 import HeaderLogo from './HeaderLogo';
 import HeaderSeachContainer from './HeaderSearch/HeaderSeachContainer';
 import HeaderTelContainer from './HeaderTel/HeaderTelContainer';
 
 
-interface HeaderProps {
+interface HeaderPropsMain {
 	strings: ISundry;
 
 }
@@ -19,6 +20,7 @@ const StyledHeader = styled(Flex)`
 	padding: 0 10px;
 	box-shadow:0px 4px 6px rgba(42, 82, 117, 0.06);
 	height: 100%;
+	
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		padding: 0 20px ;
 	};
@@ -37,9 +39,9 @@ const StyledLoginBtn = styled(Button)`
 	`;
 
 
-const Header: FC<HeaderProps> = (props) => {
+const Header: FC<HeaderPropsMain> = (props) => {
 	return (
-		<StyledHeader justufy={'space-between'}>
+		<StyledHeader justufy={'space-between'} >
 			<HeaderLogo />
 			<Flex>
 				<HeaderTelContainer workTime={props.strings.workTime} />

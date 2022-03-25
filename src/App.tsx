@@ -8,12 +8,12 @@ import { Route, Routes } from 'react-router-dom';
 import { ArrowFn } from './types/fnTypes';
 import { selectIsBodyLock, selectModalOpacity, selectScrollWidth, setScrollWidth } from './redux/ModalSlice';
 import store from './redux/store';
-import ModalContainer from './components/Modal/ModalContainer';
-import DropDownMenu from './components/Header/DropDownMenu/DropDownMenuContainer';
 
 
 
-
+const ModalContainer = React.lazy(() => import('./components/Modal/ModalContainer'));
+const DropDownMenu = React.lazy(() => import('./components/Header/DropDownMenu/DropDownMenuContainer'));
+const HeaderBottomContainer = React.lazy(() => import('./components/Header/HeaderBottomContainer/HeaderBottomContainer'));
 const Main = React.lazy(() => import('./components/Main/Main'));
 const HeaderContainer = React.lazy(() => import('./components/Header/HeaderContainer'));
 const Compare = React.lazy(() => import('./components/Compare/Compare'));
@@ -43,8 +43,8 @@ const Dropshipping = React.lazy(() => import('./components/Dropshipping/Dropship
 
 interface IAppProps {
   ref: React.RefObject<HTMLDivElement>;
-  appScroll: string;
-  isBodyLock: boolean;
+  appScroll?: string;
+
 }
 
 const AppWrapper = styled(Flex)`
@@ -60,7 +60,8 @@ const AppWrapper = styled(Flex)`
 `;
 
 const StyledAppRef = styled.div.attrs(props => ({ ref: props.ref, })) <IAppProps>`
-  margin-right: ${props => props.isBodyLock ? props.appScroll : '0px'};
+  /* padding-right: ${props => props.appScroll};
+  border: 1px solid #000; */
 `;
 
 const App: FC = (props) => {
@@ -99,21 +100,23 @@ const App: FC = (props) => {
   const isBodyLock: boolean = useAppSelector(selectIsBodyLock);
   document.body.style.overflow = isBodyLock ? 'hidden' : 'auto';
 
-  // получаем значение ширины полосы прокрутки
-  const scrollWidth: number = useAppSelector(selectScrollWidth);
-  //+ убираем сдивиг при пропадении полосу прокрутки
-  const appScroll: string = `${isBodyLock ? scrollWidth : 0}px`;
-
+  // // получаем значение ширины полосы прокрутки
+  // const scrollWidth: number = useAppSelector(selectScrollWidth);
+  // //+ убираем сдивиг при пропадении полосу прокрутки
+  // const appScroll: string = `${isBodyLock ? scrollWidth : 0}px`;
+  // // document.body.style.paddingRight = `${isBodyLock ? scrollWidth : 0}px`;
 
   console.log(store.getState());
   return (
-    <StyledAppRef ref={appRef} appScroll={appScroll} isBodyLock>
+    <StyledAppRef ref={appRef} >
 
       <AppWrapper onClick={onClickApp} direction={'column'}>
-        <DropDownMenu />
-        <ModalContainer opacity={modalOpacity} isMenu />
+
         <Suspense fallback={<div>Загрузка...</div>}>
+          <DropDownMenu />
+          <ModalContainer opacity={modalOpacity} />
           <HeaderContainer />
+          <HeaderBottomContainer strings={strings.header.bottomBtn} />
           <Routes>
             <Route index element={<Main />} />
             <Route path='/compare' element={<Compare />} />

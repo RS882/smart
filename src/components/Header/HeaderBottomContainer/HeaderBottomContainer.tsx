@@ -26,7 +26,7 @@ const StyledHeaderBottomContainer = styled(Flex)`
 	bottom: 0;
 	left: 0;
 	height: 64px;
-	z-index:150;
+	z-index:300;
    width: 100%;
 	background-color: ${props => props.theme.color.darkBlue || '#2A5275'};
 		@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
@@ -49,17 +49,14 @@ const HeaderBottomContainer: FC<IHeaderBottom> = (props) => {
 	const onClickOpenCatalog = () => {
 		dispatch(changeIsModal(true));
 		dispatch(openCatalog(true));
-
 	}
 	const onClickOpenSearch = () => {
 		dispatch(changeIsModal(true));
 		dispatch(openScearch(true));
-
 	}
 	const onClickOpenMore = () => {
 		dispatch(changeIsModal(true));
 		dispatch(openMore(true));
-
 	}
 
 	const btnArray: IHeaderBottomItem[] =
