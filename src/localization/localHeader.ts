@@ -22,6 +22,9 @@ export const headerTextEn: IHeaderStings = {
 		wholesaleDropshipping: 'Wholesale/Dropshipping',
 		contacts: 'contacts',
 	},
+	dropMenu: {
+		title: 'more'
+	},
 };
 
 export const headerTextUa: IHeaderStings = {
@@ -46,6 +49,9 @@ export const headerTextUa: IHeaderStings = {
 		wholesaleDropshipping: 'Опт/дропшиппінг',
 		contacts: 'контакти',
 	},
+	dropMenu: {
+		title: 'ще'
+	},
 };
 
 export const headerTextRu: IHeaderStings = {
@@ -69,5 +75,8 @@ export const headerTextRu: IHeaderStings = {
 		servise: 'Сервис и гарантия',
 		wholesaleDropshipping: 'Опт/дропшиппинг',
 		contacts: 'контакты',
+	},
+	dropMenu: {
+		title: 'ещё'
 	},
 };

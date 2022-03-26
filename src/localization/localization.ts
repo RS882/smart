@@ -1,5 +1,5 @@
 import LocalizedStrings, { LocalizedStringsMethods } from "react-localization";
-import { IAddress, IBottomBtn, IFooter, IFooterMenu, IMenuItem, ISundry } from "../types/LocalizationTypes";
+import { IAddress, IBottomBtn, IDporMenu, IFooter, IFooterMenu, IMenuItem, ISundry } from "../types/LocalizationTypes";
 import { headerTextEn, headerTextRu, headerTextUa } from "./localHeader";
 import { footerTextEn, footerTextRu, footerTextUa } from './localFooter';
 
@@ -7,6 +7,7 @@ export interface IHeaderStings {
 	sundry: ISundry;
 	bottomBtn: IBottomBtn;
 	menuItem: IMenuItem;
+	dropMenu: IDporMenu;
 };
 
 export interface IFooterStings extends IAddress {

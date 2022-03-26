@@ -8,14 +8,18 @@ import { Route, Routes } from 'react-router-dom';
 import { ArrowFn } from './types/fnTypes';
 import { selectIsBodyLock, selectModalOpacity, selectScrollWidth, setScrollWidth } from './redux/ModalSlice';
 import store from './redux/store';
+import DropDownMenu from './components/Header/DropDownMenu/DropDownMenuContainer';
+import ModalContainer from './components/Modal/ModalContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
+import HeaderBottomContainer from './components/Header/HeaderBottomContainer/HeaderBottomContainer';
 
 
 
-const ModalContainer = React.lazy(() => import('./components/Modal/ModalContainer'));
-const DropDownMenu = React.lazy(() => import('./components/Header/DropDownMenu/DropDownMenuContainer'));
-const HeaderBottomContainer = React.lazy(() => import('./components/Header/HeaderBottomContainer/HeaderBottomContainer'));
+// const ModalContainer = React.lazy(() => import('./components/Modal/ModalContainer'));
+// const DropDownMenu = React.lazy(() => import('./components/Header/DropDownMenu/DropDownMenuContainer'));
+// const HeaderBottomContainer = React.lazy(() => import('./components/Header/HeaderBottomContainer/HeaderBottomContainer'));
+// const HeaderContainer = React.lazy(() => import('./components/Header/HeaderContainer'));
 const Main = React.lazy(() => import('./components/Main/Main'));
-const HeaderContainer = React.lazy(() => import('./components/Header/HeaderContainer'));
 const Compare = React.lazy(() => import('./components/Compare/Compare'));
 const Viewed = React.lazy(() => import('./components/Viewed/Viewed'));
 const Favorites = React.lazy(() => import('./components/Favorites/Favorites'));
@@ -111,12 +115,11 @@ const App: FC = (props) => {
     <StyledAppRef ref={appRef} >
 
       <AppWrapper onClick={onClickApp} direction={'column'}>
-
+        <DropDownMenu title={strings.header.dropMenu.title} />
+        <ModalContainer opacity={modalOpacity} />
+        <HeaderContainer />
+        <HeaderBottomContainer strings={strings.header.bottomBtn} />
         <Suspense fallback={<div>Загрузка...</div>}>
-          <DropDownMenu />
-          <ModalContainer opacity={modalOpacity} />
-          <HeaderContainer />
-          <HeaderBottomContainer strings={strings.header.bottomBtn} />
           <Routes>
             <Route index element={<Main />} />
             <Route path='/compare' element={<Compare />} />

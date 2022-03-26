@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+
 import styled from 'styled-components';
+import { ArrowFn } from '../../../types/fnTypes';
 import Flex from '../../Flex';
 import HeaderActionCount from './HeaderActionCount';
 
@@ -11,9 +12,14 @@ interface IHeaderAction {
 	count?: number;
 	name?: string;
 
+	onClick: ArrowFn;
+};
+
+interface IHederActionIcon {
+	headerActionClassName?: string;
 }
 
-export const StyledHeaderAction = styled(Flex) <IHeaderAction>`
+export const StyledHeaderAction = styled(Flex) <IHederActionIcon>`
 	position: relative;
 	width: 48px;
 	height: 48px;
@@ -23,7 +29,7 @@ export const StyledHeaderAction = styled(Flex) <IHeaderAction>`
 
 `;
 
-const StyledNavLinkAction = styled(NavLink) <IHeaderAction>`
+const StyledNavLinkAction = styled.button <IHeaderAction>`
 	display:${props => props.name === 'cart' && 'none'};
 	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
 		display:${props => props.name === 'cart' && 'block'}
@@ -34,7 +40,7 @@ const HeaderAction: FC<IHeaderAction> = (props) => {
 	const { headerActionClassName, ...rest } = props;
 
 	return (
-		<StyledNavLinkAction {...rest} to={'/' + rest.name}>
+		<StyledNavLinkAction {...rest} >
 			<StyledHeaderAction className={headerActionClassName}>
 				<HeaderActionCount count={rest.count} />
 			</StyledHeaderAction>

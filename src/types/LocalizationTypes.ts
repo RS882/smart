@@ -14,6 +14,10 @@ export interface ISundry {
 	workTime: string[];
 };
 
+export interface IDporMenu {
+	title: string;
+}
+
 export interface IAddress {
 	address: string[];
 }

@@ -7,9 +7,11 @@ import { closeMenu } from '../../../redux/MenuSlice';
 import { selectIsMenu } from './../../../redux/MenuSlice';
 import { changeIsModal } from '../../../redux/ModalSlice';
 import More from './More/More';
+import TitleMenu from './TitleMenu';
 
 interface DropDownMenuProps {
 	isOpen?: boolean;
+	title: string;
 }
 
 const StyledDropDownMenu = styled(Flex) <DropDownMenuProps>`
@@ -48,9 +50,9 @@ const DropDownMenu: FC<DropDownMenuProps> = (props) => {
 
 
 	return (
-		<StyledDropDownMenu isOpen={isOpen}>
+		<StyledDropDownMenu isOpen={isOpen} {...props} >
 			<CloseMenu onClick={onCloseMenu} />
-
+			<TitleMenu title={props.title} />
 			{isMenuStatus.isCatalog && 'Catalog'}
 			{isMenuStatus.isScearch && 'Scearch'}
 			{isMenuStatus.isMore && <More />}
