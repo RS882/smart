@@ -23,7 +23,11 @@ export const headerTextEn: IHeaderStings = {
 		contacts: 'contacts',
 	},
 	dropMenu: {
-		title: 'more'
+		title: {
+			catalog: 'catalog',
+			search: 'search',
+			more: 'more',
+		},
 	},
 };
 
@@ -50,7 +54,11 @@ export const headerTextUa: IHeaderStings = {
 		contacts: 'контакти',
 	},
 	dropMenu: {
-		title: 'ще'
+		title: {
+			catalog: 'каталог',
+			search: 'пошук',
+			more: 'ще',
+		},
 	},
 };
 
@@ -77,6 +85,10 @@ export const headerTextRu: IHeaderStings = {
 		contacts: 'контакты',
 	},
 	dropMenu: {
-		title: 'ещё'
+		title: {
+			catalog: 'каталог',
+			search: 'поиск',
+			more: 'ещё',
+		},
 	},
 };

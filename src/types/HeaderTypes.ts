@@ -25,3 +25,8 @@ export interface IHeaderTel {
 	workTime: string[];
 };
 
+export interface IMoreMenuItem {
+	menuText?: string;
+	subMenu?: { [property: string]: string; }[];
+};
+

@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router';
 import { changeIsModal } from '../../../redux/ModalSlice';
 import HeaderBottomBtnItem from './HeaderBottomBtnItem';
 import { closeMenu, openCatalog, openMore, openScearch } from '../../../redux/MenuSlice';
-import store from '../../../redux/store';
+
 
 
 

@@ -15,7 +15,11 @@ export interface ISundry {
 };
 
 export interface IDporMenu {
-	title: string;
+	title: {
+		catalog: string;
+		search: string;
+		more: string;
+	}
 }
 
 export interface IAddress {

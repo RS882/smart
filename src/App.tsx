@@ -115,7 +115,7 @@ const App: FC = (props) => {
     <StyledAppRef ref={appRef} >
 
       <AppWrapper onClick={onClickApp} direction={'column'}>
-        <DropDownMenu title={strings.header.dropMenu.title} />
+        <DropDownMenu />
         <ModalContainer opacity={modalOpacity} />
         <HeaderContainer />
         <HeaderBottomContainer strings={strings.header.bottomBtn} />
