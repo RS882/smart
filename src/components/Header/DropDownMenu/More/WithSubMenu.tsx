@@ -5,16 +5,22 @@ import Flex from '../../../Flex';
 import SubMenuButton from './SubMenuButton';
 import WithoutSubmenuItem, { WithoutSubmenuItemProps } from './WithoutSubmenuItem';
 
-const StyledWithSubMenu = styled(Flex)`
+
+interface StyledWithSubMenuprops {
+	isSubMenuOpen: boolean;
+}
+
+const StyledWithSubMenu = styled(Flex) <StyledWithSubMenuprops>`
 	width: 100%;
 	padding: 0 0 0 10px;
+	display: ${props => props.isSubMenuOpen ? 'flex' : 'none'};
+	
 `;
-const StyledWithSubMenuTitle = styled(Flex)`
+const StyledWithSubMenuTitle = styled.div`
 	width: 100%;
-	height: 100%;
-	padding: 15px 0;
-
-	border-bottom: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
+	
+	/* padding: 15px 0;
+	border-bottom: 1px solid ${props => props.theme.color.divider || '#C8CACB'}; */
 `
 const StyledWithSubMenuWrapper = styled(Flex)`
 	width: 100%;
@@ -32,15 +38,15 @@ const WithSubMenu: FC<WithoutSubmenuItemProps> = (props) => {
 	const onClickSubMenuBtn: ArrowFn = () => {
 		setIsSubMenuOpen(!isSubMenuOpen)
 	};
-	console.log(isSubMenuOpen);
 
 	return (
 		<StyledWithSubMenuWrapper direction='column' align='flex-start' justufy='flex-start'>
-			<StyledWithSubMenuTitle justufy='space-between'>
-				{props.menuItemText.menuText}
-				<SubMenuButton onClickSubMenuBtn={onClickSubMenuBtn} isSubMenuOpen={isSubMenuOpen} />
+			<StyledWithSubMenuTitle >
+				<SubMenuButton btnText={props.menuItemText.menuText}
+					onClickSubMenuBtn={onClickSubMenuBtn} isSubMenuOpen={isSubMenuOpen} />
 			</StyledWithSubMenuTitle>
-			<StyledWithSubMenu direction='column' align='flex-start' justufy='flex-start'>
+			<StyledWithSubMenu isSubMenuOpen={isSubMenuOpen}
+				direction='column' align='flex-start' justufy='flex-start'>
 				{menuItem}
 			</StyledWithSubMenu>
 		</StyledWithSubMenuWrapper>

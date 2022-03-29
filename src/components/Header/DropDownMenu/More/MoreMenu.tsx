@@ -9,7 +9,7 @@ const StyledMoreMenu = styled(Flex)`
 	width: 100%;
 	
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-		margin-top: 50px;
+		margin-top: 0px;
 	};
 `;
 
@@ -24,12 +24,18 @@ const menuItemText: IMoreMenuItem = {
 		{ sub6: 'sub1', },
 	]
 
-}
+};
+
+const menuItemText1: IMoreMenuItem = {
+	menuText: 'меню еще',
+
+};
 
 const MoreMenu: FC = (props) => {
 	return (
 		<StyledMoreMenu direction='column' justufy='flex-start' align='flex-start'>
 			<MoreMenuItem menuItemText={menuItemText} />
+			<MoreMenuItem menuItemText={menuItemText1} />
 		</StyledMoreMenu>
 	);
 };

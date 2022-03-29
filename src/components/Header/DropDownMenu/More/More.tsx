@@ -5,18 +5,25 @@ import ActionsContainer from './../../HeaderAction/ActionContainer';
 import MoreMenu from './MoreMenu';
 
 const StyledMore = styled(Flex)`
-	
-	width: 100%;
-	padding-top: 30px;
+		width: 100%;
+		padding-top: 30px;
+		@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+			padding-top: 35px;
+		};
+`;
+
+const StyledActionsContainer = styled.div`
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-		padding-top: 50px;
+		display:none;
 	};
 `
 
 const More: FC = (props) => {
 	return (
 		<StyledMore direction='column' justufy='flex-start' align='flex-start' >
-			<ActionsContainer />
+			<StyledActionsContainer>
+				<ActionsContainer />
+			</StyledActionsContainer>
 			<MoreMenu />
 		</StyledMore>
 	);
