@@ -7,6 +7,9 @@ export interface IBottomBtn {
 export interface IMenuItem {
 	[property: string]: string;
 };
+export interface IScearchDrop {
+	[property: string]: string;
+};
 
 export interface ISundry {
 	btnEnter: string;

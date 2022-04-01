@@ -29,6 +29,10 @@ export const headerTextEn: IHeaderStings = {
 			more: 'more',
 		},
 	},
+	scearch: {
+		plaeceholderMob: 'Enter a query',
+		plaeceholderTab: 'Enter a query, such as "Smart balance"',
+	},
 };
 
 export const headerTextUa: IHeaderStings = {
@@ -60,6 +64,10 @@ export const headerTextUa: IHeaderStings = {
 			more: 'ще',
 		},
 	},
+	scearch: {
+		plaeceholderMob: 'Введіть запит',
+		plaeceholderTab: 'Введіть запит, наприклад Smart Balance',
+	},
 };
 
 export const headerTextRu: IHeaderStings = {
@@ -90,5 +98,9 @@ export const headerTextRu: IHeaderStings = {
 			search: 'поиск',
 			more: 'ещё',
 		},
+	},
+	scearch: {
+		plaeceholderMob: 'Введите запрос',
+		plaeceholderTab: 'Введите запрос, например «Smart balance»',
 	},
 };
