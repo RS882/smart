@@ -25,8 +25,6 @@ const StyledHeaderMenuContainer = styled.div`
 
 const HeaderMenuContainer: FC<IHeaderMenuContainer> = (props) => {
 
-
-
 	return (
 		<StyledHeaderMenuContainer>
 			<Container>

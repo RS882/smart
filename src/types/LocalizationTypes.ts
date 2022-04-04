@@ -23,7 +23,13 @@ export interface IDporMenu {
 		search: string;
 		more: string;
 	}
-}
+};
+
+export interface IMoreMenuItem {
+	menuText: string;
+	subMenu?: { [property: string]: string; }[];
+};
+
 
 export interface IAddress {
 	address: string[];

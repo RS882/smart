@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { IMoreMenuItem } from '../../../../types/HeaderTypes';
+import { strings } from '../../../../localization/localization';
+import { IMoreMenuItem } from '../../../../types/LocalizationTypes';
+
 import Flex from '../../../Flex';
 import MoreMenuItem from './MoreMenuItem';
 
@@ -16,12 +18,12 @@ const StyledMoreMenu = styled(Flex)`
 const menuItemText: IMoreMenuItem = {
 	menuText: 'меню еще',
 	subMenu: [
-		{ sub1: 'sub1slkdjalsjda;ldjaldaj;d  lazsfasfafasdasdsd', },
-		{ sub2: 'sub1', },
-		{ sub3: 'sub1', },
-		{ sub4: 'sub1', },
-		{ sub5: 'sub1', },
-		{ sub6: 'sub1', },
+		{ sub1: 'sub1', },
+		{ sub2: 'sub2', },
+		{ sub3: 'sub3', },
+		{ sub4: 'sub4', },
+		{ sub5: 'sub5', },
+		{ sub6: 'sub16', },
 	]
 
 };
@@ -31,11 +33,17 @@ const menuItemText1: IMoreMenuItem = {
 
 };
 
+const menuMoreItems = Object.entries(strings.header.dropMoreMenu).map((e, i) =>
+	<MoreMenuItem key={e[0] + i} menuItem={e} />
+);
+
+
+
+
 const MoreMenu: FC = (props) => {
 	return (
 		<StyledMoreMenu direction='column' justufy='flex-start' align='flex-start'>
-			<MoreMenuItem menuItemText={menuItemText} />
-			<MoreMenuItem menuItemText={menuItemText1} />
+			{menuMoreItems}
 		</StyledMoreMenu>
 	);
 };

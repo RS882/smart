@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-
-import { IMenuMore } from './MoreMenuItem';
-
+import { IMenuMoreWithoutSub } from './MoreMenuItem';
 
 
-export interface WithoutSubmenuItemProps extends IMenuMore {
+
+export interface WithoutSubmenuItemProps {
+	menuItem: IMenuMoreWithoutSub;
 	onClickMenuItemMore: (e: string) => void;
 }
 
@@ -14,6 +14,7 @@ const StylyedWithoutSubmenuItem = styled.button`
 	height: 100%;
 	padding: 15px 0;
 	text-align: start;
+	text-transform: capitalize;
 	transition: all 0.3s ease 0s;
 	border-bottom: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
 	&:hover,
@@ -27,7 +28,9 @@ const StylyedWithoutSubmenuItem = styled.button`
 `
 const WithoutSubmenuItem: FC<WithoutSubmenuItemProps> = (props) => {
 
-	const propsArr = Object.entries(props.menuItemText);
+	const propsArr = Object.entries(props.menuItem);
+
+
 
 	return (
 		<StylyedWithoutSubmenuItem onClick={() => props.onClickMenuItemMore(propsArr[0][0])}>

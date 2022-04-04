@@ -33,6 +33,34 @@ export const headerTextEn: IHeaderStings = {
 		plaeceholderMob: 'Enter a query',
 		plaeceholderTab: 'Enter a query, such as "Smart balance"',
 	},
+	dropMoreMenu: {
+		about: {
+			menuText: 'about us',
+			subMenu: [
+				{ sub1: 'sub1', },
+				{ sub2: 'sub2', },
+				{ sub3: 'sub3', },
+				{ sub4: 'sub4', },
+				{ sub5: 'sub5', },
+				{ sub6: 'sub16', },
+			]
+		},
+		stock: { menuText: 'stock', },
+		installment: { menuText: 'installment 0|0|18', },
+		servise: {
+			menuText: 'Service and Warranty',
+			subMenu: [
+				{ sub1: 'sub1', },
+				{ sub2: 'sub2', },
+				{ sub3: 'sub3', },
+				{ sub4: 'sub4', },
+				{ sub5: 'sub5', },
+				{ sub6: 'sub16', },
+			]
+		},
+		wholesaleDropshipping: { menuText: 'Wholesale/Dropshipping', },
+		contacts: { menuText: 'contacts', },
+	},
 };
 
 export const headerTextUa: IHeaderStings = {
@@ -68,6 +96,34 @@ export const headerTextUa: IHeaderStings = {
 		plaeceholderMob: 'Введіть запит',
 		plaeceholderTab: 'Введіть запит, наприклад Smart Balance',
 	},
+	dropMoreMenu: {
+		about: {
+			menuText: 'Про компанію',
+			subMenu: [
+				{ sub1: 'sub1', },
+				{ sub2: 'sub2', },
+				{ sub3: 'sub3', },
+				{ sub4: 'sub4', },
+				{ sub5: 'sub5', },
+				{ sub6: 'sub16', },
+			]
+		},
+		stock: { menuText: 'акція', },
+		installment: { menuText: 'розстрочка 0|0|18', },
+		servise: {
+			menuText: 'Сервіс та гарантія',
+			subMenu: [
+				{ sub1: 'sub1', },
+				{ sub2: 'sub2', },
+				{ sub3: 'sub3', },
+				{ sub4: 'sub4', },
+				{ sub5: 'sub5', },
+				{ sub6: 'sub16', },
+			]
+		},
+		wholesaleDropshipping: { menuText: 'Опт/дропшиппінг', },
+		contacts: { menuText: 'контакти', },
+	},
 };
 
 export const headerTextRu: IHeaderStings = {
@@ -102,5 +158,33 @@ export const headerTextRu: IHeaderStings = {
 	scearch: {
 		plaeceholderMob: 'Введите запрос',
 		plaeceholderTab: 'Введите запрос, например «Smart balance»',
+	},
+	dropMoreMenu: {
+		about: {
+			menuText: 'О компании',
+			subMenu: [
+				{ sub1: 'sub1', },
+				{ sub2: 'sub2', },
+				{ sub3: 'sub3', },
+				{ sub4: 'sub4', },
+				{ sub5: 'sub5', },
+				{ sub6: 'sub16', },
+			]
+		},
+		stock: { menuText: 'акция', },
+		installment: { menuText: 'Рассрочка 0|0|18', },
+		servise: {
+			menuText: 'Сервис и гарантия',
+			subMenu: [
+				{ sub1: 'sub1', },
+				{ sub2: 'sub2', },
+				{ sub3: 'sub3', },
+				{ sub4: 'sub4', },
+				{ sub5: 'sub5', },
+				{ sub6: 'sub16', },
+			]
+		},
+		wholesaleDropshipping: { menuText: 'Опт/дропшиппинг', },
+		contacts: { menuText: 'контакты', },
 	},
 };
