@@ -1,22 +1,31 @@
 import React, { FC } from 'react';
-import { useNavigate } from 'react-router';
+import { NavigateFunction, useNavigate } from 'react-router';
+
 
 interface CatalogMenuItemProps {
-	IconComponent: FC;
+	iconClass: string;
 	menuItem: { [propetry: string]: string };
-}
+	onClickCatalogItem: (itemType: string) => void;
+};
+
+
 
 const CatalogMenuItem: FC<CatalogMenuItemProps> = (props) => {
 
-	const btnText = Object.entries(props.menuItem);
-	const navigate = useNavigate();
+	const btnText: [string, string][] = Object.entries(props.menuItem);
+
+	const spanElem: JSX.Element[] = Array(25).fill('path').map((e, i) =>
+		<span key={e + i} className={`${e}${i + 1}`}></span>)
+
 
 
 	return (
 		<li>
-			<button onClick={() => navigate(`/${btnText[0]}`)}>
-				<props.IconComponent />
-				<div>{btnText[1]}</div>
+			<button onClick={() => props.onClickCatalogItem(btnText[0][0])}>
+				<div className={props.iconClass}>
+					{spanElem}
+				</div>
+				<div>{btnText[0][1]}</div>
 			</button>
 		</li>
 	);

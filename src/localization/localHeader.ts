@@ -61,6 +61,20 @@ export const headerTextEn: IHeaderStings = {
 		wholesaleDropshipping: { menuText: 'Wholesale/Dropshipping', },
 		contacts: { menuText: 'contacts', },
 	},
+	catalogMenu: {
+		itemsType1: 'Gyroscooters',
+		itemsType2: 'Electric kick scooters',
+		itemsType3: 'Monowheels',
+		itemsType4: 'Segways and mini segways',
+		itemsType5: 'Electric scooters',
+		itemsType6: 'Electric bikes',
+		itemsType7: 'Electric cars',
+		itemsType8: 'Electric skateboards',
+		itemsType9: 'Accessories',
+		itemsType10: 'Smart toys',
+		itemsType11: 'Smart Watch',
+	},
+
 };
 
 export const headerTextUa: IHeaderStings = {
@@ -124,6 +138,20 @@ export const headerTextUa: IHeaderStings = {
 		wholesaleDropshipping: { menuText: 'Опт/дропшиппінг', },
 		contacts: { menuText: 'контакти', },
 	},
+	catalogMenu: {
+		itemsType1: 'Гіроскутери',
+		itemsType2: 'Електросамокати',
+		itemsType3: 'Моноколіси',
+		itemsType4: 'Сігвеї та міні-сигвеї',
+		itemsType5: 'Електроскутери',
+		itemsType6: 'Електровелосипеди',
+		itemsType7: 'Електромобілі',
+		itemsType8: 'Електроскейти',
+		itemsType9: 'Аксесуари',
+		itemsType10: 'Розумні іграшки',
+		itemsType11: 'Smart Watch',
+	},
+
 };
 
 export const headerTextRu: IHeaderStings = {
@@ -186,5 +214,18 @@ export const headerTextRu: IHeaderStings = {
 		},
 		wholesaleDropshipping: { menuText: 'Опт/дропшиппинг', },
 		contacts: { menuText: 'контакты', },
+	},
+	catalogMenu: {
+		itemsType1: 'Гироскутеры',
+		itemsType2: 'Электросамокаты',
+		itemsType3: 'Моноколеса',
+		itemsType4: 'Сигвеи и мини- сигвеи',
+		itemsType5: 'Электроскутеры',
+		itemsType6: 'Электровелосипеды',
+		itemsType7: 'Электромобили',
+		itemsType8: 'Электроскейты',
+		itemsType9: 'Аксессуары',
+		itemsType10: 'Умные игрушки',
+		itemsType11: 'Smart Watch',
 	},
 };

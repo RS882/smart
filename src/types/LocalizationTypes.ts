@@ -11,6 +11,10 @@ export interface IScearchDrop {
 	[property: string]: string;
 };
 
+export interface ICatalogMenu {
+	[property: string]: string;
+};
+
 export interface ISundry {
 	btnEnter: string;
 	btnSearch: string;
