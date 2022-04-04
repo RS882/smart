@@ -4,7 +4,7 @@ import { ArrowFn } from '../../../../types/fnTypes';
 import Flex from '../../../Flex';
 import { IMenuMore } from './MoreMenuItem';
 import SubMenuButton from './SubMenuButton';
-import WithoutSubmenuItem, { WithoutSubmenuItemProps } from './WithoutSubmenuItem';
+import WithoutSubmenuItem from './WithoutSubmenuItem';
 
 
 interface StyledWithSubMenuprops {

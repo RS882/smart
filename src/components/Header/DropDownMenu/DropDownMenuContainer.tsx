@@ -11,6 +11,7 @@ import TitleMenu from './TitleMenu';
 import { IDporMenu } from '../../../types/LocalizationTypes';
 import { strings } from './../../../localization/localization';
 import Scearch from './Scearch/Scearch';
+import DropCatalogContainer from './DropCatalog/DropCatalogContainer';
 
 interface DropDownMenuProps {
 	isOpen?: boolean;
@@ -75,7 +76,7 @@ const DropDownMenu: FC<DropDownMenuProps> = (props) => {
 			<CloseMenu onClick={onCloseMenu} />
 			<StyledMenuWrapper justufy='flex-start' align='flex-start' direction='column'>
 				<TitleMenu title={setItemTitle(isMenuStatus, title)} />
-				{isMenuStatus.isCatalog ? 'Catalog' : null}
+				{isMenuStatus.isCatalog ? <DropCatalogContainer /> : null}
 				{isMenuStatus.isScearch ? <Scearch /> : null}
 				{isMenuStatus.isMore ? <More /> : null}
 			</StyledMenuWrapper>
