@@ -5,7 +5,7 @@ import { strings } from './../../../localization/localization';
 import CatalogMenuItem from './CatalogMenuItem';
 import { useNavigate } from 'react-router';
 import { useAppDispatch } from '../../../redux/hooks';
-import CloseMenu from './../DropDownMenu/CloseMenu';
+
 import { changeIsModal } from '../../../redux/ModalSlice';
 import { closeMenu } from '../../../redux/MenuSlice';
 
@@ -15,7 +15,7 @@ import { closeMenu } from '../../../redux/MenuSlice';
 const StyledCatalogMenu = styled.ul`
 	display:flex;
 	flex-direction:column;
-	
+	background-color: ${props => props.theme.color.lightBlue || '#EDF2F6'};
 `
 
 const CatalogMenu: FC = (props) => {
