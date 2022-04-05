@@ -3,6 +3,7 @@ import LanguageReducer from "./LanguageSlice";
 import ActionReducer from "./ActionSlice";
 import ModalReducer from "./ModalSlice";
 import MenuReducer from "./MenuSlice";
+import CatalogReducer from "./CatalogSlice";
 
 const store = configureStore({
 	reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
 		action: ActionReducer,
 		modal: ModalReducer,
 		menu: MenuReducer,
+		catalog: CatalogReducer,
 	}
 })
 
