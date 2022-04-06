@@ -8,6 +8,7 @@ import { useAppDispatch } from '../../../redux/hooks';
 
 import { changeIsModal } from '../../../redux/ModalSlice';
 import { closeMenu } from '../../../redux/MenuSlice';
+import { setSelectedItemsType } from '../../../redux/CatalogSlice';
 
 
 
@@ -37,13 +38,12 @@ const CatalogMenu: FC = (props) => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
+
 	const onClickCatalogItem = (itemType: string) => {
 		dispatch(closeMenu());
 		dispatch(changeIsModal(false));
-		console.log(itemType);
+		dispatch(setSelectedItemsType(itemType));
 		navigate(`/catalog`);
-
-
 	};
 
 	const menuItems: JSX.Element[] = Object.entries(itemClassName).map(e => ({

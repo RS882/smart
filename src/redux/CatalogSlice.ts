@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from './store';
 
 
 export interface ICatalog {
@@ -13,8 +15,15 @@ const CatalogSlice = createSlice({
 	name: 'catalog',
 	initialState,
 	reducers: {
-		// getSelectedItemsType:
+		setSelectedItemsType: (state, action: PayloadAction<string>) => {
+			state.selectedItemsType = action.payload;
+		},
+
 	}
 });
+
+export const { setSelectedItemsType } = CatalogSlice.actions;
+
+export const selectItemsType = (state: RootState) => state.catalog.selectedItemsType;
 
 export default CatalogSlice.reducer
