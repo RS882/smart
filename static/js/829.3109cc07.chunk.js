@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksmart=self.webpackChunksmart||[]).push([[829],{3829:function(n,r,t){t.r(r);var a,e=t(168),s=(t(2791),t(5751)),u=t(184),i=s.ZP.main(a||(a=(0,e.Z)(["\n\tmargin: 150px;\n"])));r.default=function(){return(0,u.jsx)(i,{children:"Cooperation"})}}}]);
+//# sourceMappingURL=829.3109cc07.chunk.js.map

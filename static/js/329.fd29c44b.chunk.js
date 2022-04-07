@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksmart=self.webpackChunksmart||[]).push([[329],{1329:function(n,t,r){r.r(t);var a,e=r(168),s=(r(2791),r(5751)),u=r(184),c=s.ZP.main(a||(a=(0,e.Z)(["\n\tmargin: 150px;\n"])));t.default=function(){return(0,u.jsx)(c,{children:"Stock"})}}}]);
+//# sourceMappingURL=329.fd29c44b.chunk.js.map

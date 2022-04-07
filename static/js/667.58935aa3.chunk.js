@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksmart=self.webpackChunksmart||[]).push([[667],{1667:function(n,a,e){e.r(a);var r,s=e(168),t=(e(2791),e(5751)),c=e(184),u=t.ZP.main(r||(r=(0,s.Z)(["\n\tmargin: 150px;\n"])));a.default=function(){return(0,c.jsx)(u,{children:"Vacancies"})}}}]);
+//# sourceMappingURL=667.58935aa3.chunk.js.map
