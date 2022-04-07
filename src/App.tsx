@@ -118,7 +118,7 @@ const App: FC = (props) => {
         <DropDownMenu />
         <ModalContainer opacity={modalOpacity} />
         <HeaderContainer />
-        <HeaderBottomContainer strings={strings.header.bottomBtn} />
+        <HeaderBottomContainer />
         <Suspense fallback={<div>Загрузка...</div>}>
           <Routes>
             <Route index element={<Main />} />

@@ -11,12 +11,13 @@ import { useNavigate } from 'react-router';
 import { changeIsModal } from '../../../redux/ModalSlice';
 import HeaderBottomBtnItem from './HeaderBottomBtnItem';
 import { closeMenu, openCatalog, openMore, openScearch } from '../../../redux/MenuSlice';
+import { strings } from './../../../localization/localization';
 
 
 
 
 interface IHeaderBottom {
-	strings: IBottomBtn;
+
 };
 
 
@@ -59,13 +60,15 @@ const HeaderBottomContainer: FC<IHeaderBottom> = (props) => {
 		dispatch(openMore(true));
 	}
 
+	const str: IBottomBtn = strings.header.bottomBtn;
+
 	const btnArray: IHeaderBottomItem[] =
 		[{ name: '', classItem: '_icon-home', },
 		{ name: 'catalog', classItem: '_icon-catalog', fnItem: onClickOpenCatalog, },
 		{ name: 'cart', classItem: '_icon-cart', },
 		{ name: 'search', classItem: '_icon-search_rev', fnItem: onClickOpenSearch, },
 		{ name: 'more', classItem: '_icon-dots', fnItem: onClickOpenMore, }]
-			.map((e) => ({ ...e, itemText: props.strings[e.name || 'home'] }));
+			.map((e) => ({ ...e, itemText: str[e.name || 'home'] }));
 
 	//----------------------------------------
 	const getMenuItemsNav = (itemArray: IHeaderBottomItem[]): { [property: string]: () => void } => {
