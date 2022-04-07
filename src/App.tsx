@@ -110,7 +110,7 @@ const App: FC = (props) => {
   // const appScroll: string = `${isBodyLock ? scrollWidth : 0}px`;
   // // document.body.style.paddingRight = `${isBodyLock ? scrollWidth : 0}px`;
 
-  console.log(store.getState());
+  // console.log(store.getState());
   return (
     <StyledAppRef ref={appRef} >
 

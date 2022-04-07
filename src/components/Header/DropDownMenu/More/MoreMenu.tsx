@@ -16,14 +16,12 @@ const StyledMoreMenu = styled(Flex)`
 `;
 
 
-const menuMoreItems = Object.entries(strings.header.dropMoreMenu).map((e, i) =>
-	<MoreMenuItem key={e[0] + i} menuItem={e} />
-);
-
-
-
 
 const MoreMenu: FC = (props) => {
+
+	const menuMoreItems = Object.entries(strings.header.dropMoreMenu).map((e, i) =>
+		<MoreMenuItem key={e[0] + i} menuItem={e} />
+	);
 	return (
 		<StyledMoreMenu direction='column' justufy='flex-start' align='flex-start'>
 			{menuMoreItems}

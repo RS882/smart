@@ -11,8 +11,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
+  <React.StrictMode >
+    <BrowserRouter basename='/smart'>
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Global />

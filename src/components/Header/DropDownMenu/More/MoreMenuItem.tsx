@@ -22,6 +22,7 @@ export interface IMenuMoreWithoutSub {
 
 const StyledMoreMenuItem = styled(Flex)`
 	width: 100%;
+	text-transform:capitalize;
 	
 `;
 
