@@ -5,7 +5,7 @@ import Button from '../../Button';
 import { theme } from './../../../theme';
 
 interface IHeaderSeach {
-	btnSearch: string;
+	btnSearch: string | null;
 	onClickSearch: ArrowFn;
 }
 

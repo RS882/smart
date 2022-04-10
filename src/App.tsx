@@ -1,9 +1,9 @@
 import React, { FC, Suspense, useEffect, useRef } from 'react';
 import styled from 'styled-components'
 import Flex from './components/Flex';
-import { closeMenuLng, selectActivLng, selectIsLangMenu, setLanguages } from './redux/LanguageSlice';
+import { closeMenuLng, selectActivLng, selectIsLangMenu, setLangStirings, setLanguages } from './redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
-import { strings } from './localization/localization';
+import { strings, IStrings } from './localization/localization';
 import { Route, Routes } from 'react-router-dom';
 import { ArrowFn } from './types/fnTypes';
 import { selectIsBodyLock, selectModalOpacity, selectScrollWidth, setScrollWidth } from './redux/ModalSlice';
@@ -76,8 +76,12 @@ const App: FC = (props) => {
     dispatch(setLanguages({
       languages: strings.getAvailableLanguages(),
       activeLanguage: strings.getLanguage(),
-    }))
+    }));
+    // const stringsText: IStrings = { header: strings.header, footer: strings.footer };
+    const stringsText: IStrings = { header: strings.header, footer: strings.footer };
+    dispatch(setLangStirings(stringsText));
   }, []);
+
   const appRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     // определяем ширину полосы прокрутки и диспачим ее в стейт
@@ -88,6 +92,8 @@ const App: FC = (props) => {
       elem.style.overflowY = `auto`;
     };
   }, []);
+
+
   //------------------------------------
   // ререндерим при смене языка
   const isChangeLng = useAppSelector(selectActivLng);
@@ -98,6 +104,7 @@ const App: FC = (props) => {
   const onClickApp: ArrowFn = () => {
     isMenu && dispatch(closeMenuLng());
   };
+
   // прозрачность модальго окна
   const modalOpacity: string = useAppSelector(selectModalOpacity)
   // лочим страницу если isBodyLock true( сработало модальное окно) 
@@ -110,7 +117,7 @@ const App: FC = (props) => {
   // const appScroll: string = `${isBodyLock ? scrollWidth : 0}px`;
   // // document.body.style.paddingRight = `${isBodyLock ? scrollWidth : 0}px`;
 
-  // console.log(store.getState());
+  console.log(store.getState());
   return (
     <StyledAppRef ref={appRef} >
 

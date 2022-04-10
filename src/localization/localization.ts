@@ -21,13 +21,17 @@ export interface IFooterStings extends IAddress {
 	footer: IFooter;
 };
 
-interface IStrings extends LocalizedStringsMethods {
+export interface IStrings {
 	header: IHeaderStings;
 	footer: IFooterStings;
 };
 
+export interface IStringsWithMethods extends LocalizedStringsMethods {
+	header: IHeaderStings;
+	footer: IFooterStings;
+};
 
-export let strings: IStrings = new LocalizedStrings({
+export let strings: IStringsWithMethods = new LocalizedStrings({
 	en: {
 		header: headerTextEn,
 		footer: footerTextEn,

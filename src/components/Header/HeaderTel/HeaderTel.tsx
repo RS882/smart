@@ -36,13 +36,14 @@ const HeaderTel: FC<IHTel> = (props) => {
 	const time: string[] = ['10:00', '21:00'];
 	const telElems: JSX.Element[] = tels.map((e, i) =>
 		<StledTelLink key={e + i} href={`tel: ${e}`} {...props}>{props.showPhoneNum(e)}</StledTelLink>)
+	const wTime: string[] = props.workTime !== null ? props.workTime : ['', ''];
 
 	return (
 		<StyledHT justufy='space-between' direction={props.direction} >
 			{telElems}
 
-			<StyledWorkTime> {props.workTime[0] + time[0] + props.workTime[1] + time[1]}</StyledWorkTime>
-		</StyledHT>
+			< StyledWorkTime > {wTime[0] + time[0] + wTime[1] + time[1]}</StyledWorkTime>
+		</StyledHT >
 	);
 };
 

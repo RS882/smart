@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import Container from '../Container';
-import { strings } from '../../localization/localization';
-import { ILanguages } from '../../redux/LanguageSlice';
+
+import { ILanguages, selectLangStiringsHeaderMenuItem, selectLangStiringsHeaderSundry } from '../../redux/LanguageSlice';
 import Header from './Header';
 
 import Flex from '../Flex';
 import HeaderMenuContainer from './HeaderMenu/HeaderMenuContainer';
+import { useAppSelector } from '../../redux/hooks';
 
 interface HeaderContainerProps {
 	language?: ILanguages;
@@ -33,13 +34,18 @@ const StyledHeader = styled.header`
 
 const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 
+	const sundry = useAppSelector(selectLangStiringsHeaderSundry)
+	const menuItem = useAppSelector(selectLangStiringsHeaderMenuItem)
+
+
+
 	return (<>
 		<StyledHeader >
 			<Flex direction='column'>
 				<Container>
-					<Header strings={strings.header.sundry} />
+					<Header strings={sundry} />
 				</Container>
-				<HeaderMenuContainer strings={strings.header.menuItem} />
+				<HeaderMenuContainer strings={menuItem} />
 			</Flex>
 
 		</StyledHeader>

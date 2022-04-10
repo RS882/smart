@@ -7,7 +7,7 @@ import HeaderMenuItem from './HeaderMenuItem';
 
 
 interface IHeaderMenuItems {
-	strings: IMenuItem;
+	strings: IMenuItem | null;
 
 };
 

@@ -6,7 +6,7 @@ import HeaderMenuItems from './HeaderMenuItems';
 
 
 interface IHeaderMenuContainer {
-	strings: IMenuItem;
+	strings: IMenuItem | null;
 };
 
 

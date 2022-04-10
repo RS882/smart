@@ -8,7 +8,7 @@ interface IComponentProps {
 	$attr_last: boolean;
 };
 interface MenuItemProps {
-	items: IMenuItem;
+	items: IMenuItem | null;
 	Component: React.FC<IComponentProps>;
 };
 export interface ImenuItemArray {
@@ -16,8 +16,10 @@ export interface ImenuItemArray {
 	itemText: string;
 };
 
+
 const MenuItemHOC: FC<MenuItemProps> = (props) => {
-	const menuItemArray: ImenuItemArray[] = Object.entries(props.items).map(e => ({ itemName: e[0], itemText: e[1] }))
+	const items = props.items !== null ? props.items : { '': '' };
+	const menuItemArray: ImenuItemArray[] = Object.entries(items).map(e => ({ itemName: e[0], itemText: e[1] }))
 	const MenuItemElem: JSX.Element[] = menuItemArray.map((e, i, arr) => {
 		const attrFirst: boolean = (i === 0) || false;
 		const attrLast: boolean = (i === arr.length - 1) || false;

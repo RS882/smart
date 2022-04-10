@@ -22,7 +22,7 @@ export interface IHeaderTelProps {
 };
 
 export interface IHeaderTel {
-	workTime: string[];
+	workTime: string[] | null;
 };
 
 

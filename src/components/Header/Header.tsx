@@ -12,7 +12,7 @@ import HeaderTelContainer from './HeaderTel/HeaderTelContainer';
 
 
 interface HeaderPropsMain {
-	strings: ISundry;
+	strings: ISundry | null;
 
 }
 
@@ -44,10 +44,10 @@ const Header: FC<HeaderPropsMain> = (props) => {
 		<StyledHeader justufy={'space-between'} >
 			<HeaderLogo />
 			<Flex>
-				<HeaderTelContainer workTime={props.strings.workTime} />
-				<HeaderSeachContainer btnSearch={props.strings.btnSearch} />
+				<HeaderTelContainer workTime={props.strings && props.strings.workTime} />
+				<HeaderSeachContainer btnSearch={props.strings && props.strings.btnSearch} />
 				<HeaderActionsContainer />
-				<StyledLoginBtn>{props.strings.btnEnter}</StyledLoginBtn>
+				<StyledLoginBtn>{props.strings && props.strings.btnEnter}</StyledLoginBtn>
 				<LanguageContainer />
 			</Flex>
 		</StyledHeader>

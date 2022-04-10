@@ -7,7 +7,7 @@ import Flex from '../../Flex';
 import HeaderSeach from './HeaderSeach';
 
 interface IHeaderSeachContainer {
-	btnSearch: string;
+	btnSearch: string | null;
 }
 
 const StyledHeaderSeachContainer = styled(Flex)`
