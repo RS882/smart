@@ -9,9 +9,10 @@ import { changeIsModal } from '../../../redux/ModalSlice';
 import More from './More/More';
 import TitleMenu from './TitleMenu';
 import { IDporMenu } from '../../../types/LocalizationTypes';
-import { strings } from './../../../localization/localization';
+
 import Scearch from './Scearch/Scearch';
 import DropCatalogContainer from './DropCatalog/DropCatalogContainer';
+import { selectLangStiringsHeaderDropMenu } from '../../../redux/LanguageSlice';
 
 interface DropDownMenuProps {
 	isOpen?: boolean;
@@ -62,7 +63,16 @@ const DropDownMenu: FC<DropDownMenuProps> = (props) => {
 	const isMenuStatus = useAppSelector(selectIsMenu);
 	const isOpen: boolean = Object.values(isMenuStatus).includes(true);
 
-	const title: IDporMenu = strings.header.dropMenu;
+	const title = useAppSelector(selectLangStiringsHeaderDropMenu);
+	const titleType = title !== null ? title : {
+		title: {
+			catalog: '',
+			search: '',
+			more: '',
+		}
+	};
+
+	// const title: IDporMenu = strings.header.dropMenu;
 
 	const setItemTitle = (isMenu: IIsPage, title: IDporMenu) => {
 		if (isMenu.isCatalog) return title.title.catalog;
@@ -75,7 +85,7 @@ const DropDownMenu: FC<DropDownMenuProps> = (props) => {
 		<StyledDropDownMenu isOpen={isOpen} >
 			<CloseMenu onClick={onCloseMenu} />
 			<StyledMenuWrapper justufy='flex-start' align='flex-start' direction='column'>
-				<TitleMenu title={setItemTitle(isMenuStatus, title)} />
+				<TitleMenu title={setItemTitle(isMenuStatus, titleType)} />
 				{isMenuStatus.isCatalog ? <DropCatalogContainer /> : null}
 				{isMenuStatus.isScearch ? <Scearch /> : null}
 				{isMenuStatus.isMore ? <More /> : null}

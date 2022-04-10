@@ -11,7 +11,8 @@ import { useNavigate } from 'react-router';
 import { changeIsModal } from '../../../redux/ModalSlice';
 import HeaderBottomBtnItem from './HeaderBottomBtnItem';
 import { closeMenu, openCatalog, openMore, openScearch } from '../../../redux/MenuSlice';
-import { strings } from './../../../localization/localization';
+
+import { selectLangStiringsHeaderBottomBtn } from '../../../redux/LanguageSlice';
 
 
 
@@ -60,7 +61,8 @@ const HeaderBottomContainer: FC<IHeaderBottom> = (props) => {
 		dispatch(openMore(true));
 	}
 
-	const str: IBottomBtn = strings.header.bottomBtn;
+	const str: IBottomBtn | null = useAppSelector(selectLangStiringsHeaderBottomBtn);
+	const string: IBottomBtn = str !== null ? str : { '': '' };
 
 	const btnArray: IHeaderBottomItem[] =
 		[{ name: '', classItem: '_icon-home', },
@@ -68,7 +70,7 @@ const HeaderBottomContainer: FC<IHeaderBottom> = (props) => {
 		{ name: 'cart', classItem: '_icon-cart', },
 		{ name: 'search', classItem: '_icon-search_rev', fnItem: onClickOpenSearch, },
 		{ name: 'more', classItem: '_icon-dots', fnItem: onClickOpenMore, }]
-			.map((e) => ({ ...e, itemText: str[e.name || 'home'] }));
+			.map((e) => ({ ...e, itemText: string[e.name || 'home'] }));
 
 	//----------------------------------------
 	const getMenuItemsNav = (itemArray: IHeaderBottomItem[]): { [property: string]: () => void } => {

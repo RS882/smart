@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import ScearchForm from './ScearchForm';
-import { strings } from './../../../../localization/localization';
+
+import { selectLangStiringsHeaderScearch } from './../../../../redux/LanguageSlice';
+import { useAppSelector } from '../../../../redux/hooks';
 
 const StyledScearch = styled.div`
 	width: 100%;
@@ -21,15 +23,21 @@ const StyledTablet = styled.div`
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		display:block;
 	};
-`
+`;
+
+
 const Scearch: FC = (props) => {
+
+	const scearch = useAppSelector(selectLangStiringsHeaderScearch);
+	const plaeceholderMob = scearch !== null ? scearch.plaeceholderMob : '';
+	const plaeceholderTab = scearch !== null ? scearch.plaeceholderTab : '';
 	return (
 		<StyledScearch>
 			<StyledMobil>
-				<ScearchForm placeholderText={strings.header.scearch.plaeceholderMob} />
+				<ScearchForm placeholderText={plaeceholderMob} />
 			</StyledMobil>
 			<StyledTablet>
-				<ScearchForm placeholderText={strings.header.scearch.plaeceholderTab} />
+				<ScearchForm placeholderText={plaeceholderTab} />
 			</StyledTablet>
 		</StyledScearch>
 	);

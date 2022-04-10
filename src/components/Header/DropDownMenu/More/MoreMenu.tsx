@@ -1,10 +1,12 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { strings } from '../../../../localization/localization';
+
 
 
 import Flex from '../../../Flex';
 import MoreMenuItem from './MoreMenuItem';
+import { selectLangStiringsHeaderDropMoreMenu } from './../../../../redux/LanguageSlice';
+import { useAppSelector } from '../../../../redux/hooks';
 
 const StyledMoreMenu = styled(Flex)`
 	margin-top:20px;
@@ -19,7 +21,10 @@ const StyledMoreMenu = styled(Flex)`
 
 const MoreMenu: FC = (props) => {
 
-	const menuMoreItems = Object.entries(strings.header.dropMoreMenu).map((e, i) =>
+	const dropMoreMenu = useAppSelector(selectLangStiringsHeaderDropMoreMenu);
+	const dropMoreMenuType = dropMoreMenu !== null ? dropMoreMenu : {}
+
+	const menuMoreItems = Object.entries(dropMoreMenuType).map((e, i) =>
 		<MoreMenuItem key={e[0] + i} menuItem={e} />
 	);
 	return (
