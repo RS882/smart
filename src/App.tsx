@@ -1,7 +1,7 @@
 import React, { FC, Suspense, useEffect, useRef } from 'react';
 import styled from 'styled-components'
 import Flex from './components/Flex';
-import { closeMenuLng, selectActivLng, selectIsLangMenu, setLangStirings, setLanguages } from './redux/LanguageSlice';
+import { closeMenuLng, selectActivLng, selectIsLangMenu, } from './redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { strings, IStrings } from './localization/localization';
 import { Route, Routes } from 'react-router-dom';
@@ -12,7 +12,7 @@ import DropDownMenu from './components/Header/DropDownMenu/DropDownMenuContainer
 import ModalContainer from './components/Modal/ModalContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import HeaderBottomContainer from './components/Header/HeaderBottomContainer/HeaderBottomContainer';
-import { transformObjStrings } from './utilits/functions';
+import { loadLanguage, setLanguages } from './redux/Thunk/thunkInitApp';
 
 
 
@@ -46,6 +46,7 @@ const Faq = React.lazy(() => import('./components/Faq/Faq'));
 const Wholesale = React.lazy(() => import('./components/Wholesale/Wholesale'));
 const Dropshipping = React.lazy(() => import('./components/Dropshipping/Dropshipping'));
 
+
 interface IAppProps {
   ref: React.RefObject<HTMLDivElement>;
   appScroll?: string;
@@ -73,12 +74,15 @@ const App: FC = (props) => {
 
   const dispatch = useAppDispatch();
   //заносим в стейт данные о языках
+
   useEffect(() => {
-    dispatch(setLanguages({
-      languages: strings.getAvailableLanguages(),
-      activeLanguage: strings.getLanguage(),
-    }));
-    dispatch(setLangStirings(transformObjStrings(strings)));
+    dispatch(setLanguages(strings));
+    dispatch(loadLanguage(strings));
+    //   setLanguages({
+    //   languages: strings.getAvailableLanguages(),
+    //   activeLanguage: strings.getLanguage(),
+    // }));
+    // dispatch(setLangStirings(transformObjStrings(strings)));
 
   }, []);
 

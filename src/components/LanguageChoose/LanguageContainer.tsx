@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import { closeMenuLng, selectIsLangMenu, selectLanguage, setActiveLanguage, setLangStirings, toggleShowMenuLng } from '../../redux/LanguageSlice';
+import { closeMenuLng, selectIsLangMenu, selectLanguage, setActiveLanguage, toggleShowMenuLng } from '../../redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import Languages from './Languages';
 import { strings } from '../../localization/localization';
 import { ArrowFn } from '../../types/fnTypes';
 import { transformObjStrings } from '../../utilits/functions';
+import { loadLanguage } from '../../redux/Thunk/thunkInitApp';
 
 
 const LanguageContainer: FC = () => {
@@ -20,7 +21,7 @@ const LanguageContainer: FC = () => {
 	const cnahgeActiveLng = (e: string) => {
 		strings.setLanguage(e);
 		dispatch(setActiveLanguage(e));
-		dispatch(setLangStirings(transformObjStrings(strings)));
+		dispatch(loadLanguage(strings));
 		dispatch(closeMenuLng());
 	};
 

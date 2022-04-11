@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { IStrings } from './../localization/localization';
+import { loadLanguage, setLanguages } from "./Thunk/thunkInitApp";
 
 export interface ILanguages {
 	activeLanguage: string;
@@ -30,22 +31,41 @@ const LanguageSlice = createSlice({
 		setActiveLanguage: (state, action: PayloadAction<string>) => {
 			state.language.activeLanguage = action.payload;
 		},
-		setLanguages: (state, action: PayloadAction<ILanguages>) => {
-			state.language = action.payload;
-		},
+		// setLanguages: (state, action: PayloadAction<ILanguages>) => {
+		// 	state.language = action.payload;
+		// },
 		toggleShowMenuLng: (state) => {
 			state.isMenu = !state.isMenu;
 		},
 		closeMenuLng: (state) => {
 			state.isMenu = false;
 		},
-		setLangStirings: (state, action: PayloadAction<IStrings | null>) => {
-			state.langStrings = action.payload;
-		}
+		// setLangStirings: (state, action: PayloadAction<IStrings | null>) => {
+		// 	state.langStrings = action.payload;
+		// }
 	},
+	extraReducers: {
+
+
+		// [setLanguages.pending.type]: (state) => {
+
+		// },
+		[setLanguages.fulfilled.type]: (state, action: PayloadAction<ILanguages>) => {
+			state.language = action.payload;
+		},
+
+		[loadLanguage.fulfilled.type]: (state, action: PayloadAction<IStrings | null>) => {
+			state.langStrings = action.payload;
+
+		},
+
+	},
+	// [setLanguage.rejected]: rejectedUsers,
+
+
 })
 
-export const { setActiveLanguage, setLanguages, toggleShowMenuLng, closeMenuLng, setLangStirings } = LanguageSlice.actions;
+export const { setActiveLanguage, toggleShowMenuLng, closeMenuLng, } = LanguageSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 
