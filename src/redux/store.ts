@@ -4,6 +4,7 @@ import ActionReducer from "./ActionSlice";
 import ModalReducer from "./ModalSlice";
 import MenuReducer from "./MenuSlice";
 import CatalogReducer from "./CatalogSlice";
+import AppReducer from "./AppSlice";
 
 const store = configureStore({
 	reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
 		modal: ModalReducer,
 		menu: MenuReducer,
 		catalog: CatalogReducer,
+		app: AppReducer,
 	}
 })
 

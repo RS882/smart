@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
+import { setScrollWidth } from './Thunk/thunkInitApp';
 
 interface IModalState {
 	isModal: boolean;
@@ -28,17 +29,24 @@ export const modalSlice = createSlice({
 		changeIsBodyLock: (state, action: PayloadAction<boolean>) => {
 			state.isBodyLock = action.payload;
 		},
-		// устанавливаем ширину полосы прокрутки
-		setScrollWidth: (state, action: PayloadAction<number>) => {
-			state.scrollWidth = action.payload;
-		},
+		// // устанавливаем ширину полосы прокрутки
+		// setScrollWidth: (state, action: PayloadAction<number>) => {
+		// 	state.scrollWidth = action.payload;
+		// },
 		// устанавливаем ширину полосы прокрутки
 		setOpacity: (state, action: PayloadAction<string>) => {
 			state.opacity = action.payload;
 		},
 	},
+	extraReducers: {
+		[setScrollWidth.fulfilled.type]: (state, action: PayloadAction<number>) => {
+			console.log(action.payload);
+
+			state.scrollWidth = action.payload;
+		},
+	}
 })
-export const { changeIsModal, changeIsBodyLock, setScrollWidth, setOpacity } = modalSlice.actions;
+export const { changeIsModal, changeIsBodyLock, setOpacity } = modalSlice.actions;
 
 export const selectIsModal = (state: RootState) => state.modal.isModal;
 export const selectIsBodyLock = (state: RootState) => state.modal.isBodyLock;

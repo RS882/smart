@@ -20,3 +20,18 @@ export const loadLanguage = createAsyncThunk(
 		return await transformObjStrings(data) as IStrings | null;
 	}
 );
+
+export const setScrollWidth = createAsyncThunk(
+	'modal/setScrollWidth',
+	async (data: React.RefObject<HTMLDivElement>) => {
+		const elem = data.current;
+		let res: number = 0;
+		if (elem !== null) {
+			elem.style.overflowY = `scroll`;
+			res = await elem.offsetWidth - elem.clientWidth;
+			elem.style.overflowY = `auto`;
+		};
+		console.log(res);
+		return await res as number;
+	}
+);

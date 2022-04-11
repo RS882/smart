@@ -6,13 +6,13 @@ import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { strings, IStrings } from './localization/localization';
 import { Route, Routes } from 'react-router-dom';
 import { ArrowFn } from './types/fnTypes';
-import { selectIsBodyLock, selectModalOpacity, selectScrollWidth, setScrollWidth } from './redux/ModalSlice';
+import { selectIsBodyLock, selectModalOpacity, selectScrollWidth } from './redux/ModalSlice';
 import store from './redux/store';
 import DropDownMenu from './components/Header/DropDownMenu/DropDownMenuContainer';
 import ModalContainer from './components/Modal/ModalContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import HeaderBottomContainer from './components/Header/HeaderBottomContainer/HeaderBottomContainer';
-import { loadLanguage, setLanguages } from './redux/Thunk/thunkInitApp';
+import { loadLanguage, setLanguages, setScrollWidth } from './redux/Thunk/thunkInitApp';
 
 
 
@@ -74,28 +74,19 @@ const App: FC = (props) => {
 
   const dispatch = useAppDispatch();
   //заносим в стейт данные о языках
-
-  useEffect(() => {
-    dispatch(setLanguages(strings));
-    dispatch(loadLanguage(strings));
-    //   setLanguages({
-    //   languages: strings.getAvailableLanguages(),
-    //   activeLanguage: strings.getLanguage(),
-    // }));
-    // dispatch(setLangStirings(transformObjStrings(strings)));
-
-  }, []);
-
   const appRef = useRef<HTMLDivElement>(null);
+
+
   useEffect(() => {
-    // определяем ширину полосы прокрутки и диспачим ее в стейт
-    const elem = appRef.current;
-    if (elem !== null) {
-      elem.style.overflowY = `scroll`;
-      dispatch(setScrollWidth(elem.offsetWidth - elem.clientWidth));
-      elem.style.overflowY = `auto`;
-    };
+    Promise.all([dispatch(setLanguages(strings)),
+    dispatch(loadLanguage(strings)),
+    dispatch(setScrollWidth(appRef))])
+      .then(() => {
+        console.log(store.getState());
+      })
   }, []);
+
+
 
 
   //------------------------------------
