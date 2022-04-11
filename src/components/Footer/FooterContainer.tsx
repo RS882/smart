@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { strings } from '../../localization/localization';
+import { IFooterStings, strings } from '../../localization/localization';
 import Container from '../Container';
 import FooterLogoAdressBlock from './FooterLogoAdressBlock/FooterLogoAdressBlock';
 import FooterMenu from './FooterMenu/FooterMenu';
-
 import FooterFooterContainer from './FooterFooter/FooterFooterContainer';
+import { useAppSelector } from '../../redux/hooks';
+import { selectLangStiringsFooter } from './../../redux/LanguageSlice';
 
 
 const StyledFooterContainer = styled.div`
@@ -50,27 +51,45 @@ const StyledFooterMenu2 = styled.div`
 		grid-column: 3/4; 
   		grid-row: 1/2;
 	};
-`
+`;
 
 
 
 const FooterContainer: FC = () => {
 
 
+	const footerNull = useAppSelector(selectLangStiringsFooter);
+
+	const footer: IFooterStings = footerNull !== null ? footerNull : {
+		address: ['',],
+		store: {
+			titleName: '',
+			item: { '': '' },
+		},
+		client: {
+			titleName: '',
+			item: { '': '' },
+		},
+		cooperation: {
+			titleName: '',
+			item: { '': '' },
+		},
+		footer: { '': '' },
+	}
 	return (
 		<StyledFooterContainer>
 			<Container>
 				<StyledFooterWrapper>
-					<FooterLogoAdressBlock workTime={strings.header.sundry.workTime} address={strings.footer.address} />
+					<FooterLogoAdressBlock workTime={strings.header.sundry.workTime} address={footer.address} />
 					<StyledFooterMenu2>
-						<FooterMenu items={strings.footer.store} />
+						<FooterMenu items={footer.store} />
 					</StyledFooterMenu2>
-					<FooterMenu items={strings.footer.client} />
-					<FooterMenu items={strings.footer.cooperation} />
-					<FooterFooterContainer items={strings.footer.footer} />
+					<FooterMenu items={footer.client} />
+					<FooterMenu items={footer.cooperation} />
+					<FooterFooterContainer items={footer.footer} />
 				</StyledFooterWrapper>
 			</Container>
-		</StyledFooterContainer>
+		</StyledFooterContainer >
 	);
 };
 

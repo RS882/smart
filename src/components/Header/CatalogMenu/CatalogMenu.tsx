@@ -1,14 +1,15 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { ICatalogMenu } from '../../../types/LocalizationTypes';
-import { strings } from './../../../localization/localization';
+
 import CatalogMenuItem from './CatalogMenuItem';
 import { useNavigate } from 'react-router';
-import { useAppDispatch } from '../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 
 import { changeIsModal } from '../../../redux/ModalSlice';
 import { closeMenu } from '../../../redux/MenuSlice';
 import { setSelectedItemsType } from '../../../redux/CatalogSlice';
+import { selectLangStiringsHeaderCatalogMenu } from '../../../redux/LanguageSlice';
 
 
 
@@ -46,9 +47,13 @@ const CatalogMenu: FC = (props) => {
 		navigate(`/catalog`);
 	};
 
+
+	const catalogMenu = useAppSelector(selectLangStiringsHeaderCatalogMenu);
+	const catalogMenuType: ICatalogMenu = catalogMenu !== null ? catalogMenu : { '': '' }
+
 	const menuItems: JSX.Element[] = Object.entries(itemClassName).map(e => ({
 		iconClass: e[1],
-		menuItem: { [e[0]]: strings.header.catalogMenu[e[0]] },
+		menuItem: { [e[0]]: catalogMenuType[e[0]] },
 	})).map((e, i) => <CatalogMenuItem onClickCatalogItem={onClickCatalogItem} key={e.iconClass + i} {...e} />);
 
 

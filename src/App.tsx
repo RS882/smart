@@ -77,7 +77,6 @@ const App: FC = (props) => {
       languages: strings.getAvailableLanguages(),
       activeLanguage: strings.getLanguage(),
     }));
-    // const stringsText: IStrings = { header: strings.header, footer: strings.footer };
     const stringsText: IStrings = { header: strings.header, footer: strings.footer };
     dispatch(setLangStirings(stringsText));
   }, []);
@@ -95,10 +94,7 @@ const App: FC = (props) => {
 
 
   //------------------------------------
-  // ререндерим при смене языка
-  const isChangeLng = useAppSelector(selectActivLng);
-  useEffect(() => {
-  }, [isChangeLng]);
+
   // закрываем меню выбора языка при клике на любой точке
   const isMenu = useAppSelector(selectIsLangMenu);
   const onClickApp: ArrowFn = () => {

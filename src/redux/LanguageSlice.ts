@@ -53,6 +53,7 @@ export const { setActiveLanguage, setLanguages, toggleShowMenuLng, closeMenuLng,
 export const selectLanguage = (state: RootState) => state.languages.language;
 export const selectIsLangMenu = (state: RootState) => state.languages.isMenu;
 export const selectActivLng = (state: RootState) => state.languages.language.activeLanguage;
+export const selectLangStiringsHeader = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header;
 export const selectLangStiringsHeaderBottomBtn = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header.bottomBtn;
 export const selectLangStiringsHeaderCatalogMenu = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header.catalogMenu;
 export const selectLangStiringsHeaderDropMenu = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header.dropMenu;
@@ -60,9 +61,11 @@ export const selectLangStiringsHeaderDropMoreMenu = (state: RootState) => state.
 export const selectLangStiringsHeaderMenuItem = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header.menuItem;
 export const selectLangStiringsHeaderScearch = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header.scearch;
 export const selectLangStiringsHeaderSundry = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header.sundry;
+export const selectLangStiringsFooter = (state: RootState) => state.languages.langStrings && state.languages.langStrings.footer;
 export const selectLangStiringsFooterAddress = (state: RootState) => state.languages.langStrings && state.languages.langStrings.footer.address;
 export const selectLangStiringsFooterClient = (state: RootState) => state.languages.langStrings && state.languages.langStrings.footer.client;
 export const selectLangStiringsFooterCooperationt = (state: RootState) => state.languages.langStrings && state.languages.langStrings.footer.cooperation;
 export const selectLangStiringsFooterFooter = (state: RootState) => state.languages.langStrings && state.languages.langStrings.footer.footer;
 export const selectLangStiringsFooterStore = (state: RootState) => state.languages.langStrings && state.languages.langStrings.footer.store;
+
 export default LanguageSlice.reducer
