@@ -1,3 +1,4 @@
+import { IStrings, IStringsWithMethods } from "../localization/localization";
 
 
 export type telFn = (phoneNum: string | undefined) => string;
@@ -12,5 +13,15 @@ export const showPhoneNum: telFn = phoneNum => {
 	arrMod(res, [4], '(');
 	arrMod(res, [8], ')');
 	return res.join('');
+};
+
+// получает объект без литералов начинающихся на _
+export const transformObjStrings = (obj: IStringsWithMethods) => {
+	let stringsText: IStrings = { ...obj };
+	let key: keyof typeof stringsText;
+	for (key in stringsText) {
+		(key[0] !== '_') ? stringsText = { ...stringsText } : delete stringsText[key];
+	}
+	return stringsText;
 };
 

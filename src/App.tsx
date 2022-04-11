@@ -12,6 +12,7 @@ import DropDownMenu from './components/Header/DropDownMenu/DropDownMenuContainer
 import ModalContainer from './components/Modal/ModalContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import HeaderBottomContainer from './components/Header/HeaderBottomContainer/HeaderBottomContainer';
+import { transformObjStrings } from './utilits/functions';
 
 
 
@@ -77,8 +78,8 @@ const App: FC = (props) => {
       languages: strings.getAvailableLanguages(),
       activeLanguage: strings.getLanguage(),
     }));
-    const stringsText: IStrings = { header: strings.header, footer: strings.footer };
-    dispatch(setLangStirings(stringsText));
+    dispatch(setLangStirings(transformObjStrings(strings)));
+
   }, []);
 
   const appRef = useRef<HTMLDivElement>(null);

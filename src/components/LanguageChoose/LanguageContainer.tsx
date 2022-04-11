@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import Languages from './Languages';
 import { strings } from '../../localization/localization';
 import { ArrowFn } from '../../types/fnTypes';
-import { IStrings } from './../../localization/localization';
+import { transformObjStrings } from '../../utilits/functions';
 
 
 const LanguageContainer: FC = () => {
@@ -20,8 +20,7 @@ const LanguageContainer: FC = () => {
 	const cnahgeActiveLng = (e: string) => {
 		strings.setLanguage(e);
 		dispatch(setActiveLanguage(e));
-		const stringsText: IStrings = { header: strings.header, footer: strings.footer };
-		dispatch(setLangStirings(stringsText));
+		dispatch(setLangStirings(transformObjStrings(strings)));
 		dispatch(closeMenuLng());
 	};
 
