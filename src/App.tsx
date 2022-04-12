@@ -13,6 +13,8 @@ import ModalContainer from './components/Modal/ModalContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import HeaderBottomContainer from './components/Header/HeaderBottomContainer/HeaderBottomContainer';
 import { loadLanguage, setLanguages, setScrollWidth } from './redux/Thunk/thunkInitApp';
+import { initializatedSuccess, selectInitializated } from './redux/AppSlice';
+import PreloaderContainer from './components/Preloader/PreloaderContainer';
 
 
 
@@ -80,12 +82,13 @@ const App: FC = (props) => {
   useEffect(() => {
     Promise.all([dispatch(setLanguages(strings)),
     dispatch(loadLanguage(strings)),
-    dispatch(setScrollWidth(appRef))])
+    ])
       .then(() => {
-        console.log(store.getState());
-      })
-  }, []);
+        dispatch(initializatedSuccess());
 
+      })
+
+  }, []);
 
 
 
@@ -109,47 +112,66 @@ const App: FC = (props) => {
   // const appScroll: string = `${isBodyLock ? scrollWidth : 0}px`;
   // // document.body.style.paddingRight = `${isBodyLock ? scrollWidth : 0}px`;
 
-  console.log(store.getState());
-  return (
-    <StyledAppRef ref={appRef} >
+  // console.log(store.getState());
 
-      <AppWrapper onClick={onClickApp} direction={'column'}>
-        <DropDownMenu />
-        <ModalContainer opacity={modalOpacity} />
-        <HeaderContainer />
-        <HeaderBottomContainer />
-        <Suspense fallback={<div>Загрузка...</div>}>
-          <Routes>
-            <Route index element={<Main />} />
-            <Route path='/compare' element={<Compare />} />
-            <Route path='/viewed' element={<Viewed />} />
-            <Route path='/favorites' element={<Favorites />} />
-            <Route path='/cart' element={<Cart />} />
-            <Route path='/catalog' element={<Catalog />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/stock' element={<Stock />} />
-            <Route path='/installment' element={<Installment />} />
-            <Route path='/servise' element={<Servise />} />
-            <Route path='/wholesaleDropshipping' element={<WholesaleDropshipping />} />
-            <Route path='/contacts' element={<Contacts />} />
-            <Route path='/reviews' element={<Reviews />} />
-            <Route path='/advantages' element={<Advantages />} />
-            <Route path='/cooperation' element={<Cooperation />} />
-            <Route path='/affiliate' element={<Affiliate />} />
-            <Route path='/vacancies' element={<Vacancies />} />
-            <Route path='/howToBuy' element={<HowToBuy />} />
-            <Route path='/shippingAndPayment' element={<ShippingAndPayment />} />
-            <Route path='/credit' element={<Credit />} />
-            <Route path='/privacyPolicy' element={<PrivacyPolicy />} />
-            <Route path='/faq' element={<Faq />} />
-            <Route path='/wholesale' element={<Wholesale />} />
-            <Route path='/dropshipping' element={<Dropshipping />} />
-          </Routes>
-          <FooterContainer />
-        </Suspense>
-      </AppWrapper>
-    </StyledAppRef>
-  );
+  const initialazatedApp = useAppSelector(selectInitializated);
+
+  // useEffect(() => {
+  //   dispatch(setScrollWidth(appRef));
+  // }, [initialazatedApp]);
+
+  if (initialazatedApp) {
+    console.log('загрузка');
+
+    return (
+      // <div>Загрузка...</div>
+      <PreloaderContainer />
+    )
+  } else {
+
+    console.log(store.getState());
+
+    return (
+
+      <StyledAppRef ref={appRef} >
+        <AppWrapper onClick={onClickApp} direction={'column'}>
+          <DropDownMenu />
+          <ModalContainer opacity={modalOpacity} />
+          <HeaderContainer />
+          <HeaderBottomContainer />
+          <Suspense fallback={<div>Загрузка...</div>}>
+            <Routes>
+              <Route index element={<Main />} />
+              <Route path='/compare' element={<Compare />} />
+              <Route path='/viewed' element={<Viewed />} />
+              <Route path='/favorites' element={<Favorites />} />
+              <Route path='/cart' element={<Cart />} />
+              <Route path='/catalog' element={<Catalog />} />
+              <Route path='/about' element={<About />} />
+              <Route path='/stock' element={<Stock />} />
+              <Route path='/installment' element={<Installment />} />
+              <Route path='/servise' element={<Servise />} />
+              <Route path='/wholesaleDropshipping' element={<WholesaleDropshipping />} />
+              <Route path='/contacts' element={<Contacts />} />
+              <Route path='/reviews' element={<Reviews />} />
+              <Route path='/advantages' element={<Advantages />} />
+              <Route path='/cooperation' element={<Cooperation />} />
+              <Route path='/affiliate' element={<Affiliate />} />
+              <Route path='/vacancies' element={<Vacancies />} />
+              <Route path='/howToBuy' element={<HowToBuy />} />
+              <Route path='/shippingAndPayment' element={<ShippingAndPayment />} />
+              <Route path='/credit' element={<Credit />} />
+              <Route path='/privacyPolicy' element={<PrivacyPolicy />} />
+              <Route path='/faq' element={<Faq />} />
+              <Route path='/wholesale' element={<Wholesale />} />
+              <Route path='/dropshipping' element={<Dropshipping />} />
+            </Routes>
+            <FooterContainer />
+          </Suspense>
+        </AppWrapper>
+      </StyledAppRef>
+    );
+  }
 };
 
 

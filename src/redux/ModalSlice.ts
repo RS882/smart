@@ -40,7 +40,6 @@ export const modalSlice = createSlice({
 	},
 	extraReducers: {
 		[setScrollWidth.fulfilled.type]: (state, action: PayloadAction<number>) => {
-			console.log(action.payload);
 
 			state.scrollWidth = action.payload;
 		},

@@ -32,6 +32,7 @@ export const setScrollWidth = createAsyncThunk(
 			elem.style.overflowY = `auto`;
 		};
 		console.log(res);
+
 		return await res as number;
 	}
 );

@@ -32,7 +32,7 @@ const Modal: FC<IModal> = (props) => {
 	const { isModal, ...rest } = props;
 	return (
 		<>
-			{isModal && <StyledModal {...rest} />}
+			{isModal ? <StyledModal {...rest} /> : null}
 		</>
 	);
 };
