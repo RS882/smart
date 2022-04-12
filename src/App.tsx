@@ -82,12 +82,10 @@ const App: FC = (props) => {
   useEffect(() => {
     Promise.all([dispatch(setLanguages(strings)),
     dispatch(loadLanguage(strings)),
-    ])
+    dispatch(setScrollWidth(appRef)),])
       .then(() => {
         dispatch(initializatedSuccess());
-
       })
-
   }, []);
 
 
@@ -116,24 +114,16 @@ const App: FC = (props) => {
 
   const initialazatedApp = useAppSelector(selectInitializated);
 
-  // useEffect(() => {
-  //   dispatch(setScrollWidth(appRef));
-  // }, [initialazatedApp]);
-
-  if (initialazatedApp) {
-    console.log('загрузка');
-
+  if (!initialazatedApp) {
     return (
-      // <div>Загрузка...</div>
-      <PreloaderContainer />
+      <div ref={appRef}>
+        <PreloaderContainer />
+      </div>
     )
   } else {
-
     console.log(store.getState());
-
     return (
-
-      <StyledAppRef ref={appRef} >
+      <StyledAppRef  >
         <AppWrapper onClick={onClickApp} direction={'column'}>
           <DropDownMenu />
           <ModalContainer opacity={modalOpacity} />

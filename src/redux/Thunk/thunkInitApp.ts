@@ -31,7 +31,7 @@ export const setScrollWidth = createAsyncThunk(
 			res = await elem.offsetWidth - elem.clientWidth;
 			elem.style.overflowY = `auto`;
 		};
-		console.log(res);
+
 
 		return await res as number;
 	}
