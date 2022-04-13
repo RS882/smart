@@ -11,15 +11,17 @@ import { useAppSelector } from '../../redux/hooks';
 
 interface HeaderContainerProps {
 	language?: ILanguages;
+	appScroll?: string;
 };
 
-const StyledHeader = styled.header`
+const StyledHeader = styled.header<HeaderContainerProps>`
 	position: fixed;
 	top: 0;
 	left: 0;
 	height:60px;
 	z-index:100;
    width: 100%;
+	padding-right: ${props => props.appScroll};
 	background-color: ${props => props.theme.color.bg.main || `#fff`};
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		height: 72px;
@@ -40,7 +42,7 @@ const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 
 
 	return (<>
-		<StyledHeader >
+		<StyledHeader appScroll={props.appScroll}>
 			<Flex direction='column'>
 				<Container>
 					<Header strings={sundry} />

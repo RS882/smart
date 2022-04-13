@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { closeMenuLng, selectIsLangChange, selectIsLangMenu, selectLanguage, setActiveLanguage, setIsLangChange, toggleShowMenuLng } from '../../redux/LanguageSlice';
+import { closeMenuLng, selectIsLangMenu, selectLanguage, setActiveLanguage, setIsLangChange, toggleShowMenuLng } from '../../redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import Languages from './Languages';
 import { strings } from '../../localization/localization';
 import { ArrowFn } from '../../types/fnTypes';
 import { loadLanguage } from '../../redux/Thunk/thunkInitApp';
 
-import PreloaderContainer from './../Preloader/PreloaderContainer';
+
 import { changeIsBodyLock } from '../../redux/ModalSlice';
 
 

@@ -68,8 +68,9 @@ const AppWrapper = styled(Flex)`
 `;
 
 const StyledAppRef = styled.div.attrs(props => ({ ref: props.ref, })) <IAppProps>`
-  /* padding-right: ${props => props.appScroll};
-  border: 1px solid #000; */
+   /* width: ${props => `calc(100% - ${props.appScroll})`}; */
+   padding-right: ${props => props.appScroll};
+
 `;
 
 const App: FC = (props) => {
@@ -107,11 +108,11 @@ const App: FC = (props) => {
   const isBodyLock: boolean = useAppSelector(selectIsBodyLock);
   document.body.style.overflow = isBodyLock ? 'hidden' : 'auto';
 
-  // // получаем значение ширины полосы прокрутки
-  // const scrollWidth: number = useAppSelector(selectScrollWidth);
-  // //+ убираем сдивиг при пропадении полосу прокрутки
-  // const appScroll: string = `${isBodyLock ? scrollWidth : 0}px`;
-  // // document.body.style.paddingRight = `${isBodyLock ? scrollWidth : 0}px`;
+  // получаем значение ширины полосы прокрутки
+  const scrollWidth: number = useAppSelector(selectScrollWidth);
+  //+ убираем сдивиг при пропадении полосу прокрутки
+  const appScroll: string = `${isBodyLock ? scrollWidth : 0}px`;
+  // document.body.style.paddingRight = `${isBodyLock ? scrollWidth : 0}px`;
 
   // console.log(store.getState());
 
@@ -119,21 +120,24 @@ const App: FC = (props) => {
   const isLangChange = useAppSelector(selectIsLangChange);
 
   if (!initialazatedApp) {
+    // console.log(store.getState());
     return (
       <div ref={appRef}>
         <PreloaderContainer />
       </div>
     )
   } else {
-    console.log(store.getState());
+    // console.log(store.getState());
+
+
     return (
-      <StyledAppRef >
+      <StyledAppRef appScroll={appScroll}>
         {isLangChange ? <PreloaderContainer /> : null}
         <AppWrapper onClick={onClickApp} direction={'column'}>
           <DropDownMenu />
           <ModalContainer opacity={modalOpacity} />
-          <HeaderContainer />
-          <HeaderBottomContainer />
+          <HeaderContainer appScroll={appScroll} />
+          <HeaderBottomContainer appScroll={appScroll} />
           <Suspense fallback={<PreloaderContainer />}>
             <Routes>
               <Route index element={<Main />} />

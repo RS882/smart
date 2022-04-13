@@ -18,21 +18,23 @@ import { selectLangStiringsHeaderBottomBtn } from '../../../redux/LanguageSlice'
 
 
 interface IHeaderBottom {
-
+	appScroll?: string;
 };
 
 
 
-const StyledHeaderBottomContainer = styled(Flex)`
+const StyledHeaderBottomContainer = styled(Flex) <IHeaderBottom>`
 	position: fixed;
 	bottom: 0;
 	left: 0;
 	height: 64px;
 	z-index:300;
    width: 100%;
+	padding-right: ${props => props.appScroll};
 	background-color: ${props => props.theme.color.darkBlue || '#2A5275'};
 		@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		padding: 0 104px;
+		padding-right: ${props => props.appScroll};
 	};
 	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
 		display:none;
@@ -96,7 +98,7 @@ const HeaderBottomContainer: FC<IHeaderBottom> = (props) => {
 	);
 
 	return (
-		<StyledHeaderBottomContainer justufy={'space-between'}>
+		<StyledHeaderBottomContainer justufy={'space-between'} appScroll={props.appScroll}>
 			{btnElements}
 		</StyledHeaderBottomContainer>
 
