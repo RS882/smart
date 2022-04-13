@@ -1,11 +1,14 @@
 import React, { FC } from 'react';
-import { closeMenuLng, selectIsLangMenu, selectLanguage, setActiveLanguage, toggleShowMenuLng } from '../../redux/LanguageSlice';
+import { closeMenuLng, selectIsLangChange, selectIsLangMenu, selectLanguage, setActiveLanguage, setIsLangChange, toggleShowMenuLng } from '../../redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import Languages from './Languages';
 import { strings } from '../../localization/localization';
 import { ArrowFn } from '../../types/fnTypes';
-import { transformObjStrings } from '../../utilits/functions';
 import { loadLanguage } from '../../redux/Thunk/thunkInitApp';
+
+import PreloaderContainer from './../Preloader/PreloaderContainer';
+import { changeIsBodyLock } from '../../redux/ModalSlice';
+
 
 
 const LanguageContainer: FC = () => {
@@ -14,21 +17,39 @@ const LanguageContainer: FC = () => {
 	const language = useAppSelector(selectLanguage);
 	const isMenu = useAppSelector(selectIsLangMenu);
 
+
+
 	const onClickBtnLng: ArrowFn = () => {
 		dispatch(toggleShowMenuLng());
 	};
 
 	const cnahgeActiveLng = (e: string) => {
-		strings.setLanguage(e);
-		dispatch(setActiveLanguage(e));
-		dispatch(loadLanguage(strings));
-		dispatch(closeMenuLng());
+		Promise.all([
+			dispatch(setIsLangChange(true)),
+			dispatch(changeIsBodyLock(true)),
+		])
+			.then(() => {
+				strings.setLanguage(e);
+				dispatch(setActiveLanguage(e));
+				dispatch(loadLanguage(strings));
+				dispatch(closeMenuLng());
+			})
+			.then(() => {
+				setTimeout(() => {
+					dispatch(setIsLangChange(false))
+					dispatch(changeIsBodyLock(false))
+				}, 500)
+
+			});
+
 	};
 
 	return (
-		<Languages {...language} onClickBtnLng={onClickBtnLng}
-			cnahgeActiveLng={cnahgeActiveLng} isMenu={isMenu} />
+		<>
 
+			<Languages {...language} onClickBtnLng={onClickBtnLng}
+				cnahgeActiveLng={cnahgeActiveLng} isMenu={isMenu} />
+		</>
 	);
 };
 

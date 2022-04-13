@@ -1,12 +1,12 @@
 import React, { FC, Suspense, useEffect, useRef } from 'react';
 import styled from 'styled-components'
 import Flex from './components/Flex';
-import { closeMenuLng, selectActivLng, selectIsLangMenu, } from './redux/LanguageSlice';
+import { closeMenuLng, selectIsLangChange, selectIsLangMenu, } from './redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
-import { strings, IStrings } from './localization/localization';
+import { strings } from './localization/localization';
 import { Route, Routes } from 'react-router-dom';
 import { ArrowFn } from './types/fnTypes';
-import { selectIsBodyLock, selectModalOpacity, selectScrollWidth } from './redux/ModalSlice';
+import { changeIsBodyLock, selectIsBodyLock, selectModalOpacity, selectScrollWidth } from './redux/ModalSlice';
 import store from './redux/store';
 import DropDownMenu from './components/Header/DropDownMenu/DropDownMenuContainer';
 import ModalContainer from './components/Modal/ModalContainer';
@@ -78,14 +78,17 @@ const App: FC = (props) => {
   //заносим в стейт данные о языках
   const appRef = useRef<HTMLDivElement>(null);
 
-
   useEffect(() => {
-    Promise.all([dispatch(setLanguages(strings)),
-    dispatch(loadLanguage(strings)),
-    dispatch(setScrollWidth(appRef)),])
+    Promise.all([
+      dispatch(changeIsBodyLock(true)),
+      dispatch(setLanguages(strings)),
+      dispatch(loadLanguage(strings)),
+      dispatch(setScrollWidth(appRef)),
+    ])
       .then(() => {
-        dispatch(initializatedSuccess());
+        setTimeout(() => dispatch(initializatedSuccess()), 500);
       })
+      .then(() => dispatch(changeIsBodyLock(false)))
   }, []);
 
 
@@ -113,6 +116,7 @@ const App: FC = (props) => {
   // console.log(store.getState());
 
   const initialazatedApp = useAppSelector(selectInitializated);
+  const isLangChange = useAppSelector(selectIsLangChange);
 
   if (!initialazatedApp) {
     return (
@@ -123,13 +127,14 @@ const App: FC = (props) => {
   } else {
     console.log(store.getState());
     return (
-      <StyledAppRef  >
+      <StyledAppRef >
+        {isLangChange ? <PreloaderContainer /> : null}
         <AppWrapper onClick={onClickApp} direction={'column'}>
           <DropDownMenu />
           <ModalContainer opacity={modalOpacity} />
           <HeaderContainer />
           <HeaderBottomContainer />
-          <Suspense fallback={<div>Загрузка...</div>}>
+          <Suspense fallback={<PreloaderContainer />}>
             <Routes>
               <Route index element={<Main />} />
               <Route path='/compare' element={<Compare />} />

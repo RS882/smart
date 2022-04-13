@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { IStrings } from './../localization/localization';
 import { loadLanguage, setLanguages } from "./Thunk/thunkInitApp";
+import { boolean } from "yup";
 
 export interface ILanguages {
 	activeLanguage: string;
@@ -12,6 +13,7 @@ interface ILang {
 	language: ILanguages;
 	isMenu: boolean;
 	langStrings: IStrings | null;
+	isLangChange: boolean;
 }
 
 const initialState: ILang = {
@@ -21,6 +23,7 @@ const initialState: ILang = {
 	},
 	isMenu: false,
 	langStrings: null,
+	isLangChange: false,
 }
 
 const LanguageSlice = createSlice({
@@ -31,18 +34,17 @@ const LanguageSlice = createSlice({
 		setActiveLanguage: (state, action: PayloadAction<string>) => {
 			state.language.activeLanguage = action.payload;
 		},
-		// setLanguages: (state, action: PayloadAction<ILanguages>) => {
-		// 	state.language = action.payload;
-		// },
+
 		toggleShowMenuLng: (state) => {
 			state.isMenu = !state.isMenu;
 		},
 		closeMenuLng: (state) => {
 			state.isMenu = false;
 		},
-		// setLangStirings: (state, action: PayloadAction<IStrings | null>) => {
-		// 	state.langStrings = action.payload;
-		// }
+		setIsLangChange: (state, action: PayloadAction<boolean>) => {
+			state.isLangChange = action.payload;
+		},
+
 	},
 	extraReducers: {
 
@@ -65,7 +67,7 @@ const LanguageSlice = createSlice({
 
 })
 
-export const { setActiveLanguage, toggleShowMenuLng, closeMenuLng, } = LanguageSlice.actions;
+export const { setActiveLanguage, toggleShowMenuLng, closeMenuLng, setIsLangChange, } = LanguageSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 
@@ -73,6 +75,7 @@ export const { setActiveLanguage, toggleShowMenuLng, closeMenuLng, } = LanguageS
 export const selectLanguage = (state: RootState) => state.languages.language;
 export const selectIsLangMenu = (state: RootState) => state.languages.isMenu;
 export const selectActivLng = (state: RootState) => state.languages.language.activeLanguage;
+export const selectIsLangChange = (state: RootState) => state.languages.isLangChange;
 export const selectLangStiringsHeader = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header;
 export const selectLangStiringsHeaderBottomBtn = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header.bottomBtn;
 export const selectLangStiringsHeaderCatalogMenu = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header.catalogMenu;

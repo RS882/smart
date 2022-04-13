@@ -18,11 +18,12 @@ const StyledModal = styled.div<ModalProps>`
 	top: 0;
 	left: 0;
 	width: 100vw;
-	height: ${props => props.isOpen ? 'calc(100vh - 64px)' : '100vh'};
-	background-color:${props => props.theme.color.darkBlue || '#2A5275'};
-	opacity:${props => props.opacity || '0.8'};
-	z-index:${props => props.isOpen ? '150' : '350'};
-	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
+	background-color:	${props => `rgba(42, 82, 117, ${props.opacity || '0.8'})`
+	};
+		backdrop-filter: blur(4px);
+		height: ${props => props.isOpen ? 'calc(100vh - 64px)' : '100vh'};
+		z-index:${props => props.isOpen ? '150' : '350'};
+		@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
 		display: ${props => props.isOpen ? 'none' : 'block'};
 	};
 `;
