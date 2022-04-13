@@ -6,10 +6,12 @@ import { RootState } from './store';
 
 export interface IApp {
 	initializated: boolean;
+	isRetina: boolean;
 };
 
 const initialState: IApp = {
 	initializated: false,
+	isRetina: false,
 };
 
 const AppSlice = createSlice({
@@ -19,11 +21,13 @@ const AppSlice = createSlice({
 		initializatedSuccess: (state) => {
 			state.initializated = true;
 		},
-
+		setIsRetina: (state, action: PayloadAction<boolean>) => {
+			state.isRetina = action.payload;
+		},
 	}
 });
 
-export const { initializatedSuccess } = AppSlice.actions;
+export const { initializatedSuccess, setIsRetina } = AppSlice.actions;
 
 export const selectInitializated = (state: RootState) => state.app.initializated;
 

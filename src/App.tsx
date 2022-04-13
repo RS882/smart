@@ -13,8 +13,9 @@ import ModalContainer from './components/Modal/ModalContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import HeaderBottomContainer from './components/Header/HeaderBottomContainer/HeaderBottomContainer';
 import { loadLanguage, setLanguages, setScrollWidth } from './redux/Thunk/thunkInitApp';
-import { initializatedSuccess, selectInitializated } from './redux/AppSlice';
+import { initializatedSuccess, selectInitializated, setIsRetina } from './redux/AppSlice';
 import PreloaderContainer from './components/Preloader/PreloaderContainer';
+import { isRetina } from './utilits/functions';
 
 
 
@@ -85,6 +86,7 @@ const App: FC = (props) => {
       dispatch(setLanguages(strings)),
       dispatch(loadLanguage(strings)),
       dispatch(setScrollWidth(appRef)),
+      dispatch(setIsRetina(isRetina())),
     ])
       .then(() => {
         setTimeout(() => dispatch(initializatedSuccess()), 500);
@@ -127,7 +129,7 @@ const App: FC = (props) => {
       </div>
     )
   } else {
-    // console.log(store.getState());
+    console.log(store.getState());
 
 
     return (
