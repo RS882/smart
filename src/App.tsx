@@ -129,7 +129,7 @@ const App: FC = (props) => {
       </div>
     )
   } else {
-    console.log(store.getState());
+    // console.log(store.getState());
 
 
     return (

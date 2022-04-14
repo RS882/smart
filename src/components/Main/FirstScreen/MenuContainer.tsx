@@ -6,7 +6,7 @@ const StyledMenuContainer = styled.div`
 	display: none;
 	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
 		display: block;
-	
+
 	};
 `
 

@@ -19,6 +19,7 @@ const StyledCatalogMenu = styled.ul`
 	flex-direction:column;
 	background-color: ${props => props.theme.color.lightBlue || '#EDF2F6'};
 	border-radius: 0 0 4px 4px;
+	padding-top:18px;
 `
 
 const CatalogMenu: FC = (props) => {

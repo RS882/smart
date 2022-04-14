@@ -1,17 +1,14 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import MainSlider from './MainSlider';
 import MenuContainer from './MenuContainer';
 
 const StyledGrid = styled.div`
 	display:grid;
-	
-border: 1px solid #000;
-	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-	
-		
-	};
+	grid-template-columns: minmax(0,1fr);
+	border: 1px solid #000;
 	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
-		grid-template-columns: 310px 1fr;
+		grid-template-columns: 310px minmax(0,1fr);
 		column-gap:20px;
 	};
 `;
@@ -20,7 +17,7 @@ const FirstScreen: FC = (props) => {
 	return (
 		<StyledGrid>
 			<MenuContainer />
-			<div>slider</div>
+			<MainSlider />
 		</StyledGrid>
 	);
 };
