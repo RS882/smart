@@ -48,14 +48,25 @@ const StyledH = styled.h3`
 	
 `;
 
+const StyledCustomPaging = styled.div`
+	height: 100%;
+`
+
+
+
 const MainSlider: FC = (props) => {
 
 	const settings = {
 		dots: true,
 		infinite: true,
-		speed: 500,
+		speed: 1500,
 		slidesToShow: 1,
 		slidesToScroll: 1,
+		autoplay: true,
+
+		autoplaySpeed: 2000,
+		cssEase: "ease",
+
 		nextArrow: <></>,
 		prevArrow: <></>,
 		appendDots: (dots: JSX.Element) => (
@@ -63,7 +74,10 @@ const MainSlider: FC = (props) => {
 				<ul > {dots} </ul>
 			</div>
 		),
-		customPaging: () => <></>,
+		customPaging: () => (
+			<StyledCustomPaging>
+
+			</StyledCustomPaging>),
 	};
 	return (
 		<StyledSliderWraper>

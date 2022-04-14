@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import Container from '../Container';
 
-import { ILanguages, selectLangStiringsHeaderMenuItem, selectLangStiringsHeaderSundry } from '../../redux/LanguageSlice';
+import { ILanguages, selectLangStiringsHeaderSundry } from '../../redux/LanguageSlice';
 import Header from './Header';
 
 import Flex from '../Flex';
-import HeaderMenuContainer from './HeaderMenu/HeaderMenuContainer';
+
 import { useAppSelector } from '../../redux/hooks';
 
 interface HeaderContainerProps {
@@ -22,13 +22,14 @@ const StyledHeader = styled.header<HeaderContainerProps>`
 	z-index:100;
    width: 100%;
 	padding-right: ${props => props.appScroll};
-	background-color: ${props => props.theme.color.bg.main || `#fff`};
+	background-color: rgba(255,255,255,0.6);
+	backdrop-filter: blur(8px);
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		height: 72px;
 		
 	};
 	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
-		height: 140px;
+		height: 80px;
 	};
  `;
 
@@ -37,7 +38,7 @@ const StyledHeader = styled.header<HeaderContainerProps>`
 const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 
 	const sundry = useAppSelector(selectLangStiringsHeaderSundry)
-	const menuItem = useAppSelector(selectLangStiringsHeaderMenuItem)
+	// const menuItem = useAppSelector(selectLangStiringsHeaderMenuItem)
 
 
 
@@ -47,7 +48,7 @@ const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 				<Container>
 					<Header strings={sundry} />
 				</Container>
-				<HeaderMenuContainer strings={menuItem} />
+				{/* <HeaderMenuContainer strings={menuItem} /> */}
 			</Flex>
 
 		</StyledHeader>

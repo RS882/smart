@@ -24,10 +24,10 @@ const LanguageWrapper = styled.div<ILanguageWrapperProps>`
 	padding: 9px 9px 10px 9px ;	
 	transition: all 0.3s ease 0s;
 	z-index:100;
-		background-color:  ${props => props.isMenu && props.theme.color.lightBlue};
-		border-radius:  ${props => props.isMenu && '4px 4px 0 0'};
-		border: 1px solid  ${props => props.isMenu ? props.theme.color.darkBlue : props.theme.color.bg.main};
-		border-bottom: 1px solid ${props => props.theme.color.bg.main || '#fff'};
+	background-color:  ${props => props.isMenu && props.theme.color.lightBlue};
+	border-radius:  ${props => props.isMenu && '4px 4px 0 0'};
+	border: 1px solid  ${props => props.isMenu ? props.theme.color.darkBlue : 'transparent'};
+	border-bottom: 1px solid ${props => 'transparent'};
 	
 `;
 
