@@ -20,7 +20,7 @@ const StyledModal = styled.div<ModalProps>`
 	width: 100vw;
 	background-color:	${props => `rgba(42, 82, 117, ${props.opacity || '0.8'})`
 	};
-		backdrop-filter: blur(4px);
+		backdrop-filter: blur(8px);
 		height: ${props => props.isOpen ? 'calc(100vh - 64px)' : '100vh'};
 		z-index:${props => props.isOpen ? '150' : '350'};
 		@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {

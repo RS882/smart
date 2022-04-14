@@ -6,20 +6,31 @@ import "slick-carousel/slick/slick-theme.css";
 
 const StyledSliderWraper = styled.div`
 	margin-top:20px;
-	border: 1px solid #af1313;
-
+	.slick-dots{
+		bottom:6px;
+		ul{
+			margin: 0 6px;
+			display:flex;
+			li{
+				margin:0;
+				flex:1 1 100%;
+				background-color:${props => props.theme.color.divider || '#C8CACB'};
+				height: 3px;;
+				border-radius:1.5px;
+				&:not(:last-child){
+					margin-right:3px;
+				}
+			}
+			li.slick-active{
+				background-color:${props => props.theme.color.lightBlue || '#EDF2F6'};
+			}
+		}
+	}
 `;
 
 
-
-const StyledSlider = styled(Slider)`
-	border: 1px solid #36dd15;
-
-`;
 
 const Div1 = styled.div`
-	border: 1px solid #0c2ad8;
-	display: block;
 	font-size:40px ;
 	
 `;
@@ -35,7 +46,7 @@ const StyledH = styled.h3`
 		
 	};
 	
-`
+`;
 
 const MainSlider: FC = (props) => {
 
@@ -47,11 +58,17 @@ const MainSlider: FC = (props) => {
 		slidesToScroll: 1,
 		nextArrow: <></>,
 		prevArrow: <></>,
+		appendDots: (dots: JSX.Element) => (
+			<div>
+				<ul > {dots} </ul>
+			</div>
+		),
+		customPaging: () => <></>,
 	};
 	return (
 		<StyledSliderWraper>
 
-			<StyledSlider {...settings}>
+			<Slider {...settings}>
 				<Div1>
 					<StyledH>Lorem .</StyledH>
 				</Div1>
@@ -70,7 +87,13 @@ const MainSlider: FC = (props) => {
 				<Div1>
 					<StyledH>6</StyledH>
 				</Div1>
-			</StyledSlider>
+				<Div1>
+					<StyledH>5</StyledH>
+				</Div1>
+				<Div1>
+					<StyledH>6</StyledH>
+				</Div1>
+			</Slider>
 		</StyledSliderWraper>
 	);
 };

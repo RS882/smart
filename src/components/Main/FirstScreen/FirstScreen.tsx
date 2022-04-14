@@ -5,8 +5,7 @@ import MenuContainer from './MenuContainer';
 
 const StyledGrid = styled.div`
 	display:grid;
-	grid-template-columns: minmax(0,1fr);
-	border: 1px solid #000;
+	grid-template-columns: minmax(0, 1fr);
 	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
 		grid-template-columns: 310px minmax(0,1fr);
 		column-gap:20px;
