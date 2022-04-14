@@ -27,7 +27,10 @@ const StyledSliderWraper = styled.div`
 		}
 	}
 `;
-
+const StyledCustomPaging = styled.div`
+	height: 100%;
+	width: 100%;
+`;
 
 
 const Div1 = styled.div`
@@ -48,12 +51,6 @@ const StyledH = styled.h3`
 	
 `;
 
-const StyledCustomPaging = styled.div`
-	height: 100%;
-`
-
-
-
 const MainSlider: FC = (props) => {
 
 	const settings = {
@@ -63,21 +60,12 @@ const MainSlider: FC = (props) => {
 		slidesToShow: 1,
 		slidesToScroll: 1,
 		autoplay: true,
-
 		autoplaySpeed: 2000,
 		cssEase: "ease",
-
 		nextArrow: <></>,
 		prevArrow: <></>,
-		appendDots: (dots: JSX.Element) => (
-			<div>
-				<ul > {dots} </ul>
-			</div>
-		),
-		customPaging: () => (
-			<StyledCustomPaging>
-
-			</StyledCustomPaging>),
+		appendDots: (dots: JSX.Element) => <div><ul > {dots} </ul></div>,
+		customPaging: () => <StyledCustomPaging />,
 	};
 	return (
 		<StyledSliderWraper>

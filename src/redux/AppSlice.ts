@@ -30,5 +30,6 @@ const AppSlice = createSlice({
 export const { initializatedSuccess, setIsRetina } = AppSlice.actions;
 
 export const selectInitializated = (state: RootState) => state.app.initializated;
+export const selectIsRetina = (state: RootState) => state.app.isRetina;
 
 export default AppSlice.reducer
