@@ -1,24 +1,35 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { openDesktopScearch } from '../../../redux/MenuSlice';
+import { openDesktopScearch, selectIsDesktopScearch } from '../../../redux/MenuSlice';
 import { changeIsBodyLock } from '../../../redux/ModalSlice';
 import Flex from '../../Flex';
 import Modal from '../../Modal/Modal';
 import CloseMenu from '../DropDownMenu/CloseMenu';
-import CloseMenuContainer from '../DropDownMenu/CloseMenuContaine';
 import Scearch from '../DropDownMenu/Scearch/Scearch';
 import Container from './../../Container';
 import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../../redux/hooks';
 
 
-const StyledSCearch = styled.div`
+interface StyledScearchBoxProps {
+}
+
+const StyledScearchBox = styled.div<StyledScearchBoxProps>`
 	position:fixed;
-	top: 0;
+	top: -90px;
+	transition:top 1s ease 0s;
 	left: 0;
 	width: 100%;
 	z-index:400;
 	min-height: 80px;
 	background-color:${props => props.theme.color.bg.main || '#fff'};
+	animation: down 1s ease forwards;
+	@keyframes down {
+		0% { top:-90px}
+		100%{top:0px}
+	}
+
+
 `;
 
 const StyledScearchWrapper = styled(Flex)`
@@ -38,13 +49,16 @@ const StyledScearch = styled.div`
 const DecktopSearchContainer: FC = (props) => {
 
 	const dispatch = useDispatch();
+
 	const closeScearch = () => {
 		dispatch(openDesktopScearch(false));
 		dispatch(changeIsBodyLock(false))
 	};
+
+
 	return (
 		<div>
-			<StyledSCearch>
+			<StyledScearchBox >
 				<Container>
 					<StyledScearchWrapper align='flex-start'>
 						<StyledScearch>
@@ -55,7 +69,7 @@ const DecktopSearchContainer: FC = (props) => {
 						</StyledClose>
 					</StyledScearchWrapper>
 				</Container>
-			</StyledSCearch>
+			</StyledScearchBox>
 			<Modal opacity={'0.6'} isModal={true} isOpen={false} />
 		</div>
 	);
