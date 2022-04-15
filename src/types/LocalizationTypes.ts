@@ -45,3 +45,7 @@ export interface IFooterMenu {
 export interface IFooter {
 	[property: string]: string;
 };
+
+export interface ISlides {
+	bannerText: string;
+}

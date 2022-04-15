@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import SlideTextContainer from '../SlideText/SlideTextContainer';
 import { IBgImg } from './FirstSlideContainer';
 
 interface FirstSlideProps {
@@ -30,7 +31,7 @@ const FirstSlide: FC<FirstSlideProps> = (props) => {
 
 	return (
 		<StyledBg bgImg={props.bgImg}>
-
+			<SlideTextContainer />
 		</StyledBg>
 	);
 };
