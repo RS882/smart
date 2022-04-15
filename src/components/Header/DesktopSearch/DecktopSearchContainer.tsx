@@ -1,11 +1,14 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { openDesktopScearch } from '../../../redux/MenuSlice';
+import { changeIsBodyLock } from '../../../redux/ModalSlice';
 import Flex from '../../Flex';
 import Modal from '../../Modal/Modal';
 import CloseMenu from '../DropDownMenu/CloseMenu';
 import CloseMenuContainer from '../DropDownMenu/CloseMenuContaine';
 import Scearch from '../DropDownMenu/Scearch/Scearch';
 import Container from './../../Container';
+import { useDispatch } from 'react-redux';
 
 
 const StyledSCearch = styled.div`
@@ -23,10 +26,10 @@ const StyledScearchWrapper = styled(Flex)`
 	min-height: 80px;
 `;
 const DecktopSearchContainer: FC = (props) => {
-
+	const dispatch = useDispatch();
 	const closeScearch = () => {
-		console.log('close');
-
+		dispatch(openDesktopScearch(false));
+		dispatch(changeIsBodyLock(false))
 	};
 	return (
 		<div>
