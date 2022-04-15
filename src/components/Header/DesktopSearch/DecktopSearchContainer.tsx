@@ -25,7 +25,18 @@ const StyledScearchWrapper = styled(Flex)`
 	width: 100%;
 	min-height: 80px;
 `;
+
+const StyledClose = styled.div`
+	margin-top:22px;
+`;
+
+const StyledScearch = styled.div`
+	flex:1 1 100%;
+	margin-top:16px;
+`
+
 const DecktopSearchContainer: FC = (props) => {
+
 	const dispatch = useDispatch();
 	const closeScearch = () => {
 		dispatch(openDesktopScearch(false));
@@ -35,9 +46,13 @@ const DecktopSearchContainer: FC = (props) => {
 		<div>
 			<StyledSCearch>
 				<Container>
-					<StyledScearchWrapper>
-						<Scearch />
-						<CloseMenu onClick={closeScearch} />
+					<StyledScearchWrapper align='flex-start'>
+						<StyledScearch>
+							<Scearch />
+						</StyledScearch>
+						<StyledClose>
+							<CloseMenu onClick={closeScearch} />
+						</StyledClose>
 					</StyledScearchWrapper>
 				</Container>
 			</StyledSCearch>
