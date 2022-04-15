@@ -23,9 +23,9 @@ const FirstSlideContainer: FC = (props) => {
 		{ '320': img320_1x, '768': img768_1x, '1000': imgDesktop_1x }
 
 	return (
-		<div>
-			<FirstSlide bgImg={bgImg} />
-		</div>
+
+		<FirstSlide bgImg={bgImg} />
+
 	);
 };
 
