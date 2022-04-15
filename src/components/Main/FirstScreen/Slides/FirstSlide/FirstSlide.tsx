@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import SlideTextContainer from '../SlideText/SlideTextContainer';
-import { IBgImg } from './FirstSlideContainer';
+import { IBgImg } from './../../../../../types/sliderTypes';
+
 
 interface FirstSlideProps {
 	bgImg: IBgImg;

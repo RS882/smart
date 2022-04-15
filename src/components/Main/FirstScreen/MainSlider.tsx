@@ -3,7 +3,8 @@ import Slider from "react-slick";
 import styled from 'styled-components';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import FirstSlideContainer from './Slides/FirstSlide/FirstSlideContainer';
+import SlideContainer from './Slides/FirstSlide/FirstSlideContainer';
+import { bgImgFirstSlide, bgImgSecondSlide } from './Slides/slideImg';
 
 const StyledSliderWraper = styled.div`
 	
@@ -42,7 +43,7 @@ const Div1 = styled.div`
 	font-size:40px ;
 	
 `;
-const StyledH = styled.div`
+const StyledSlideBox = styled.div`
 	
 	min-height:160px;
 	
@@ -77,28 +78,28 @@ const MainSlider: FC = (props) => {
 
 			<Slider {...settings}>
 				<Div1>
-					<StyledH><FirstSlideContainer /></StyledH>
+					<StyledSlideBox><SlideContainer bgImg={bgImgFirstSlide} /></StyledSlideBox>
 				</Div1>
 				<Div1>
-					<StyledH>2</StyledH>
+					<StyledSlideBox><SlideContainer bgImg={bgImgSecondSlide} /></StyledSlideBox>
 				</Div1>
 				<Div1>
-					<StyledH>3</StyledH>
+					<StyledSlideBox>3</StyledSlideBox>
 				</Div1>
 				<Div1>
-					<StyledH>4</StyledH>
+					<StyledSlideBox>4</StyledSlideBox>
 				</Div1>
 				<Div1>
-					<StyledH>5</StyledH>
+					<StyledSlideBox>5</StyledSlideBox>
 				</Div1>
 				<Div1>
-					<StyledH>6</StyledH>
+					<StyledSlideBox>6</StyledSlideBox>
 				</Div1>
 				<Div1>
-					<StyledH>5</StyledH>
+					<StyledSlideBox>5</StyledSlideBox>
 				</Div1>
 				<Div1>
-					<StyledH>6</StyledH>
+					<StyledSlideBox>6</StyledSlideBox>
 				</Div1>
 			</Slider>
 		</StyledSliderWraper>
