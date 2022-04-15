@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import Flex from '../../Flex';
-import CloseMenu from './CloseMenu';
+
 import { useAppDispatch, useAppSelector } from './../../../redux/hooks';
 import { closeMenu } from '../../../redux/MenuSlice';
 import { selectIsMenu, IIsPage } from './../../../redux/MenuSlice';
@@ -10,9 +10,10 @@ import More from './More/More';
 import TitleMenu from './TitleMenu';
 import { IDporMenu } from '../../../types/LocalizationTypes';
 
-import Scearch from './Scearch/Scearch';
 import DropCatalogContainer from './DropCatalog/DropCatalogContainer';
 import { selectLangStiringsHeaderDropMenu } from '../../../redux/LanguageSlice';
+import ScearchContainer from './Scearch/ScearchContainer';
+import CloseMenuContainer from './CloseMenuContaine';
 
 interface DropDownMenuProps {
 	isOpen?: boolean;
@@ -83,11 +84,11 @@ const DropDownMenu: FC<DropDownMenuProps> = (props) => {
 
 	return (
 		<StyledDropDownMenu isOpen={isOpen} >
-			<CloseMenu onClick={onCloseMenu} />
+			<CloseMenuContainer onClick={onCloseMenu} />
 			<StyledMenuWrapper justufy='flex-start' align='flex-start' direction='column'>
 				<TitleMenu title={setItemTitle(isMenuStatus, titleType)} />
 				{isMenuStatus.isCatalog ? <DropCatalogContainer /> : null}
-				{isMenuStatus.isScearch ? <Scearch /> : null}
+				{isMenuStatus.isScearch ? <ScearchContainer /> : null}
 				{isMenuStatus.isMore ? <More /> : null}
 			</StyledMenuWrapper>
 		</StyledDropDownMenu>

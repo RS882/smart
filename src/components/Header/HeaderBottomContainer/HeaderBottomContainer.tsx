@@ -1,9 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-
 import Flex from '../../Flex';
 import { IHeaderBottomItem } from '../../../types/HeaderTypes';
-
 import { IBottomBtn } from './../../../types/LocalizationTypes';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { selectIsCartFull, selectIsMoreFull } from '../../../redux/ActionSlice';
@@ -11,17 +9,11 @@ import { useNavigate } from 'react-router';
 import { changeIsModal } from '../../../redux/ModalSlice';
 import HeaderBottomBtnItem from './HeaderBottomBtnItem';
 import { closeMenu, openCatalog, openMore, openScearch } from '../../../redux/MenuSlice';
-
 import { selectLangStiringsHeaderBottomBtn } from '../../../redux/LanguageSlice';
-
-
-
 
 interface IHeaderBottom {
 	appScroll?: string;
 };
-
-
 
 const StyledHeaderBottomContainer = styled(Flex) <IHeaderBottom>`
 	position: fixed;

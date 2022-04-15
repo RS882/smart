@@ -8,6 +8,7 @@ import Header from './Header';
 import Flex from '../Flex';
 
 import { useAppSelector } from '../../redux/hooks';
+import DecktopSearchContainer from './DesktopSearch/DecktopSearchContainer';
 
 interface HeaderContainerProps {
 	language?: ILanguages;
@@ -38,9 +39,6 @@ const StyledHeader = styled.header<HeaderContainerProps>`
 const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 
 	const sundry = useAppSelector(selectLangStiringsHeaderSundry)
-	// const menuItem = useAppSelector(selectLangStiringsHeaderMenuItem)
-
-
 
 	return (<>
 		<StyledHeader appScroll={props.appScroll}>
@@ -48,7 +46,7 @@ const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 				<Container>
 					<Header strings={sundry} />
 				</Container>
-				{/* <HeaderMenuContainer strings={menuItem} /> */}
+				<DecktopSearchContainer />
 			</Flex>
 
 		</StyledHeader>

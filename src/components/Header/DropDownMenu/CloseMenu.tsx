@@ -7,9 +7,7 @@ interface ICloseMenu {
 }
 
 const StyledCloseMenu = styled.button`
-	position: absolute;
-	top: 14px;
-	right: 14px;
+
 	width: 36px;
 	height: 36px;
 	animation: rotateClose 3s linear infinite;
@@ -27,7 +25,7 @@ const StyledCloseMenu = styled.button`
 		transform:translateX(-50%) rotate(45deg);
 	};
 	&::after{
-		transform:translateX(-50%)rotate(-45deg);
+		transform:translateX(-50%) rotate(-45deg);
 	};
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		top: 44px;
@@ -55,7 +53,7 @@ const StyledCloseMenu = styled.button`
 
 const CloseMenu: FC<ICloseMenu> = (props) => {
 	return (
-		<StyledCloseMenu {...props} />
+		<StyledCloseMenu onClick={props.onClick} />
 
 	);
 };

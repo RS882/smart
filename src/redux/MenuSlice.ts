@@ -9,6 +9,7 @@ export interface IIsPage {
 
 interface IMenuState {
 	isMenu: IIsPage;
+	isDesktopScearch: boolean;
 };
 
 const initialState: IMenuState = {
@@ -17,6 +18,7 @@ const initialState: IMenuState = {
 		isScearch: false,
 		isMore: false,
 	},
+	isDesktopScearch: false,
 };
 
 const getObjFalse = (obj: IIsPage): IIsPage => {
@@ -44,11 +46,14 @@ export const menuSlice = createSlice({
 		closeMenu: (state) => {
 			state.isMenu = getObjFalse(state.isMenu);
 		},
+		openDesktopScearch: (state, action: PayloadAction<boolean>) => {
+			state.isDesktopScearch = action.payload;
+		},
 	},
 })
-export const { openCatalog, openScearch, openMore, closeMenu } = menuSlice.actions;
+export const { openCatalog, openScearch, openMore, closeMenu, openDesktopScearch } = menuSlice.actions;
 
 export const selectIsMenu = (state: RootState) => state.menu.isMenu;
-
+export const selectIsDesktopScearch = (state: RootState) => state.menu.isDesktopScearch;
 
 export default menuSlice.reducer;
