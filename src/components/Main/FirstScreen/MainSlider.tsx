@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import styled from 'styled-components';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import SlideContainer from './Slides/FirstSlide/FirstSlideContainer';
+import SlideContainer from './Slides/FirstSlide/SlideContainer';
 import { bgImgFirstSlide, bgImgSecondSlide } from './Slides/slideImg';
 
 const StyledSliderWraper = styled.div`
@@ -40,7 +40,7 @@ const StyledCustomPaging = styled.div`
 
 
 const Div1 = styled.div`
-	font-size:40px ;
+	font-size:30px ;
 	
 `;
 const StyledSlideBox = styled.div`
@@ -65,8 +65,8 @@ const MainSlider: FC = (props) => {
 		speed: 1500,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		// autoplay: true,
-		// autoplaySpeed: 2000,
+		autoplay: true,
+		autoplaySpeed: 2000,
 		cssEase: "ease",
 		nextArrow: <></>,
 		prevArrow: <></>,
