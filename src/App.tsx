@@ -16,7 +16,8 @@ import { loadLanguage, setLanguages, setScrollWidth } from './redux/Thunk/thunkI
 import { initializatedSuccess, selectInitializated, setIsRetina } from './redux/AppSlice';
 import PreloaderContainer from './components/Preloader/PreloaderContainer';
 import { isRetina } from './utilits/functions';
-
+import LoginContainer from './components/Login/LoginContainer';
+import { selectIsLoginBox } from './redux/LoginSlice';
 
 
 // const ModalContainer = React.lazy(() => import('./components/Modal/ModalContainer'));
@@ -48,6 +49,7 @@ const PrivacyPolicy = React.lazy(() => import('./components/PrivacyPolicy/Privac
 const Faq = React.lazy(() => import('./components/Faq/Faq'));
 const Wholesale = React.lazy(() => import('./components/Wholesale/Wholesale'));
 const Dropshipping = React.lazy(() => import('./components/Dropshipping/Dropshipping'));
+
 
 
 interface IAppProps {
@@ -120,6 +122,7 @@ const App: FC = (props) => {
 
   const initialazatedApp = useAppSelector(selectInitializated);
   const isLangChange = useAppSelector(selectIsLangChange);
+  const isLoginBoxOpen = useAppSelector(selectIsLoginBox);
 
   if (!initialazatedApp) {
     // console.log(store.getState());
@@ -129,13 +132,14 @@ const App: FC = (props) => {
       </div>
     )
   } else {
-    // console.log(store.getState());
+    console.log(store.getState());
 
 
     return (
       <StyledAppRef appScroll={appScroll}>
         {isLangChange ? <PreloaderContainer /> : null}
         <AppWrapper onClick={onClickApp} direction={'column'}>
+          {isLoginBoxOpen ? <LoginContainer /> : null}
           <DropDownMenu />
           <ModalContainer opacity={modalOpacity} />
           <HeaderContainer appScroll={appScroll} />

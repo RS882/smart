@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { ArrowFn } from '../../types/fnTypes';
 import { ISundry } from '../../types/LocalizationTypes';
 import Button from '../Button';
 import Flex from '../Flex';
@@ -11,9 +12,10 @@ import HeaderSeachContainer from './HeaderSearch/HeaderSeachContainer';
 import HeaderTelContainer from './HeaderTel/HeaderTelContainer';
 
 
+
 interface HeaderPropsMain {
 	strings: ISundry | null;
-
+	onClickLogin: ArrowFn,
 }
 
 const StyledHeader = styled(Flex)`
@@ -47,7 +49,7 @@ const Header: FC<HeaderPropsMain> = (props) => {
 				<HeaderTelContainer workTime={props.strings && props.strings.workTime} />
 				<HeaderSeachContainer btnSearch={props.strings && props.strings.btnSearch} />
 				<HeaderActionsContainer />
-				<StyledLoginBtn>{props.strings && props.strings.btnEnter}</StyledLoginBtn>
+				<StyledLoginBtn onClick={props.onClickLogin}>{props.strings && props.strings.btnEnter}</StyledLoginBtn>
 				<LanguageContainer />
 			</Flex>
 		</StyledHeader>

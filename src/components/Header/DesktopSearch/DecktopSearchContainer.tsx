@@ -60,7 +60,7 @@ const DecktopSearchContainer: FC = (props) => {
 		setIsShow(true);
 	}, [])
 	return (
-		<div>
+		<>
 			<StyledScearchBox isShow={isShow} onTransitionEnd={closeModal}>
 				<Container>
 					<StyledScearchWrapper align='flex-start'>
@@ -74,7 +74,7 @@ const DecktopSearchContainer: FC = (props) => {
 				</Container>
 			</StyledScearchBox>
 			<Modal opacity={'0.6'} isModal={true} isOpen={false} />
-		</div>
+		</>
 	);
 };
 

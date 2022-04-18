@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import Container from '../Container';
-
 import { ILanguages, selectLangStiringsHeaderSundry } from '../../redux/LanguageSlice';
 import Header from './Header';
-
 import Flex from '../Flex';
-
 import { useAppSelector } from '../../redux/hooks';
 import DecktopSearchContainer from './DesktopSearch/DecktopSearchContainer';
 import { selectIsDesktopScearch } from '../../redux/MenuSlice';
+import { useAppDispatch } from './../../redux/hooks';
+import { openPopUp } from '../../redux/LoginSlice';
+import { changeIsBodyLock } from '../../redux/ModalSlice';
 
 interface HeaderContainerProps {
 	language?: ILanguages;
@@ -43,11 +43,18 @@ const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 
 	const isDesktopSearch = useAppSelector(selectIsDesktopScearch);
 
+	const dispatch = useAppDispatch();
+
+	const onClickLogin = () => {
+		dispatch(openPopUp());
+		dispatch(changeIsBodyLock(true));
+	}
+
 	return (<>
 		<StyledHeader appScroll={props.appScroll}>
 			<Flex direction='column'>
 				<Container>
-					<Header strings={sundry} />
+					<Header strings={sundry} onClickLogin={onClickLogin} />
 				</Container>
 				{isDesktopSearch ? <DecktopSearchContainer /> : null}
 			</Flex>
@@ -59,3 +66,5 @@ const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 };
 
 export default HeaderContainer;
+
+

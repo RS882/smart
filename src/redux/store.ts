@@ -5,6 +5,7 @@ import ModalReducer from "./ModalSlice";
 import MenuReducer from "./MenuSlice";
 import CatalogReducer from "./CatalogSlice";
 import AppReducer from "./AppSlice";
+import LoginReducer from "./LoginSlice";
 
 const store = configureStore({
 	reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
 		menu: MenuReducer,
 		catalog: CatalogReducer,
 		app: AppReducer,
+		login: LoginReducer,
 	}
 })
 
