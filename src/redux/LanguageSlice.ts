@@ -91,4 +91,6 @@ export const selectLangStiringsFooterCooperationt = (state: RootState) => state.
 export const selectLangStiringsFooterFooter = (state: RootState) => state.languages.langStrings && state.languages.langStrings.footer.footer;
 export const selectLangStiringsFooterStore = (state: RootState) => state.languages.langStrings && state.languages.langStrings.footer.store;
 export const selectLangStiringsSlideText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.slider.bannerText;
+export const selectLoginText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.login.login;
+
 export default LanguageSlice.reducer

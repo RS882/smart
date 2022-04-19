@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 interface ITitle {
-	title: string;
+	title?: string;
 }
 
 const StyledTitle = styled.h3`
