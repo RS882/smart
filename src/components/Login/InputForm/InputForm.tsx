@@ -2,6 +2,7 @@ import { ErrorMessage, Field } from 'formik';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import ErrorTextIcon from './InputStatusIcon/ErrorTextIcon';
+import EyeIcon from './InputStatusIcon/EyeIcon';
 import InputStatusIcon from './InputStatusIcon/InputStatusIcon';
 import RichtTextIcon from './InputStatusIcon/RichtTextIcon';
 
@@ -45,7 +46,7 @@ const InputForm: FC<IIptumForm> = (props) => {
 				<Styledlabeltext>{props.labeltext}</Styledlabeltext>
 				<StyledInputBox>
 					{props.type !== 'checkbox' ? <StyledInput name={props.name} type={props.type ? props.type : 'text'} /> : null}
-					{props.type !== 'checkbox' ? <StyledInputStatusIcon Component={RichtTextIcon} /> : null}
+					{props.type !== 'checkbox' ? <StyledInputStatusIcon Component={EyeIcon} /> : null}
 				</StyledInputBox>
 			</StyledLabel>
 			<ErrorMessage name={props.name} />

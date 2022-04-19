@@ -11,17 +11,9 @@ const StyledRichtWraper = styled(Flex)`
 	border: 1.5px solid #22A44E;
 	color:#22A44E;
 	font-size:6px;
-	
-
-	`;
+`;
 
 
-const RichtTextIcon: FC = (props) => {
-	return (
-		<StyledRichtWraper className='_icon-checkbox' />
-
-
-	);
-};
+const RichtTextIcon: FC = (props) => <StyledRichtWraper className='_icon-checkbox' />;
 
 export default RichtTextIcon;
