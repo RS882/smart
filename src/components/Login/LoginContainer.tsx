@@ -7,6 +7,7 @@ import Modal from '../Modal/Modal';
 import ClosePopUpContainer from './ClosePopUpContainer';
 import { useAppDispatch } from './../../redux/hooks';
 import { changeIsBodyLock } from '../../redux/ModalSlice';
+import LoginFormContainer from './LoginForm/LoginFormContainer';
 
 
 
@@ -47,7 +48,7 @@ const LoginContainer: FC = (props) => {
 		<>
 			<StyledLoginWrapper>
 				<StyledComponetBox >
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit nostrum, suscipit eaque veritatis quia aspernatur officiis doloremque explicabo, provident, eum esse qui officia ex corrupti maxime enim a. Ipsum, vero.
+					{isLoginBox ? <LoginFormContainer /> : null}
 					<ClosePopUpContainer onClickClosePopUp={onClickClosePopUp} />
 				</StyledComponetBox>
 			</StyledLoginWrapper>

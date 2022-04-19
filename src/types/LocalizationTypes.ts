@@ -48,4 +48,25 @@ export interface IFooter {
 
 export interface ISlides {
 	bannerText: string;
-}
+};
+
+export interface ILoginBoxStrings {
+	title: string;
+	emailOrTel: string;
+	password: string;
+	forgotPassword: string;
+	renemberMe: string;
+	loginBtn: string;
+	goToRegBtn: string;
+};
+export interface IRegBoxStrings {
+	title: string;
+	name: string;
+	email: string;
+	tel: string;
+	createPassword: string;
+	regText: { text: string, link: string, };
+	regBtn: string;
+	goToLoginBtn: string;
+
+};
