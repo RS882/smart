@@ -17,6 +17,15 @@ const StyledForm = styled(Form)`
 	};
 `;
 
+const StyledForgotPasswordBtn = styled.button`
+	margin-bottom:20px;
+	color:${props => props.theme.color.blue || '#4878A6'};
+	transition: color 0.3s ease 0s;
+	&:hover{
+		color:${props => props.theme.color.darkBlue || '#2A5275'};
+	};
+`
+
 const LoginForm: FC = (props) => {
 
 	const loginStings = useAppSelector(selectLoginText);
@@ -42,7 +51,7 @@ const LoginForm: FC = (props) => {
 					<InputForm labeltext={loginStings?.emailOrTel} name={'userEmailFild'} />
 					<InputForm labeltext={loginStings?.password}
 						name={'password'} type={isShowPassword ? 'text' : 'password'} />
-					<button>{loginStings?.forgotPassword}</button>
+					<StyledForgotPasswordBtn>{loginStings?.forgotPassword}</StyledForgotPasswordBtn>
 					<InputForm labeltext={loginStings?.renemberMe} name={'renemberMe'} type={'checkbox'} />
 					<button type="submit">{loginStings?.loginBtn}</button>
 				</StyledForm>
