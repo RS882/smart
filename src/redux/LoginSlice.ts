@@ -5,12 +5,14 @@ export interface ILogin {
 	isPopUp: boolean;
 	isLoginBox: boolean;
 	isRegBox: boolean;
+	isShowPassword: boolean;
 };
 
 const initialState: ILogin = {
 	isPopUp: false,
 	isLoginBox: false,
 	isRegBox: false,
+	isShowPassword: false,
 }
 
 
@@ -37,13 +39,18 @@ export const loginSlice = createSlice({
 			state.isLoginBox = false;
 			state.isRegBox = action.payload;
 		},
-
-	},
+		changeIsShowPassword: (state, action: PayloadAction<boolean>) => {
+			state.isShowPassword = action.payload;
+		},
+	}
 })
-export const { openLoginBox, openRegBox, openPopUp, closePopUp, } = loginSlice.actions;
+
+
+export const { openLoginBox, openRegBox, openPopUp, closePopUp, changeIsShowPassword, } = loginSlice.actions;
 
 export const selectIsLoginBox = (state: RootState) => state.login.isLoginBox;
 export const selectIsRegBox = (state: RootState) => state.login.isLoginBox;
 export const selectIsPopUp = (state: RootState) => state.login.isPopUp;
+export const selectIsShowPassword = (state: RootState) => state.login.isShowPassword;
 
 export default loginSlice.reducer;

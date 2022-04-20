@@ -2,10 +2,13 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import Flex from '../../../Flex';
 
+
+
+
 interface IInputStatusIcon {
 	Component?: FC;
 	color: string;
-}
+};
 
 const StyledInputStatusIcon = styled(Flex) <IInputStatusIcon>`
 	flex: 0 0 40px;

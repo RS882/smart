@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectLoginText } from '../../../redux/LanguageSlice';
 import InputForm from '../InputForm/InputForm';
+import { selectIsShowPassword } from './../../../redux/LoginSlice';
 
 
 
@@ -19,6 +20,7 @@ const StyledForm = styled(Form)`
 const LoginForm: FC = (props) => {
 
 	const loginStings = useAppSelector(selectLoginText);
+	const isShowPassword = useAppSelector(selectIsShowPassword);
 
 	const validators = Yup.object({
 		userEmailFild: Yup.string()
@@ -32,13 +34,14 @@ const LoginForm: FC = (props) => {
 	return (
 		<>
 			<Formik
-				initialValues={{ userEmailFild: '', password: '', renemberMe: 'false', }}
+				initialValues={{ userEmailFild: '', password: '', renemberMe: false, }}
 				validationSchema={validators}
 				onSubmit={values => console.log(values)}
 			>
 				<StyledForm>
 					<InputForm labeltext={loginStings?.emailOrTel} name={'userEmailFild'} />
-					<InputForm labeltext={loginStings?.password} name={'password'} type={'password'} />
+					<InputForm labeltext={loginStings?.password}
+						name={'password'} type={isShowPassword ? 'text' : 'password'} />
 					<button>{loginStings?.forgotPassword}</button>
 					<InputForm labeltext={loginStings?.renemberMe} name={'renemberMe'} type={'checkbox'} />
 					<button type="submit">{loginStings?.loginBtn}</button>

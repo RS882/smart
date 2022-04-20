@@ -1,23 +1,37 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import Flex from '../../../Flex';
 
-interface IEyeIcon {
+
+
+export interface IEyeIcon {
 	isShow?: boolean;
+	showText?: (arg: boolean) => void;
 }
 
 
-const StyledRichtWraper = styled(Flex)`
+const StyledRichtWraper = styled.button<IEyeIcon>`
+	display:flex;
+	justify-content:center;
+	align-items:center;
 	position: relative;
 	width: 75%;
 	height: 75%;
-	/* border-radius:50%;
-	border: 1.5px solid #22A44E;
-	color:#22A44E; */
 	font-size:20px;
+	color:${props => props.isShow ? props.theme.color.text.main : props.theme.color.text.second};
 `;
 
 
-const EyeIcon: FC<IEyeIcon> = (props) => <StyledRichtWraper className={props.isShow ? '_icon-eye1' : '_icon-eye_off'} />;
+const EyeIcon: FC<IEyeIcon> = (props) => {
+
+	const eyeClassName = props.isShow ? '_icon-eye1' : '_icon-eye_off';
+
+	return (
+		<StyledRichtWraper isShow={props.isShow}
+			onPointerDown={() => props.showText ? props.showText(true) : null}
+			onPointerUp={() => props.showText ? props.showText(false) : null}
+			className={eyeClassName} />
+	);
+}
+
 
 export default EyeIcon;
