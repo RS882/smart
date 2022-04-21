@@ -6,7 +6,7 @@ import ErrorTextIcon from './InputStatusIcon/ErrorTextIcon';
 import InputStatusIcon from './InputStatusIcon/InputStatusIcon';
 import RichtTextIcon from './InputStatusIcon/RichtTextIcon';
 import EyeIconContainer from './InputStatusIcon/EyeIconContainer';
-import RememberMeFalse from '../LoginForm/RememeberMe/RememberMe';
+
 import RemembeMeContainer from '../LoginForm/RememeberMe/RemembeMeContainer';
 import LoockIcon from './InputStatusIcon/LoockIcon';
 
@@ -29,11 +29,11 @@ const StyledLabel = styled.label<{ isCheckbox: boolean, isPassword: boolean, }>`
 	cursor: ${props => props.isCheckbox ? 'pointer' : 'auto'};
 `;
 
-const StyledInput = styled(Field) <{ $isPassword: boolean, }>`
+const StyledInput = styled(Field) <{ $isPassword: boolean, color: string }>`
 	flex: 1 1 100%;
 	height: 48px;
 	padding-left:20px;
-	border: 1px solid ${props => props.theme.color.cardBorder || '#EAEAF0'};
+	border: 1px solid ${props => props.color};
 	border-right: none;
 	border-left:${props => props.$isPassword ? 'none' : ''} ;
 	border-radius:${props => props.$isPassword ? '0' : '4px 0 0 4px'} ;
@@ -45,7 +45,7 @@ const StyledInputBox = styled.div<{ isCheckbox: boolean, }>`
 	display: ${props => props.isCheckbox ? 'none' : 'flex'};
 `;
 const StyledInputStatusIcon = styled(InputStatusIcon).attrs(props => ({
-	color: props.theme.color.cardBorder || '#EAEAF0',
+	color: props.color,
 }
 ))`
 	`;
@@ -57,20 +57,24 @@ const InputForm: FC<IIptumForm> = (props) => {
 
 	const labelElem: JSX.Element = !isCheckbox ? <>{props.labeltext}</> :
 		<RemembeMeContainer value={!!props.value} text={props.labeltext} />;
-	const IconComponent = isPassword ? EyeIconContainer : undefined;
+	const IconComponent = isPassword ? EyeIconContainer :
+		!props.touched ? undefined :
+			props.error ? ErrorTextIcon : RichtTextIcon;
 
-	// const validationRes: boolean = props.touched && props.error
+	const inputColorBrd: string = !props.touched ? '#EAEAF0' :
+		props.error ? '#F15152' : '#22A44E';
+
 
 	return (
 		<>
 			<StyledLabel isCheckbox={isCheckbox} isPassword={isPassword}>
 				<Styledlabeltext>{labelElem}</Styledlabeltext>
 				<StyledInputBox isCheckbox={isCheckbox} >
-					{isPassword ? <LoockIcon /> : null}
+					{isPassword ? <LoockIcon color={inputColorBrd} /> : null}
 					<StyledInput name={props.name}
 						type={props.type ? props.type : 'text'} $isPassword={isPassword}
-						validate={props.validate} />
-					<StyledInputStatusIcon Component={IconComponent} />
+						validate={props.validate} color={inputColorBrd} />
+					<StyledInputStatusIcon color={inputColorBrd} Component={IconComponent} />
 				</StyledInputBox>
 			</StyledLabel>
 			<ErrorMessage name={props.name} />
