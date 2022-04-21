@@ -16,6 +16,9 @@ interface IIptumForm {
 	name: string;
 	type?: string;
 	value?: boolean | string;
+	error?: string | undefined;
+	touched?: boolean;
+	validate?: (value: string) => string | undefined;
 };
 
 const StyledLabel = styled.label<{ isCheckbox: boolean, isPassword: boolean, }>`
@@ -54,9 +57,9 @@ const InputForm: FC<IIptumForm> = (props) => {
 
 	const labelElem: JSX.Element = !isCheckbox ? <>{props.labeltext}</> :
 		<RemembeMeContainer value={!!props.value} text={props.labeltext} />;
-
 	const IconComponent = isPassword ? EyeIconContainer : undefined;
 
+	// const validationRes: boolean = props.touched && props.error
 
 	return (
 		<>
@@ -65,7 +68,8 @@ const InputForm: FC<IIptumForm> = (props) => {
 				<StyledInputBox isCheckbox={isCheckbox} >
 					{isPassword ? <LoockIcon /> : null}
 					<StyledInput name={props.name}
-						type={props.type ? props.type : 'text'} $isPassword={isPassword} />
+						type={props.type ? props.type : 'text'} $isPassword={isPassword}
+						validate={props.validate} />
 					<StyledInputStatusIcon Component={IconComponent} />
 				</StyledInputBox>
 			</StyledLabel>

@@ -10,7 +10,11 @@ import InputForm from '../InputForm/InputForm';
 import LoockIcon from '../InputForm/InputStatusIcon/LoockIcon';
 import { selectIsShowPassword } from './../../../redux/LoginSlice';
 
-
+interface IValuesLogin {
+	userEmailFild?: string;
+	password?: string;
+	renemberMe?: boolean;
+}
 
 const StyledForm = styled(Form)`
 	
@@ -50,34 +54,89 @@ const LoginForm: FC = (props) => {
 	const loginStings = useAppSelector(selectLoginText);
 	const isShowPassword = useAppSelector(selectIsShowPassword);
 
-	const validators = Yup.object({
-		userEmailFild: Yup.string()
-			.email('Invalid email address')
-			// .min(3, 'Must be 3 characters or more')
-			.required('Required') && Yup.string()
-				.min(3, 'Must be 3 characters or more')
-				.required('Required'),
-		password: Yup.string()
-			.min(3, 'Must be 3 characters or more')
-			.required('Required'),
-	});
+	// const validate = (values: IValuesLogin) => {
+	// 	const errors: IValuesLogin = {};
+
+
+	// 	if (!values.password) {
+	// 		errors.password = 'Required';
+	// 	} else if (values.password.length < 3) {
+	// 		errors.password = 'Must be 20 characters or less';
+	// 	}
+
+	// 	if (!values.userEmailFild) {
+	// 		errors.userEmailFild = 'Required';
+	// 	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.userEmailFild)) {
+	// 		errors.userEmailFild = 'Invalid email address';
+	// 	}
+
+	// 	return errors;
+	// };
+	const validatePassword = (value: string) => {
+		let error: string | undefined = undefined;
+		if (!value) {
+			error = 'Required';
+		} else if (value.length < 3) {
+			error = 'Must be 3 characters or more';
+		}
+		return error;
+	};
+	const validateEmail = (value: string) => {
+		let error: string | undefined = undefined;
+		if (!value) {
+			error = 'Required';
+		} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+			error = 'Invalid email address/phone number';
+		}
+		return error;
+	};
+
+	const validateTel = (value: string) => {
+		let error: string = '';
+		if (!value) {
+			error = 'Required';
+		} else if (!/(?<!\d)\d{10}(?!\d)/i.test(value)) {
+			error = 'Invalid email address/phone number';
+		}
+		return error;
+	};
+	const validateEmailOrTel = (value: string) =>
+		(validateEmail(value) !== undefined) ? validateTel(value) : undefined;
+
+
+
+
+	// const validators = Yup.object({
+	// 	userEmailFild: Yup.string()
+	// 		.email('Invalid email address')
+	// 		.required('Required'),
+	// 
+
+	// 	password: Yup.string()
+	// 		.min(3, 'Must be 3 characters or more')
+	// 		.required('Required'),
+	// });
+
+
 
 	return (
 		<>
 			<Formik
 				initialValues={{ userEmailFild: '', password: '', renemberMe: true, }}
-				validationSchema={validators}
+				// validationSchema={validators}
 				onSubmit={values => console.log(values)}
 			>
 				{({ values, touched, errors, ...props }) => {
-					console.log(touched);
-
 
 					return <StyledForm>
-						<InputForm labeltext={loginStings?.emailOrTel} name={'userEmailFild'} />
+						<InputForm labeltext={loginStings?.emailOrTel} name={'userEmailFild'}
+							validate={validateEmailOrTel}
+							error={errors.userEmailFild} touched={touched.userEmailFild} />
 
 						<InputForm labeltext={loginStings?.password}
-							name={'password'} type={isShowPassword ? 'text' : 'password'} />
+							name={'password'} type={isShowPassword ? 'text' : 'password'}
+							validate={validatePassword}
+							error={errors.password} touched={touched.password} />
 
 						<StyledForgotPasswordBtn type='button'>{loginStings?.forgotPassword}</StyledForgotPasswordBtn>
 
