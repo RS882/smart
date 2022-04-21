@@ -5,6 +5,7 @@ import RememberMe from './RememberMe';
 
 interface IRemembeMe {
 	text?: string;
+	value: boolean;
 };
 
 const StyledRemembeMeWrapper = styled.div`
@@ -18,7 +19,7 @@ const StyledRemembeMeBox = styled.div`
 const RemembeMeContainer: FC<IRemembeMe> = (props) => {
 	return (
 		<StyledRemembeMeWrapper>
-			<StyledRemembeMeBox><RememberMe /></StyledRemembeMeBox>
+			<StyledRemembeMeBox><RememberMe value={props.value} /></StyledRemembeMeBox>
 			{props.text}
 		</StyledRemembeMeWrapper>
 	);

@@ -26,7 +26,7 @@ const EyeIcon: FC<IEyeIcon> = (props) => {
 	const eyeClassName = props.isShow ? '_icon-eye1' : '_icon-eye_off';
 
 	return (
-		<StyledRichtWraper isShow={props.isShow}
+		<StyledRichtWraper type='button' isShow={props.isShow}
 			onPointerDown={() => props.showText ? props.showText(true) : null}
 			onPointerUp={() => props.showText ? props.showText(false) : null}
 			className={eyeClassName} />

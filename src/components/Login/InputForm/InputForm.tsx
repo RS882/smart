@@ -8,12 +8,14 @@ import RichtTextIcon from './InputStatusIcon/RichtTextIcon';
 import EyeIconContainer from './InputStatusIcon/EyeIconContainer';
 import RememberMeFalse from '../LoginForm/RememeberMe/RememberMe';
 import RemembeMeContainer from '../LoginForm/RememeberMe/RemembeMeContainer';
+import LoockIcon from './InputStatusIcon/LoockIcon';
 
 
 interface IIptumForm {
 	labeltext?: string;
 	name: string;
 	type?: string;
+	value?: boolean | string;
 };
 
 const StyledLabel = styled.label<{ isCheckbox: boolean, isPassword: boolean, }>`
@@ -24,12 +26,14 @@ const StyledLabel = styled.label<{ isCheckbox: boolean, isPassword: boolean, }>`
 	cursor: ${props => props.isCheckbox ? 'pointer' : 'auto'};
 `;
 
-const StyledInput = styled(Field) <IIptumForm>`
+const StyledInput = styled(Field) <{ $isPassword: boolean, }>`
 	flex: 1 1 100%;
 	height: 48px;
+	padding-left:20px;
 	border: 1px solid ${props => props.theme.color.cardBorder || '#EAEAF0'};
 	border-right: none;
-	border-radius: 4px 0 0 4px;
+	border-left:${props => props.$isPassword ? 'none' : ''} ;
+	border-radius:${props => props.$isPassword ? '0' : '4px 0 0 4px'} ;
 `;
 const Styledlabeltext = styled.div`
 	margin-bottom: 8px;
@@ -49,7 +53,9 @@ const InputForm: FC<IIptumForm> = (props) => {
 	const isPassword: boolean = props.name === 'password';
 
 	const labelElem: JSX.Element = !isCheckbox ? <>{props.labeltext}</> :
-		<RemembeMeContainer text={props.labeltext} />;
+		<RemembeMeContainer value={!!props.value} text={props.labeltext} />;
+
+	const IconComponent = isPassword ? EyeIconContainer : undefined;
 
 
 	return (
@@ -57,8 +63,10 @@ const InputForm: FC<IIptumForm> = (props) => {
 			<StyledLabel isCheckbox={isCheckbox} isPassword={isPassword}>
 				<Styledlabeltext>{labelElem}</Styledlabeltext>
 				<StyledInputBox isCheckbox={isCheckbox} >
-					<StyledInput name={props.name} type={props.type ? props.type : 'text'} />
-					<StyledInputStatusIcon Component={EyeIconContainer} />
+					{isPassword ? <LoockIcon /> : null}
+					<StyledInput name={props.name}
+						type={props.type ? props.type : 'text'} $isPassword={isPassword} />
+					<StyledInputStatusIcon Component={IconComponent} />
 				</StyledInputBox>
 			</StyledLabel>
 			<ErrorMessage name={props.name} />

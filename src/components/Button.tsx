@@ -18,11 +18,15 @@ export interface ButtonProps {
 	hoverBgColor?: string;
 	hoverColor?: string;
 	hoverBorder?: string;
+	type?: string;
+	heigth768?: string;
 };
 
 
 
-const StyledButton = styled.button<ButtonProps>`
+const StyledButton = styled.button.attrs(props => ({
+	type: props.type ? props.type : null,
+})) <ButtonProps>`
 	width: ${props => props.width || '80px'};
 	height: ${props => props.height || '40px'};
 	color: ${props => props.color || props.theme.color.text.mainLight};
@@ -32,12 +36,16 @@ const StyledButton = styled.button<ButtonProps>`
 	border-radius: ${props => props.borderRadius || '4px'};
 	text-transform: ${props => props.texTransform || 'capitalize'};
 	transition: all 0.3s ease 0s;
+	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+		height:${props => props.heigth768 || '40px'};
+	};
 	&:hover{
 		background-color: ${props => props.hoverBgColor || props.theme.color.blue};
-		color: ${props => props.hoverColor || props.theme.color.text.mainLight};
-		border: ${props => props.hoverBorder || 'none'};
+	color: ${props => props.hoverColor || props.theme.color.text.mainLight};
+	border: ${props => props.hoverBorder || 'none'};
+
 	}
-`;
+	`;
 
 
 const Button: FC<ButtonProps> = (props) => {
