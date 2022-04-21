@@ -31,24 +31,35 @@ const StyledLabel = styled.label<{ isCheckbox: boolean, isPassword: boolean, }>`
 
 const StyledInput = styled(Field) <{ $isPassword: boolean, color: string }>`
 	flex: 1 1 100%;
+	display: block;
 	height: 48px;
-	padding-left:20px;
+	padding-left: ${props => props.$isPassword ? '55px' : '20px'};
 	border: 1px solid ${props => props.color};
 	border-right: none;
-	border-left:${props => props.$isPassword ? 'none' : ''} ;
-	border-radius:${props => props.$isPassword ? '0' : '4px 0 0 4px'} ;
+	border-radius:4px 0 0 4px;
 `;
 const Styledlabeltext = styled.div`
 	margin-bottom: 8px;
 `;
 const StyledInputBox = styled.div<{ isCheckbox: boolean, }>`
 	display: ${props => props.isCheckbox ? 'none' : 'flex'};
+	width: 100%;
+	position:relative;
 `;
 const StyledInputStatusIcon = styled(InputStatusIcon).attrs(props => ({
 	color: props.color,
 }
 ))`
+
 	`;
+const StyledLooCkIcon = styled(LoockIcon) <{ $isPassword: boolean, }>`
+	display: ${props => props.$isPassword ? 'flex' : 'none'};
+	position:absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+`;
 
 
 const InputForm: FC<IIptumForm> = (props) => {
@@ -70,7 +81,7 @@ const InputForm: FC<IIptumForm> = (props) => {
 			<StyledLabel isCheckbox={isCheckbox} isPassword={isPassword}>
 				<Styledlabeltext>{labelElem}</Styledlabeltext>
 				<StyledInputBox isCheckbox={isCheckbox} >
-					{isPassword ? <LoockIcon color={inputColorBrd} /> : null}
+					<StyledLooCkIcon $isPassword={isPassword} />
 					<StyledInput name={props.name}
 						type={props.type ? props.type : 'text'} $isPassword={isPassword}
 						validate={props.validate} color={inputColorBrd} />

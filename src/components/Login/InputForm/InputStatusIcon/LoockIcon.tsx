@@ -10,7 +10,7 @@ align-items:center;
 width: 50px;
 height:48px;
 border-radius: 4px 0 0 4px;
-border: 1px solid  ${props => props.color ? props.color : '#EAEAF0'};
+border: 1px solid  ${props => props.color ? props.color : 'none'};
 border-right:none;
 & span{
 	margin-left:24px;

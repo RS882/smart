@@ -18,6 +18,10 @@ const StyledLoginWrapper = styled(Flex)`
 	width:100vw;
 	height: 100vh;
 	z-index:700;
+	align-items:flex-end;
+	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+		align-items:center;
+	};
 `;
 
 const StyledComponetBox = styled.div`
