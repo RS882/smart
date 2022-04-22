@@ -20,6 +20,7 @@ export interface ButtonProps {
 	hoverBorder?: string;
 	type?: string;
 	heigth768?: string;
+	disabled?: boolean;
 };
 
 
@@ -44,6 +45,10 @@ const StyledButton = styled.button.attrs(props => ({
 	color: ${props => props.hoverColor || props.theme.color.text.mainLight};
 	border: ${props => props.hoverBorder || 'none'};
 
+	}
+	&:disabled{
+		background-color: ${props => props.theme.color.cardBorder};
+		cursor:auto;
 	}
 	`;
 

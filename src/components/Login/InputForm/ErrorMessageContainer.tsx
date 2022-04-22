@@ -13,6 +13,7 @@ const StyledErrorMessageWrapper = styled.div`
 	background-color:rgba(255,255,255,0.2);
 	backdrop-filter: blur(8px);
 	transform:translateY(100%);
+	font-size:10px;
 	color:${props => props.theme.color.red || '#F15152'};
 	z-index:30;
 

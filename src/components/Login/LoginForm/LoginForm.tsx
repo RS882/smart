@@ -7,14 +7,10 @@ import { selectLoginText } from '../../../redux/LanguageSlice';
 import Button from '../../Button';
 
 import InputForm from '../InputForm/InputForm';
-import LoockIcon from '../InputForm/InputStatusIcon/LoockIcon';
+
 import { selectIsShowPassword } from './../../../redux/LoginSlice';
 
-interface IValuesLogin {
-	userEmailFild?: string;
-	password?: string;
-	renemberMe?: boolean;
-}
+
 
 const StyledForm = styled(Form)`
 	
@@ -54,30 +50,11 @@ const LoginForm: FC = (props) => {
 	const loginStings = useAppSelector(selectLoginText);
 	const isShowPassword = useAppSelector(selectIsShowPassword);
 
-	// const validate = (values: IValuesLogin) => {
-	// 	const errors: IValuesLogin = {};
 
-
-	// 	if (!values.password) {
-	// 		errors.password = 'Required';
-	// 	} else if (values.password.length < 3) {
-	// 		errors.password = 'Must be 20 characters or less';
-	// 	}
-
-	// 	if (!values.userEmailFild) {
-	// 		errors.userEmailFild = 'Required';
-	// 	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.userEmailFild)) {
-	// 		errors.userEmailFild = 'Invalid email address';
-	// 	}
-
-	// 	return errors;
-	// };
 	const validatePassword = (value: string) => {
 		let error: string | undefined = undefined;
 		if (!value) {
 			error = 'Required';
-			// } else if (value.length < 3) {
-			// 	error = 'Must be 3 characters or more';
 		}
 		return error;
 	};
@@ -145,9 +122,18 @@ const LoginForm: FC = (props) => {
 			<Formik
 				initialValues={{ userEmailFild: '', password: '', renemberMe: true, }}
 				// validationSchema={validators}
-				onSubmit={values => console.log(values)}
+				onSubmit={(values, props) => {
+
+					console.log(values)
+					setTimeout(() => {
+						props.resetForm()
+						props.setSubmitting(false)
+					}, 2000)
+
+				}}
 			>
 				{({ ...props }) => {
+
 
 					return <StyledForm>
 						<InputForm  {...props} name={'userEmailFild'}
@@ -164,7 +150,9 @@ const LoginForm: FC = (props) => {
 							name={'renemberMe'} type={'checkbox'} {...props} />
 
 						<StyledSubmiiBtn width='100%' height='36px' heigth768='48px'
-							type="submit">{loginStings?.loginBtn}</StyledSubmiiBtn>
+							type="submit" disabled={props.isSubmitting}
+						>{loginStings?.loginBtn}</StyledSubmiiBtn>
+
 					</StyledForm>
 				}}
 			</Formik >
