@@ -1,4 +1,4 @@
-import { ErrorMessage, Field } from 'formik';
+import { ErrorMessage, Field, FormikProps } from 'formik';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import ErrorTextIcon from './InputStatusIcon/ErrorTextIcon';
@@ -16,11 +16,15 @@ interface IIptumForm {
 	labeltext?: string;
 	name: string;
 	type?: string;
-	value?: boolean | string;
-	error?: string | undefined;
-	touched?: boolean;
 	validate?: (value: string) => string | undefined;
+	validateTel?: (value: string) => string | undefined;
 };
+
+interface IFormValues {
+	userEmailFild: string;
+	password: string;
+	renemberMe: boolean;
+}
 
 const StyledLabel = styled.label<{ isCheckbox: boolean, isPassword: boolean, }>`
 	display: flex;
@@ -66,19 +70,38 @@ const StyledInputWrapper = styled.div`
 `
 
 
-const InputForm: FC<IIptumForm> = (props) => {
+const InputForm = (props: IIptumForm & FormikProps<IFormValues>) => {
+
+
 	const isCheckbox: boolean = props.type === 'checkbox';
 	const isPassword: boolean = props.name === 'password';
 
 	const labelElem: JSX.Element = !isCheckbox ? <>{props.labeltext}</> :
-		<RemembeMeContainer value={!!props.value} text={props.labeltext} />;
+		<RemembeMeContainer value={!!props.values.renemberMe} text={props.labeltext} />;
+
+
+	type ErrorsKey = keyof typeof props.errors;
+	type TouchedKey = keyof typeof props.touched;
+
 	const IconComponent = isPassword ? EyeIconContainer :
-		!props.touched ? undefined :
-			props.error ? ErrorTextIcon : RichtTextIcon;
+		!props.touched[props.name as TouchedKey] ? undefined :
+			props.errors[props.name as ErrorsKey] ? ErrorTextIcon : RichtTextIcon;
 
-	const inputColorBrd: string = !props.touched ? '#EAEAF0' :
-		props.error ? '#F15152' : '#22A44E';
+	const inputColorBrd: string = !props.touched[props.name as TouchedKey] ? '#EAEAF0' :
+		props.errors[props.name as ErrorsKey] ? '#F15152' : '#22A44E';
 
+	const formatPhoneNumber = (value: any) => {
+		if (props.validateTel && !!props.validateTel(value) === false) {
+			const res = value.split('')
+			const arrMod = (arr: string[], arrModPos: number[], modElem = '-') => arrModPos.forEach(e => arr.splice(e, 0, modElem));
+			arrMod(res, [0], '(');
+			arrMod(res, [4], ')');
+			arrMod(res, [5], ' ');
+			arrMod(res, [9, 12]);
+			return res.join('');
+		}
+		return value;
+	};
 
 	return (
 		<StyledInputWrapper>
@@ -88,7 +111,15 @@ const InputForm: FC<IIptumForm> = (props) => {
 					<StyledLooCkIcon $isPassword={isPassword} />
 					<StyledInput name={props.name}
 						type={props.type ? props.type : 'text'} $isPassword={isPassword}
-						validate={props.validate} color={inputColorBrd} />
+						validate={props.validate} color={inputColorBrd}
+						onBlur={(event: any) => {
+							if (props.name === 'userEmailFild') {
+								const formatted = formatPhoneNumber(props.values.userEmailFild);
+								props.setFieldValue(props.name, formatted);
+							}
+							props.handleBlur(event);
+						}}
+					/>
 					<StyledInputStatusIcon color={inputColorBrd} Component={IconComponent} />
 				</StyledInputBox>
 			</StyledLabel>

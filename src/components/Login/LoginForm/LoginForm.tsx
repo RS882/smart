@@ -100,10 +100,19 @@ const LoginForm: FC = (props) => {
 		}
 		return error;
 	};
+
+	const validateTelAndForamt = (value: string) => {
+		let error: string = '';
+		if (!value) {
+			error = 'Required';
+		} else if (!(/(?<!\d)\d{10}(?!\d)/i.test(value) || /^\(\d{3}\) \d{3}-\d{2}-\d{2}$/i.test(value))) {
+			error = 'Invalid email address/phone number';
+		}
+		return error;
+	};
+
 	const validateEmailOrTel = (value: string) =>
-		(validateEmail(value) !== undefined) ? validateTel(value) : undefined;
-
-
+		(validateEmail(value) !== undefined) ? validateTelAndForamt(value) : undefined;
 
 
 	// const validators = Yup.object({
@@ -117,6 +126,18 @@ const LoginForm: FC = (props) => {
 	// 		.required('Required'),
 	// });
 
+	// 	<Form>
+	// 	<Field
+	// 	  name="phone"
+	// 	  component={CustomInputComponent}
+	// 	  onBlur={event => {
+	// 		 const formatted = formatPhoneNumber(props.values['phone']);
+	// 		 props.setFieldValue('phone', formatted);
+	// 		 props.handleBlur(event);
+	// 	  }}
+	// 	/>
+	//  </Form>
+
 
 
 	return (
@@ -126,22 +147,21 @@ const LoginForm: FC = (props) => {
 				// validationSchema={validators}
 				onSubmit={values => console.log(values)}
 			>
-				{({ values, touched, errors, ...props }) => {
+				{({ ...props }) => {
 
 					return <StyledForm>
-						<InputForm labeltext={loginStings?.emailOrTel} name={'userEmailFild'}
-							validate={validateEmailOrTel}
-							error={errors.userEmailFild} touched={touched.userEmailFild} />
+						<InputForm  {...props} name={'userEmailFild'}
+							labeltext={loginStings?.emailOrTel} type={'text'}
+							validate={validateEmailOrTel} validateTel={validateTel} />
 
 						<InputForm labeltext={loginStings?.password}
 							name={'password'} type={isShowPassword ? 'text' : 'password'}
-							validate={validatePassword}
-							error={errors.password} touched={touched.password} />
+							validate={validatePassword} {...props} />
 
 						<StyledForgotPasswordBtn type='button'>{loginStings?.forgotPassword}</StyledForgotPasswordBtn>
 
 						<InputForm labeltext={loginStings?.renemberMe}
-							name={'renemberMe'} type={'checkbox'} value={values.renemberMe} />
+							name={'renemberMe'} type={'checkbox'} {...props} />
 
 						<StyledSubmiiBtn width='100%' height='36px' heigth768='48px'
 							type="submit">{loginStings?.loginBtn}</StyledSubmiiBtn>
