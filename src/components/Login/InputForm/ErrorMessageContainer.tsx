@@ -6,7 +6,7 @@ interface IErrorMessageContainer {
 	name: string;
 };
 
-const StyledErrorMessageWrapper = styled(ErrorMessage)`
+const StyledErrorMessageWrapper = styled.div`
 	position: absolute;
 	bottom: -3px;
 	right: 0;	
@@ -20,7 +20,9 @@ const StyledErrorMessageWrapper = styled(ErrorMessage)`
 
 const ErrorMessageContainer: FC<IErrorMessageContainer> = (props) => {
 	return (
-		<StyledErrorMessageWrapper name={props.name} />
+		<StyledErrorMessageWrapper>
+			<ErrorMessage name={props.name} />
+		</StyledErrorMessageWrapper>
 	);
 };
 
