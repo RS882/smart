@@ -34,3 +34,5 @@ export const isRetina = () => {/*проверка Retina*/
 			.matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2))
 		&& /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
 };
+
+

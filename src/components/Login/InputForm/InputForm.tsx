@@ -35,20 +35,21 @@ const StyledLabel = styled.label<{ isCheckbox: boolean, isPassword: boolean, }>`
 `;
 
 const StyledInput = styled(Field) <{ $isPassword: boolean, color: string }>`
-	flex: 1 1 100%;
-	display: block;
+
 	height: 48px;
 	padding-left: ${props => props.$isPassword ? '55px' : '20px'};
 	border: 1px solid ${props => props.color};
 	border-right: none;
 	border-radius:4px 0 0 4px;
+
 `;
 const Styledlabeltext = styled.div`
 	margin-bottom: 8px;
 `;
 const StyledInputBox = styled.div<{ isCheckbox: boolean, }>`
-	display: ${props => props.isCheckbox ? 'none' : 'flex'};
-	width: 100%;
+	display: ${props => props.isCheckbox ? 'none' : 'grid'};
+	grid-template-columns: calc(100% - 40px) 40px;
+	grid-template-rows:1fr;
 	position:relative;
 `;
 const StyledInputStatusIcon = styled(InputStatusIcon).attrs(props => ({
@@ -62,7 +63,6 @@ const StyledLooCkIcon = styled(LoockIcon) <{ $isPassword: boolean, }>`
 	position:absolute;
 	top: 0;
 	left: 0;
-	width: 100%;
 	height: 100%;
 `;
 const StyledInputWrapper = styled.div`
@@ -100,6 +100,14 @@ const InputForm = (props: IIptumForm & FormikProps<IFormValues>) => {
 		return value;
 	};
 
+	const onBlurFormatTel = (event: any) => {
+		if (props.name === 'userEmailFild') {
+			const formatted = formatPhoneNumber(props.values.userEmailFild);
+			props.setFieldValue(props.name, formatted);
+		}
+		props.handleBlur(event);
+	}
+
 	return (
 		<StyledInputWrapper>
 			<StyledLabel isCheckbox={isCheckbox} isPassword={isPassword}>
@@ -109,13 +117,7 @@ const InputForm = (props: IIptumForm & FormikProps<IFormValues>) => {
 					<StyledInput name={props.name}
 						type={props.type ? props.type : 'text'} $isPassword={isPassword}
 						validate={props.validate} color={inputColorBrd}
-						onBlur={(event: any) => {
-							if (props.name === 'userEmailFild') {
-								const formatted = formatPhoneNumber(props.values.userEmailFild);
-								props.setFieldValue(props.name, formatted);
-							}
-							props.handleBlur(event);
-						}}
+						onBlur={onBlurFormatTel}
 					/>
 					<StyledInputStatusIcon color={inputColorBrd} Component={IconComponent} />
 				</StyledInputBox>

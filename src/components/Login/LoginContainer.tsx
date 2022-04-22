@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../redux/hooks';
-import { closePopUp, selectIsLoginBox, selectIsRegBox, selectIsSubmit } from '../../redux/LoginSlice';
+import { closePopUp, selectIsSubmit } from '../../redux/LoginSlice';
 import Flex from '../Flex';
 import Modal from '../Modal/Modal';
 import ClosePopUpContainer from './ClosePopUpContainer';
@@ -38,8 +38,7 @@ const StyledComponetBox = styled.div`
 const LoginContainer: FC = (props) => {
 
 	const dispatch = useAppDispatch();
-	// const isLoginBox = useAppSelector(selectIsLoginBox);
-	// const isRegBox = useAppSelector(selectIsRegBox);
+
 	const [isLoginBox, setIsLoginBox] = useState(true);
 	const [isRegBox, setIsRegBox] = useState(false);
 	const isSubmit = useAppSelector(selectIsSubmit)
