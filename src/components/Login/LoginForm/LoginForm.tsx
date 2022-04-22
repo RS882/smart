@@ -76,8 +76,8 @@ const LoginForm: FC = (props) => {
 		let error: string | undefined = undefined;
 		if (!value) {
 			error = 'Required';
-		} else if (value.length < 3) {
-			error = 'Must be 3 characters or more';
+			// } else if (value.length < 3) {
+			// 	error = 'Must be 3 characters or more';
 		}
 		return error;
 	};

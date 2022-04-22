@@ -9,6 +9,7 @@ import EyeIconContainer from './InputStatusIcon/EyeIconContainer';
 
 import RemembeMeContainer from '../LoginForm/RememeberMe/RemembeMeContainer';
 import LoockIcon from './InputStatusIcon/LoockIcon';
+import ErrorMessageContainer from './ErrorMessageContainer';
 
 
 interface IIptumForm {
@@ -60,6 +61,9 @@ const StyledLooCkIcon = styled(LoockIcon) <{ $isPassword: boolean, }>`
 	width: 100%;
 	height: 100%;
 `;
+const StyledInputWrapper = styled.div`
+	position: relative;
+`
 
 
 const InputForm: FC<IIptumForm> = (props) => {
@@ -77,7 +81,7 @@ const InputForm: FC<IIptumForm> = (props) => {
 
 
 	return (
-		<>
+		<StyledInputWrapper>
 			<StyledLabel isCheckbox={isCheckbox} isPassword={isPassword}>
 				<Styledlabeltext>{labelElem}</Styledlabeltext>
 				<StyledInputBox isCheckbox={isCheckbox} >
@@ -88,8 +92,8 @@ const InputForm: FC<IIptumForm> = (props) => {
 					<StyledInputStatusIcon color={inputColorBrd} Component={IconComponent} />
 				</StyledInputBox>
 			</StyledLabel>
-			<ErrorMessage name={props.name} />
-		</>
+			<ErrorMessageContainer name={props.name} />
+		</StyledInputWrapper>
 	);
 };
 
