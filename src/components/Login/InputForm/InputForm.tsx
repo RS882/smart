@@ -72,13 +72,10 @@ const StyledInputWrapper = styled.div`
 
 const InputForm = (props: IIptumForm & FormikProps<IFormValues>) => {
 
-
 	const isCheckbox: boolean = props.type === 'checkbox';
 	const isPassword: boolean = props.name === 'password';
-
 	const labelElem: JSX.Element = !isCheckbox ? <>{props.labeltext}</> :
 		<RemembeMeContainer value={!!props.values.renemberMe} text={props.labeltext} />;
-
 
 	type ErrorsKey = keyof typeof props.errors;
 	type TouchedKey = keyof typeof props.touched;

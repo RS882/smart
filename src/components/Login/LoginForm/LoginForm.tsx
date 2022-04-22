@@ -4,11 +4,13 @@ import styled from 'styled-components';
 import * as Yup from 'yup';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectLoginText } from '../../../redux/LanguageSlice';
+import { validateEmailOrTel, validatePassword, validateTel } from '../../../utilits/validators';
 import Button from '../../Button';
 
 import InputForm from '../InputForm/InputForm';
 
-import { selectIsShowPassword } from './../../../redux/LoginSlice';
+import { changeIsSubmit, selectIsShowPassword } from './../../../redux/LoginSlice';
+import { useAppDispatch } from './../../../redux/hooks';
 
 
 
@@ -47,49 +49,11 @@ const StyledGotoRegBtn = styled(StyledForgotPasswordBtn)`
 
 const LoginForm: FC = (props) => {
 
+	const dispatch = useAppDispatch();
 	const loginStings = useAppSelector(selectLoginText);
 	const isShowPassword = useAppSelector(selectIsShowPassword);
 
 
-	const validatePassword = (value: string) => {
-		let error: string | undefined = undefined;
-		if (!value) {
-			error = 'Required';
-		}
-		return error;
-	};
-	const validateEmail = (value: string) => {
-		let error: string | undefined = undefined;
-		if (!value) {
-			error = 'Required';
-		} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-			error = 'Invalid email address/phone number';
-		}
-		return error;
-	};
-
-	const validateTel = (value: string) => {
-		let error: string = '';
-		if (!value) {
-			error = 'Required';
-		} else if (!/(?<!\d)\d{10}(?!\d)/i.test(value)) {
-			error = 'Invalid email address/phone number';
-		}
-		return error;
-	};
-
-	const validateTelAndForamt = (value: string) => {
-		let error: string = '';
-		if (!value) {
-			error = 'Required';
-		} else if (!(/(?<!\d)\d{10}(?!\d)/i.test(value) || /^\(\d{3}\) \d{3}-\d{2}-\d{2}$/i.test(value))) {
-			error = 'Invalid email address/phone number';
-		}
-		return error;
-	};
-
-	const validateEmailOrTel = (value: string) =>
-		(validateEmail(value) !== undefined) ? validateTelAndForamt(value) : undefined;
 
 
 	// const validators = Yup.object({
@@ -123,11 +87,12 @@ const LoginForm: FC = (props) => {
 				initialValues={{ userEmailFild: '', password: '', renemberMe: true, }}
 				// validationSchema={validators}
 				onSubmit={(values, props) => {
-
+					dispatch(changeIsSubmit(true))
 					console.log(values)
 					setTimeout(() => {
 						props.resetForm()
 						props.setSubmitting(false)
+						dispatch(changeIsSubmit(false))
 					}, 2000)
 
 				}}
