@@ -28,7 +28,9 @@ body {
 	min-width: ${props => props.theme.width.min}
 }
 #root{
-	height: 100%;
+	height:100%;
+	
+	
 }
 body {
 	

@@ -3,16 +3,21 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import * as Yup from 'yup';
 import { useAppSelector } from '../../../redux/hooks';
-import { selectLoginText } from '../../../redux/LanguageSlice';
+import { selectLoginText, selectRegText } from '../../../redux/LanguageSlice';
 import { validateEmailOrTel, validatePassword, validateTel } from '../../../utilits/validators';
 import Button from '../../Button';
-
 import InputForm from '../InputForm/InputForm';
-
 import { changeIsSubmit, selectIsShowPassword } from './../../../redux/LoginSlice';
 import { useAppDispatch } from './../../../redux/hooks';
+import { ArrowFn } from '../../../types/fnTypes';
+import { ILoginBoxStrings, IRegBoxStrings } from '../../../types/LocalizationTypes';
 
-
+export interface ILoginForm {
+	goToReg: ArrowFn;
+	isLogBox: boolean;
+	isRegBox: boolean;
+	textString?: IRegBoxStrings | ILoginBoxStrings | null;
+}
 
 const StyledForm = styled(Form)`
 	
@@ -47,12 +52,12 @@ const StyledGotoRegBtn = styled(StyledForgotPasswordBtn)`
 
 
 
-const LoginForm: FC = (props) => {
+const LoginForm: FC<ILoginForm> = (props) => {
 
 	const dispatch = useAppDispatch();
 	const loginStings = useAppSelector(selectLoginText);
+	const regStrings = useAppSelector(selectRegText);
 	const isShowPassword = useAppSelector(selectIsShowPassword);
-
 
 
 
@@ -96,29 +101,29 @@ const LoginForm: FC = (props) => {
 				// validationSchema={validators}
 				onSubmit={onLoginCubmit}
 			>
-				{({ ...props }) => {
+				{({ ...propsFormik }) => {
 					return <StyledForm>
-						<InputForm  {...props} name={'userEmailFild'}
+						<InputForm  {...propsFormik} name={'userEmailFild'}
 							labeltext={loginStings?.emailOrTel} type={'text'}
 							validate={validateEmailOrTel} validateTel={validateTel} />
 
 						<InputForm labeltext={loginStings?.password}
 							name={'password'} type={isShowPassword ? 'text' : 'password'}
-							validate={validatePassword} {...props} />
+							validate={validatePassword} {...propsFormik} />
 
 						<StyledForgotPasswordBtn type='button'>{loginStings?.forgotPassword}</StyledForgotPasswordBtn>
 
 						<InputForm labeltext={loginStings?.renemberMe}
-							name={'renemberMe'} type={'checkbox'} {...props} />
+							name={'renemberMe'} type={'checkbox'} {...propsFormik} />
 
 						<StyledSubmiiBtn width='100%' height='36px' heigth768='48px'
-							type="submit" disabled={props.isSubmitting}
+							type="submit" disabled={propsFormik.isSubmitting}
 						>{loginStings?.loginBtn}</StyledSubmiiBtn>
 
 					</StyledForm>
 				}}
 			</Formik >
-			<StyledGotoRegBtn type='button'>{loginStings?.goToRegBtn}</StyledGotoRegBtn>
+			<StyledGotoRegBtn onClick={props.goToReg} type='button'>{loginStings?.goToRegBtn}</StyledGotoRegBtn>
 		</>
 	);
 };

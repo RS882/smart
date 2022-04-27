@@ -73,6 +73,7 @@ const AppWrapper = styled(Flex)`
 const StyledAppRef = styled.div.attrs(props => ({ ref: props.ref, })) <IAppProps>`
    /* width: ${props => `calc(100% - ${props.appScroll})`}; */
    padding-right: ${props => props.appScroll};
+   height: 100%;
 
 `;
 
@@ -116,9 +117,7 @@ const App: FC = (props) => {
   const scrollWidth: number = useAppSelector(selectScrollWidth);
   //+ убираем сдивиг при пропадении полосу прокрутки
   const appScroll: string = `${isBodyLock ? scrollWidth : 0}px`;
-  // document.body.style.paddingRight = `${isBodyLock ? scrollWidth : 0}px`;
 
-  // console.log(store.getState());
 
   const initialazatedApp = useAppSelector(selectInitializated);
   const isLangChange = useAppSelector(selectIsLangChange);
@@ -132,7 +131,7 @@ const App: FC = (props) => {
       </div>
     )
   } else {
-    // console.log(store.getState());
+    console.log(store.getState());
 
 
     return (

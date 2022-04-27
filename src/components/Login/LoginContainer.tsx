@@ -46,13 +46,24 @@ const LoginContainer: FC = (props) => {
 	const onClickClosePopUp = () => {
 		dispatch(closePopUp());
 		dispatch(changeIsBodyLock(false));
-	}
+	};
+
+	const goToReg = () => {
+		if (isLoginBox) {
+			setIsLoginBox(false);
+			setIsRegBox(true);
+		} else if (isRegBox) {
+			setIsRegBox(false);
+			setIsLoginBox(true);
+		}
+
+	};
 
 	return (
 		<>
 			<StyledLoginWrapper>
 				<StyledComponetBox >
-					{isLoginBox ? <LoginFormContainer /> : null}
+					<LoginFormContainer goToReg={goToReg} isLogBox={isLoginBox} isRegBox={isRegBox} />
 					<ClosePopUpContainer onClickClosePopUp={isSubmit ? () => { } : onClickClosePopUp} />
 				</StyledComponetBox>
 			</StyledLoginWrapper>

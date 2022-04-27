@@ -11,6 +11,7 @@ interface SlideProps {
 const StyledBg = styled.div<SlideProps>`
 	position: relative;
 	height:50vw;
+	width: 100%;
 	background-position: 0 0;
 	background-repeat: no-repeat;
 	background-size: cover;

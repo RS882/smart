@@ -23,7 +23,7 @@ const StyledImg = styled.img`
 const Preloader: FC = (props) => {
 	return (
 		<StyledSpiner>
-			<StyledImg src={spiner} alt="spiner" />
+			<StyledImg src={spiner} alt="spiner" width='100' height='100' />
 		</StyledSpiner>
 	);
 };
