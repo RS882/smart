@@ -28,12 +28,11 @@ const StyledComponetBox = styled.div`
 	position: relative;
 	max-width:370px;
 	width:100%;
-
+	overflow-y:auto;
+	max-height:100vh;
 	background-color:${props => props.theme.color.bg.main || '#fff'};
 	border-radius:4px;
-	
-
-`
+`;
 
 const LoginContainer: FC = (props) => {
 
