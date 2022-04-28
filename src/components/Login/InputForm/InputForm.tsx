@@ -10,6 +10,7 @@ import EyeIconContainer from './InputStatusIcon/EyeIconContainer';
 import RemembeMeContainer from '../LoginForm/RememeberMe/RemembeMeContainer';
 import LoockIcon from './InputStatusIcon/LoockIcon';
 import ErrorMessageContainer from './ErrorMessageContainer';
+import { ValuesLog } from '../LoginForm/LoginForm';
 
 
 interface IIptumForm {
@@ -20,11 +21,13 @@ interface IIptumForm {
 	validateTel?: (value: string) => string | undefined;
 };
 
-interface IFormValues {
-	userEmailFild: string;
-	password: string;
-	renemberMe: boolean;
-}
+// interface IFormValues {
+// 	userEmailFild: string;
+// 	password: string;
+// 	renemberMe: boolean;
+// }
+
+
 
 const StyledLabel = styled.label<{ isCheckbox: boolean, isPassword: boolean, }>`
 	display: flex;
@@ -70,7 +73,7 @@ const StyledInputWrapper = styled.div`
 `
 
 
-const InputForm = (props: IIptumForm & FormikProps<IFormValues>) => {
+const InputForm = (props: IIptumForm & FormikProps<ValuesLog>) => {
 
 	const isCheckbox: boolean = props.type === 'checkbox';
 	const isPassword: boolean = props.name === 'password';
@@ -101,8 +104,8 @@ const InputForm = (props: IIptumForm & FormikProps<IFormValues>) => {
 	};
 
 	const onBlurFormatTel = (event: any) => {
-		if (props.name === 'userEmailFild') {
-			const formatted = formatPhoneNumber(props.values.userEmailFild);
+		if (props.name === 'userEmailFild' || props.name === 'userRegTelNumber') {
+			const formatted = formatPhoneNumber(props.values[props.name]);
 			props.setFieldValue(props.name, formatted);
 		}
 		props.handleBlur(event);

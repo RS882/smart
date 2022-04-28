@@ -6,6 +6,17 @@ export const validatePassword = (value: string) => {
 	}
 	return error;
 };
+
+export const validateLength = (value: string) => {
+	let error: string | undefined = undefined;
+	if (!value) {
+		error = 'Required';
+	} if (value.length > 20) {
+		error = 'Must be 20 characters or less';
+	}
+	return error;
+};
+
 export const validateEmail = (value: string) => {
 	let error: string | undefined = undefined;
 	if (!value) {

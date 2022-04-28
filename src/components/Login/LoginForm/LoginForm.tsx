@@ -1,22 +1,32 @@
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import * as Yup from 'yup';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectLoginText, selectRegText } from '../../../redux/LanguageSlice';
-import { validateEmailOrTel, validatePassword, validateTel } from '../../../utilits/validators';
+import { validateEmail, validateEmailOrTel, validateLength, validatePassword, validateTel, validateTelAndForamt } from '../../../utilits/validators';
 import Button from '../../Button';
 import InputForm from '../InputForm/InputForm';
 import { changeIsSubmit, selectIsShowPassword } from './../../../redux/LoginSlice';
 import { useAppDispatch } from './../../../redux/hooks';
 import { ArrowFn } from '../../../types/fnTypes';
-import { ILoginBoxStrings, IRegBoxStrings } from '../../../types/LocalizationTypes';
+
 
 export interface ILoginForm {
 	goToReg: ArrowFn;
 	isLogBox: boolean;
 	isRegBox: boolean;
-	textString?: IRegBoxStrings | ILoginBoxStrings | null;
+
+}
+
+export interface ValuesLog {
+	userEmailFild?: string;
+	password?: string;
+	renemberMe?: boolean;
+	userRegName?: string;
+	userRegEmail?: string;
+	userRegTelNumber?: string;
+
 }
 
 const StyledForm = styled(Form)`
@@ -84,46 +94,102 @@ const LoginForm: FC<ILoginForm> = (props) => {
 	// 	/>
 	//  </Form>
 
-	const onLoginCubmit = (values: any, props: any) => {
-		dispatch(changeIsSubmit(true))
-		console.log(values)
-		setTimeout(() => {
-			props.resetForm()
-			props.setSubmitting(false)
-			dispatch(changeIsSubmit(false))
-		}, 2000)
-	}
+	const onLoginSubmit = (isLogin: boolean, isRegistr: boolean) =>
+		(values: ValuesLog, { setSubmitting, resetForm }: FormikHelpers<ValuesLog>) => {
+			dispatch(changeIsSubmit(true))
+			//---------------------
+			if (isLogin) {
+				const logValues = {
+					userEmailFild: values.userEmailFild,
+					password: values.password,
+					renemberMe: values.renemberMe,
+				};
+				console.log('Login');
+				console.log(logValues);
+			};
+			if (isRegistr) {
+				const regValues = {
+					userRegName: values.userRegName,
+					userRegEmail: values.userRegEmail,
+					userRegTelNumber: values.userRegTelNumber,
+					password: values.password,
+				};
+				console.log('Registration')
+				console.log(regValues);
+			};
+
+			//---------------------
+			setTimeout(() => {
+				resetForm()
+				setSubmitting(false)
+				dispatch(changeIsSubmit(false))
+			}, 2000)
+		};
+
+	const choseLogOrRegText = (logText: string | undefined, regText: string | undefined,
+		isLog = props.isLogBox, isReg = props.isRegBox): string | undefined =>
+		isLog && !isReg ? logText : !isLog && isReg ? regText : '';
+
+	const initialValues: ValuesLog = {
+		userEmailFild: '',
+		password: '',
+		renemberMe: true,
+		userRegName: '',
+		userRegEmail: '',
+		userRegTelNumber: '',
+	};
+
+	const isLog: boolean = props.isLogBox && !props.isRegBox;
+	const isReg: boolean = !props.isLogBox && props.isRegBox;
 
 	return (
 		<>
 			<Formik
-				initialValues={{ userEmailFild: '', password: '', renemberMe: true, }}
+				initialValues={initialValues}
 				// validationSchema={validators}
-				onSubmit={onLoginCubmit}
+				onSubmit={onLoginSubmit(props.isLogBox, props.isRegBox)}
 			>
 				{({ ...propsFormik }) => {
 					return <StyledForm>
-						<InputForm  {...propsFormik} name={'userEmailFild'}
+						{isLog ? <InputForm  {...propsFormik} name={'userEmailFild'}
 							labeltext={loginStings?.emailOrTel} type={'text'}
-							validate={validateEmailOrTel} validateTel={validateTel} />
+							validate={validateEmailOrTel} validateTel={validateTel} /> : null}
 
-						<InputForm labeltext={loginStings?.password}
+						{isReg ? <InputForm  {...propsFormik} name={'userRegName'}
+							labeltext={regStrings?.name} type={'text'}
+							validate={validateLength} /> : null}
+
+						{isReg ? <InputForm  {...propsFormik} name={'userRegEmail'}
+							labeltext={regStrings?.email} type={'text'}
+							validate={validateEmail} /> : null}
+
+						{isReg ? <InputForm  {...propsFormik} name={'userRegTelNumber'}
+							labeltext={regStrings?.tel} type={'text'}
+							validate={validateTelAndForamt} validateTel={validateTel} /> : null}
+
+
+						<InputForm labeltext={choseLogOrRegText(loginStings?.password, regStrings?.createPassword)}
 							name={'password'} type={isShowPassword ? 'text' : 'password'}
 							validate={validatePassword} {...propsFormik} />
 
-						<StyledForgotPasswordBtn type='button'>{loginStings?.forgotPassword}</StyledForgotPasswordBtn>
 
-						<InputForm labeltext={loginStings?.renemberMe}
-							name={'renemberMe'} type={'checkbox'} {...propsFormik} />
+						{isLog ? <StyledForgotPasswordBtn type='button'>{loginStings?.forgotPassword}
+						</StyledForgotPasswordBtn> : null}
+
+						{isLog ? <InputForm labeltext={loginStings?.renemberMe}
+							name={'renemberMe'} type={'checkbox'} {...propsFormik} /> : null}
 
 						<StyledSubmiiBtn width='100%' height='36px' heigth768='48px'
-							type="submit" disabled={propsFormik.isSubmitting}
-						>{loginStings?.loginBtn}</StyledSubmiiBtn>
+							type="submit" disabled={propsFormik.isSubmitting}>
+							{choseLogOrRegText(loginStings?.loginBtn, regStrings?.regBtn)}
+						</StyledSubmiiBtn>
 
 					</StyledForm>
 				}}
 			</Formik >
-			<StyledGotoRegBtn onClick={props.goToReg} type='button'>{loginStings?.goToRegBtn}</StyledGotoRegBtn>
+			<StyledGotoRegBtn onClick={props.goToReg} type='button'>
+				{choseLogOrRegText(loginStings?.goToRegBtn, regStrings?.goToLoginBtn)}
+			</StyledGotoRegBtn>
 		</>
 	);
 };
