@@ -169,6 +169,7 @@ const App: FC = (props) => {
               <Route path='/faq' element={<Faq />} />
               <Route path='/wholesale' element={<Wholesale />} />
               <Route path='/dropshipping' element={<Dropshipping />} />
+
             </Routes>
             <FooterContainer />
           </Suspense>

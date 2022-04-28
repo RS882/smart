@@ -10,6 +10,7 @@ import InputForm from '../InputForm/InputForm';
 import { changeIsSubmit, selectIsShowPassword } from './../../../redux/LoginSlice';
 import { useAppDispatch } from './../../../redux/hooks';
 import { ArrowFn } from '../../../types/fnTypes';
+import UserAgreementBtn from './RegForm/UserAgreementBtn';
 
 
 export interface ILoginForm {
@@ -37,7 +38,7 @@ const StyledForm = styled(Form)`
 	};
 `;
 
-const StyledForgotPasswordBtn = styled.button`
+export const StyledForgotPasswordBtn = styled.button`
 	margin-bottom:20px;
 	color:${props => props.theme.color.blue || '#4878A6'};
 	transition: color 0.3s ease 0s;
@@ -58,9 +59,7 @@ const StyledGotoRegBtn = styled(StyledForgotPasswordBtn)`
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		margin-bottom:30px;
 	};
-`
-
-
+`;
 
 const LoginForm: FC<ILoginForm> = (props) => {
 
@@ -70,29 +69,6 @@ const LoginForm: FC<ILoginForm> = (props) => {
 	const isShowPassword = useAppSelector(selectIsShowPassword);
 
 
-
-	// const validators = Yup.object({
-	// 	userEmailFild: Yup.string()
-	// 		.email('Invalid email address')
-	// 		.required('Required'),
-	// 
-
-	// 	password: Yup.string()
-	// 		.min(3, 'Must be 3 characters or more')
-	// 		.required('Required'),
-	// });
-
-	// 	<Form>
-	// 	<Field
-	// 	  name="phone"
-	// 	  component={CustomInputComponent}
-	// 	  onBlur={event => {
-	// 		 const formatted = formatPhoneNumber(props.values['phone']);
-	// 		 props.setFieldValue('phone', formatted);
-	// 		 props.handleBlur(event);
-	// 	  }}
-	// 	/>
-	//  </Form>
 
 	const onLoginSubmit = (isLogin: boolean, isRegistr: boolean) =>
 		(values: ValuesLog, { setSubmitting, resetForm }: FormikHelpers<ValuesLog>) => {
@@ -175,6 +151,8 @@ const LoginForm: FC<ILoginForm> = (props) => {
 
 						{isLog ? <StyledForgotPasswordBtn type='button'>{loginStings?.forgotPassword}
 						</StyledForgotPasswordBtn> : null}
+
+						{isReg ? <UserAgreementBtn regText={regStrings?.regText} /> : null}
 
 						{isLog ? <InputForm labeltext={loginStings?.renemberMe}
 							name={'renemberMe'} type={'checkbox'} {...propsFormik} /> : null}
