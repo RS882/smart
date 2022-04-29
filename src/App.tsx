@@ -17,7 +17,7 @@ import { initializatedSuccess, selectInitializated, setIsRetina } from './redux/
 import PreloaderContainer from './components/Preloader/PreloaderContainer';
 import { isRetina } from './utilits/functions';
 import LoginContainer from './components/Login/LoginContainer';
-import { selectIsLoginBox } from './redux/LoginSlice';
+import { selectIsLoginBox, selectIsPopUp } from './redux/LoginSlice';
 
 
 // const ModalContainer = React.lazy(() => import('./components/Modal/ModalContainer'));
@@ -121,7 +121,7 @@ const App: FC = (props) => {
 
   const initialazatedApp = useAppSelector(selectInitializated);
   const isLangChange = useAppSelector(selectIsLangChange);
-  const isLoginBoxOpen = useAppSelector(selectIsLoginBox);
+  const isLoginBoxOpen = useAppSelector(selectIsPopUp);
 
   if (!initialazatedApp) {
     // console.log(store.getState());
@@ -131,7 +131,7 @@ const App: FC = (props) => {
       </div>
     )
   } else {
-    console.log(store.getState());
+    // console.log(store.getState());
 
 
     return (

@@ -118,6 +118,8 @@ const LoginForm: FC<ILoginForm> = (props) => {
 	const isLog: boolean = props.isLogBox && !props.isRegBox;
 	const isReg: boolean = !props.isLogBox && props.isRegBox;
 
+
+
 	return (
 		<>
 			<Formik

@@ -12,6 +12,7 @@ const LoginFormContainer: FC<ILoginForm> = (props) => {
 	const regStrings = useAppSelector(selectRegText);
 	const title: string | undefined = props.isLogBox ? loginStrings?.title : props.isRegBox ? regStrings?.title : '';
 
+
 	return (
 		<div>
 			<TitleForm title={title} />

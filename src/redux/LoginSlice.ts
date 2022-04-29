@@ -25,7 +25,7 @@ export const loginSlice = createSlice({
 		openPopUp: (state) => {
 			state.isPopUp = true;
 			state.isRegBox = false;
-			state.isLoginBox = true;
+			state.isLoginBox = false;
 		},
 		closePopUp: (state) => {
 			state.isPopUp = false;
@@ -55,7 +55,7 @@ export const { openLoginBox, openRegBox, openPopUp,
 	closePopUp, changeIsShowPassword, changeIsSubmit, } = loginSlice.actions;
 
 export const selectIsLoginBox = (state: RootState) => state.login.isLoginBox;
-export const selectIsRegBox = (state: RootState) => state.login.isLoginBox;
+export const selectIsRegBox = (state: RootState) => state.login.isRegBox;
 export const selectIsPopUp = (state: RootState) => state.login.isPopUp;
 export const selectIsShowPassword = (state: RootState) => state.login.isShowPassword;
 export const selectIsSubmit = (state: RootState) => state.login.isSubmit;

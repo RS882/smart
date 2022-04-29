@@ -15,10 +15,7 @@ import { selectLangStiringsHeaderDropMenu } from '../../../redux/LanguageSlice';
 import ScearchContainer from './Scearch/ScearchContainer';
 import CloseMenuContainer from './CloseMenuContaine';
 
-interface DropDownMenuProps {
-	isOpen?: boolean;
 
-}
 interface IDropDownProps {
 	isOpen?: boolean;
 }
@@ -53,7 +50,7 @@ width: 100%;
 	};
 `
 
-const DropDownMenu: FC<DropDownMenuProps> = (props) => {
+const DropDownMenu: FC<IDropDownProps> = (props) => {
 
 	const dispatch = useAppDispatch();
 	const onCloseMenu = () => {
