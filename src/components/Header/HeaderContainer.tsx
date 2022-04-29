@@ -10,6 +10,7 @@ import { selectIsDesktopScearch } from '../../redux/MenuSlice';
 import { useAppDispatch } from './../../redux/hooks';
 import { openPopUp } from '../../redux/LoginSlice';
 import { changeIsBodyLock } from '../../redux/ModalSlice';
+import { selectIsLogSuccess } from './../../redux/LoginSlice';
 
 interface HeaderContainerProps {
 	language?: ILanguages;
@@ -43,18 +44,26 @@ const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 
 	const isDesktopSearch = useAppSelector(selectIsDesktopScearch);
 
+	const isLogSuccess = useAppSelector(selectIsLogSuccess);
+
 	const dispatch = useAppDispatch();
 
 	const onClickLogin = () => {
 		dispatch(openPopUp());
 		dispatch(changeIsBodyLock(true));
+	};
+
+	const openUserMenu = () => {
+		console.log('openUserMenu');
+
 	}
 
 	return (<>
 		<StyledHeader appScroll={props.appScroll}>
 			<Flex direction='column'>
 				<Container>
-					<Header strings={sundry} onClickLogin={onClickLogin} />
+					<Header isLogSuccess={isLogSuccess} strings={sundry}
+						onClickLogin={onClickLogin} openUserMenu={openUserMenu} />
 				</Container>
 				{isDesktopSearch ? <DecktopSearchContainer /> : null}
 			</Flex>

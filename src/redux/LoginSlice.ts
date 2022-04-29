@@ -7,6 +7,7 @@ export interface ILogin {
 	isRegBox: boolean;
 	isShowPassword: boolean;
 	isSubmit: boolean;
+	isLoginSuccess: boolean;
 };
 
 const initialState: ILogin = {
@@ -15,6 +16,7 @@ const initialState: ILogin = {
 	isRegBox: false,
 	isShowPassword: false,
 	isSubmit: false,
+	isLoginSuccess: true,
 }
 
 
@@ -47,6 +49,12 @@ export const loginSlice = createSlice({
 		changeIsSubmit: (state, action: PayloadAction<boolean>) => {
 			state.isSubmit = action.payload;
 		},
+		setLoginSuccess: (state) => {
+			state.isLoginSuccess = true;
+		},
+		setLogOut: (state) => {
+			state.isLoginSuccess = false;
+		},
 	}
 })
 
@@ -59,5 +67,6 @@ export const selectIsRegBox = (state: RootState) => state.login.isRegBox;
 export const selectIsPopUp = (state: RootState) => state.login.isPopUp;
 export const selectIsShowPassword = (state: RootState) => state.login.isShowPassword;
 export const selectIsSubmit = (state: RootState) => state.login.isSubmit;
+export const selectIsLogSuccess = (state: RootState) => state.login.isLoginSuccess;
 
 export default loginSlice.reducer;
