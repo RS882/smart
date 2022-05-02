@@ -74,6 +74,14 @@ export const headerTextEn: IHeaderStings = {
 		itemsType10: 'Smart toys',
 		itemsType11: 'Smart Watch',
 	},
+	userMenuItem: {
+		GeneralInformation: 'General information',
+		PersonalData: 'Personal data',
+		ShoppingHistory: 'Shopping history',
+		Favorites: 'Favorites',
+		ChangePassword: 'Change password',
+		LogOff: 'Log off',
+	},
 
 };
 
@@ -151,6 +159,14 @@ export const headerTextUa: IHeaderStings = {
 		itemsType10: 'Розумні іграшки',
 		itemsType11: 'Smart Watch',
 	},
+	userMenuItem: {
+		GeneralInformation: 'Загальні відомості',
+		PersonalData: 'Особисті дані',
+		ShoppingHistory: 'Історія покупок',
+		Favorites: 'Вибране',
+		ChangePassword: 'Змінити пароль',
+		LogOff: 'Вийти',
+	},
 
 };
 
@@ -227,5 +243,13 @@ export const headerTextRu: IHeaderStings = {
 		itemsType9: 'Аксессуары',
 		itemsType10: 'Умные игрушки',
 		itemsType11: 'Smart Watch',
+	},
+	userMenuItem: {
+		GeneralInformation: 'Общие сведения',
+		PersonalData: 'Личные данные',
+		ShoppingHistory: 'История покупок',
+		Favorites: 'Избранное',
+		ChangePassword: 'Сменить пароль',
+		LogOff: 'Выйти',
 	},
 };

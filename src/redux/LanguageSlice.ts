@@ -93,4 +93,7 @@ export const selectLangStiringsFooterStore = (state: RootState) => state.languag
 export const selectLangStiringsSlideText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.slider.bannerText;
 export const selectLoginText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.login.login;
 export const selectRegText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.login.reg;
+export const selectUserMenuText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header.userMenuItem;
+
+
 export default LanguageSlice.reducer

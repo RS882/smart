@@ -14,6 +14,7 @@ export interface IHeaderStings {
 	scearch: IScearchDrop;
 	dropMoreMenu: { [property: string]: IMoreMenuItem, };
 	catalogMenu: ICatalogMenu;
+	userMenuItem: IMenuItem;
 
 };
 

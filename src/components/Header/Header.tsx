@@ -42,22 +42,29 @@ const StyledLoginBtn = styled(Button)`
 		};
 	`;
 
-const StyledLoginSuccessBtn = styled.button`
-		margin-right:10px;
-		width: 48px;
-		height: 48px;
-		font-size:25px;
-		color: ${props => props.theme.color.text.second || '#838688'};
-		@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-			width: 99px;
-			height: 48px;
-			transition: color 0.3s ease 0s;
-			&:hover{
-				color: ${props => props.theme.color.darkBlue || '#2A5275'};
-				
-			};
+const StyledLoginSuccessBtnWrapper = styled.div`
+	position: relative;
+	margin-right:10px;
+	width: 48px;
+	height: 60px;
+	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+		width: 99px;
+		height: 72px;
 		};
-	
+	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
+		height: 80px;
+	};
+` ;
+const StyledLoginSuccessBtn = styled.button`
+	height: 100%;
+	width: 100%;
+	font-size:25px;
+	border: 1px solid #000;
+	color: ${props => props.theme.color.text.second || '#838688'};
+	transition: color 0.3s ease 0s;
+	&:hover{
+		color: ${props => props.theme.color.darkBlue || '#2A5275'};
+	};
 	`;
 
 const Header: FC<HeaderPropsMain> = (props) => {
@@ -72,7 +79,10 @@ const Header: FC<HeaderPropsMain> = (props) => {
 				<HeaderTelContainer workTime={props.strings && props.strings.workTime} />
 				<HeaderSeachContainer btnSearch={props.strings && props.strings.btnSearch} />
 				<HeaderActionsContainer />
-				{props.isLogSuccess ? <StyledLoginSuccessBtn onTouchStart={props.openUserMenu} className='_icon-sing_in' /> :
+				{props.isLogSuccess ?
+					<StyledLoginSuccessBtnWrapper>
+						<StyledLoginSuccessBtn onTouchStart={props.openUserMenu} className='_icon-sing_in' />
+					</StyledLoginSuccessBtnWrapper> :
 					<StyledLoginBtn onClick={props.onClickLogin}>{props.strings && props.strings.btnEnter}</StyledLoginBtn>}
 
 				<LanguageContainer />
