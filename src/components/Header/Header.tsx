@@ -10,6 +10,7 @@ import HeaderActionsContainer from './HeaderAction/HeaderActionsContainer';
 import HeaderLogo from './HeaderLogo';
 import HeaderSeachContainer from './HeaderSearch/HeaderSeachContainer';
 import HeaderTelContainer from './HeaderTel/HeaderTelContainer';
+import UserMenuContainer from './UserMenu/UserMenuContainer';
 
 
 
@@ -54,6 +55,12 @@ const StyledLoginSuccessBtnWrapper = styled.div`
 	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
 		height: 80px;
 	};
+	&:hover{
+		.header__user-menu{
+			opacity:1;
+			visibility:visible;
+		}
+	}
 ` ;
 const StyledLoginSuccessBtn = styled.button`
 	height: 100%;
@@ -67,10 +74,18 @@ const StyledLoginSuccessBtn = styled.button`
 	};
 	`;
 
+const StyledUserMenu = styled.div`
+	position: absolute;
+	top: 100%;
+	right: 0;
+	width: 270px;
+	z-index:200;
+	opacity:0;
+	visibility:hidden;
+	transition: all 0.3s ease 0s;
+	`;
+
 const Header: FC<HeaderPropsMain> = (props) => {
-
-
-
 
 	return (
 		<StyledHeader justufy={'space-between'} >
@@ -82,6 +97,9 @@ const Header: FC<HeaderPropsMain> = (props) => {
 				{props.isLogSuccess ?
 					<StyledLoginSuccessBtnWrapper>
 						<StyledLoginSuccessBtn onTouchStart={props.openUserMenu} className='_icon-sing_in' />
+						<StyledUserMenu className='header__user-menu'>
+							<UserMenuContainer />
+						</StyledUserMenu>
 					</StyledLoginSuccessBtnWrapper> :
 					<StyledLoginBtn onClick={props.onClickLogin}>{props.strings && props.strings.btnEnter}</StyledLoginBtn>}
 
