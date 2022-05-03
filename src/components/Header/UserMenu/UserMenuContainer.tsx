@@ -11,8 +11,7 @@ const StyledUserMenuContainer = styled.div`
 	width: 100%;
 	flex-direction:column;
 	border: 1px solid ${props => props.theme.color.cardBorder || '#EAEAF0'};
-	overflow:hidden;
-	border-radius: 0 0 4px 4px;
+
 `
 
 

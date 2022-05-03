@@ -53,17 +53,14 @@ const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 		dispatch(changeIsBodyLock(true));
 	};
 
-	const openUserMenu = () => {
-		console.log('openUserMenu');
 
-	}
 
 	return (<>
 		<StyledHeader appScroll={props.appScroll}>
 			<Flex direction='column'>
 				<Container>
 					<Header isLogSuccess={isLogSuccess} strings={sundry}
-						onClickLogin={onClickLogin} openUserMenu={openUserMenu} />
+						onClickLogin={onClickLogin} />
 				</Container>
 				{isDesktopSearch ? <DecktopSearchContainer /> : null}
 			</Flex>

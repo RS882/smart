@@ -1,5 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
+import { useAppSelector } from '../../redux/hooks';
+import { openUserMenu, selectIsUserMenuOpen } from '../../redux/MenuSlice';
 import { ArrowFn } from '../../types/fnTypes';
 import { ISundry } from '../../types/LocalizationTypes';
 import Button from '../Button';
@@ -11,6 +13,7 @@ import HeaderLogo from './HeaderLogo';
 import HeaderSeachContainer from './HeaderSearch/HeaderSeachContainer';
 import HeaderTelContainer from './HeaderTel/HeaderTelContainer';
 import UserMenuContainer from './UserMenu/UserMenuContainer';
+import { useAppDispatch } from './../../redux/hooks';
 
 
 
@@ -18,7 +21,7 @@ interface HeaderPropsMain {
 	strings: ISundry | null;
 	onClickLogin: ArrowFn;
 	isLogSuccess: boolean;
-	openUserMenu: ArrowFn;
+
 }
 
 const StyledHeader = styled(Flex)`
@@ -55,12 +58,7 @@ const StyledLoginSuccessBtnWrapper = styled.div`
 	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
 		height: 80px;
 	};
-	&:hover{
-		.header__user-menu{
-			opacity:1;
-			visibility:visible;
-		}
-	}
+	
 ` ;
 const StyledLoginSuccessBtn = styled.button`
 	height: 100%;
@@ -74,18 +72,33 @@ const StyledLoginSuccessBtn = styled.button`
 	};
 	`;
 
-const StyledUserMenu = styled.div`
+const StyledUserMenu = styled.div < { isUserMenuOpen: boolean }> `
 	position: absolute;
 	top: 100%;
 	right: 0;
 	width: 270px;
+	overflow:hidden;
+	border-radius: 0 0 4px 4px;
 	z-index:200;
-	opacity:0;
-	visibility:hidden;
+	opacity: ${props => props.isUserMenuOpen ? '1' : '0'};
+	visibility:${props => props.isUserMenuOpen ? 'visible' : 'hidden'};
 	transition: all 0.3s ease 0s;
 	`;
 
 const Header: FC<HeaderPropsMain> = (props) => {
+
+	const isUserMenuOpen = useAppSelector(selectIsUserMenuOpen);
+	const dispatch = useAppDispatch();
+
+	const showUserMenu = () => {
+		dispatch(openUserMenu(true));
+		console.log('openUserMenu');
+	}
+
+	const closeUserMenu = () => {
+		dispatch(openUserMenu(false));
+		console.log('closeUserMenu');
+	}
 
 	return (
 		<StyledHeader justufy={'space-between'} >
@@ -94,10 +107,11 @@ const Header: FC<HeaderPropsMain> = (props) => {
 				<HeaderTelContainer workTime={props.strings && props.strings.workTime} />
 				<HeaderSeachContainer btnSearch={props.strings && props.strings.btnSearch} />
 				<HeaderActionsContainer />
+
 				{props.isLogSuccess ?
-					<StyledLoginSuccessBtnWrapper>
-						<StyledLoginSuccessBtn onTouchStart={props.openUserMenu} className='_icon-sing_in' />
-						<StyledUserMenu className='header__user-menu'>
+					<StyledLoginSuccessBtnWrapper onMouseEnter={showUserMenu} onMouseLeave={closeUserMenu}>
+						<StyledLoginSuccessBtn onTouchStart={showUserMenu} className='_icon-sing_in' />
+						<StyledUserMenu isUserMenuOpen={isUserMenuOpen} >
 							<UserMenuContainer />
 						</StyledUserMenu>
 					</StyledLoginSuccessBtnWrapper> :
