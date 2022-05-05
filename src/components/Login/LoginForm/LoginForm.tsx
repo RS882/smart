@@ -7,7 +7,7 @@ import { selectLoginText, selectRegText } from '../../../redux/LanguageSlice';
 import { validateEmail, validateEmailOrTel, validateLength, validatePassword, validateTel, validateTelAndForamt } from '../../../utilits/validators';
 import Button from '../../Button';
 import InputForm from '../InputForm/InputForm';
-import { changeIsSubmit, selectIsShowPassword } from './../../../redux/LoginSlice';
+import { changeIsSubmit, selectIsShowPassword, setLoginSuccess } from './../../../redux/LoginSlice';
 import { useAppDispatch } from './../../../redux/hooks';
 import { ArrowFn } from '../../../types/fnTypes';
 import UserAgreementBtn from './RegForm/UserAgreementBtn';
@@ -92,10 +92,12 @@ const LoginForm: FC<ILoginForm> = (props) => {
 				};
 				console.log('Registration')
 				console.log(regValues);
+
 			};
 
 			//---------------------
 			setTimeout(() => {
+				dispatch(setLoginSuccess())
 				resetForm()
 				setSubmitting(false)
 				dispatch(changeIsSubmit(false))

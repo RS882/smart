@@ -16,7 +16,7 @@ const initialState: ILogin = {
 	isRegBox: false,
 	isShowPassword: false,
 	isSubmit: false,
-	isLoginSuccess: true,
+	isLoginSuccess: false,
 }
 
 
@@ -37,7 +37,6 @@ export const loginSlice = createSlice({
 		openLoginBox: (state, action: PayloadAction<boolean>) => {
 			state.isRegBox = false;
 			state.isLoginBox = action.payload;
-
 		},
 		openRegBox: (state, action: PayloadAction<boolean>) => {
 			state.isLoginBox = false;
@@ -60,7 +59,7 @@ export const loginSlice = createSlice({
 
 
 export const { openLoginBox, openRegBox, openPopUp,
-	closePopUp, changeIsShowPassword, changeIsSubmit, } = loginSlice.actions;
+	closePopUp, changeIsShowPassword, changeIsSubmit, setLoginSuccess, setLogOut } = loginSlice.actions;
 
 export const selectIsLoginBox = (state: RootState) => state.login.isLoginBox;
 export const selectIsRegBox = (state: RootState) => state.login.isRegBox;
