@@ -6,7 +6,7 @@ import Header from './Header';
 import Flex from '../Flex';
 import { useAppSelector } from '../../redux/hooks';
 import DecktopSearchContainer from './DesktopSearch/DecktopSearchContainer';
-import { selectIsDesktopScearch } from '../../redux/MenuSlice';
+import { selectIsDesktopScearch, selectIsUserMenuOpen } from '../../redux/MenuSlice';
 import { useAppDispatch } from './../../redux/hooks';
 import { openPopUp } from '../../redux/LoginSlice';
 import { changeIsBodyLock } from '../../redux/ModalSlice';
@@ -15,6 +15,7 @@ import { selectIsLogSuccess } from './../../redux/LoginSlice';
 interface HeaderContainerProps {
 	language?: ILanguages;
 	appScroll?: string;
+	isUserMenuOpen?: boolean;
 };
 
 const StyledHeader = styled.header<HeaderContainerProps>`
@@ -22,7 +23,7 @@ const StyledHeader = styled.header<HeaderContainerProps>`
 	top: 0;
 	left: 0;
 	height:60px;
-	z-index:100;
+	z-index:${props => props.isUserMenuOpen ? '350' : '100'};
    width: 100%;
 	padding-right: ${props => props.appScroll};
 	background-color: rgba(255,255,255,0.6);
@@ -45,6 +46,7 @@ const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 	const isDesktopSearch = useAppSelector(selectIsDesktopScearch);
 
 	const isLogSuccess = useAppSelector(selectIsLogSuccess);
+	const isUserMenuOpen = useAppSelector(selectIsUserMenuOpen);
 
 	const dispatch = useAppDispatch();
 
@@ -56,7 +58,7 @@ const HeaderContainer: FC<HeaderContainerProps> = (props) => {
 
 
 	return (<>
-		<StyledHeader appScroll={props.appScroll}>
+		<StyledHeader appScroll={props.appScroll} isUserMenuOpen={isUserMenuOpen}>
 			<Flex direction='column'>
 				<Container>
 					<Header isLogSuccess={isLogSuccess} strings={sundry}

@@ -5,6 +5,7 @@ import { IMenuItemProps } from '../../../types/globalTypes';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch } from '../../../redux/hooks';
 import { openUserMenu } from '../../../redux/MenuSlice';
+import { changeIsBodyLock } from '../../../redux/ModalSlice';
 
 interface IHeaderMenuItemProps {
 	$attr_last: boolean;
@@ -41,6 +42,7 @@ const UserMenuItem: FC<IMenuItemProps> = (props) => {
 	const dispatch = useAppDispatch();
 	const onClickBtn = () => {
 		dispatch(openUserMenu(false));
+		dispatch(changeIsBodyLock(false));
 	};
 	return (
 		<StyledUserItem to={`/${props.item_name}`} $attr_last={props.$attr_last}>

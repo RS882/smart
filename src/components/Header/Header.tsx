@@ -14,6 +14,8 @@ import HeaderSeachContainer from './HeaderSearch/HeaderSeachContainer';
 import HeaderTelContainer from './HeaderTel/HeaderTelContainer';
 import UserMenuContainer from './UserMenu/UserMenuContainer';
 import { useAppDispatch } from './../../redux/hooks';
+import Modal from './../Modal/Modal';
+import { changeIsBodyLock } from '../../redux/ModalSlice';
 
 
 
@@ -64,7 +66,6 @@ const StyledLoginSuccessBtn = styled.button`
 	height: 100%;
 	width: 100%;
 	font-size:25px;
-	border: 1px solid #000;
 	color: ${props => props.theme.color.text.second || '#838688'};
 	transition: color 0.3s ease 0s;
 	&:hover{
@@ -75,14 +76,24 @@ const StyledLoginSuccessBtn = styled.button`
 const StyledUserMenu = styled.div < { isUserMenuOpen: boolean }> `
 	position: absolute;
 	top: 100%;
-	right: 0;
+	right: -60px;
+	transform:translateX(0);
 	width: 270px;
+	transition: all 0.3s ease 0s;
 	overflow:hidden;
 	border-radius: 0 0 4px 4px;
 	z-index:200;
 	opacity: ${props => props.isUserMenuOpen ? '1' : '0'};
 	visibility:${props => props.isUserMenuOpen ? 'visible' : 'hidden'};
-	transition: all 0.3s ease 0s;
+	transition: top 0.3s ease 0s;
+	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+		position: absolute;
+		top: 100%;
+		right: 0;
+		transform:translateX(0);
+		width: 270px;
+		transition: all 0.3s ease 0s;
+	};
 	`;
 
 const Header: FC<HeaderPropsMain> = (props) => {
@@ -92,12 +103,12 @@ const Header: FC<HeaderPropsMain> = (props) => {
 
 	const showUserMenu = () => {
 		dispatch(openUserMenu(true));
-		console.log('openUserMenu');
+		dispatch(changeIsBodyLock(true));
 	}
 
 	const closeUserMenu = () => {
 		dispatch(openUserMenu(false));
-		console.log('closeUserMenu');
+		dispatch(changeIsBodyLock(false));
 	}
 
 	return (
@@ -107,16 +118,15 @@ const Header: FC<HeaderPropsMain> = (props) => {
 				<HeaderTelContainer workTime={props.strings && props.strings.workTime} />
 				<HeaderSeachContainer btnSearch={props.strings && props.strings.btnSearch} />
 				<HeaderActionsContainer />
-
 				{props.isLogSuccess ?
 					<StyledLoginSuccessBtnWrapper onMouseEnter={showUserMenu} onMouseLeave={closeUserMenu}>
-						<StyledLoginSuccessBtn onTouchStart={showUserMenu} className='_icon-sing_in' />
+						<StyledLoginSuccessBtn onClick={showUserMenu} className='_icon-sing_in' />
 						<StyledUserMenu isUserMenuOpen={isUserMenuOpen} >
 							<UserMenuContainer />
 						</StyledUserMenu>
 					</StyledLoginSuccessBtnWrapper> :
-					<StyledLoginBtn onClick={props.onClickLogin}>{props.strings && props.strings.btnEnter}</StyledLoginBtn>}
-
+					<StyledLoginBtn onClick={props.onClickLogin}>{props.strings && props.strings.btnEnter}</StyledLoginBtn>
+				}
 				<LanguageContainer />
 			</Flex>
 		</StyledHeader>
