@@ -16,7 +16,7 @@ const LoginFormContainer: FC<ILoginForm> = (props) => {
 	return (
 		<div>
 			<TitleForm title={title} />
-			<LoginForm goToReg={props.goToReg} isLogBox={props.isLogBox} isRegBox={props.isRegBox} />
+			<LoginForm closeForm={props.closeForm} goToReg={props.goToReg} isLogBox={props.isLogBox} isRegBox={props.isRegBox} />
 
 		</div>
 	);

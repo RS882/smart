@@ -17,7 +17,7 @@ export interface ILoginForm {
 	goToReg: ArrowFn;
 	isLogBox: boolean;
 	isRegBox: boolean;
-
+	closeForm: ArrowFn;
 }
 
 export interface ValuesLog {
@@ -100,6 +100,7 @@ const LoginForm: FC<ILoginForm> = (props) => {
 				dispatch(setLoginSuccess())
 				resetForm()
 				setSubmitting(false)
+				props.closeForm();
 				dispatch(changeIsSubmit(false))
 			}, 2000)
 		};

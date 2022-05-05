@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { IMenuItemProps } from '../../../types/globalTypes';
-
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { useAppDispatch } from '../../../redux/hooks';
 import { openUserMenu } from '../../../redux/MenuSlice';
 import { changeIsBodyLock } from '../../../redux/ModalSlice';
+import { setLogOut } from '../../../redux/LoginSlice';
 
 interface IHeaderMenuItemProps {
 	$attr_last: boolean;
 };
 
-const StyledUserItem = styled(NavLink) <IHeaderMenuItemProps>`
+const StyledUserItem = styled.div <IHeaderMenuItemProps>`
 	display:flex;
 	height: 54px;
 	width: 100%;
@@ -40,12 +40,17 @@ const StyledUserItem = styled(NavLink) <IHeaderMenuItemProps>`
 
 const UserMenuItem: FC<IMenuItemProps> = (props) => {
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
 	const onClickBtn = () => {
 		dispatch(openUserMenu(false));
 		dispatch(changeIsBodyLock(false));
+		props.$attr_last ? dispatch(setLogOut()) : navigate(`/${props.item_name}`);
 	};
+
+
 	return (
-		<StyledUserItem to={`/${props.item_name}`} $attr_last={props.$attr_last}>
+		<StyledUserItem $attr_last={props.$attr_last}>
 			<button onClick={onClickBtn}>{props.item_text}</button>
 		</StyledUserItem>
 	);

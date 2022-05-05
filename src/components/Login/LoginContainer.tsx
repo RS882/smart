@@ -80,7 +80,7 @@ const LoginContainer: FC = (props) => {
 		<>
 			<StyledLoginWrapper >
 				<StyledComponetBox isOpen={isOpen} onTransitionEnd={closeWрhenTransitionEnd}>
-					<LoginFormContainer goToReg={goToReg} isLogBox={isLoginBox} isRegBox={isRegBox} />
+					<LoginFormContainer closeForm={onClickClosePopUp} goToReg={goToReg} isLogBox={isLoginBox} isRegBox={isRegBox} />
 					<ClosePopUpContainer onClickClosePopUp={isSubmit ? () => { } : onClickClosePopUp} />
 				</StyledComponetBox>
 			</StyledLoginWrapper>
