@@ -11,6 +11,7 @@ import { changeIsSubmit, selectIsShowPassword, setLoginSuccess } from './../../.
 import { useAppDispatch } from './../../../redux/hooks';
 import { ArrowFn } from '../../../types/fnTypes';
 import UserAgreementBtn from './RegForm/UserAgreementBtn';
+import { loginUser } from '../../../redux/Thunk/thunkLogin';
 
 
 export interface ILoginForm {
@@ -80,8 +81,8 @@ const LoginForm: FC<ILoginForm> = (props) => {
 					password: values.password,
 					renemberMe: values.renemberMe,
 				};
-				console.log('Login');
-				console.log(logValues);
+				console.log(loginUser(logValues));
+				// console.log(logValues);
 			};
 			if (isRegistr) {
 				const regValues = {
@@ -102,7 +103,7 @@ const LoginForm: FC<ILoginForm> = (props) => {
 				setSubmitting(false)
 				props.closeForm();
 				dispatch(changeIsSubmit(false))
-			}, 2000)
+			}, 300)
 		};
 
 	const choseLogOrRegText = (logText: string | undefined, regText: string | undefined,

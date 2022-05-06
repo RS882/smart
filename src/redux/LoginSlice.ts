@@ -1,5 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
+import { loginUser } from "./Thunk/thunkLogin";
+
+export interface IUserDate {
+	id: string;
+	name: string;
+	password: string;
+	email: string;
+	phone: string;
+	registrationDate: string;
+	city: string;
+	address: string;
+	zipIndex: string;
+	paymentMethod: string;
+	deliveryMethod: string;
+	avatar: string;
+	shoppingHistory: string[];
+	favorites: string[];
+}
 
 export interface ILogin {
 	isPopUp: boolean;
@@ -8,6 +26,8 @@ export interface ILogin {
 	isShowPassword: boolean;
 	isSubmit: boolean;
 	isLoginSuccess: boolean;
+	userDate?: IUserDate;
+	error?: string | undefined;
 };
 
 const initialState: ILogin = {
@@ -54,6 +74,11 @@ export const loginSlice = createSlice({
 		setLogOut: (state) => {
 			state.isLoginSuccess = false;
 		},
+	},
+	extraReducers: {
+		[loginUser.fulfilled.type]: (state, action: PayloadAction<IUserDate>) => {
+
+		}
 	}
 })
 

@@ -36,3 +36,4 @@ export const setScrollWidth = createAsyncThunk(
 		return await res as number;
 	}
 );
+

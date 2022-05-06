@@ -18,7 +18,8 @@ import PreloaderContainer from './components/Preloader/PreloaderContainer';
 import { isRetina } from './utilits/functions';
 import LoginContainer from './components/Login/LoginContainer';
 import { selectIsLoginBox, selectIsPopUp } from './redux/LoginSlice';
-
+import { loginAPI } from './API/api';
+import { loginUser } from './redux/Thunk/thunkLogin';
 
 // const ModalContainer = React.lazy(() => import('./components/Modal/ModalContainer'));
 // const DropDownMenu = React.lazy(() => import('./components/Header/DropDownMenu/DropDownMenuContainer'));
@@ -49,6 +50,7 @@ const PrivacyPolicy = React.lazy(() => import('./components/PrivacyPolicy/Privac
 const Faq = React.lazy(() => import('./components/Faq/Faq'));
 const Wholesale = React.lazy(() => import('./components/Wholesale/Wholesale'));
 const Dropshipping = React.lazy(() => import('./components/Dropshipping/Dropshipping'));
+
 
 
 
@@ -123,6 +125,9 @@ const App: FC = (props) => {
   const isLangChange = useAppSelector(selectIsLangChange);
   const isLoginBoxOpen = useAppSelector(selectIsPopUp);
 
+
+
+
   if (!initialazatedApp) {
     // console.log(store.getState());
     return (
@@ -130,8 +135,10 @@ const App: FC = (props) => {
         <PreloaderContainer />
       </div>
     )
+
   } else {
-    console.log(store.getState());
+    // console.log(store.getState());
+
 
 
     return (

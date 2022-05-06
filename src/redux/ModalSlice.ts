@@ -29,10 +29,7 @@ export const modalSlice = createSlice({
 		changeIsBodyLock: (state, action: PayloadAction<boolean>) => {
 			state.isBodyLock = action.payload;
 		},
-		// // устанавливаем ширину полосы прокрутки
-		// setScrollWidth: (state, action: PayloadAction<number>) => {
-		// 	state.scrollWidth = action.payload;
-		// },
+
 		// устанавливаем ширину полосы прокрутки
 		setOpacity: (state, action: PayloadAction<string>) => {
 			state.opacity = action.payload;
