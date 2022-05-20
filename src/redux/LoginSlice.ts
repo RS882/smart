@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import { loginUser } from "./Thunk/thunkLogin";
+import { loginUser, regNewUser } from "./Thunk/thunkLogin";
 
 export interface IUserDate {
 	id: string;
@@ -26,9 +26,10 @@ export interface ILogin {
 	isShowPassword: boolean;
 	isSubmit: boolean;
 	isLoginSuccess: boolean;
-	userDate?: IUserDate;
+	userDate: IUserDate | {};
 	error: any | undefined;
 	errorText: string | undefined;
+	regMessage: string | undefined;
 };
 
 const initialState: ILogin = {
@@ -40,6 +41,8 @@ const initialState: ILogin = {
 	isLoginSuccess: false,
 	error: undefined,
 	errorText: undefined,
+	userDate: {},
+	regMessage: undefined,
 }
 
 
@@ -71,12 +74,13 @@ export const loginSlice = createSlice({
 		changeIsSubmit: (state, action: PayloadAction<boolean>) => {
 			state.isSubmit = action.payload;
 		},
-		setLoginSuccess: (state) => {
-			state.isLoginSuccess = true;
-		},
 		setLogOut: (state) => {
 			state.isLoginSuccess = false;
+			state.userDate = {};
 		},
+		clearRegMessage: (state) => {
+			state.regMessage = undefined;
+		}
 	},
 	extraReducers: {
 		[loginUser.fulfilled.type]: (state, action: PayloadAction<IUserDate>) => {
@@ -89,9 +93,24 @@ export const loginSlice = createSlice({
 				state.error = undefined;
 				state.isLoginSuccess = true;
 			}
-
 		},
 		[loginUser.rejected.type]: (state, action: PayloadAction<Error>) => {
+			console.log('errror');
+			state.error = action.payload;
+		},
+		[regNewUser.fulfilled.type]: (state, action: PayloadAction<number>) => {
+			console.log(action.payload);
+
+			// if (/^20/.test(action.payload + '')) {
+			// 	state.regMessage = 'You are registered!'
+			// }
+			// else {
+			// 	state.regMessage = 'Registration failed'
+			// }
+
+			// state.regMessage = /^20/.test(action.payload + '') ? 'You are registered!' : 'Registration failed';
+		},
+		[regNewUser.rejected.type]: (state, action: PayloadAction<Error>) => {
 			console.log('errror');
 			state.error = action.payload;
 		},
@@ -100,7 +119,7 @@ export const loginSlice = createSlice({
 
 
 export const { openLoginBox, openRegBox, openPopUp,
-	closePopUp, changeIsShowPassword, changeIsSubmit, setLoginSuccess, setLogOut } = loginSlice.actions;
+	closePopUp, changeIsShowPassword, changeIsSubmit, setLogOut } = loginSlice.actions;
 
 export const selectIsLoginBox = (state: RootState) => state.login.isLoginBox;
 export const selectIsRegBox = (state: RootState) => state.login.isRegBox;

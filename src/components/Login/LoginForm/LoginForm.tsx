@@ -7,11 +7,12 @@ import { selectLoginText, selectRegText } from '../../../redux/LanguageSlice';
 import { validateEmail, validateEmailOrTel, validateLength, validatePassword, validateTel, validateTelAndForamt } from '../../../utilits/validators';
 import Button from '../../Button';
 import InputForm from '../InputForm/InputForm';
-import { changeIsSubmit, selectIsShowPassword, setLoginSuccess } from './../../../redux/LoginSlice';
+import { changeIsSubmit, selectIsShowPassword } from './../../../redux/LoginSlice';
 import { useAppDispatch } from './../../../redux/hooks';
 import { ArrowFn } from '../../../types/fnTypes';
 import UserAgreementBtn from './RegForm/UserAgreementBtn';
-import { loginUser } from '../../../redux/Thunk/thunkLogin';
+import { loginUser, regNewUser } from '../../../redux/Thunk/thunkLogin';
+import { loginAPI } from './../../../API/api';
 
 
 export interface ILoginForm {
@@ -82,17 +83,29 @@ const LoginForm: FC<ILoginForm> = (props) => {
 					renemberMe: values.renemberMe,
 				};
 				dispatch(loginUser(logValues));
-				// console.log(loginUser(logValues));
-				// console.log(logValues);
+
 			};
 			if (isRegistr) {
 				const regValues = {
-					userRegName: values.userRegName,
-					userRegEmail: values.userRegEmail,
-					userRegTelNumber: values.userRegTelNumber,
+					name: values.userRegName,
+					email: values.userRegEmail,
+					phone: values.userRegTelNumber,
 					password: values.password,
+					avatar: '',
+					registrationDate: new Date(),
+					city: '',
+					address: '',
+					zipIndex: '',
+					paymentMethod: '',
+					deliveryMethod: '',
+					shoppingHistory: [],
+					favorites: [],
+
 				};
 				console.log('Registration')
+
+				dispatch(regNewUser(regValues))
+				// loginAPI.regUser(regValues);
 				console.log(regValues);
 
 			};
