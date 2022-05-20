@@ -1,3 +1,4 @@
+import { string } from "yup";
 import { IStrings, IStringsWithMethods } from "../localization/localization";
 
 
@@ -35,4 +36,9 @@ export const isRetina = () => {/*проверка Retina*/
 		&& /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
 };
 
+export const converTelNumber = (tel: string | undefined) => {
+	if (tel !== undefined) {
+		return tel.split('').filter(e => /^\d$/.test(e)).join('')
+	}
+};
 

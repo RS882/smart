@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { IStrings } from './../localization/localization';
 import { loadLanguage, setLanguages } from "./Thunk/thunkInitApp";
-import { boolean } from "yup";
+
 
 export interface ILanguages {
 	activeLanguage: string;

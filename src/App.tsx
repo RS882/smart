@@ -15,7 +15,7 @@ import HeaderBottomContainer from './components/Header/HeaderBottomContainer/Hea
 import { loadLanguage, setLanguages, setScrollWidth } from './redux/Thunk/thunkInitApp';
 import { initializatedSuccess, selectInitializated, setIsRetina } from './redux/AppSlice';
 import PreloaderContainer from './components/Preloader/PreloaderContainer';
-import { isRetina } from './utilits/functions';
+import { converTelNumber, isRetina } from './utilits/functions';
 import LoginContainer from './components/Login/LoginContainer';
 import { selectIsLoginBox, selectIsPopUp } from './redux/LoginSlice';
 import { loginAPI } from './API/api';
@@ -137,7 +137,8 @@ const App: FC = (props) => {
     )
 
   } else {
-    // console.log(store.getState());
+    console.log(store.getState());
+
 
 
 

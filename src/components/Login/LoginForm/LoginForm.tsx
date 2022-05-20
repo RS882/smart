@@ -81,7 +81,8 @@ const LoginForm: FC<ILoginForm> = (props) => {
 					password: values.password,
 					renemberMe: values.renemberMe,
 				};
-				console.log(loginUser(logValues));
+				dispatch(loginUser(logValues));
+				// console.log(loginUser(logValues));
 				// console.log(logValues);
 			};
 			if (isRegistr) {
@@ -98,7 +99,7 @@ const LoginForm: FC<ILoginForm> = (props) => {
 
 			//---------------------
 			setTimeout(() => {
-				dispatch(setLoginSuccess())
+
 				resetForm()
 				setSubmitting(false)
 				props.closeForm();
