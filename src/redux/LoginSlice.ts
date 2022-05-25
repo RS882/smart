@@ -98,17 +98,18 @@ export const loginSlice = createSlice({
 			console.log('errror');
 			state.error = action.payload;
 		},
-		[regNewUser.fulfilled.type]: (state, action: PayloadAction<number>) => {
-			console.log(action.payload);
+		[regNewUser.fulfilled.type]: (state, action: PayloadAction<IUserDate>) => {
+			if (action.payload.id !== undefined) {
+				state.userDate = action.payload;
+				state.regMessage = 'You are registered!';
+				state.isLoginSuccess = true;
 
-			// if (/^20/.test(action.payload + '')) {
-			// 	state.regMessage = 'You are registered!'
-			// }
-			// else {
-			// 	state.regMessage = 'Registration failed'
-			// }
+			} else {
+				state.userDate = {};
+				state.isLoginSuccess = false;
+				state.regMessage = 'Registration failed';
+			}
 
-			// state.regMessage = /^20/.test(action.payload + '') ? 'You are registered!' : 'Registration failed';
 		},
 		[regNewUser.rejected.type]: (state, action: PayloadAction<Error>) => {
 			console.log('errror');
@@ -119,7 +120,7 @@ export const loginSlice = createSlice({
 
 
 export const { openLoginBox, openRegBox, openPopUp,
-	closePopUp, changeIsShowPassword, changeIsSubmit, setLogOut } = loginSlice.actions;
+	closePopUp, changeIsShowPassword, changeIsSubmit, setLogOut, clearRegMessage } = loginSlice.actions;
 
 export const selectIsLoginBox = (state: RootState) => state.login.isLoginBox;
 export const selectIsRegBox = (state: RootState) => state.login.isRegBox;
@@ -127,5 +128,6 @@ export const selectIsPopUp = (state: RootState) => state.login.isPopUp;
 export const selectIsShowPassword = (state: RootState) => state.login.isShowPassword;
 export const selectIsSubmit = (state: RootState) => state.login.isSubmit;
 export const selectIsLogSuccess = (state: RootState) => state.login.isLoginSuccess;
+export const selectLoginMessage = (state: RootState) => state.login.regMessage;
 
 export default loginSlice.reducer;

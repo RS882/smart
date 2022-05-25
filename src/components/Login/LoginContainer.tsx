@@ -1,12 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../redux/hooks';
-import { closePopUp, openLoginBox, openRegBox, selectIsLoginBox, selectIsRegBox, selectIsSubmit } from '../../redux/LoginSlice';
+import { closePopUp, openLoginBox, openRegBox, selectIsLoginBox, selectIsRegBox, selectIsSubmit, selectLoginMessage } from '../../redux/LoginSlice';
 import Modal from '../Modal/Modal';
 import ClosePopUpContainer from './ClosePopUpContainer';
 import { useAppDispatch } from './../../redux/hooks';
 import { changeIsBodyLock } from '../../redux/ModalSlice';
 import LoginFormContainer from './LoginForm/LoginFormContainer';
+import LoginMessageContainer from './LoginForm/LoginMessage/LoginMessageContainer';
 
 interface ILoginMEnuShow {
 	isOpen?: boolean;
@@ -50,6 +51,8 @@ const LoginContainer: FC = (props) => {
 	const isLoginBox = useAppSelector(selectIsLoginBox);
 	const isRegBox = useAppSelector(selectIsRegBox);
 	const isSubmit = useAppSelector(selectIsSubmit);
+	const message = useAppSelector(selectLoginMessage)
+
 	useEffect(() => {
 		dispatch(openLoginBox(true));
 		setIsOpen(true);
@@ -68,7 +71,7 @@ const LoginContainer: FC = (props) => {
 	};
 
 	const closeWрhenTransitionEnd = () => {
-		if (!isOpen) {
+		if (!isOpen && message === undefined) {
 			dispatch(closePopUp());
 			dispatch(changeIsBodyLock(false));
 		}
@@ -84,6 +87,7 @@ const LoginContainer: FC = (props) => {
 					<ClosePopUpContainer onClickClosePopUp={isSubmit ? () => { } : onClickClosePopUp} />
 				</StyledComponetBox>
 			</StyledLoginWrapper>
+			{message !== undefined ? <LoginMessageContainer /> : null}
 			<Modal opacity={'0.6'} isModal={true} isOpen={false} />
 		</>
 	);

@@ -29,17 +29,7 @@ export const regNewUser = createAsyncThunk(
 	'login/regNewUser',
 	async (data: ValuesLog, thunkAPI) => {
 		const res = await loginAPI.regUser(data)
-			.then(response => response.data
-				// /^20/.test(response.status + '') ? 'You are registered!' : 'Registration failed'
-				// 	 {
-				// 	if (/^20/.test(response.status + '')) {
-				// 		return 'You are registered!'
-				// 	} else {
-				// 		return 'Registration failed'
-				// 	}
-
-				// }
-			)
+			.then(response => response.data)
 			.catch(reject => thunkAPI.rejectWithValue(reject));//выводим ошибку
 
 		return res;

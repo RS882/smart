@@ -100,19 +100,12 @@ const LoginForm: FC<ILoginForm> = (props) => {
 					deliveryMethod: '',
 					shoppingHistory: [],
 					favorites: [],
-
 				};
-				console.log('Registration')
-
 				dispatch(regNewUser(regValues))
-				// loginAPI.regUser(regValues);
-				console.log(regValues);
-
 			};
 
 			//---------------------
 			setTimeout(() => {
-
 				resetForm()
 				setSubmitting(false)
 				props.closeForm();
