@@ -1,10 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import Container from './../Container';
 import FirstScreen from './FirstScreen/FirstScreen';
 import HeaderMenuContainer from './../Header/HeaderMenu/HeaderMenuContainer';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { selectLangStiringsHeaderMenuItem } from '../../redux/LanguageSlice';
+import { getItem } from './../../redux/Thunk/thunkItem';
+import store from '../../redux/store';
 
 const StyledMain = styled.main`
 	margin-top: 80px;
@@ -25,6 +27,13 @@ const StyledWrapper = styled.div`
 const Main: FC = (props) => {
 
 	const menuItem = useAppSelector(selectLangStiringsHeaderMenuItem)
+	const dispatch = useAppDispatch();
+	useEffect(() => {
+		dispatch(getItem(1));
+	}, []);
+
+	setTimeout(() => console.log(store.getState()), 400)
+
 	return (
 		<StyledMain>
 			<Container>

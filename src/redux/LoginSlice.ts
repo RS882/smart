@@ -107,7 +107,7 @@ export const loginSlice = createSlice({
 			} else {
 				state.userDate = {};
 				state.isLoginSuccess = false;
-				state.regMessage = 'Registration failed';
+				state.regMessage = 'Registration failed...(';
 			}
 
 		},

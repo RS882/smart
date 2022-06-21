@@ -6,6 +6,7 @@ import MenuReducer from "./MenuSlice";
 import CatalogReducer from "./CatalogSlice";
 import AppReducer from "./AppSlice";
 import LoginReducer from "./LoginSlice";
+import ItemReducer from "./ItemSlice";
 
 const store = configureStore({
 	reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
 		catalog: CatalogReducer,
 		app: AppReducer,
 		login: LoginReducer,
+		item: ItemReducer,
 	}
 })
 
