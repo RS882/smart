@@ -26,7 +26,10 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-._icon-lock_icon:before {
+._icon-star:before {
+	content: "\e9a8";
+ }
+ ._icon-lock_icon:before {
 	content: "\e9a0";
  }
  ._icon-arrow_down:before {
@@ -801,6 +804,9 @@
  }
  ._icon-eye_off:before {
 	content: "\e99f";
+ }
+ ._icon-message-square:before {
+	content: "\e9a7";
  }
  ._icon-change:before {
 	content: "\e9a3";

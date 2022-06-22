@@ -1,5 +1,6 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from './store';
 import { getItem } from './Thunk/thunkItem';
 
 export interface IItemData {
@@ -52,5 +53,6 @@ export const itemSlice = createSlice({
 
 //export const {  } = itemSlice.actions;
 
+export const selectitemsData = (state: RootState) => state.item.itemsData;
 
 export default itemSlice.reducer;
