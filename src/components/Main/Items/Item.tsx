@@ -13,10 +13,12 @@ export interface IItemProps {
 const StyledItemColumn = styled.div`
 	display: flex;
 	flex-direction:column;
-	margin: 20px;
+	padding: 20px;
+	border: 1px solid  ${props => props.theme.color.cardBorder || '#EAEAF0'};
+	border-radius: 6px;
 `;
-const StyledImg = styled.div`
-	border: 1px solid #000;
+const StyledImg = styled.button`
+	
 	margin-bottom:10px;
 	
 `;
@@ -35,19 +37,17 @@ const StyledItemType = styled.div`
 	font-weight:500;
 `;
 
-const StyledItemName = styled.div`
+const StyledItemName = styled.button`
 	font-weight:400;
 	margin-bottom:20px;
+	text-align:start;
+
 `;
 
 const Item: FC<IItemProps> = (props) => {
 
-	const itemData = props.itemData;
-	console.log(itemData);
-
-	const starts = Math.round(itemData.starts / 20);
-
-
+	const itemData: IItemData = props.itemData;
+	console.log(itemData)
 
 	return (
 		<StyledItemColumn>
@@ -63,7 +63,8 @@ const Item: FC<IItemProps> = (props) => {
 				{itemData ? itemData.itemname : null}
 			</StyledItemName>
 
-			<StarsContainer stars={starts} reviewsNumber={itemData.reviews} />
+			<StarsContainer stars={itemData ? Math.round(itemData.starts / 20) : 0}
+				reviewsNumber={itemData ? itemData.reviews : 0} />
 
 		</StyledItemColumn>
 	);
