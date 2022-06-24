@@ -26,7 +26,10 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-._icon-star:before {
+_icon-empty_cart:before {
+	content: "\e9a9";
+ }
+ ._icon-star:before {
 	content: "\e9a8";
  }
  ._icon-lock_icon:before {

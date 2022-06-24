@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { theme } from './../../../../theme';
 
 interface IStars {
 	stars: number;
@@ -16,6 +17,7 @@ interface IStarProps {
 const StyledStarsAndReviewsContainer = styled.div`
 	display: flex;
 	padding:2px;
+	margin-bottom:20px;
 `;
 
 const StyledStarsBox = styled.div`
@@ -30,11 +32,17 @@ const StyledStar = styled.div<IStarProps>`
 
 const StyledReviewsBox = styled.button`
 	display:flex;
+	transition:all 0.3s ease 0s;
+		&:hover{
+		color: ${props => props.theme.color.yellow};
+	}
 `;
 const StyledReviews = styled.div`
 	font-size:22px;
 	display:flex;
 	padding:2px;
+
+
 `;
 const StyledNumReviews = styled.div`
 	font-size:16px;

@@ -15,11 +15,10 @@ import HeaderBottomContainer from './components/Header/HeaderBottomContainer/Hea
 import { loadLanguage, setLanguages, setScrollWidth } from './redux/Thunk/thunkInitApp';
 import { initializatedSuccess, selectInitializated, setIsRetina } from './redux/AppSlice';
 import PreloaderContainer from './components/Preloader/PreloaderContainer';
-import { converTelNumber, isRetina } from './utilits/functions';
+import { isRetina } from './utilits/functions';
 import LoginContainer from './components/Login/LoginContainer';
-import { selectIsLoginBox, selectIsPopUp } from './redux/LoginSlice';
-import { loginAPI } from './API/api';
-import { loginUser } from './redux/Thunk/thunkLogin';
+import { selectIsPopUp } from './redux/LoginSlice';
+
 
 // const ModalContainer = React.lazy(() => import('./components/Modal/ModalContainer'));
 // const DropDownMenu = React.lazy(() => import('./components/Header/DropDownMenu/DropDownMenuContainer'));
@@ -65,6 +64,7 @@ const AppWrapper = styled(Flex)`
 	overflow: hidden;
 	position: relative;
   color:${props => props.theme.color.text.main || `#070C11`};
+  font-size: ${props => props.theme.font.size || `16px`};
   line-height: 130%;
   background-color: ${props => props.theme.color.bg.main || `#fff`};
   > main {
