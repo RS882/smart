@@ -12,7 +12,7 @@ export interface IPriseProps {
 };
 
 const StyledPriseAndFavorit = styled.div`
-	border: 1px solid #000;
+
 	display:flex;
 	justify-content: space-between;
 	margin-bottom:20px;

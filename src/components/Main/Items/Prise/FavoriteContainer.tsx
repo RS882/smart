@@ -33,10 +33,10 @@ const FavoriteContainer: FC<IFavoriteContainer> = (props) => {
 	return (
 		<StyledFavoriteContainer>
 			<IconBtn iconClass={props.isFavorite ? '_icon-hart_full' : '_icon-hart_empty'}
-				iconColor={props.isFavorite ? '#F15152' : ''}
+				iconColor={props.isFavorite ? '#F15152' : undefined}
 				callBack={toogleItemToFavotite} />
 			<IconBtn iconClass={'_icon-compare'}
-				iconColor={props.isCompare ? '#2A5275' : ''}
+				iconColor={props.isCompare ? '#2A5275' : undefined}
 				callBack={toogleItemToCompare} />
 		</StyledFavoriteContainer>
 	);

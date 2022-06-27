@@ -7,7 +7,7 @@ import Item from './Item';
 
 const StyledItemsContainer = styled.div`
 	width:	365px;
-	height: 570px;
+	/* height: 570px; */
 	border: 1px solid #000;
 `
 

@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import itemImg from '../../../assets/image 18.png'
 import { IItemData } from '../../../redux/ItemSlice';
+import BuyAndCartContainer from './BuyAndCart/BuyAndCartContainer';
 import PriseAndFavoritsContainer from './Prise/PriseAndFavoritsContainer';
 import StarsContainer from './Stars/StarsContainer';
 
@@ -85,6 +86,8 @@ const Item: FC<IItemProps> = (props) => {
 				discount={itemData ? itemData.discount : 0}
 				isFavorite={itemData ? itemData.isFavorite : false}
 				isCompare={itemData ? itemData.isCompare : false} />
+
+			<BuyAndCartContainer />
 
 		</StyledItemColumn>
 	);
