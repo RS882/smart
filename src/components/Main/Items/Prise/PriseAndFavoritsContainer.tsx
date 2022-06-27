@@ -6,6 +6,9 @@ import PriseContainer from './PriseContainer';
 export interface IPriseProps {
 	prise: string;
 	discount: number;
+	idItem: number;
+	isFavorite: boolean | undefined;
+	isCompare: boolean | undefined;
 };
 
 const StyledPriseAndFavorit = styled.div`
@@ -16,10 +19,6 @@ const StyledPriseAndFavorit = styled.div`
 `;
 
 
-
-
-
-
 const PriseAndFavoritsContainer: FC<IPriseProps> = (props) => {
 
 
@@ -28,7 +27,7 @@ const PriseAndFavoritsContainer: FC<IPriseProps> = (props) => {
 	return (
 		<StyledPriseAndFavorit>
 			<PriseContainer {...props} />
-			<FavoriteContainer />
+			<FavoriteContainer id={props.idItem} isFavorite={props.isFavorite} isCompare={props.isCompare} />
 		</StyledPriseAndFavorit>
 	);
 };

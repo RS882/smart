@@ -4,6 +4,7 @@ import { RootState } from './store';
 import { getItem } from './Thunk/thunkItem';
 
 export interface IItemData {
+	id: string;
 	itemname: string;
 	prise: string;
 	discount: number;
@@ -11,6 +12,8 @@ export interface IItemData {
 	reviews: number;
 	salehit: number;
 	newitem: number;
+	isFavorite?: boolean;
+	isCompare?: boolean;
 };
 
 export interface IItems {
@@ -31,6 +34,13 @@ export const itemSlice = createSlice({
 	initialState,
 	reducers: {
 
+		toogleFavoriteItem: (state, action: PayloadAction<number>) => {
+			state.itemsData[action.payload].isFavorite = !state.itemsData[action.payload].isFavorite
+		},
+		toogleCompareItem: (state, action: PayloadAction<number>) => {
+			state.itemsData[action.payload].isCompare = !state.itemsData[action.payload].isCompare
+		},
+
 	},
 	extraReducers: {
 		[getItem.fulfilled.type]: (state, action: PayloadAction<IItemData[]>) => {
@@ -39,7 +49,10 @@ export const itemSlice = createSlice({
 
 			} else {
 				state.itemsData = action.payload;
-
+				state.itemsData.map((e) => {
+					e.isFavorite = false;
+					e.isCompare = false;
+				})
 
 			}
 		},
@@ -51,7 +64,7 @@ export const itemSlice = createSlice({
 
 })
 
-//export const {  } = itemSlice.actions;
+export const { toogleFavoriteItem, toogleCompareItem } = itemSlice.actions;
 
 export const selectitemsData = (state: RootState) => state.item.itemsData;
 

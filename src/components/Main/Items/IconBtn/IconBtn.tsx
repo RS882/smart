@@ -2,12 +2,15 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { ArrowFn } from '../../../../types/fnTypes';
 
+
+
 interface IIconBtn {
-	isCartBtn: boolean;
+	isCartBtn?: boolean;
 	isItemInCart?: boolean;
 	iconClass: string;
 	iconColor?: string;
 	callBack: ArrowFn;
+
 };
 interface IIconFavorProps {
 	colorIcon?: string;
@@ -31,12 +34,13 @@ const StyledBox = styled.div`
 	align-items:center;
 	font-size:20px;
 	transition:all 0.3s ease 0s;
+	border-radius:4px;
 `
 const StyledIconFAvorit = styled(StyledBox) <IIconFavorProps>`
-	border: 1px solid ${props => props.colorIcon || props.theme.color.divider || '#C8CACB'};
-	color:${props => props.theme.color.divider || '#C8CACB'};
+	border: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
+	color: ${props => props.colorIcon || props.theme.color.divider || '#C8CACB'};
 	&:hover{
-			border: 2px solid ${props => props.theme.color.darkBlue || '#2A5275'};
+			border: 2px solid ${props => props.theme.color.blue || '#2A5275'};
 	}
 `;
 
