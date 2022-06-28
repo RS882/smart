@@ -66,6 +66,7 @@ const Item: FC<IItemProps> = (props) => {
 
 	return (
 		<StyledItemColumn>
+
 			<StyledImg>
 				<ImgStyled />
 			</StyledImg>

@@ -14,20 +14,21 @@ export interface IItemData {
 	newitem: number;
 	isFavorite?: boolean;
 	isCompare?: boolean;
-	isAddingItemToCart?: boolean;
+	// isAddingItemToCart?: boolean;
 };
 
 export interface IItems {
 	itemsData: IItemData[] | [];
 	itemsPage: number;
 	errorText: string | undefined;
-
+	isAddingItemToCart?: boolean;
 };
 
 const initialState: IItems = {
 	itemsData: [],
 	itemsPage: 1,
 	errorText: undefined,
+	isAddingItemToCart: false,
 };
 
 export const itemSlice = createSlice({
@@ -41,11 +42,13 @@ export const itemSlice = createSlice({
 		toogleCompareItem: (state, action: PayloadAction<string>) => {
 			state.itemsData.map(e => { if (e.id === action.payload) e.isCompare = !e.isCompare; })
 		},
-		startAddingItemToCart: (state, action: PayloadAction<string>) => {
-			state.itemsData.map(e => { if (e.id === action.payload) e.isAddingItemToCart = true; })
+		startAddingItemToCart: (state) => {
+			state.isAddingItemToCart = true;
+			//state.itemsData.map(e => { if (e.id === action.payload) e.isAddingItemToCart = true; })
 		},
-		endAddingItemToCart: (state, action: PayloadAction<string>) => {
-			state.itemsData.map(e => { if (e.id === action.payload) e.isAddingItemToCart = false; })
+		endAddingItemToCart: (state) => {
+			state.isAddingItemToCart = false;
+			//state.itemsData.map(e => { if (e.id === action.payload) e.isAddingItemToCart = false; })
 		},
 	},
 	extraReducers: {
@@ -58,7 +61,7 @@ export const itemSlice = createSlice({
 				state.itemsData.map((e) => {
 					e.isFavorite = false;
 					e.isCompare = false;
-					e.isAddingItemToCart = false;
+					// e.isAddingItemToCart = false;
 				})
 
 			}
@@ -74,6 +77,6 @@ export const itemSlice = createSlice({
 export const { toogleFavoriteItem, toogleCompareItem, startAddingItemToCart, endAddingItemToCart } = itemSlice.actions;
 
 export const selectitemsData = (state: RootState) => state.item.itemsData;
-
+export const selectAddItemToCart = (state: RootState) => state.item.isAddingItemToCart;
 
 export default itemSlice.reducer;

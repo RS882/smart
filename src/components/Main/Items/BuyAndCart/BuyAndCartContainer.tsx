@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
-import { startAddingItemToCart } from '../../../../redux/ItemSlice';
+import { selectAddItemToCart, startAddingItemToCart } from '../../../../redux/ItemSlice';
 import IconBtn from '../IconBtn/IconBtn';
 import { selectItemBuyBtnText } from './../../../../redux/LanguageSlice';
 
@@ -36,9 +36,10 @@ const StyledBuyBtn = styled.button`
 const BuyAndCartContainer: FC<ICartProps> = (props) => {
 
 	const btnText = useAppSelector(selectItemBuyBtnText);
+	const isAddingItem = useAppSelector(selectAddItemToCart);
 	const dispatch = useAppDispatch();
 	const addToCart = () => {
-		dispatch(startAddingItemToCart(props.idItem))
+		dispatch(startAddingItemToCart())
 	};
 
 	const gotoBuyMenu = () => {
@@ -47,7 +48,7 @@ const BuyAndCartContainer: FC<ICartProps> = (props) => {
 
 	return (
 		<StyledBuyAndCartContainer>
-			<StyledBuyBtn onClick={gotoBuyMenu}>{btnText}</StyledBuyBtn>
+			<StyledBuyBtn disabled={isAddingItem} onClick={gotoBuyMenu}>{btnText}</StyledBuyBtn>
 			<IconBtn callBack={addToCart} iconClass={'_icon-cart'} isCartBtn={true} />
 
 		</StyledBuyAndCartContainer>

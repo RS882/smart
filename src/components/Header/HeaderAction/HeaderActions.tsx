@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { closeMenu } from '../../../redux/MenuSlice';
 import { changeIsModal } from '../../../redux/ModalSlice';
+import { useAppDispatch } from '../../../redux/hooks';
 
 
 interface IHeaderActions {
@@ -17,7 +18,7 @@ interface IHeaderActions {
 
 const HeaderActions: FC<IHeaderActions> = (props) => {
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const onClickAction1 = (actionName: string) => {
 		dispatch(closeMenu());
 		dispatch(changeIsModal(false));

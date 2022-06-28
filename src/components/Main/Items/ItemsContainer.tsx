@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectitemsData } from '../../../redux/ItemSlice';
 import Item from './Item';
+import ItemContainer from './ItemContainer';
 
 
 const StyledItemsContainer = styled.div`
-	width:	365px;
-
+	
 	border: 1px solid #000;
 `
 
@@ -18,7 +18,8 @@ const ItemsContainer: FC = (props) => {
 
 	return (
 		<StyledItemsContainer>
-			<Item itemData={ItemsData[0]} itemArrNumb={'1'} />
+			<ItemContainer itemData={ItemsData[0]} itemArrNumb={'1'} />
+
 		</StyledItemsContainer>
 
 	)

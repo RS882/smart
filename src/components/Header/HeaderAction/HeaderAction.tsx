@@ -1,6 +1,8 @@
 import React, { FC, useEffect, useRef } from 'react';
 
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { endAddingItemToCart, selectAddItemToCart } from '../../../redux/ItemSlice';
 import { ArrowFn } from '../../../types/fnTypes';
 import Flex from '../../Flex';
 import HeaderActionCount from './HeaderActionCount';
@@ -37,20 +39,20 @@ const StyledNavLinkAction = styled.button <IHeaderAction>`
 `;
 
 const HeaderAction: FC<IHeaderAction> = (props) => {
-	const { headerActionClassName, ...rest } = props;
 
+
+	const { headerActionClassName, ...rest } = props;
 	const cartRef = useRef<HTMLDivElement>(null);
 
-
+	const dispatch = useAppDispatch();
+	const isAddingItem = useAppSelector(selectAddItemToCart);
 	useEffect(() => {
-
 		if (props.name === 'cart') {
 			const rect = cartRef.current !== null && cartRef.current.getBoundingClientRect();
 			console.log(rect);
-
+			dispatch(endAddingItemToCart())
 		}
-
-	}, []);
+	}, [isAddingItem]);
 
 	return (
 		<StyledNavLinkAction {...rest} >

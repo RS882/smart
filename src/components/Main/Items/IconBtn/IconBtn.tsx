@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { useAppSelector } from '../../../../redux/hooks';
+import { selectAddItemToCart } from '../../../../redux/ItemSlice';
 import { ArrowFn } from '../../../../types/fnTypes';
 
 
@@ -18,6 +20,8 @@ interface IIconFavorProps {
 
 interface IIconCart {
 	isItem?: boolean;
+	disabled?: boolean;
+	className?: string;
 };
 
 const StyledIconBtn = styled.button`
@@ -59,10 +63,16 @@ const StyledIconCart = styled(StyledBox) <IIconCart>`
 
 const IconBtn: FC<IIconBtn> = (props) => {
 
+	const cartProps: IIconCart = {
+		className: props.iconClass,
+		isItem: props.isItemInCart,
+		disabled: useAppSelector(selectAddItemToCart),
+	};
+
 	return (
 		<StyledIconBtn onClick={props.callBack}>
 			{props.isCartBtn ?
-				<StyledIconCart className={props.iconClass} isItem={props.isItemInCart} /> :
+				<StyledIconCart {...cartProps} /> :
 				<StyledIconFAvorit className={props.iconClass} colorIcon={props.iconColor} />
 			}
 
