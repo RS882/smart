@@ -5,6 +5,7 @@ import { footerTextEn, footerTextRu, footerTextUa } from './localFooter';
 import { sliderTextEn, sliderTextRu, sliderTextUa } from './localSlider';
 import { IRegBoxStrings } from './../types/LocalizationTypes';
 import { loginTextEn, loginTextRu } from './localLogin';
+import { itemCardTextEn, itemCardTextRu, itemCardTextUa } from "./localItemCart";
 
 export interface IHeaderStings {
 	sundry: ISundry;
@@ -30,13 +31,19 @@ export interface ILoginStings {
 	reg: IRegBoxStrings;
 
 };
+export interface IItemCard {
+	buyBtn: string;
+};
 
 export interface IStrings {
 	header: IHeaderStings;
 	footer: IFooterStings;
 	slider: ISlides;
 	login: ILoginStings;
+	itemCard: IItemCard;
 };
+
+
 
 export interface IStringsWithMethods extends IStrings, LocalizedStringsMethods {
 
@@ -48,18 +55,21 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 		footer: footerTextEn,
 		slider: sliderTextEn,
 		login: loginTextEn,
+		itemCard: itemCardTextEn,
 	},
 	ua: {
 		header: headerTextUa,
 		footer: footerTextUa,
 		slider: sliderTextUa,
 		login: loginTextRu,
+		itemCard: itemCardTextUa,
 	},
 	ru: {
 		header: headerTextRu,
 		footer: footerTextRu,
 		slider: sliderTextRu,
 		login: loginTextRu,
+		itemCard: itemCardTextRu,
 	},
 });
 

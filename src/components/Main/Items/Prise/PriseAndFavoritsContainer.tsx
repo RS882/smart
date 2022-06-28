@@ -6,7 +6,7 @@ import PriseContainer from './PriseContainer';
 export interface IPriseProps {
 	prise: string;
 	discount: number;
-	idItem: number;
+	idItem: string;
 	isFavorite: boolean | undefined;
 	isCompare: boolean | undefined;
 };

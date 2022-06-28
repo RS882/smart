@@ -70,3 +70,4 @@ export interface IRegBoxStrings {
 	goToLoginBtn: string;
 
 };
+

@@ -1,7 +1,16 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
+import { startAddingItemToCart } from '../../../../redux/ItemSlice';
 import IconBtn from '../IconBtn/IconBtn';
+import { selectItemBuyBtnText } from './../../../../redux/LanguageSlice';
 
+
+export interface ICartProps {
+
+	idItem: string;
+
+};
 const StyledBuyAndCartContainer = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 48px;
@@ -24,12 +33,21 @@ const StyledBuyBtn = styled.button`
 	
 `
 
-const BuyAndCartContainer: FC = (props) => {
+const BuyAndCartContainer: FC<ICartProps> = (props) => {
 
-	const addToCart = () => { }
+	const btnText = useAppSelector(selectItemBuyBtnText);
+	const dispatch = useAppDispatch();
+	const addToCart = () => {
+		dispatch(startAddingItemToCart(props.idItem))
+	};
+
+	const gotoBuyMenu = () => {
+
+	};
+
 	return (
 		<StyledBuyAndCartContainer>
-			<StyledBuyBtn>Купить в 1 клик</StyledBuyBtn>
+			<StyledBuyBtn onClick={gotoBuyMenu}>{btnText}</StyledBuyBtn>
 			<IconBtn callBack={addToCart} iconClass={'_icon-cart'} isCartBtn={true} />
 
 		</StyledBuyAndCartContainer>

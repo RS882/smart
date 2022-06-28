@@ -7,7 +7,7 @@ import { useAppDispatch } from './../../../../redux/hooks';
 
 
 interface IFavoriteContainer {
-	id: number;
+	id: string;
 	isFavorite: boolean | undefined;
 	isCompare: boolean | undefined;
 }

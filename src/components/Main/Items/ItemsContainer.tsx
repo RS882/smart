@@ -7,7 +7,7 @@ import Item from './Item';
 
 const StyledItemsContainer = styled.div`
 	width:	365px;
-	/* height: 570px; */
+
 	border: 1px solid #000;
 `
 
@@ -18,7 +18,7 @@ const ItemsContainer: FC = (props) => {
 
 	return (
 		<StyledItemsContainer>
-			<Item itemData={ItemsData[0]} itemArrNumb={0} />
+			<Item itemData={ItemsData[0]} itemArrNumb={'1'} />
 		</StyledItemsContainer>
 
 	)

@@ -10,7 +10,7 @@ import StarsContainer from './Stars/StarsContainer';
 
 export interface IItemProps {
 	itemData: IItemData;
-	itemArrNumb: number;
+	itemArrNumb: string;
 }
 
 const StyledItemColumn = styled.div`
@@ -81,13 +81,13 @@ const Item: FC<IItemProps> = (props) => {
 			<StarsContainer stars={itemData ? Math.round(itemData.starts / 20) : 0}
 				reviewsNumber={itemData ? itemData.reviews : 0} />
 
-			<PriseAndFavoritsContainer idItem={props.itemArrNumb ? props.itemArrNumb : 0}
+			<PriseAndFavoritsContainer idItem={props.itemArrNumb ? props.itemArrNumb : ''}
 				prise={itemData ? itemData.prise : '0'}
 				discount={itemData ? itemData.discount : 0}
 				isFavorite={itemData ? itemData.isFavorite : false}
 				isCompare={itemData ? itemData.isCompare : false} />
 
-			<BuyAndCartContainer />
+			<BuyAndCartContainer idItem={props.itemArrNumb ? props.itemArrNumb : ''} />
 
 		</StyledItemColumn>
 	);

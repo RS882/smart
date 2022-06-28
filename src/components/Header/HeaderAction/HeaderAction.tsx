@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 
 import styled from 'styled-components';
 import { ArrowFn } from '../../../types/fnTypes';
@@ -39,11 +39,26 @@ const StyledNavLinkAction = styled.button <IHeaderAction>`
 const HeaderAction: FC<IHeaderAction> = (props) => {
 	const { headerActionClassName, ...rest } = props;
 
+	const cartRef = useRef<HTMLDivElement>(null);
+
+
+	useEffect(() => {
+
+		if (props.name === 'cart') {
+			const rect = cartRef.current !== null && cartRef.current.getBoundingClientRect();
+			console.log(rect);
+
+		}
+
+	}, []);
+
 	return (
 		<StyledNavLinkAction {...rest} >
-			<StyledHeaderAction className={headerActionClassName}>
-				<HeaderActionCount count={rest.count} />
-			</StyledHeaderAction>
+			<div ref={cartRef}>
+				<StyledHeaderAction className={headerActionClassName}>
+					<HeaderActionCount count={rest.count} />
+				</StyledHeaderAction>
+			</div>
 		</StyledNavLinkAction>
 	);
 };
