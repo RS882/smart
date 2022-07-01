@@ -28,7 +28,7 @@ export interface IItems {
 	itemsPage: number;
 	errorText: string | undefined;
 	isAddingItemToCart?: boolean;
-	// startFlyToCart: IKoord;
+
 	endFlyToCart: IKoord;
 };
 
@@ -37,10 +37,7 @@ const initialState: IItems = {
 	itemsPage: 1,
 	errorText: undefined,
 	isAddingItemToCart: false,
-	// startFlyToCart: {
-	// 	left: undefined,
-	// 	top: undefined,
-	// },
+
 	endFlyToCart: {
 		left: undefined,
 		top: undefined,
@@ -65,16 +62,13 @@ export const itemSlice = createSlice({
 		endAddingItemToCart: (state) => {
 			state.isAddingItemToCart = false;
 		},
-		// getFlyingStartKoord: (state, action: PayloadAction<IKoord>) => {
-		// 	state.startFlyToCart = action.payload;
-		// },
+
 		getFlyingEndKoord: (state, action: PayloadAction<IKoord>) => {
 			state.endFlyToCart = action.payload;
 		},
 
 		clearFlyingKoord: (state) => {
-			// state.startFlyToCart.left = undefined;
-			// state.startFlyToCart.top = undefined;
+
 			state.endFlyToCart.left = undefined;
 			state.endFlyToCart.top = undefined;
 		}
@@ -106,7 +100,7 @@ export const { toogleFavoriteItem, toogleCompareItem, startAddingItemToCart, end
 
 export const selectitemsData = (state: RootState) => state.item.itemsData;
 export const selectAddItemToCart = (state: RootState) => state.item.isAddingItemToCart;
-// export const selectStartFlyKoord = (state: RootState) => state.item.startFlyToCart;
+
 export const selectEndFlyKoord = (state: RootState) => state.item.endFlyToCart;
 
 export default itemSlice.reducer;

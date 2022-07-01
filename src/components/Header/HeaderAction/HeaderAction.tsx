@@ -48,12 +48,9 @@ const HeaderAction: FC<IHeaderAction> = (props) => {
 	const isAddingItem = useAppSelector(selectAddItemToCart);
 	useEffect(() => {
 		if (props.name === 'cart') {
-			if (cartRef.current !== null) {
+			if (cartRef.current !== null && isAddingItem) {
 				const rect = cartRef.current.getBoundingClientRect();
-				dispatch(getFlyingEndKoord({
-					left: `${rect.left}px`,
-					top: `${rect.top}px`,
-				}))
+				dispatch(getFlyingEndKoord({ left: `${rect.left}px`, top: `${rect.top}px`, }))
 			}
 		}
 	}, [isAddingItem]);

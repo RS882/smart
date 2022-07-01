@@ -1,11 +1,12 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useRef } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { endAddingItemToCart, IKoord, selectAddItemToCart } from '../../../redux/ItemSlice';
-import store from '../../../redux/store';
+import { clearFlyingKoord, endAddingItemToCart, IKoord, selectAddItemToCart } from '../../../redux/ItemSlice';
+
 import Item, { IItemProps } from './Item';
 import { selectEndFlyKoord } from './../../../redux/ItemSlice';
-import { addCartCount } from '../../../redux/ActionSlice';
+import { addCartCount, addItemToCart } from '../../../redux/ActionSlice';
+import store from '../../../redux/store';
 
 interface IFlyingItem {
 	startK: IKoord;
@@ -46,13 +47,11 @@ const StyledFlyingItem = styled.div<IFlyingItem>`
 const ItemContainer: FC<IItemProps> = (props) => {
 	const flyRef = useRef<HTMLDivElement>(null);
 	const flyKoord: IFlyingItem = {
-		startK: { left: '0', top: '0', widthK: '0', heightK: '0' },
-		endK: { left: '0', top: '0', },
+		startK: { left: '0px', top: '0px', widthK: '0px', heightK: '0px' },
+		endK: { left: '0px', top: '0px', },
 
 	};
-
 	const endFly = useAppSelector(selectEndFlyKoord);
-
 	const isAddingItem = useAppSelector(selectAddItemToCart);
 	const dispatch = useAppDispatch();
 
@@ -69,18 +68,22 @@ const ItemContainer: FC<IItemProps> = (props) => {
 	}
 
 	if (isAddingItem) {
-		getStartKoord(flyRef)
-		flyKoord.endK = {
-			left: `${endFly.left}`,
-			top: `${endFly.top}`,
+		if (endFly.left !== '0px' && endFly.left && endFly.top !== '0px' && endFly.top) {
+			getStartKoord(flyRef)
+			flyKoord.endK = { left: `${endFly.left}`, top: `${endFly.top}`, }
 		}
 	}
 
 	const stopFlying = () => {
 		dispatch(endAddingItemToCart());
 		dispatch(addCartCount());
+		dispatch(addItemToCart(props.itemArrNumb));
+		dispatch(clearFlyingKoord());
+	};
 
-	}
+	// console.log(store.getState());
+	// console.log(flyKoord);
+
 
 	return (
 		<StyledItemContainer>

@@ -15,6 +15,7 @@ interface IActions {
 
 export interface IAction extends IIsActionFull {
 	counts: IActions,
+	itemsInCart: string[];
 };
 
 
@@ -25,8 +26,9 @@ const initialState: IAction = {
 		compare: 25,
 		cart: 0,
 	},
-	isCartFull: true,
+	isCartFull: false,
 	isMoreFull: true,
+	itemsInCart: [],
 };
 
 const ActionSlice = createSlice({
@@ -63,6 +65,16 @@ const ActionSlice = createSlice({
 			++state.counts.cart;
 			state.isCartFull = true;
 		},
+		addItemToCart: (state, action: PayloadAction<string>) => {
+			state.itemsInCart.push(action.payload);
+		},
+		delItemToCart: (state, action: PayloadAction<string>) => {
+			state.itemsInCart = state.itemsInCart.filter(e => e !== action.payload);
+		},
+		clearCart: (state) => {
+			state.itemsInCart = [];
+		},
+
 		reduceCartCount: (state) => {
 			state.counts.cart && --state.counts.cart;
 			state.isCartFull = state.counts.cart !== 0;
@@ -78,7 +90,8 @@ const ActionSlice = createSlice({
 
 
 export const { addViewedCount, addFavoritesCount, reduceFavoritesCount,
-	addCompareCount, reduceCompareCount, addCartCount, reduceCartCount, clearCounts, loadCounts }
+	addCompareCount, reduceCompareCount, addCartCount, reduceCartCount, clearCounts, loadCounts,
+	addItemToCart, delItemToCart, clearCart }
 	= ActionSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
@@ -90,4 +103,5 @@ export const selectCartCount = (state: RootState) => state.action.counts.cart;
 export const selectIsCartFull = (state: RootState) => state.action.isCartFull;
 export const selectIsMoreFull = (state: RootState) => state.action.isMoreFull;
 export const selectActionCount = (state: RootState) => state.action.counts;
+export const selectItemInCart = (state: RootState) => state.action.itemsInCart;
 export default ActionSlice.reducer
