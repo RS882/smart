@@ -16,9 +16,12 @@ export interface IItemProps {
 const StyledItemColumn = styled.div`
 	display: flex;
 	flex-direction:column;
+	width: 100%;
+	height:100%;
 	padding: 20px;
 	border: 1px solid  ${props => props.theme.color.cardBorder || '#EAEAF0'};
 	border-radius: 6px;
+	
 `;
 const StyledImg = styled.button`
 	
@@ -62,7 +65,7 @@ const StyledItemName = styled.button`
 const Item: FC<IItemProps> = (props) => {
 
 	const itemData: IItemData = props.itemData;
-	console.log(itemData)
+	// console.log(itemData)
 
 	return (
 		<StyledItemColumn>

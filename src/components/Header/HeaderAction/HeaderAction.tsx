@@ -54,8 +54,6 @@ const HeaderAction: FC<IHeaderAction> = (props) => {
 					left: `${rect.left}px`,
 					top: `${rect.top}px`,
 				}))
-				// console.log(rect.left);
-				// dispatch(endAddingItemToCart())
 			}
 		}
 	}, [isAddingItem]);

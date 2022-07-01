@@ -19,8 +19,8 @@ export interface IItemData {
 export interface IKoord {
 	left?: string;
 	top?: string;
-	width?: string;
-	height?: string;
+	widthK?: string;
+	heightK?: string;
 }
 
 export interface IItems {

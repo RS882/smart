@@ -23,7 +23,7 @@ const initialState: IAction = {
 		viewed: 0,
 		favorites: 5,
 		compare: 25,
-		cart: 15,
+		cart: 0,
 	},
 	isCartFull: true,
 	isMoreFull: true,
