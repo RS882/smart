@@ -14,14 +14,22 @@ export interface IItemData {
 	newitem: number;
 	isFavorite?: boolean;
 	isCompare?: boolean;
-	// isAddingItemToCart?: boolean;
+
 };
+export interface IKoord {
+	left?: string;
+	top?: string;
+	width?: string;
+	height?: string;
+}
 
 export interface IItems {
 	itemsData: IItemData[] | [];
 	itemsPage: number;
 	errorText: string | undefined;
 	isAddingItemToCart?: boolean;
+	// startFlyToCart: IKoord;
+	endFlyToCart: IKoord;
 };
 
 const initialState: IItems = {
@@ -29,6 +37,14 @@ const initialState: IItems = {
 	itemsPage: 1,
 	errorText: undefined,
 	isAddingItemToCart: false,
+	// startFlyToCart: {
+	// 	left: undefined,
+	// 	top: undefined,
+	// },
+	endFlyToCart: {
+		left: undefined,
+		top: undefined,
+	},
 };
 
 export const itemSlice = createSlice({
@@ -44,12 +60,24 @@ export const itemSlice = createSlice({
 		},
 		startAddingItemToCart: (state) => {
 			state.isAddingItemToCart = true;
-			//state.itemsData.map(e => { if (e.id === action.payload) e.isAddingItemToCart = true; })
+
 		},
 		endAddingItemToCart: (state) => {
 			state.isAddingItemToCart = false;
-			//state.itemsData.map(e => { if (e.id === action.payload) e.isAddingItemToCart = false; })
 		},
+		// getFlyingStartKoord: (state, action: PayloadAction<IKoord>) => {
+		// 	state.startFlyToCart = action.payload;
+		// },
+		getFlyingEndKoord: (state, action: PayloadAction<IKoord>) => {
+			state.endFlyToCart = action.payload;
+		},
+
+		clearFlyingKoord: (state) => {
+			// state.startFlyToCart.left = undefined;
+			// state.startFlyToCart.top = undefined;
+			state.endFlyToCart.left = undefined;
+			state.endFlyToCart.top = undefined;
+		}
 	},
 	extraReducers: {
 		[getItem.fulfilled.type]: (state, action: PayloadAction<IItemData[]>) => {
@@ -61,7 +89,6 @@ export const itemSlice = createSlice({
 				state.itemsData.map((e) => {
 					e.isFavorite = false;
 					e.isCompare = false;
-					// e.isAddingItemToCart = false;
 				})
 
 			}
@@ -74,9 +101,12 @@ export const itemSlice = createSlice({
 
 })
 
-export const { toogleFavoriteItem, toogleCompareItem, startAddingItemToCart, endAddingItemToCart } = itemSlice.actions;
+export const { toogleFavoriteItem, toogleCompareItem, startAddingItemToCart, endAddingItemToCart,
+	getFlyingEndKoord, clearFlyingKoord } = itemSlice.actions;
 
 export const selectitemsData = (state: RootState) => state.item.itemsData;
 export const selectAddItemToCart = (state: RootState) => state.item.isAddingItemToCart;
+// export const selectStartFlyKoord = (state: RootState) => state.item.startFlyToCart;
+export const selectEndFlyKoord = (state: RootState) => state.item.endFlyToCart;
 
 export default itemSlice.reducer;
