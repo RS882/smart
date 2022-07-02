@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef } from 'react';
 
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { endAddingItemToCart, getFlyingEndKoord, selectAddItemToCart } from '../../../redux/ItemSlice';
+import { endAddingItemToCart, getFlyingEndKoord, selectAddItemToCart, selectEndFlyKoord } from '../../../redux/ItemSlice';
 import { ArrowFn } from '../../../types/fnTypes';
 import Flex from '../../Flex';
 import HeaderActionCount from './HeaderActionCount';
@@ -46,11 +46,12 @@ const HeaderAction: FC<IHeaderAction> = (props) => {
 
 	const dispatch = useAppDispatch();
 	const isAddingItem = useAppSelector(selectAddItemToCart);
+
 	useEffect(() => {
 		if (props.name === 'cart') {
 			if (cartRef.current !== null && isAddingItem) {
 				const rect = cartRef.current.getBoundingClientRect();
-				dispatch(getFlyingEndKoord({ left: `${rect.left}px`, top: `${rect.top}px`, }))
+				rect.left && rect.top && dispatch(getFlyingEndKoord({ left: `${rect.left}px`, top: `${rect.top}px`, }))
 			}
 		}
 	}, [isAddingItem]);

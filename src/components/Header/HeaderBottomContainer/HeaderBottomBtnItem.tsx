@@ -25,14 +25,14 @@ const StyledHeaderBottomItem = styled(Button)`
 const HeaderBottomBtnItem: FC<IHeaderBottomBtnItem> = (props) => {
 
 	return (
-		<div>
-			<StyledHeaderBottomItem onClick={props.onClickBottomItem}
-				width='64px' height='64px' color='#BFCBD6' border='none'
-				bgColor={theme.color.darkBlue || '#2A5275'} borderRadius='none'
-				hoverBgColor='none' hoverColor={theme.color.text.mainLight || '#FFF'}>
-				<HeaderBottomItem {...props} />
-			</StyledHeaderBottomItem>
-		</div>
+
+		<StyledHeaderBottomItem onClick={props.onClickBottomItem}
+			width='64px' height='64px' color='#BFCBD6' border='none'
+			bgColor={theme.color.darkBlue || '#2A5275'} borderRadius='none'
+			hoverBgColor='none' hoverColor={theme.color.text.mainLight || '#FFF'}>
+			<HeaderBottomItem {...props} />
+		</StyledHeaderBottomItem>
+
 	);
 };
 

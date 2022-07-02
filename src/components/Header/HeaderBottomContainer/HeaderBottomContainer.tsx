@@ -62,7 +62,7 @@ const HeaderBottomContainer: FC<IHeaderBottom> = (props) => {
 		[{ name: '', classItem: '_icon-home', },
 		{ name: 'catalog', classItem: '_icon-catalog', fnItem: onClickOpenCatalog, },
 		{ name: 'cart', classItem: '_icon-cart', },
-		{ name: 'search', classItem: '_icon-search_rev', fnItem: onClickOpenSearch, },
+		{ name: 'search', classItem: '_icon-search', fnItem: onClickOpenSearch, },
 		{ name: 'more', classItem: '_icon-dots', fnItem: onClickOpenMore, }]
 			.map((e) => ({ ...e, itemText: string[e.name || 'home'] }));
 
