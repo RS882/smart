@@ -81,7 +81,7 @@ const ItemContainer: FC<IItemProps> = (props) => {
 		dispatch(clearFlyingKoord());
 	};
 
-	// console.log(store.getState());
+	console.log(store.getState());
 	// console.log(flyKoord);
 
 

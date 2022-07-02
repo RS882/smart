@@ -56,6 +56,7 @@ const HeaderAction: FC<IHeaderAction> = (props) => {
 		}
 	}, [isAddingItem]);
 
+
 	return (
 		<StyledNavLinkAction {...rest} >
 			<div ref={cartRef}>

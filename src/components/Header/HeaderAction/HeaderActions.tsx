@@ -25,8 +25,10 @@ const HeaderActions: FC<IHeaderActions> = (props) => {
 		navigate(`/${actionName}`);
 	}
 
+
 	const actionElements: JSX.Element[] = props.actionArray.map((e, i) => {
 		const countAction: number = Object.entries(props.conuts).filter(el => e.name === el[0])[0][1];
+
 		const classAction: string = e.classIconActive && countAction ? e.classIconActive : e.classIcon;
 		return <HeaderAction key={e.name + i} name={e.name} onClick={() => onClickAction1(e.name)}
 			headerActionClassName={classAction} count={countAction} />

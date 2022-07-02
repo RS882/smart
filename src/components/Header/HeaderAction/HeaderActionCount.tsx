@@ -13,19 +13,24 @@ left: 25px;
 font-size: 14px;
 line-height: 100%;
 background-color:${props => props.theme.color.darkBlue};
-height: 20px;
-min-width: 20px;
+height: 30px;
+min-width:40px;
 border-radius: 64px;
 padding: 2px 7px 4px ;
-color: ${props => props.theme.color.text.mainLight};
+color: ${props => props.theme.color.text.mainLight || '#fff'};
 display: ${props => props.count ? 'flex' : 'none'};
 `
 
 const HeaderActionCount: FC<IHeaderActionCount> = (props) => {
+
 	return (
-		<StyledHeaderActionCount {...props} >
-			{props.count}
-		</StyledHeaderActionCount>
+		<>
+
+			<StyledHeaderActionCount {...props} >
+				{props.count}
+
+			</StyledHeaderActionCount>
+		</>
 	);
 };
 

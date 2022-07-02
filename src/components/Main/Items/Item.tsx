@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import itemImg from '../../../assets/image 18.png'
+import { addItemToViewed, addViewedCount } from '../../../redux/ActionSlice';
+import { useAppDispatch } from '../../../redux/hooks';
 import { IItemData } from '../../../redux/ItemSlice';
 import BuyAndCartContainer from './BuyAndCart/BuyAndCartContainer';
 import PriseAndFavoritsContainer from './Prise/PriseAndFavoritsContainer';
@@ -65,12 +67,16 @@ const StyledItemName = styled.button`
 const Item: FC<IItemProps> = (props) => {
 
 	const itemData: IItemData = props.itemData;
-	// console.log(itemData)
+	const dispatch = useAppDispatch();
+	const addViewItems = () => {
+		dispatch(addViewedCount());
+		dispatch(addItemToViewed(props.itemArrNumb))
+	};
 
 	return (
 		<StyledItemColumn>
 
-			<StyledImg>
+			<StyledImg onClick={addViewItems}>
 				<ImgStyled />
 			</StyledImg>
 
@@ -78,7 +84,7 @@ const Item: FC<IItemProps> = (props) => {
 				segways
 			</StyledItemType>
 
-			<StyledItemName>
+			<StyledItemName onClick={addViewItems}>
 				{itemData ? itemData.itemname : null}
 			</StyledItemName>
 

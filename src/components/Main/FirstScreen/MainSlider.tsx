@@ -84,16 +84,16 @@ const MainSlider: FC = (props) => {
 					<StyledSlideBox><SlideContainer bgImg={bgImgSecondSlide} /></StyledSlideBox>
 				</Div1>
 				<Div1>
-					<StyledSlideBox>3</StyledSlideBox>
+					<StyledSlideBox>30</StyledSlideBox>
 				</Div1>
 				<Div1>
-					<StyledSlideBox>4</StyledSlideBox>
+					<StyledSlideBox>40</StyledSlideBox>
 				</Div1>
 				<Div1>
-					<StyledSlideBox>5</StyledSlideBox>
+					<StyledSlideBox>50</StyledSlideBox>
 				</Div1>
 				<Div1>
-					<StyledSlideBox>6</StyledSlideBox>
+					<StyledSlideBox>60</StyledSlideBox>
 				</Div1>
 				<Div1>
 					<StyledSlideBox>5</StyledSlideBox>

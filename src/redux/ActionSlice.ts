@@ -16,6 +16,9 @@ interface IActions {
 export interface IAction extends IIsActionFull {
 	counts: IActions,
 	itemsInCart: string[];
+	viewedItems: string[];
+	favoriteItems: string[];
+	compareItems: string[];
 };
 
 
@@ -29,6 +32,9 @@ const initialState: IAction = {
 	isCartFull: false,
 	isMoreFull: true,
 	itemsInCart: [],
+	viewedItems: [],
+	favoriteItems: [],
+	compareItems: [],
 };
 
 const ActionSlice = createSlice({
@@ -41,10 +47,21 @@ const ActionSlice = createSlice({
 			state.isCartFull = state.counts.cart !== 0;
 			state.isMoreFull = (state.counts.viewed + state.counts.compare + state.counts.favorites) !== 0;
 		},
+
 		addViewedCount: (state) => {
 			++state.counts.viewed;
 			state.isMoreFull = true;
 		},
+		addItemToViewed: (state, action: PayloadAction<string>) => {
+			state.viewedItems.push(action.payload);
+		},
+		delItemToViewed: (state, action: PayloadAction<string>) => {
+			state.viewedItems = state.viewedItems.filter(e => e !== action.payload);
+		},
+		clearViewed: (state) => {
+			state.viewedItems = [];
+		},
+
 		addFavoritesCount: (state) => {
 			++state.counts.favorites;
 			state.isMoreFull = true;
@@ -53,6 +70,16 @@ const ActionSlice = createSlice({
 			state.counts.favorites && --state.counts.favorites;
 			state.isMoreFull = state.counts.favorites !== 0;
 		},
+		addItemToFavorite: (state, action: PayloadAction<string>) => {
+			state.favoriteItems.push(action.payload);
+		},
+		delItemToFavorite: (state, action: PayloadAction<string>) => {
+			state.favoriteItems = state.favoriteItems.filter(e => e !== action.payload);
+		},
+		clearFavorite: (state) => {
+			state.favoriteItems = [];
+		},
+
 		addCompareCount: (state) => {
 			++state.counts.compare;
 			state.isMoreFull = true;
@@ -61,6 +88,17 @@ const ActionSlice = createSlice({
 			state.counts.compare && --state.counts.compare;
 			state.isMoreFull = state.counts.compare !== 0;
 		},
+		addItemToCompare: (state, action: PayloadAction<string>) => {
+			state.compareItems.push(action.payload);
+		},
+		delItemToCompare: (state, action: PayloadAction<string>) => {
+			state.compareItems = state.compareItems.filter(e => e !== action.payload);
+		},
+		clearCompare: (state) => {
+			state.compareItems = [];
+		},
+
+
 		addCartCount: (state) => {
 			++state.counts.cart;
 			state.isCartFull = true;
@@ -91,7 +129,9 @@ const ActionSlice = createSlice({
 
 export const { addViewedCount, addFavoritesCount, reduceFavoritesCount,
 	addCompareCount, reduceCompareCount, addCartCount, reduceCartCount, clearCounts, loadCounts,
-	addItemToCart, delItemToCart, clearCart }
+	addItemToCart, delItemToCart, clearCart, addItemToViewed, delItemToViewed, clearViewed,
+	addItemToFavorite, delItemToFavorite, clearFavorite,
+	addItemToCompare, delItemToCompare, clearCompare }
 	= ActionSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
