@@ -77,22 +77,23 @@ const ItemContainer: FC<IItemProps> = (props) => {
 	const stopFlying = () => {
 		dispatch(endAddingItemToCart());
 		dispatch(addCartCount());
-		dispatch(addItemToCart(props.itemArrNumb));
+		dispatch(addItemToCart(props.itemData ? props.itemData.id : '0'));
 		dispatch(clearFlyingKoord());
 	};
 
 	console.log(store.getState());
-	// console.log(flyKoord);
+
+
 
 
 	return (
 		<StyledItemContainer>
 			{isAddingItem ?
 				<StyledFlyingItem {...flyKoord} onAnimationEnd={stopFlying}>
-					<Item itemData={props.itemData} itemArrNumb={props.itemArrNumb} />
+					<Item itemData={props.itemData} />
 				</StyledFlyingItem> : null}
 			<div ref={flyRef}>
-				<Item itemData={props.itemData} itemArrNumb={props.itemArrNumb} />
+				<Item itemData={props.itemData} />
 			</div>
 		</StyledItemContainer >
 	);

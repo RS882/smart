@@ -25,8 +25,8 @@ export interface IAction extends IIsActionFull {
 const initialState: IAction = {
 	counts: {
 		viewed: 0,
-		favorites: 5,
-		compare: 25,
+		favorites: 0,
+		compare: 0,
 		cart: 0,
 	},
 	isCartFull: false,
@@ -144,4 +144,7 @@ export const selectIsCartFull = (state: RootState) => state.action.isCartFull;
 export const selectIsMoreFull = (state: RootState) => state.action.isMoreFull;
 export const selectActionCount = (state: RootState) => state.action.counts;
 export const selectItemInCart = (state: RootState) => state.action.itemsInCart;
+export const selectViewedItem = (state: RootState) => state.action.viewedItems;
+export const selectFavoritedItem = (state: RootState) => state.action.favoriteItems;
+export const selectCompaedItem = (state: RootState) => state.action.compareItems;
 export default ActionSlice.reducer

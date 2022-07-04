@@ -50,10 +50,10 @@ export const itemSlice = createSlice({
 	reducers: {
 
 		toogleFavoriteItem: (state, action: PayloadAction<string>) => {
-			state.itemsData.map(e => { if (e.id === action.payload) e.isFavorite = !e.isFavorite; })
+			//state.itemsData.map(e => { if (e.id === action.payload) e.isFavorite = !e.isFavorite; })
 		},
 		toogleCompareItem: (state, action: PayloadAction<string>) => {
-			state.itemsData.map(e => { if (e.id === action.payload) e.isCompare = !e.isCompare; })
+			//state.itemsData.map(e => { if (e.id === action.payload) e.isCompare = !e.isCompare; })
 		},
 		startAddingItemToCart: (state) => {
 			state.isAddingItemToCart = true;

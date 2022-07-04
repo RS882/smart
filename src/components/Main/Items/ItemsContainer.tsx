@@ -18,7 +18,7 @@ const ItemsContainer: FC = (props) => {
 
 	return (
 		<StyledItemsContainer>
-			<ItemContainer itemData={ItemsData[0]} itemArrNumb={'1'} />
+			<ItemContainer itemData={ItemsData[0]} />
 
 		</StyledItemsContainer>
 

@@ -1,18 +1,19 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import itemImg from '../../../assets/image 18.png'
-import { addItemToViewed, addViewedCount } from '../../../redux/ActionSlice';
-import { useAppDispatch } from '../../../redux/hooks';
+import { addItemToViewed, addViewedCount, selectCompaedItem, selectViewedItem } from '../../../redux/ActionSlice';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { IItemData } from '../../../redux/ItemSlice';
 import BuyAndCartContainer from './BuyAndCart/BuyAndCartContainer';
 import PriseAndFavoritsContainer from './Prise/PriseAndFavoritsContainer';
 import StarsContainer from './Stars/StarsContainer';
+import { selectFavoritedItem } from './../../../redux/ActionSlice';
 
 
 
 export interface IItemProps {
 	itemData: IItemData;
-	itemArrNumb: string;
+
 }
 
 const StyledItemColumn = styled.div`
@@ -67,11 +68,22 @@ const StyledItemName = styled.button`
 const Item: FC<IItemProps> = (props) => {
 
 	const itemData: IItemData = props.itemData;
+	const itemId = props.itemData ? props.itemData.id : '0';
+	const favoriteItems = useAppSelector(selectFavoritedItem);
+	const copmareItems = useAppSelector(selectCompaedItem);
 	const dispatch = useAppDispatch();
+
+	const isFavorite: boolean = props.itemData ? favoriteItems.includes(itemId) : false;
+	const isCompare: boolean = props.itemData ? copmareItems.includes(itemId) : false;
+
+
 	const addViewItems = () => {
 		dispatch(addViewedCount());
-		dispatch(addItemToViewed(props.itemArrNumb))
+		dispatch(addItemToViewed(itemId))
 	};
+
+	// console.log(itemData);
+
 
 	return (
 		<StyledItemColumn>
@@ -91,13 +103,13 @@ const Item: FC<IItemProps> = (props) => {
 			<StarsContainer stars={itemData ? Math.round(itemData.starts / 20) : 0}
 				reviewsNumber={itemData ? itemData.reviews : 0} />
 
-			<PriseAndFavoritsContainer idItem={props.itemArrNumb ? props.itemArrNumb : ''}
+			<PriseAndFavoritsContainer idItem={itemId}
 				prise={itemData ? itemData.prise : '0'}
 				discount={itemData ? itemData.discount : 0}
-				isFavorite={itemData ? itemData.isFavorite : false}
-				isCompare={itemData ? itemData.isCompare : false} />
+				isFavorite={isFavorite}
+				isCompare={isCompare} />
 
-			<BuyAndCartContainer idItem={props.itemArrNumb ? props.itemArrNumb : ''} />
+			<BuyAndCartContainer idItem={itemId} />
 
 		</StyledItemColumn>
 	);
