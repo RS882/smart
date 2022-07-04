@@ -13,8 +13,8 @@ const StyledHeaderActionCount = styled(Flex) <IHeaderActionCount>`
 	font-size: 14px;
 	line-height: 100%;
 	background-color:${props => props.theme.color.darkBlue};
-	height: 30px;
-	min-width:40px;
+	height: 20px;
+	min-width:28px;
 	border-radius: 64px;
 	padding: 2px 7px 4px ;
 	color: ${props => props.theme.color.text.mainLight || '#fff'};

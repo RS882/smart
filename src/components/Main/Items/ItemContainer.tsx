@@ -15,7 +15,6 @@ interface IFlyingItem {
 }
 
 const StyledItemContainer = styled.div`
-	width:	365px;
 	position: relative;
 `;
 const StyledFlyingItem = styled.div<IFlyingItem>`

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { addCompareCount, addFavoritesCount, addItemToCompare, addItemToFavorite, delItemToCompare, delItemToFavorite, reduceCompareCount, reduceFavoritesCount } from '../../../../redux/ActionSlice';
-import { toogleCompareItem, toogleFavoriteItem } from '../../../../redux/ItemSlice';
+
 
 import IconBtn from '../IconBtn/IconBtn';
 import { useAppDispatch } from './../../../../redux/hooks';
@@ -27,7 +27,7 @@ const FavoriteContainer: FC<IFavoriteContainer> = (props) => {
 	const dispatch = useAppDispatch();
 
 	const toogleItemToFavotite = () => {
-		props.id !== undefined && dispatch(toogleFavoriteItem(props.id));
+
 		if (props.isFavorite) {
 			dispatch(reduceFavoritesCount());
 			dispatch(delItemToFavorite(props.id));
@@ -39,7 +39,7 @@ const FavoriteContainer: FC<IFavoriteContainer> = (props) => {
 	};
 
 	const toogleItemToCompare = () => {
-		props.id !== undefined && dispatch(toogleCompareItem(props.id));
+
 		if (props.isCompare) {
 			dispatch(reduceCompareCount());
 			dispatch(delItemToCompare(props.id));

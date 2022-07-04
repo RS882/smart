@@ -7,18 +7,24 @@ import ItemContainer from './ItemContainer';
 
 
 const StyledItemsContainer = styled.div`
-	
-	border: 1px solid #000;
-`
+	display: grid;
+		// автозаполнение с переносом если не помещаются
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		row-gap:20px;
+	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+		row-gap:30px;
+	};
+
+`;
 
 const ItemsContainer: FC = (props) => {
 
-	const ItemsData = useAppSelector(selectitemsData);
-
+	const itemsData = useAppSelector(selectitemsData);
+	const itemsCart: JSX.Element[] = itemsData.map((e, i) => <ItemContainer itemData={e} key={e.id + i + ''} />)
 
 	return (
 		<StyledItemsContainer>
-			<ItemContainer itemData={ItemsData[0]} />
+			{itemsCart}
 
 		</StyledItemsContainer>
 

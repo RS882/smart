@@ -54,6 +54,7 @@ const StyledItemType = styled.div`
 `;
 
 const StyledItemName = styled.button`
+height:100px;
 	font-weight:400;
 	margin-bottom:20px;
 	text-align:start;
@@ -71,6 +72,7 @@ const Item: FC<IItemProps> = (props) => {
 	const itemId = props.itemData ? props.itemData.id : '0';
 	const favoriteItems = useAppSelector(selectFavoritedItem);
 	const copmareItems = useAppSelector(selectCompaedItem);
+	const viewedItems = useAppSelector(selectViewedItem);
 	const dispatch = useAppDispatch();
 
 	const isFavorite: boolean = props.itemData ? favoriteItems.includes(itemId) : false;
@@ -78,8 +80,10 @@ const Item: FC<IItemProps> = (props) => {
 
 
 	const addViewItems = () => {
-		dispatch(addViewedCount());
-		dispatch(addItemToViewed(itemId))
+		if (props.itemData && !viewedItems.includes(itemId)) {
+			dispatch(addViewedCount());
+			dispatch(addItemToViewed(itemId))
+		}
 	};
 
 	// console.log(itemData);

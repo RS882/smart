@@ -12,8 +12,7 @@ export interface IItemData {
 	reviews: number;
 	salehit: number;
 	newitem: number;
-	isFavorite?: boolean;
-	isCompare?: boolean;
+
 
 };
 export interface IKoord {
@@ -49,12 +48,7 @@ export const itemSlice = createSlice({
 	initialState,
 	reducers: {
 
-		toogleFavoriteItem: (state, action: PayloadAction<string>) => {
-			//state.itemsData.map(e => { if (e.id === action.payload) e.isFavorite = !e.isFavorite; })
-		},
-		toogleCompareItem: (state, action: PayloadAction<string>) => {
-			//state.itemsData.map(e => { if (e.id === action.payload) e.isCompare = !e.isCompare; })
-		},
+
 		startAddingItemToCart: (state) => {
 			state.isAddingItemToCart = true;
 
@@ -81,8 +75,7 @@ export const itemSlice = createSlice({
 			} else {
 				state.itemsData = action.payload;
 				state.itemsData.map((e) => {
-					e.isFavorite = false;
-					e.isCompare = false;
+
 				})
 
 			}
@@ -95,7 +88,7 @@ export const itemSlice = createSlice({
 
 })
 
-export const { toogleFavoriteItem, toogleCompareItem, startAddingItemToCart, endAddingItemToCart,
+export const { startAddingItemToCart, endAddingItemToCart,
 	getFlyingEndKoord, clearFlyingKoord } = itemSlice.actions;
 
 export const selectitemsData = (state: RootState) => state.item.itemsData;
