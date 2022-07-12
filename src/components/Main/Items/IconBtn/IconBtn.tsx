@@ -25,6 +25,7 @@ interface IIconCart {
 };
 
 const StyledIconBtn = styled.button`
+	position:relative;
 	width:48px;
 	height: 48px;
 	border-radius:4px;
@@ -72,7 +73,7 @@ const IconBtn: FC<IIconBtn> = (props) => {
 	return (
 		<StyledIconBtn onClick={props.callBack}>
 			{props.isCartBtn ?
-				<StyledIconCart {...cartProps} /> :
+				<StyledIconCart {...cartProps} >{props.children}</StyledIconCart> :
 				<StyledIconFAvorit className={props.iconClass} colorIcon={props.iconColor} />
 			}
 

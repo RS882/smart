@@ -1,10 +1,10 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { clearFlyingKoord, endAddingItemToCart, IKoord, selectAddItemToCart } from '../../../redux/ItemSlice';
+import { clearFlyingItemId, clearFlyingKoord, endAddingItemToCart, getFlyingStartKoord, IKoord, selectAddItemToCart, selectStartFlyKoord } from '../../../redux/ItemSlice';
 
 import Item, { IItemProps } from './Item';
-import { selectEndFlyKoord } from './../../../redux/ItemSlice';
+import { selectEndFlyKoord, selectIdFlyingItem, selectIsGetKoord } from './../../../redux/ItemSlice';
 import { addCartCount, addItemToCart } from '../../../redux/ActionSlice';
 import store from '../../../redux/store';
 
@@ -24,7 +24,7 @@ const StyledFlyingItem = styled.div<IFlyingItem>`
 	width:${props => props.startK.widthK}; 
 	height:${props => props.startK.heightK};
 	transform-origin: top left;
-	animation:fly_item .5s ease forwards ; 
+	animation:fly_item .3s ease forwards ; 
 
 	@keyframes fly_item {
 		0%{
@@ -44,56 +44,83 @@ const StyledFlyingItem = styled.div<IFlyingItem>`
 
 
 const ItemContainer: FC<IItemProps> = (props) => {
-	const flyRef = useRef<HTMLDivElement>(null);
-	const flyKoord: IFlyingItem = {
-		startK: { left: '0px', top: '0px', widthK: '0px', heightK: '0px' },
-		endK: { left: '0px', top: '0px', },
 
-	};
+	const flyRef = useRef<HTMLDivElement>(null);
+
+
 	const endFly = useAppSelector(selectEndFlyKoord);
+	const startFly = useAppSelector(selectStartFlyKoord)
 	const isAddingItem = useAppSelector(selectAddItemToCart);
+	const idFlyItem = useAppSelector(selectIdFlyingItem);
+	const isGetKoord = useAppSelector(selectIsGetKoord);
 	const dispatch = useAppDispatch();
 
-	const getStartKoord = (ref: React.RefObject<HTMLDivElement>) => {
+
+
+	const getStartKoord = (ref: React.RefObject<HTMLDivElement>): IKoord => {
 		if (ref.current !== null) {
 			const rect = ref.current.getBoundingClientRect();
-			flyKoord.startK = {
+
+			return {
 				left: `${rect.left}px`,
 				top: `${rect.top}px`,
 				widthK: `${rect.width}px`,
 				heightK: `${rect.height}px`,
 			};
 		}
-	}
-
-	if (isAddingItem) {
-		if (endFly.left !== '0px' && endFly.left && endFly.top !== '0px' && endFly.top) {
-			getStartKoord(flyRef)
-			flyKoord.endK = { left: `${endFly.left}`, top: `${endFly.top}`, }
+		return {
+			left: `0px`,
+			top: `0px`,
+			widthK: `0px`,
+			heightK: `0px`,
 		}
 	}
 
+
+
+	useEffect(() => {
+
+		if (isAddingItem && props.itemData.id === idFlyItem) {
+			dispatch(getFlyingStartKoord(getStartKoord(flyRef)))
+		}
+
+	}, [isAddingItem])
+
+
+
+
+
 	const stopFlying = () => {
+
 		dispatch(endAddingItemToCart());
+		dispatch(clearFlyingItemId());
 		dispatch(addCartCount());
 		dispatch(addItemToCart(props.itemData ? props.itemData.id : '0'));
 		dispatch(clearFlyingKoord());
+
 	};
 
-	console.log(store.getState());
+
+
+
 
 
 
 
 	return (
 		<StyledItemContainer>
-			{isAddingItem ?
-				<StyledFlyingItem {...flyKoord} onAnimationEnd={stopFlying}>
+			{isAddingItem && props.itemData.id === idFlyItem && isGetKoord ?
+
+				<StyledFlyingItem startK={startFly}
+					endK={endFly}
+					onAnimationEnd={stopFlying}>
 					<Item itemData={props.itemData} />
 				</StyledFlyingItem> : null}
 			<div ref={flyRef}>
 				<Item itemData={props.itemData} />
 			</div>
+
+
 		</StyledItemContainer >
 	);
 };

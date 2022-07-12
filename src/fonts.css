@@ -26,7 +26,7 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-_icon-empty_cart:before {
+._icon-empty_cart:before {
 	content: "\e9a9";
  }
  ._icon-star:before {

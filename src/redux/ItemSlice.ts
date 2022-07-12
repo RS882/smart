@@ -1,4 +1,3 @@
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import { getItem } from './Thunk/thunkItem';
@@ -27,8 +26,10 @@ export interface IItems {
 	itemsPage: number;
 	errorText: string | undefined;
 	isAddingItemToCart?: boolean;
-
+	idFlyingItem: string | undefined;
 	endFlyToCart: IKoord;
+	startFlyToCart: IKoord;
+	isGetKoord: boolean;
 };
 
 const initialState: IItems = {
@@ -36,11 +37,19 @@ const initialState: IItems = {
 	itemsPage: 1,
 	errorText: undefined,
 	isAddingItemToCart: false,
-
+	idFlyingItem: undefined,
 	endFlyToCart: {
 		left: undefined,
 		top: undefined,
 	},
+	startFlyToCart: {
+		left: undefined,
+		top: undefined,
+		widthK: undefined,
+		heightK: undefined,
+
+	},
+	isGetKoord: false,
 };
 
 export const itemSlice = createSlice({
@@ -60,11 +69,26 @@ export const itemSlice = createSlice({
 		getFlyingEndKoord: (state, action: PayloadAction<IKoord>) => {
 			state.endFlyToCart = action.payload;
 		},
+		getFlyingStartKoord: (state, action: PayloadAction<IKoord>) => {
+			state.startFlyToCart = action.payload;
+			state.isGetKoord = true;
+		},
+
 
 		clearFlyingKoord: (state) => {
-
 			state.endFlyToCart.left = undefined;
 			state.endFlyToCart.top = undefined;
+			state.startFlyToCart.left = undefined;
+			state.startFlyToCart.top = undefined;
+			state.startFlyToCart.widthK = undefined;
+			state.startFlyToCart.heightK = undefined;
+			state.isGetKoord = false;
+		},
+		addFlyingItemId: (state, action: PayloadAction<string>) => {
+			state.idFlyingItem = action.payload;
+		},
+		clearFlyingItemId: (state) => {
+			state.idFlyingItem = undefined;
 		}
 	},
 	extraReducers: {
@@ -89,11 +113,12 @@ export const itemSlice = createSlice({
 })
 
 export const { startAddingItemToCart, endAddingItemToCart,
-	getFlyingEndKoord, clearFlyingKoord } = itemSlice.actions;
+	getFlyingEndKoord, getFlyingStartKoord, clearFlyingKoord, addFlyingItemId, clearFlyingItemId } = itemSlice.actions;
 
 export const selectitemsData = (state: RootState) => state.item.itemsData;
 export const selectAddItemToCart = (state: RootState) => state.item.isAddingItemToCart;
-
 export const selectEndFlyKoord = (state: RootState) => state.item.endFlyToCart;
-
+export const selectStartFlyKoord = (state: RootState) => state.item.startFlyToCart;
+export const selectIdFlyingItem = (state: RootState) => state.item.idFlyingItem;
+export const selectIsGetKoord = (state: RootState) => state.item.isGetKoord;
 export default itemSlice.reducer;

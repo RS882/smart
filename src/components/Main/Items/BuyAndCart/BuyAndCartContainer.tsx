@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { selectItemInCart } from '../../../../redux/ActionSlice';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
-import { selectAddItemToCart, startAddingItemToCart } from '../../../../redux/ItemSlice';
+import { addFlyingItemId, selectAddItemToCart, startAddingItemToCart } from '../../../../redux/ItemSlice';
 import IconBtn from '../IconBtn/IconBtn';
 import { selectItemBuyBtnText } from './../../../../redux/LanguageSlice';
 
@@ -31,25 +32,45 @@ const StyledBuyBtn = styled.button`
 		color:#fff;
 	}
 	
+`;
+
+const StyledInCart = styled.div`
+	position: absolute;
+	top:0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	font-size:10px;
+	padding-top:10px;
+	padding-left:5px;
+
+
 `
 
 const BuyAndCartContainer: FC<ICartProps> = (props) => {
 
+
 	const btnText = useAppSelector(selectItemBuyBtnText);
 	const isAddingItem = useAppSelector(selectAddItemToCart);
+	const itemInCart = useAppSelector(selectItemInCart)
 	const dispatch = useAppDispatch();
 	const addToCart = () => {
-		dispatch(startAddingItemToCart())
+		dispatch(startAddingItemToCart());
+		dispatch(addFlyingItemId(props.idItem));
 	};
 
 	const gotoBuyMenu = () => {
 
 	};
 
+	const isItemCart = itemInCart.includes(props.idItem)
+
 	return (
 		<StyledBuyAndCartContainer>
 			<StyledBuyBtn disabled={isAddingItem} onClick={gotoBuyMenu}>{btnText}</StyledBuyBtn>
-			<IconBtn callBack={addToCart} iconClass={'_icon-cart'} isCartBtn={true} />
+			<IconBtn callBack={addToCart} iconClass={isItemCart ? '_icon-empty_cart' : '_icon-cart'} isCartBtn={true} isItemInCart={isItemCart}>
+				{isItemCart ? <StyledInCart className='_icon-checkbox' ></StyledInCart> : null}
+			</IconBtn>
 
 		</StyledBuyAndCartContainer>
 	);
