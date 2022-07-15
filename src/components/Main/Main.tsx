@@ -8,6 +8,7 @@ import { selectLangStiringsHeaderMenuItem } from '../../redux/LanguageSlice';
 import { getItem } from './../../redux/Thunk/thunkItem';
 import store from '../../redux/store';
 import ItemsContainer from './Items/ItemsContainer';
+import { selectitemsData } from '../../redux/ItemSlice';
 
 const StyledMain = styled.main`
 	margin-top: 80px;
@@ -27,6 +28,8 @@ const StyledWrapper = styled.div`
 `;
 const Main: FC = (props) => {
 
+	const itemsData = useAppSelector(selectitemsData);
+
 	const menuItem = useAppSelector(selectLangStiringsHeaderMenuItem)
 	const dispatch = useAppDispatch();
 	useEffect(() => {
@@ -41,7 +44,7 @@ const Main: FC = (props) => {
 				<StyledWrapper>
 					<HeaderMenuContainer strings={menuItem} />
 					<FirstScreen />
-					<ItemsContainer />
+					<ItemsContainer iData={itemsData.filter(e => e.salehit)} titleType='Хиты продаж' />
 
 				</StyledWrapper>
 			</Container>
