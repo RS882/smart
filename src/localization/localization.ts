@@ -33,6 +33,8 @@ export interface ILoginStings {
 };
 export interface IItemCard {
 	buyBtn: string;
+	newBanner: string;
+	hitBanner: string;
 };
 
 export interface IStrings {

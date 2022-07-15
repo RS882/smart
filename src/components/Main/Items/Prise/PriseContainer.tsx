@@ -46,7 +46,7 @@ const StyledDiscountSum = styled.div`
 
 const PriseContainer: FC<IPriseProps> = (props) => {
 
-	const dicsountPrise = props.discount !== 0 ? (+props.prise * props.discount / 100).toFixed(2) : 0;
+	const dicsountPrise = props.discount !== 0 ? (+props.prise - (+props.prise * props.discount / 100)).toFixed(2) : 0;
 	const discount = props.discount !== 0 ? (+props.prise - +dicsountPrise).toFixed(2) : 0;
 
 

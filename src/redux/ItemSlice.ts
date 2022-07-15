@@ -5,12 +5,14 @@ import { getItem } from './Thunk/thunkItem';
 export interface IItemData {
 	id: string;
 	itemname: string;
+	itemDescription: string;
 	prise: string;
 	discount: number;
 	starts: number;
 	reviews: number;
-	salehit: number;
-	newitem: number;
+	salehit: number | boolean;
+	newitem: number | boolean;
+	itemType: string;
 
 
 };
@@ -99,7 +101,10 @@ export const itemSlice = createSlice({
 			} else {
 				state.itemsData = action.payload;
 				state.itemsData.map((e) => {
-
+					e.starts = Math.round(e.starts / 20);
+					e.salehit = e.salehit > 50;
+					e.newitem = e.newitem > 50;
+					e.itemType = `itemsType${Math.round(+e.itemType / 11)}`;
 				})
 
 			}

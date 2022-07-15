@@ -95,5 +95,6 @@ export const selectLoginText = (state: RootState) => state.languages.langStrings
 export const selectRegText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.login.reg;
 export const selectUserMenuText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header.userMenuItem;
 export const selectItemBuyBtnText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.itemCard.buyBtn;
-
+export const selectItemNewBannersText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.itemCard.newBanner;
+export const selectItemHitBannersText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.itemCard.hitBanner;
 export default LanguageSlice.reducer
