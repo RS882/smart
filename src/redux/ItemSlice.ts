@@ -105,6 +105,18 @@ export const itemSlice = createSlice({
 					e.salehit = e.salehit > 50;
 					e.newitem = e.newitem > 50;
 					e.itemType = `itemsType${Math.round(+e.itemType / 11)}`;
+
+					// itemsType1: '_icon-hoverboard',
+					// itemsType2: '_icon-e_kick_scooter',
+					// itemsType3: '_icon-mono_wheel',
+					// itemsType4: '_icon-segway',
+					// itemsType5: '_icon-e_scooter',
+					// itemsType6: '_icon-e_bike',
+					// itemsType7: '_icon-e_cars',
+					// itemsType8: '_icon-e_skate',
+					// itemsType9: '_icon-accessory',
+					// itemsType10: '_icon-smart_toys',
+					// itemsType11: '_icon-smart_watch',
 				})
 
 			}

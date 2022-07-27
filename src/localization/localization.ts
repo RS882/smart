@@ -35,6 +35,8 @@ export interface IItemCard {
 	buyBtn: string;
 	newBanner: string;
 	hitBanner: string;
+	itemsBox: string[];
+	allItems: string;
 };
 
 export interface IStrings {

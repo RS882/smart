@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { useAppSelector } from '../../../redux/hooks';
+import { selectViewAllItems } from '../../../redux/LanguageSlice';
 import { ArrowFn } from '../../../types/fnTypes';
 
 
@@ -59,13 +61,13 @@ const StyledBtnArrow = styled.div`
 
 const TitleItems: FC<ITitleItems> = (props) => {
 
-
+	const viewAllTaet = useAppSelector(selectViewAllItems)
 
 	return (
 		<StyledItemsTitle>
 			<StyledTitle>{props.title}</StyledTitle>
 			{!props.isAll ? <StyledViewAllBtn onClick={props.viewAllItem} >
-				<StyledBtnText>{'Все товары'}</StyledBtnText>
+				<StyledBtnText>{viewAllTaet}</StyledBtnText>
 				<StyledBtnArrow className='_icon-arrow-right' />
 			</StyledViewAllBtn> : null}
 		</StyledItemsTitle>

@@ -9,5 +9,5 @@ export const loginAPI = {
 };
 
 export const itemAPI = {
-	getItem: (page: number = 1) => axios.get(`item?page=${page}&limit=10`),
+	getItem: (page: number = 1) => axios.get(`item`),
 }
