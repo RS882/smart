@@ -4,7 +4,7 @@ export const itemCardTextEn: IItemCard = {
 	buyBtn: 'Buy in 1 click',
 	newBanner: 'new',
 	hitBanner: 'Bestseller',
-	itemsBox: ['Bestsellers', 'Novelties', 'Segweys', 'Monowheels', 'Electricbikes'],
+	itemsBox: ['Bestsellers', 'New', 'Segweys', 'Monowheels', 'Electricbikes'],
 	allItems: 'All goods',
 
 

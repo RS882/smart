@@ -140,4 +140,4 @@ const Item: FC<IItemProps> = (props) => {
 	);
 };
 
-export default Item;
+export default React.memo(Item);

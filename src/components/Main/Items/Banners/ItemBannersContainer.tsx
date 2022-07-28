@@ -22,6 +22,8 @@ const StyledBannersContainer = styled.div`
 `;
 
 const ItemBannersContainer: FC<IItemBanners> = (props) => {
+
+
 	return (
 		<StyledBannersContainer>
 			{props.new ? <ItemBanner bannerType='new' /> : null}

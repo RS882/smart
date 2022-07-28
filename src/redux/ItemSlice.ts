@@ -32,6 +32,7 @@ export interface IItems {
 	endFlyToCart: IKoord;
 	startFlyToCart: IKoord;
 	isGetKoord: boolean;
+	isFetching: boolean;
 };
 
 const initialState: IItems = {
@@ -52,6 +53,7 @@ const initialState: IItems = {
 
 	},
 	isGetKoord: false,
+	isFetching: false,
 };
 
 export const itemSlice = createSlice({
@@ -94,9 +96,12 @@ export const itemSlice = createSlice({
 		}
 	},
 	extraReducers: {
+		[getItem.pending.type]: (state) => {
+			state.isFetching = true;
+		},
 		[getItem.fulfilled.type]: (state, action: PayloadAction<IItemData[]>) => {
 			if (typeof (action.payload) === 'string') {
-				state.errorText = action.payload;
+				state.errorText = action.payload; state.isFetching = true
 
 			} else {
 				state.itemsData = action.payload;
@@ -120,6 +125,7 @@ export const itemSlice = createSlice({
 				})
 
 			}
+			state.isFetching = false;
 		},
 		[getItem.rejected.type]: (state, action: PayloadAction<Error>) => {
 			console.log('errror');
@@ -138,4 +144,5 @@ export const selectEndFlyKoord = (state: RootState) => state.item.endFlyToCart;
 export const selectStartFlyKoord = (state: RootState) => state.item.startFlyToCart;
 export const selectIdFlyingItem = (state: RootState) => state.item.idFlyingItem;
 export const selectIsGetKoord = (state: RootState) => state.item.isGetKoord;
+export const selectIsFetching = (state: RootState) => state.item.isFetching;
 export default itemSlice.reducer;

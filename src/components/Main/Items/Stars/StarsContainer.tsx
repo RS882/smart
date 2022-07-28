@@ -66,4 +66,4 @@ const StarsContainer: FC<IStars> = (props) => {
 	);
 };
 
-export default StarsContainer;
+export default React.memo(StarsContainer);

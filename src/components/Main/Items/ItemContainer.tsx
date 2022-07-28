@@ -105,8 +105,6 @@ const ItemContainer: FC<IItemProps> = (props) => {
 
 
 
-
-
 	return (
 		<StyledItemContainer>
 			{isAddingItem && props.itemData.id === idFlyItem && isGetKoord ?
@@ -125,4 +123,4 @@ const ItemContainer: FC<IItemProps> = (props) => {
 	);
 };
 
-export default ItemContainer;
+export default React.memo(ItemContainer);

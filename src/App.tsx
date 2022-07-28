@@ -18,6 +18,7 @@ import PreloaderContainer from './components/Preloader/PreloaderContainer';
 import { isRetina } from './utilits/functions';
 import LoginContainer from './components/Login/LoginContainer';
 import { selectIsPopUp } from './redux/LoginSlice';
+import { selectIsFetching } from './redux/ItemSlice';
 
 
 // const ModalContainer = React.lazy(() => import('./components/Modal/ModalContainer'));
@@ -124,7 +125,7 @@ const App: FC = (props) => {
   const initialazatedApp = useAppSelector(selectInitializated);
   const isLangChange = useAppSelector(selectIsLangChange);
   const isLoginBoxOpen = useAppSelector(selectIsPopUp);
-
+  const isFetching = useAppSelector(selectIsFetching);
 
 
 
@@ -144,7 +145,7 @@ const App: FC = (props) => {
 
     return (
       <StyledAppRef appScroll={appScroll}>
-        {isLangChange ? <PreloaderContainer /> : null}
+        {isLangChange || isFetching ? <PreloaderContainer /> : null}
         <AppWrapper onClick={onClickApp} direction={'column'}>
           {isLoginBoxOpen ? <LoginContainer /> : null}
           <DropDownMenu />

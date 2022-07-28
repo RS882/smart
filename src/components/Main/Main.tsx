@@ -68,12 +68,10 @@ const Main: FC = (props) => {
 					<HeaderMenuContainer strings={menuItem} />
 					<FirstScreen />
 					{itemsBoxs}
-					{/* <ItemsContainer iData={itemsData.filter(e => e.itemType === 'itemsType3')} titleType={namesItemsBox !== null ? namesItemsBox[0] : ''} /> */}
-
 				</StyledWrapper>
 			</Container>
 		</StyledMain>
 	);
 };
 
-export default Main;
+export default React.memo(Main);
