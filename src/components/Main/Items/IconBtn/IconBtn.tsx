@@ -62,7 +62,7 @@ const StyledIconCart = styled(StyledBox) <IIconCart>`
 `;
 
 
-const IconBtn: FC<IIconBtn> = (props) => {
+const IconBtn: FC<IIconBtn> = ({ callBack, iconColor, children, ...props }) => {
 
 	const cartProps: IIconCart = {
 		className: props.iconClass,
@@ -71,10 +71,10 @@ const IconBtn: FC<IIconBtn> = (props) => {
 	};
 
 	return (
-		<StyledIconBtn onClick={props.callBack}>
+		<StyledIconBtn onClick={callBack}>
 			{props.isCartBtn ?
-				<StyledIconCart {...cartProps} >{props.children}</StyledIconCart> :
-				<StyledIconFAvorit className={props.iconClass} colorIcon={props.iconColor} />
+				<StyledIconCart {...cartProps} >{children}</StyledIconCart> :
+				<StyledIconFAvorit className={props.iconClass} colorIcon={iconColor} />
 			}
 
 		</StyledIconBtn>

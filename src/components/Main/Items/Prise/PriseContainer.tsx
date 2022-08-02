@@ -2,6 +2,11 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { IPriseProps } from './PriseAndFavoritsContainer';
 
+interface IPrieseContainerProps {
+	prise: string;
+	discount: number;
+}
+
 const StyledPriseBox = styled.div`
 	width:117px;
 	display:flex;
@@ -44,23 +49,23 @@ const StyledDiscountSum = styled.div`
 
 `;
 
-const PriseContainer: FC<IPriseProps> = (props) => {
+const PriseContainer: FC<IPrieseContainerProps> = ({ prise, discount }) => {
 
-	const dicsountPrise = props.discount !== 0 ? (+props.prise - (+props.prise * props.discount / 100)).toFixed(2) : 0;
-	const discount = props.discount !== 0 ? (+props.prise - +dicsountPrise).toFixed(2) : 0;
+	const dicsountPrise = discount !== 0 ? (+prise - (+prise * discount / 100)).toFixed(2) : 0;
+	const discounSum = discount !== 0 ? (+prise - +dicsountPrise).toFixed(2) : 0;
 
 
 	return (
 		<StyledPriseBox>
 			<StyledPeise>
-				{props.prise} €
+				{prise} €
 			</StyledPeise>
 			<StyledDiscountPrise>
 				{dicsountPrise} €
 			</StyledDiscountPrise>
 			<StyledDiscountContainer>
-				<StyledDiscountPerc>{props.discount}%</StyledDiscountPerc>
-				<StyledDiscountSum>- {discount} €</StyledDiscountSum>
+				<StyledDiscountPerc>{discount}%</StyledDiscountPerc>
+				<StyledDiscountSum>- {discounSum} €</StyledDiscountSum>
 			</StyledDiscountContainer>
 
 		</StyledPriseBox>

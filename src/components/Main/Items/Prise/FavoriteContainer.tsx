@@ -23,40 +23,40 @@ const StyledFavoriteContainer = styled.div`
 
 
 
-const FavoriteContainer: FC<IFavoriteContainer> = (props) => {
+const FavoriteContainer: FC<IFavoriteContainer> = ({ isFavorite, id, isCompare }) => {
 	const dispatch = useAppDispatch();
 
 	const toogleItemToFavotite = () => {
 
-		if (props.isFavorite) {
+		if (isFavorite) {
 			dispatch(reduceFavoritesCount());
-			dispatch(delItemToFavorite(props.id));
+			dispatch(delItemToFavorite(id));
 		} else {
 			dispatch(addFavoritesCount());
-			dispatch(addItemToFavorite(props.id));
+			dispatch(addItemToFavorite(id));
 		}
 
 	};
 
 	const toogleItemToCompare = () => {
 
-		if (props.isCompare) {
+		if (isCompare) {
 			dispatch(reduceCompareCount());
-			dispatch(delItemToCompare(props.id));
+			dispatch(delItemToCompare(id));
 		} else {
 			dispatch(addCompareCount());
-			dispatch(addItemToCompare(props.id));
+			dispatch(addItemToCompare(id));
 		}
 	};
 
 
 	return (
 		<StyledFavoriteContainer>
-			<IconBtn iconClass={props.isFavorite ? '_icon-hart_full' : '_icon-hart_empty'}
-				iconColor={props.isFavorite ? '#F15152' : undefined}
+			<IconBtn iconClass={isFavorite ? '_icon-hart_full' : '_icon-hart_empty'}
+				iconColor={isFavorite ? '#F15152' : undefined}
 				callBack={toogleItemToFavotite} />
 			<IconBtn iconClass={'_icon-compare'}
-				iconColor={props.isCompare ? '#2A5275' : undefined}
+				iconColor={isCompare ? '#2A5275' : undefined}
 				callBack={toogleItemToCompare} />
 		</StyledFavoriteContainer>
 	);

@@ -47,7 +47,7 @@ const StyledInCart = styled.div`
 
 `
 
-const BuyAndCartContainer: FC<ICartProps> = (props) => {
+const BuyAndCartContainer: FC<ICartProps> = ({ idItem }) => {
 
 
 	const btnText = useAppSelector(selectItemBuyBtnText);
@@ -56,14 +56,14 @@ const BuyAndCartContainer: FC<ICartProps> = (props) => {
 	const dispatch = useAppDispatch();
 	const addToCart = () => {
 		dispatch(startAddingItemToCart());
-		dispatch(addFlyingItemId(props.idItem));
+		dispatch(addFlyingItemId(idItem));
 	};
 
 	const gotoBuyMenu = () => {
 
 	};
 
-	const isItemCart = itemInCart.includes(props.idItem)
+	const isItemCart = itemInCart.includes(idItem)
 
 	return (
 		<StyledBuyAndCartContainer>

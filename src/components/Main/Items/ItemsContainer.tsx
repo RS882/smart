@@ -7,7 +7,10 @@ import ItemContainer from './ItemContainer';
 import TitleItems from './TitleItems';
 import { log } from 'console';
 
+export interface IItemProps {
+	itemData: IItemData;
 
+}
 interface IItemsContainer {
 	iData: [] | IItemData[];
 	titleType: string;
@@ -27,22 +30,22 @@ const StyledItemsContainer = styled.div<IItemsProps>`
 
 `;
 
-const ItemsContainer: FC<IItemsContainer> = (props) => {
+const ItemsContainer: FC<IItemsContainer> = ({ iData, titleType, ...props }) => {
 	const [isViewAll, setIsViewAll] = useState(false);
 	const viewAllItem = () => {
 		setIsViewAll(true);
 	};
 
-	const itemsCart: JSX.Element[] = props.iData.map((e, i) => <ItemContainer itemData={e} key={e.id + i + ''} />)
+	const itemsCart: JSX.Element[] = iData.map((e, i) => <ItemContainer itemData={e} key={e.id + i + ''} />)
 
 
 
 	return (
 		<>
-			{props.iData.length > 0 ?
+			{iData.length > 0 ?
 				<>
-					<TitleItems title={props.titleType} viewAllItem={viewAllItem} isAll={isViewAll} />
-					<StyledItemsContainer isFixWidth={props.iData.length <= 3} >
+					<TitleItems title={titleType} viewAllItem={viewAllItem} isAll={isViewAll} />
+					<StyledItemsContainer isFixWidth={iData.length <= 3} >
 						{isViewAll ? itemsCart : itemsCart.filter((e, i) => i < 4)}
 					</StyledItemsContainer>
 				</>

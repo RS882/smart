@@ -21,12 +21,9 @@ const StyledPriseAndFavorit = styled.div`
 
 const PriseAndFavoritsContainer: FC<IPriseProps> = (props) => {
 
-
-
-
 	return (
 		<StyledPriseAndFavorit>
-			<PriseContainer {...props} />
+			<PriseContainer prise={props.prise} discount={props.discount} />
 			<FavoriteContainer id={props.idItem} isFavorite={props.isFavorite} isCompare={props.isCompare} />
 		</StyledPriseAndFavorit>
 	);

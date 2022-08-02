@@ -3,21 +3,19 @@ import styled from 'styled-components';
 import itemImg from '../../../assets/image 18.png'
 import { addItemToViewed, addViewedCount, selectCompaedItem, selectViewedItem } from '../../../redux/ActionSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { IItemData } from '../../../redux/ItemSlice';
+
 import BuyAndCartContainer from './BuyAndCart/BuyAndCartContainer';
 import PriseAndFavoritsContainer from './Prise/PriseAndFavoritsContainer';
 import StarsContainer from './Stars/StarsContainer';
 import { selectFavoritedItem } from './../../../redux/ActionSlice';
 import { selectLangStiringsHeaderCatalogMenu } from '../../../redux/LanguageSlice';
-import { log } from 'console';
-import BannersContainer from './Banners/ItemBannersContainer';
+
+import ItemBannersContainer from './Banners/ItemBannersContainer';
+import { IItemProps } from './ItemsContainer';
 
 
 
-export interface IItemProps {
-	itemData: IItemData;
 
-}
 
 const StyledItemColumn = styled.div`
 	position:relative;
@@ -76,48 +74,44 @@ const StyledItemName = styled.button`
 
 `;
 
-const Item: FC<IItemProps> = (props) => {
+const Item: FC<IItemProps> = ({ itemData }) => {
 
-	const itemData: IItemData = props.itemData;
-	const itemId = props.itemData ? props.itemData.id : '0';
+
+	const itemId = itemData ? itemData.id : '0';
 	const favoriteItems = useAppSelector(selectFavoritedItem);
 	const copmareItems = useAppSelector(selectCompaedItem);
 	const viewedItems = useAppSelector(selectViewedItem);
 	const itemsType = useAppSelector(selectLangStiringsHeaderCatalogMenu);
 	const dispatch = useAppDispatch();
 
-	const isFavorite: boolean = props.itemData ? favoriteItems.includes(itemId) : false;
-	const isCompare: boolean = props.itemData ? copmareItems.includes(itemId) : false;
+	const isFavorite: boolean = itemData ? favoriteItems.includes(itemId) : false;
+	const isCompare: boolean = itemData ? copmareItems.includes(itemId) : false;
 
 
 	const addViewItems = () => {
-		if (props.itemData && !viewedItems.includes(itemId)) {
+		if (itemData && !viewedItems.includes(itemId)) {
 			dispatch(addViewedCount());
 			dispatch(addItemToViewed(itemId))
 		}
 	};
 
 	const viewAllItemOfType = () => {
-		console.log(props.itemData.itemType);
+		console.log(itemData.itemType);
 
 	};
-
-	//console.log(itemsType);
-
-
 
 
 	return (
 		<StyledItemColumn>
-			<BannersContainer new={itemData ? props.itemData.newitem : false}
-				bestseller={itemData ? props.itemData.salehit : false} />
+			<ItemBannersContainer newItem={itemData ? itemData.newitem : false}
+				bestseller={itemData ? itemData.salehit : false} />
 
 			<StyledImg onClick={addViewItems}>
 				<ImgStyled />
 			</StyledImg>
 
 			<StyledItemType onClick={viewAllItemOfType}>
-				{itemsType !== null ? itemsType[props.itemData.itemType] : null}
+				{itemsType !== null ? itemsType[itemData.itemType] : null}
 			</StyledItemType>
 
 			<StyledItemName onClick={addViewItems}>

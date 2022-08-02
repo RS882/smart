@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectViewAllItems } from '../../../redux/LanguageSlice';
@@ -59,14 +59,14 @@ const StyledBtnArrow = styled.div`
 	
 `;
 
-const TitleItems: FC<ITitleItems> = (props) => {
+const TitleItems: FC<ITitleItems> = ({ title, isAll, viewAllItem, ...props }) => {
 
 	const viewAllTaet = useAppSelector(selectViewAllItems)
 
 	return (
 		<StyledItemsTitle>
-			<StyledTitle>{props.title}</StyledTitle>
-			{!props.isAll ? <StyledViewAllBtn onClick={props.viewAllItem} >
+			<StyledTitle>{title}</StyledTitle>
+			{!isAll ? <StyledViewAllBtn onClick={viewAllItem} >
 				<StyledBtnText>{viewAllTaet}</StyledBtnText>
 				<StyledBtnArrow className='_icon-arrow-right' />
 			</StyledViewAllBtn> : null}

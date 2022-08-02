@@ -49,17 +49,17 @@ const StyledNumReviews = styled.div`
 	margin-left:10px;
 `;
 
-const StarsContainer: FC<IStars> = (props) => {
+const StarsContainer: FC<IStars> = ({ stars, reviewsNumber }) => {
 
 	const starsBlock = [0, 0, 0, 0, 0].map((e, i, arr) =>
-		<StyledStar className='_icon-star' isColor={i <= props.stars - 1} last={i === arr.length - 1} key={`_icon - star ${i} `} />
+		<StyledStar className='_icon-star' isColor={i <= stars - 1} last={i === arr.length - 1} key={`_icon - star ${i} `} />
 	);
 	return (
 		<StyledStarsAndReviewsContainer>
 			<StyledStarsBox>{starsBlock}</StyledStarsBox>
 			<StyledReviewsBox>
 				<StyledReviews className='_icon-message-square' >
-					<StyledNumReviews>({props.reviewsNumber})</StyledNumReviews>
+					<StyledNumReviews>({reviewsNumber})</StyledNumReviews>
 				</StyledReviews>
 			</StyledReviewsBox>
 		</StyledStarsAndReviewsContainer>

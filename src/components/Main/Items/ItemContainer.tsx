@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { clearFlyingItemId, clearFlyingKoord, endAddingItemToCart, getFlyingStartKoord, IKoord, selectAddItemToCart, selectStartFlyKoord } from '../../../redux/ItemSlice';
 
-import Item, { IItemProps } from './Item';
+import Item from './Item';
 import { selectEndFlyKoord, selectIdFlyingItem, selectIsGetKoord } from './../../../redux/ItemSlice';
 import { addCartCount, addItemToCart } from '../../../redux/ActionSlice';
 import store from '../../../redux/store';
+import { IItemProps } from './ItemsContainer';
 
 interface IFlyingItem {
 	startK: IKoord;
@@ -43,7 +44,7 @@ const StyledFlyingItem = styled.div<IFlyingItem>`
 `;
 
 
-const ItemContainer: FC<IItemProps> = (props) => {
+const ItemContainer: FC<IItemProps> = ({ itemData }) => {
 
 	const flyRef = useRef<HTMLDivElement>(null);
 
@@ -80,7 +81,7 @@ const ItemContainer: FC<IItemProps> = (props) => {
 
 	useEffect(() => {
 
-		if (isAddingItem && props.itemData.id === idFlyItem) {
+		if (isAddingItem && itemData.id === idFlyItem) {
 			dispatch(getFlyingStartKoord(getStartKoord(flyRef)))
 		}
 
@@ -95,7 +96,7 @@ const ItemContainer: FC<IItemProps> = (props) => {
 		dispatch(endAddingItemToCart());
 		dispatch(clearFlyingItemId());
 		dispatch(addCartCount());
-		dispatch(addItemToCart(props.itemData ? props.itemData.id : '0'));
+		dispatch(addItemToCart(itemData ? itemData.id : '0'));
 		dispatch(clearFlyingKoord());
 
 	};
@@ -107,15 +108,15 @@ const ItemContainer: FC<IItemProps> = (props) => {
 
 	return (
 		<StyledItemContainer>
-			{isAddingItem && props.itemData.id === idFlyItem && isGetKoord ?
+			{isAddingItem && itemData.id === idFlyItem && isGetKoord ?
 
 				<StyledFlyingItem startK={startFly}
 					endK={endFly}
 					onAnimationEnd={stopFlying}>
-					<Item itemData={props.itemData} />
+					<Item itemData={itemData} />
 				</StyledFlyingItem> : null}
 			<div ref={flyRef}>
-				<Item itemData={props.itemData} />
+				<Item itemData={itemData} />
 			</div>
 
 

@@ -25,15 +25,15 @@ const StyledBanner = styled.div<IItemBannerType>`
 		props.bannerType === 'bestseller' ? '#D73838' : ''};
 `;
 
-const ItemBanner: FC<IItemBannerType> = (props) => {
+const ItemBanner: FC<IItemBannerType> = ({ bannerType }) => {
 	const bannerNewText = useAppSelector(selectItemNewBannersText);
 	const bannerHittext = useAppSelector(selectItemHitBannersText);
 
-	const bannerText = props.bannerType === 'new' ? bannerNewText :
-		props.bannerType === 'bestseller' ? bannerHittext : '';
+	const bannerText = bannerType === 'new' ? bannerNewText :
+		bannerType === 'bestseller' ? bannerHittext : '';
 
 	return (
-		<StyledBanner bannerType={props.bannerType} >
+		<StyledBanner bannerType={bannerType} >
 			{bannerText}
 		</StyledBanner>
 	);

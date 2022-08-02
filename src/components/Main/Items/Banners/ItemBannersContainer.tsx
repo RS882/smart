@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ItemBanner from './ItemBanner';
 
 export interface IItemBanners {
-	new?: number | boolean;
+	newItem?: number | boolean;
 	bestseller?: number | boolean;
 }
 
@@ -21,13 +21,13 @@ const StyledBannersContainer = styled.div`
 
 `;
 
-const ItemBannersContainer: FC<IItemBanners> = (props) => {
+const ItemBannersContainer: FC<IItemBanners> = ({ newItem, bestseller, ...props }) => {
 
 
 	return (
 		<StyledBannersContainer>
-			{props.new ? <ItemBanner bannerType='new' /> : null}
-			{props.bestseller ? <ItemBanner bannerType='bestseller' /> : null}
+			{newItem ? <ItemBanner bannerType='new' /> : null}
+			{bestseller ? <ItemBanner bannerType='bestseller' /> : null}
 		</StyledBannersContainer>
 	);
 };
