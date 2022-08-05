@@ -37,6 +37,7 @@ export interface IItemCard {
 	hitBanner: string;
 	itemsBox: string[];
 	allItems: string;
+	bannerItemText: string[];
 };
 
 export interface IStrings {

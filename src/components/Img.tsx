@@ -14,8 +14,10 @@ const StyledImg = styled.img.attrs(props => ({
 	alt: props.alt || 'alt',
 	width: props.width || '',
 	height: props.height || '',
+
 })) <ImgProps>`
-	
+	width: 100%;
+	height: 100%;
 `;
 
 

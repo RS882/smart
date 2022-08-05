@@ -53,6 +53,7 @@ const StyledItemType = styled.button`
 	text-transform: capitalize;
 	margin-bottom:10px;
 	font-weight:500;
+	line-height: 130%;
 	text-align:start;
 	transition:all 0.3s ease 0s;
 	text-decoration:none;
@@ -62,10 +63,11 @@ const StyledItemType = styled.button`
 `;
 
 const StyledItemName = styled.button`
-	height:100px;
+	
 	font-weight:400;
 	margin-bottom:20px;
-	text-align:start;
+	text-align:start;font-size: 20px;
+	line-height: 130%;
 	transition:all 0.3s ease 0s;
 	text-decoration:none;
 	&:hover{

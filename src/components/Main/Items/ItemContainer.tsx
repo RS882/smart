@@ -6,7 +6,7 @@ import { clearFlyingItemId, clearFlyingKoord, endAddingItemToCart, getFlyingStar
 import Item from './Item';
 import { selectEndFlyKoord, selectIdFlyingItem, selectIsGetKoord } from './../../../redux/ItemSlice';
 import { addCartCount, addItemToCart } from '../../../redux/ActionSlice';
-import store from '../../../redux/store';
+
 import { IItemProps } from './ItemsContainer';
 
 interface IFlyingItem {

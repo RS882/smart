@@ -189,4 +189,4 @@ const App: FC = (props) => {
 };
 
 
-export default App;
+export default React.memo(App);

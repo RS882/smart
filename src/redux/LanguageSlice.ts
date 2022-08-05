@@ -99,5 +99,7 @@ export const selectItemNewBannersText = (state: RootState) => state.languages.la
 export const selectItemHitBannersText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.itemCard.hitBanner;
 export const selectItemsBoxName = (state: RootState) => state.languages.langStrings && state.languages.langStrings.itemCard.itemsBox;
 export const selectViewAllItems = (state: RootState) => state.languages.langStrings && state.languages.langStrings.itemCard.allItems;
+export const selectBannersItemText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.itemCard.bannerItemText;
+
 
 export default LanguageSlice.reducer

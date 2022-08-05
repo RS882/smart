@@ -1,11 +1,13 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../../redux/hooks';
-import { IItemData, selectitemsData } from '../../../redux/ItemSlice';
+
+import { IItemData } from '../../../redux/ItemSlice';
+import { selectViewAllItems } from '../../../redux/LanguageSlice';
 
 import ItemContainer from './ItemContainer';
 import TitleItems from './TitleItems';
-import { log } from 'console';
+
 
 export interface IItemProps {
 	itemData: IItemData;
@@ -35,6 +37,7 @@ const ItemsContainer: FC<IItemsContainer> = ({ iData, titleType, ...props }) => 
 	const viewAllItem = () => {
 		setIsViewAll(true);
 	};
+	const viewAllText = useAppSelector(selectViewAllItems);
 
 	const itemsCart: JSX.Element[] = iData.map((e, i) => <ItemContainer itemData={e} key={e.id + i + ''} />)
 
@@ -44,7 +47,8 @@ const ItemsContainer: FC<IItemsContainer> = ({ iData, titleType, ...props }) => 
 		<>
 			{iData.length > 0 ?
 				<>
-					<TitleItems title={titleType} viewAllItem={viewAllItem} isAll={isViewAll} />
+					<TitleItems title={titleType} viewAllItem={viewAllItem} isAll={isViewAll}
+						textBtn={viewAllText !== null ? viewAllText : ''} />
 					<StyledItemsContainer isFixWidth={iData.length <= 3} >
 						{isViewAll ? itemsCart : itemsCart.filter((e, i) => i < 4)}
 					</StyledItemsContainer>

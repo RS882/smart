@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { IPriseProps } from './PriseAndFavoritsContainer';
+
 
 interface IPrieseContainerProps {
 	prise: string;

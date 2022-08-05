@@ -4,11 +4,18 @@ import Container from './../Container';
 import FirstScreen from './FirstScreen/FirstScreen';
 import HeaderMenuContainer from './../Header/HeaderMenu/HeaderMenuContainer';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { selectItemsBoxName, selectLangStiringsHeaderMenuItem } from '../../redux/LanguageSlice';
+import { selectBannersItemText, selectItemsBoxName, selectLangStiringsHeaderMenuItem } from '../../redux/LanguageSlice';
 import { getItem } from './../../redux/Thunk/thunkItem';
-import store from '../../redux/store';
+
 import ItemsContainer from './Items/ItemsContainer';
 import { IItemData, selectitemsData } from '../../redux/ItemSlice';
+import BanneActionrContainer, { IBannerItemObj } from './Banner/BanneActionrContainer';
+import percImg from './../../assets/banner_item/percent.svg';
+import giroImg from './../../assets/banner_item/pngegg1.png';
+import segvImg from './../../assets/banner_item/pngwing1.png';
+import swatchImg from './../../assets/banner_item/pngwing2.png';
+
+
 
 const StyledMain = styled.main`
 	margin-top: 80px;
@@ -26,12 +33,26 @@ const StyledWrapper = styled.div`
 	display:flex;
 	flex-direction:column;
 `;
+
+const StyledBannerBox = styled.div`
+	display:grid;
+	grid-template-rows: repeat(2, 1fr);
+	gap:20px;
+	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
+		grid-template-rows: 1fr;
+		grid-template-columns: repeat(2, 1fr);
+	};
+`
+
 const Main: FC = (props) => {
 
 	const itemsData = useAppSelector(selectitemsData);
 	const namesItemsBox = useAppSelector(selectItemsBoxName);
 	const menuItem = useAppSelector(selectLangStiringsHeaderMenuItem)
+	const bannerItemsText = useAppSelector(selectBannersItemText)
+
 	const dispatch = useAppDispatch();
+
 	useEffect(() => {
 		dispatch(getItem(1));
 	}, []);
@@ -58,8 +79,38 @@ const Main: FC = (props) => {
 	// itemsType10: '_icon-smart_toys',
 	// itemsType11: '_icon-smart_watch',
 
+	// bannerItemText: ['Скидки до 30% на сигвеи', 'Неделя смарт часов', 'Распродажа до — 50%', 'Smart Balance Premium по специальной цене',],
+	const bannerItemImg = [
+		{ srcItem: segvImg, w: '187', h: '180', },
+		{ srcItem: swatchImg, w: '147', h: '166', },
+		{ srcItem: percImg, w: '144', h: '124', },
+		{ srcItem: giroImg, w: '241', h: '161', },
+	];
 
-	const itemsBoxs: JSX.Element[] = [0, 0, 0, 0, 0].map((e, i) => <ItemsContainer key={namesItemsBox !== null ? namesItemsBox[i] + i : i} iData={filterItemsFun[i](itemsData)} titleType={namesItemsBox !== null ? namesItemsBox[i] : ''} />)
+	const bannerItems: IBannerItemObj[] = bannerItemImg.map((e, i) => ({
+		...e, text: bannerItemsText !== null ? bannerItemsText[i] : '',
+		callBack: () => {
+			console.log(bannerItemsText !== null ? bannerItemsText[i] : '');
+		},
+	}));
+
+
+
+	const itemsBoxs: JSX.Element[] = [0, 0, 0, 0, 0].map((e, i) => {
+		return (
+			<div key={namesItemsBox !== null ? namesItemsBox[i] + i : i}>
+				<ItemsContainer iData={filterItemsFun[i](itemsData)} titleType={namesItemsBox !== null ? namesItemsBox[i] : ''} />
+				{i === 1 ? <StyledBannerBox >
+					<BanneActionrContainer bannerItem={bannerItems[0]} />
+					<BanneActionrContainer bannerItem={bannerItems[1]} />
+				</StyledBannerBox> : null}
+				{i === 3 ? <StyledBannerBox >
+					<BanneActionrContainer bannerItem={bannerItems[2]} />
+					<BanneActionrContainer bannerItem={bannerItems[3]} />
+				</StyledBannerBox> : null}
+			</div>
+		)
+	});
 
 	return (
 		<StyledMain>
@@ -68,6 +119,7 @@ const Main: FC = (props) => {
 					<HeaderMenuContainer strings={menuItem} />
 					<FirstScreen />
 					{itemsBoxs}
+
 				</StyledWrapper>
 			</Container>
 		</StyledMain>

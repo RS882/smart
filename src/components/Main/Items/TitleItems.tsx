@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectViewAllItems } from '../../../redux/LanguageSlice';
@@ -9,6 +9,7 @@ interface ITitleItems {
 	title: string;
 	viewAllItem: ArrowFn;
 	isAll: boolean;
+	textBtn: string;
 };
 
 const StyledItemsTitle = styled.div`
@@ -59,19 +60,18 @@ const StyledBtnArrow = styled.div`
 	
 `;
 
-const TitleItems: FC<ITitleItems> = ({ title, isAll, viewAllItem, ...props }) => {
+const TitleItems: FC<ITitleItems> = ({ title, isAll, viewAllItem, textBtn, ...props }) => {
 
-	const viewAllTaet = useAppSelector(selectViewAllItems)
 
 	return (
 		<StyledItemsTitle>
 			<StyledTitle>{title}</StyledTitle>
 			{!isAll ? <StyledViewAllBtn onClick={viewAllItem} >
-				<StyledBtnText>{viewAllTaet}</StyledBtnText>
+				<StyledBtnText>{textBtn}</StyledBtnText>
 				<StyledBtnArrow className='_icon-arrow-right' />
 			</StyledViewAllBtn> : null}
 		</StyledItemsTitle>
 	);
 };
 
-export default TitleItems;
+export default React.memo(TitleItems);
