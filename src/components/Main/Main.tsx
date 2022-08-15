@@ -17,6 +17,7 @@ import swatchImg from './../../assets/banner_item/pngwing2.png';
 
 
 
+
 const StyledMain = styled.main`
 	margin-top: 80px;
 	

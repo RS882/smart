@@ -7,7 +7,7 @@ import { strings } from './localization/localization';
 import { Route, Routes } from 'react-router-dom';
 import { ArrowFn } from './types/fnTypes';
 import { changeIsBodyLock, selectIsBodyLock, selectModalOpacity, selectScrollWidth } from './redux/ModalSlice';
-import store from './redux/store';
+
 import DropDownMenu from './components/Header/DropDownMenu/DropDownMenuContainer';
 import ModalContainer from './components/Modal/ModalContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -19,37 +19,24 @@ import { isRetina } from './utilits/functions';
 import LoginContainer from './components/Login/LoginContainer';
 import { selectIsPopUp } from './redux/LoginSlice';
 import { selectIsFetching } from './redux/ItemSlice';
+import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
+import { routeObj } from './routeObj';
 
 
-// const ModalContainer = React.lazy(() => import('./components/Modal/ModalContainer'));
-// const DropDownMenu = React.lazy(() => import('./components/Header/DropDownMenu/DropDownMenuContainer'));
-// const HeaderBottomContainer = React.lazy(() => import('./components/Header/HeaderBottomContainer/HeaderBottomContainer'));
-// const HeaderContainer = React.lazy(() => import('./components/Header/HeaderContainer'));
+import { Global } from './GlobalStyle';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './theme';
+import store from './redux/store';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
+
+
+
 const Main = React.lazy(() => import('./components/Main/Main'));
-const Compare = React.lazy(() => import('./components/Compare/Compare'));
-const Viewed = React.lazy(() => import('./components/Viewed/Viewed'));
-const Favorites = React.lazy(() => import('./components/Favorites/Favorites'));
 const FooterContainer = React.lazy(() => import('./components/Footer/FooterContainer'));
 const Cart = React.lazy(() => import('./components/Cart/Cart'));
-const Catalog = React.lazy(() => import('./components/Catalog/Catalog'));
-const About = React.lazy(() => import('./components/About/About'));
-const Stock = React.lazy(() => import('./components/Stock/Stock'));
-const Installment = React.lazy(() => import('./components/Installment/Installment'));
-const Servise = React.lazy(() => import('./components/Servise/Servise'));
-const WholesaleDropshipping = React.lazy(() => import('./components/WholesaleDropshipping/WholesaleDropshipping'));
-const Contacts = React.lazy(() => import('./components/Contacts/Contacts'));
-const Reviews = React.lazy(() => import('./components/Reviews/Reviews'));
-const Advantages = React.lazy(() => import('./components/Advantages/Advantages'));
-const Cooperation = React.lazy(() => import('./components/Cooperation/Cooperation'));
-const Affiliate = React.lazy(() => import('./components/Affiliate/Affiliate'));
-const Vacancies = React.lazy(() => import('./components/Vacancies/Vacancies'));
-const HowToBuy = React.lazy(() => import('./components/HowToBuy/HowToBuy'));
-const ShippingAndPayment = React.lazy(() => import('./components/ShippingAndPayment/ShippingAndPayment'));
-const Credit = React.lazy(() => import('./components/Credit/Credit'));
-const PrivacyPolicy = React.lazy(() => import('./components/PrivacyPolicy/PrivacyPolicy'));
-const Faq = React.lazy(() => import('./components/Faq/Faq'));
-const Wholesale = React.lazy(() => import('./components/Wholesale/Wholesale'));
-const Dropshipping = React.lazy(() => import('./components/Dropshipping/Dropshipping'));
+
 
 
 
@@ -80,7 +67,7 @@ const StyledAppRef = styled.div.attrs(props => ({ ref: props.ref, })) <IAppProps
 
 `;
 
-const App: FC = (props) => {
+const App: FC = () => {
 
   const dispatch = useAppDispatch();
   //заносим в стейт данные о языках
@@ -99,7 +86,6 @@ const App: FC = (props) => {
       })
       .then(() => dispatch(changeIsBodyLock(false)))
   }, []);
-
 
 
   //------------------------------------
@@ -127,6 +113,7 @@ const App: FC = (props) => {
   const isLoginBoxOpen = useAppSelector(selectIsPopUp);
   const isFetching = useAppSelector(selectIsFetching);
 
+  const RouteElements: JSX.Element[] = routeObj.map((e, i) => <Route key={e.linkText + i} path={e.path} element={<e.component />} />);
 
 
   if (!initialazatedApp) {
@@ -139,10 +126,6 @@ const App: FC = (props) => {
 
   } else {
     console.log(store.getState());
-
-
-
-
     return (
       <StyledAppRef appScroll={appScroll}>
         {isLangChange || isFetching ? <PreloaderContainer /> : null}
@@ -152,33 +135,12 @@ const App: FC = (props) => {
           <ModalContainer opacity={modalOpacity} />
           <HeaderContainer appScroll={appScroll} />
           <HeaderBottomContainer appScroll={appScroll} />
+          {/* <Breadcrumbs /> */}
           <Suspense fallback={<PreloaderContainer />}>
             <Routes>
               <Route index element={<Main />} />
-              <Route path='/compare' element={<Compare />} />
-              <Route path='/viewed' element={<Viewed />} />
-              <Route path='/favorites' element={<Favorites />} />
               <Route path='/cart' element={<Cart />} />
-              <Route path='/catalog' element={<Catalog />} />
-              <Route path='/about' element={<About />} />
-              <Route path='/stock' element={<Stock />} />
-              <Route path='/installment' element={<Installment />} />
-              <Route path='/servise' element={<Servise />} />
-              <Route path='/wholesaleDropshipping' element={<WholesaleDropshipping />} />
-              <Route path='/contacts' element={<Contacts />} />
-              <Route path='/reviews' element={<Reviews />} />
-              <Route path='/advantages' element={<Advantages />} />
-              <Route path='/cooperation' element={<Cooperation />} />
-              <Route path='/affiliate' element={<Affiliate />} />
-              <Route path='/vacancies' element={<Vacancies />} />
-              <Route path='/howToBuy' element={<HowToBuy />} />
-              <Route path='/shippingAndPayment' element={<ShippingAndPayment />} />
-              <Route path='/credit' element={<Credit />} />
-              <Route path='/privacyPolicy' element={<PrivacyPolicy />} />
-              <Route path='/faq' element={<Faq />} />
-              <Route path='/wholesale' element={<Wholesale />} />
-              <Route path='/dropshipping' element={<Dropshipping />} />
-
+              {RouteElements}
             </Routes>
             <FooterContainer />
           </Suspense>
@@ -189,4 +151,24 @@ const App: FC = (props) => {
 };
 
 
-export default React.memo(App);
+
+
+
+const AppContainer = () => {
+  return (
+    <>
+      <React.StrictMode >
+        <BrowserRouter basename='/smart'>
+          <Provider store={store}>
+            <ThemeProvider theme={theme}>
+              <Global />
+              <App />
+            </ThemeProvider>
+          </Provider>
+        </BrowserRouter>
+      </React.StrictMode>,
+    </>
+  );
+};
+
+export default React.memo(AppContainer);
