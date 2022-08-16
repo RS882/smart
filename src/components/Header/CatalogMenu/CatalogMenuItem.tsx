@@ -29,7 +29,9 @@ const StyledItemIcon = styled.div`
 
 const CatalogMenuItem: FC<CatalogMenuItemProps> = (props) => {
 
+
 	const btnText: [string, string][] = Object.entries(props.menuItem);
+
 	const spanElem: JSX.Element[] = Array(25).fill('path').map((e, i) =>
 		<span key={e + i} className={`${e}${i + 1}`}></span>);
 

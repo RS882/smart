@@ -7,7 +7,6 @@ import { strings } from './localization/localization';
 import { Route, Routes } from 'react-router-dom';
 import { ArrowFn } from './types/fnTypes';
 import { changeIsBodyLock, selectIsBodyLock, selectModalOpacity, selectScrollWidth } from './redux/ModalSlice';
-
 import DropDownMenu from './components/Header/DropDownMenu/DropDownMenuContainer';
 import ModalContainer from './components/Modal/ModalContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -21,24 +20,16 @@ import { selectIsPopUp } from './redux/LoginSlice';
 import { selectIsFetching } from './redux/ItemSlice';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import { routeObj } from './routeObj';
-
-
 import { Global } from './GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-
-
-
-
-const Main = React.lazy(() => import('./components/Main/Main'));
-const FooterContainer = React.lazy(() => import('./components/Footer/FooterContainer'));
+import FooterContainer from './components/Footer/FooterContainer';
+import WithSuspense from './components/HOC/WithSuspense';
+import Main from './components/Main/Main'
 const Cart = React.lazy(() => import('./components/Cart/Cart'));
-
-
-
 
 
 interface IAppProps {
@@ -113,8 +104,9 @@ const App: FC = () => {
   const isLoginBoxOpen = useAppSelector(selectIsPopUp);
   const isFetching = useAppSelector(selectIsFetching);
 
-  const RouteElements: JSX.Element[] = routeObj.map((e, i) => <Route key={e.linkText + i} path={e.path} element={<e.component />} />);
-
+  const RouteElements: JSX.Element[] = routeObj.map((e, i) =>
+    <Route key={e.linkText + i} path={e.path}
+      element={WithSuspense(e.Component)({ ...e.componentProps })} />);
 
   if (!initialazatedApp) {
     // console.log(store.getState());
@@ -136,14 +128,13 @@ const App: FC = () => {
           <HeaderContainer appScroll={appScroll} />
           <HeaderBottomContainer appScroll={appScroll} />
           {/* <Breadcrumbs /> */}
-          <Suspense fallback={<PreloaderContainer />}>
-            <Routes>
-              <Route index element={<Main />} />
-              <Route path='/cart' element={<Cart />} />
-              {RouteElements}
-            </Routes>
-            <FooterContainer />
-          </Suspense>
+          <Routes>
+            <Route index element={<Main />} />
+            <Route path='/cart' element={WithSuspense(Cart)({ rrr: '1234' })} />
+            {RouteElements}
+          </Routes>
+          <FooterContainer />
+
         </AppWrapper>
       </StyledAppRef>
     );

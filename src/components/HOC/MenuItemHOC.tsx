@@ -17,13 +17,13 @@ export interface ImenuItemArray {
 };
 
 
-const MenuItemHOC: FC<MenuItemProps> = (props) => {
+const MenuItemHOC: FC<MenuItemProps> = ({ Component, ...props }) => {
 	const items = props.items !== null ? props.items : { '': '' };
 	const menuItemArray: ImenuItemArray[] = Object.entries(items).map(e => ({ itemName: e[0], itemText: e[1] }))
 	const MenuItemElem: JSX.Element[] = menuItemArray.map((e, i, arr) => {
 		const attrFirst: boolean = (i === 0) || false;
 		const attrLast: boolean = (i === arr.length - 1) || false;
-		return <props.Component key={e.itemName + i} item_name={e.itemName} item_text={e.itemText}
+		return <Component key={e.itemName + i} item_name={e.itemName} item_text={e.itemText}
 			$attr_last={attrLast} $attrFirst={attrFirst} />
 	})
 

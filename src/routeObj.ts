@@ -25,31 +25,32 @@ const Dropshipping = React.lazy(() => import('./components/Dropshipping/Dropship
 
 export interface IRouteobj {
 	path: string;
-	component: React.LazyExoticComponent<() => JSX.Element>;
-	linkText: string
+	Component: React.LazyExoticComponent<() => JSX.Element>;
+	linkText: string;
+	componentProps?: object;
 };
 //             
 export const routeObj: IRouteobj[] = [
-	{ path: '/viewed', component: Viewed, linkText: 'Viewed', },
-	{ path: '/compare', component: Compare, linkText: 'Compare', },
-	{ path: '/favorites', component: Favorites, linkText: 'Favorites', },
-	{ path: '/catalog', component: Catalog, linkText: 'Catalog', },
-	{ path: '/about', component: About, linkText: 'About', },
-	{ path: '/stock', component: Stock, linkText: 'Stock', },
-	{ path: '/installment', component: Installment, linkText: 'Installment', },
-	{ path: '/servise', component: Servise, linkText: 'Servise', },
-	{ path: '/wholesaleDropshipping', component: WholesaleDropshipping, linkText: 'Wholesale dropshipping', },
-	{ path: '/contacts', component: Contacts, linkText: 'Contacts', },
-	{ path: '/reviews', component: Reviews, linkText: 'Reviews', },
-	{ path: '/advantages', component: Advantages, linkText: 'Advantages', },
-	{ path: '/affiliate', component: Affiliate, linkText: 'Affiliate', },
-	{ path: '/cooperation', component: Cooperation, linkText: 'Cooperation', },
-	{ path: '/vacancies', component: Vacancies, linkText: 'Vacancies', },
-	{ path: '/howToBuy', component: HowToBuy, linkText: 'How to buy', },
-	{ path: '/shippingAndPayment', component: ShippingAndPayment, linkText: 'Shipping and payment', },
-	{ path: '/credit', component: Credit, linkText: 'Credit', },
-	{ path: '/privacyPolicy', component: PrivacyPolicy, linkText: 'Privacy policy', },
-	{ path: '/faq', component: Faq, linkText: 'faq', },
-	{ path: '/wholesale', component: Wholesale, linkText: 'Wholesale', },
-	{ path: '/dropshipping', component: Dropshipping, linkText: 'Dropshipping', },
+	{ path: '/viewed', Component: Viewed, linkText: 'Viewed', },
+	{ path: '/compare', Component: Compare, linkText: 'Compare', },
+	{ path: '/favorites', Component: Favorites, linkText: 'Favorites', },
+	{ path: '/catalog', Component: Catalog, linkText: 'Catalog', },
+	{ path: '/about', Component: About, linkText: 'About', },
+	{ path: '/stock', Component: Stock, linkText: 'Stock', },
+	{ path: '/installment', Component: Installment, linkText: 'Installment', },
+	{ path: '/servise', Component: Servise, linkText: 'Servise', },
+	{ path: '/wholesaleDropshipping', Component: WholesaleDropshipping, linkText: 'Wholesale dropshipping', },
+	{ path: '/contacts', Component: Contacts, linkText: 'Contacts', },
+	{ path: '/reviews', Component: Reviews, linkText: 'Reviews', },
+	{ path: '/advantages', Component: Advantages, linkText: 'Advantages', },
+	{ path: '/affiliate', Component: Affiliate, linkText: 'Affiliate', },
+	{ path: '/cooperation', Component: Cooperation, linkText: 'Cooperation', },
+	{ path: '/vacancies', Component: Vacancies, linkText: 'Vacancies', },
+	{ path: '/howToBuy', Component: HowToBuy, linkText: 'How to buy', },
+	{ path: '/shippingAndPayment', Component: ShippingAndPayment, linkText: 'Shipping and payment', },
+	{ path: '/credit', Component: Credit, linkText: 'Credit', },
+	{ path: '/privacyPolicy', Component: PrivacyPolicy, linkText: 'Privacy policy', },
+	{ path: '/faq', Component: Faq, linkText: 'faq', },
+	{ path: '/wholesale', Component: Wholesale, linkText: 'Wholesale', },
+	{ path: '/dropshipping', Component: Dropshipping, linkText: 'Dropshipping', },
 ];
