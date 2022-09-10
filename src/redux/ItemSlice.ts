@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { RootState } from './store';
 import { getItem } from './Thunk/thunkItem';
 
@@ -93,7 +94,10 @@ export const itemSlice = createSlice({
 		},
 		clearFlyingItemId: (state) => {
 			state.idFlyingItem = undefined;
-		}
+		},
+		stopIsFetching: (state) => {
+			state.isFetching = false;
+		},
 	},
 	extraReducers: {
 		[getItem.pending.type]: (state) => {
@@ -101,7 +105,8 @@ export const itemSlice = createSlice({
 		},
 		[getItem.fulfilled.type]: (state, action: PayloadAction<IItemData[]>) => {
 			if (typeof (action.payload) === 'string') {
-				state.errorText = action.payload; state.isFetching = true
+				state.errorText = action.payload;
+				state.isFetching = true;
 
 			} else {
 				state.itemsData = action.payload;
@@ -127,16 +132,13 @@ export const itemSlice = createSlice({
 			}
 			state.isFetching = false;
 		},
-		[getItem.rejected.type]: (state, action: PayloadAction<Error>) => {
-			console.log('errror');
 
-		},
 	}
 
 })
 
 export const { startAddingItemToCart, endAddingItemToCart,
-	getFlyingEndKoord, getFlyingStartKoord, clearFlyingKoord, addFlyingItemId, clearFlyingItemId } = itemSlice.actions;
+	getFlyingEndKoord, getFlyingStartKoord, clearFlyingKoord, addFlyingItemId, clearFlyingItemId, stopIsFetching, } = itemSlice.actions;
 
 export const selectitemsData = (state: RootState) => state.item.itemsData;
 export const selectAddItemToCart = (state: RootState) => state.item.isAddingItemToCart;

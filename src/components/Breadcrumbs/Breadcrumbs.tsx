@@ -26,7 +26,7 @@ const StyledBreadcrumbsActive = styled.div`
 	color:${props => props.theme.color.text.second || '#838688'};
 `;
 
-const Breadcrumbs: FC<IBreadcrumbsProps[]> = (props) => {
+const Breadcrumbs: FC<IBreadcrumbsProps> = (props) => {
 	//const url = useLocation().pathname;
 	const url = '/advantages/howToBuy/iwuwuqiu/uoppp/939382/1ssss';
 

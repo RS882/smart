@@ -7,6 +7,7 @@ import CatalogReducer from "./CatalogSlice";
 import AppReducer from "./AppSlice";
 import LoginReducer from "./LoginSlice";
 import ItemReducer from "./ItemSlice";
+import ErrorReducer from "./ErrorSlice";
 
 const store = configureStore({
 	reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
 		app: AppReducer,
 		login: LoginReducer,
 		item: ItemReducer,
+		error: ErrorReducer,
 	}
 })
 

@@ -1,4 +1,4 @@
-import React, { FC, Suspense, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import styled from 'styled-components'
 import Flex from './components/Flex';
 import { closeMenuLng, selectIsLangChange, selectIsLangMenu, } from './redux/LanguageSlice';
@@ -16,8 +16,8 @@ import { initializatedSuccess, selectInitializated, setIsRetina } from './redux/
 import PreloaderContainer from './components/Preloader/PreloaderContainer';
 import { isRetina } from './utilits/functions';
 import LoginContainer from './components/Login/LoginContainer';
-import { selectIsPopUp } from './redux/LoginSlice';
-import { selectIsFetching } from './redux/ItemSlice';
+import { closePopUp, selectIsPopUp } from './redux/LoginSlice';
+import { selectIsFetching, stopIsFetching } from './redux/ItemSlice';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import { routeObj } from './routeObj';
 import { Global } from './GlobalStyle';
@@ -29,6 +29,8 @@ import { BrowserRouter } from 'react-router-dom';
 import FooterContainer from './components/Footer/FooterContainer';
 import WithSuspense from './components/HOC/WithSuspense';
 import Main from './components/Main/Main'
+import { delErrorMessage, selectErrorMessage, setErrorMessage } from './redux/ErrorSlice';
+import LoginMessage from './components/Login/LoginForm/LoginMessage/LoginMessage';
 const Cart = React.lazy(() => import('./components/Cart/Cart'));
 
 
@@ -78,7 +80,21 @@ const App: FC = () => {
       .then(() => dispatch(changeIsBodyLock(false)))
   }, []);
 
+  const catchAllError = (error: PromiseRejectionEvent) => {
+    dispatch(setErrorMessage(error.reason.message))
+    console.log("Error occurred: " + error.reason.message);
+    // console.log(error);
+  };
 
+  useEffect(() => {
+    window.addEventListener('unhandledrejection', catchAllError);
+
+    return () => {
+      window.removeEventListener('unhandledrejection', catchAllError);
+
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps 
+  }, []);
   //------------------------------------
 
   // закрываем меню выбора языка при клике на любой точке
@@ -108,6 +124,16 @@ const App: FC = () => {
     <Route key={e.linkText + i} path={e.path}
       element={WithSuspense(e.Component)({ ...e.componentProps })} />);
 
+
+  const errorMessage = useAppSelector(selectErrorMessage);
+  const onClickErrorPopUp = () => {
+    dispatch(delErrorMessage());
+    dispatch(closePopUp());
+    dispatch(changeIsBodyLock(false));
+    dispatch(stopIsFetching());
+  }
+
+
   if (!initialazatedApp) {
     // console.log(store.getState());
     return (
@@ -120,6 +146,7 @@ const App: FC = () => {
     console.log(store.getState());
     return (
       <StyledAppRef appScroll={appScroll}>
+        {errorMessage ? <LoginMessage message={errorMessage} onClickOk={onClickErrorPopUp} /> : null}
         {isLangChange || isFetching ? <PreloaderContainer /> : null}
         <AppWrapper onClick={onClickApp} direction={'column'}>
           {isLoginBoxOpen ? <LoginContainer /> : null}
@@ -132,6 +159,7 @@ const App: FC = () => {
             <Route index element={<Main />} />
             <Route path='/cart' element={WithSuspense(Cart)({ rrr: '1234' })} />
             {RouteElements}
+            <Route path='*' element={<div>404 NOT FOUND</div>} />
           </Routes>
           <FooterContainer />
 
@@ -147,18 +175,16 @@ const App: FC = () => {
 
 const AppContainer = () => {
   return (
-    <>
-      <React.StrictMode >
-        <BrowserRouter basename='/smart'>
-          <Provider store={store}>
-            <ThemeProvider theme={theme}>
-              <Global />
-              <App />
-            </ThemeProvider>
-          </Provider>
-        </BrowserRouter>
-      </React.StrictMode>,
-    </>
+    <React.StrictMode >
+      <BrowserRouter basename='/smart'>
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            <Global />
+            <App />
+          </ThemeProvider>
+        </Provider>
+      </BrowserRouter>
+    </React.StrictMode>
   );
 };
 

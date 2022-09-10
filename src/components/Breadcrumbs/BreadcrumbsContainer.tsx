@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { routeObj } from '../../routeObj';
+import Breadcrumbs from './Breadcrumbs';
 
-const BreadcrumbsContainer = () => {
+const BreadcrumbsContainer: FC = () => {
 	//const url = useLocation().pathname;
 	const url = '/advantages/howToBuy/iwuwuqiu/uoppp/939382/1ssss';
 
@@ -18,7 +19,7 @@ const BreadcrumbsContainer = () => {
 
 	return (
 		<div>
-
+			<Breadcrumbs link={url} text={url} />
 		</div>
 	);
 };
