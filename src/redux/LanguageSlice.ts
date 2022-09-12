@@ -13,7 +13,7 @@ interface ILang {
 	language: ILanguages;
 	isMenu: boolean;
 	langStrings: IStrings | null;
-	isLangChange: boolean;
+
 }
 
 const initialState: ILang = {
@@ -23,7 +23,7 @@ const initialState: ILang = {
 	},
 	isMenu: false,
 	langStrings: null,
-	isLangChange: false,
+
 }
 
 const LanguageSlice = createSlice({
@@ -41,17 +41,13 @@ const LanguageSlice = createSlice({
 		closeMenuLng: (state) => {
 			state.isMenu = false;
 		},
-		setIsLangChange: (state, action: PayloadAction<boolean>) => {
-			state.isLangChange = action.payload;
-		},
+
 
 	},
 	extraReducers: {
 
 
-		// [setLanguages.pending.type]: (state) => {
 
-		// },
 		[setLanguages.fulfilled.type]: (state, action: PayloadAction<ILanguages>) => {
 			state.language = action.payload;
 		},
@@ -67,7 +63,7 @@ const LanguageSlice = createSlice({
 
 })
 
-export const { setActiveLanguage, toggleShowMenuLng, closeMenuLng, setIsLangChange, } = LanguageSlice.actions;
+export const { setActiveLanguage, toggleShowMenuLng, closeMenuLng, } = LanguageSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 
@@ -75,7 +71,7 @@ export const { setActiveLanguage, toggleShowMenuLng, closeMenuLng, setIsLangChan
 export const selectLanguage = (state: RootState) => state.languages.language;
 export const selectIsLangMenu = (state: RootState) => state.languages.isMenu;
 export const selectActivLng = (state: RootState) => state.languages.language.activeLanguage;
-export const selectIsLangChange = (state: RootState) => state.languages.isLangChange;
+
 export const selectLangStiringsHeader = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header;
 export const selectLangStiringsHeaderBottomBtn = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header.bottomBtn;
 export const selectLangStiringsHeaderCatalogMenu = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header.catalogMenu;

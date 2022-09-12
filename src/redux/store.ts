@@ -8,6 +8,7 @@ import AppReducer from "./AppSlice";
 import LoginReducer from "./LoginSlice";
 import ItemReducer from "./ItemSlice";
 import ErrorReducer from "./ErrorSlice";
+import PreloaderReducer from "./PreloaderSlice";
 
 const store = configureStore({
 	reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
 		login: LoginReducer,
 		item: ItemReducer,
 		error: ErrorReducer,
+		preloader: PreloaderReducer,
 	}
 })
 

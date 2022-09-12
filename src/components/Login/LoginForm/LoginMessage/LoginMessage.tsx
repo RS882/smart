@@ -35,7 +35,7 @@ const StyledMessage = styled.div`
 const LoginMessage: FC<ILoginMessage> = ({ message, onClickOk }) => {
 
 
-	useEffect(() => { setTimeout(onClickOk, 5000) }, [])
+	//useEffect(() => { setTimeout(onClickOk, 5000) }, [])
 
 	return (
 

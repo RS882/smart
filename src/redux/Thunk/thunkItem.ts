@@ -1,6 +1,6 @@
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { log } from 'console';
+
 import { itemAPI } from '../../API/api';
 
 export const getItem = createAsyncThunk(

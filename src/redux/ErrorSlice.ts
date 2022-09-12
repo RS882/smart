@@ -3,6 +3,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from './store';
 import { getItem } from './Thunk/thunkItem';
+import { loginUser, regNewUser } from './Thunk/thunkLogin';
 
 
 
@@ -15,6 +16,8 @@ const initialState: IErrorSlice = {
 	errorMessage: undefined,
 
 };
+
+
 
 const ErrorSlice = createSlice({
 	name: 'error',
@@ -30,8 +33,12 @@ const ErrorSlice = createSlice({
 	extraReducers: {
 		[getItem.rejected.type]: (state, action: PayloadAction<string>) => {
 			state.errorMessage = action.payload;
-
-
+		},
+		[loginUser.rejected.type]: (state, action: PayloadAction<string>) => {
+			state.errorMessage = action.payload;
+		},
+		[regNewUser.rejected.type]: (state, action: PayloadAction<string>) => {
+			state.errorMessage = action.payload;
 		},
 	}
 });

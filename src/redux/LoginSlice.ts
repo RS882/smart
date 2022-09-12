@@ -94,10 +94,7 @@ export const loginSlice = createSlice({
 				state.isLoginSuccess = true;
 			}
 		},
-		[loginUser.rejected.type]: (state, action: PayloadAction<Error>) => {
-			console.log('errror');
-			state.error = action.payload;
-		},
+
 		[regNewUser.fulfilled.type]: (state, action: PayloadAction<IUserDate>) => {
 			if (action.payload.id !== undefined) {
 				state.userDate = action.payload;
@@ -111,10 +108,7 @@ export const loginSlice = createSlice({
 			}
 
 		},
-		[regNewUser.rejected.type]: (state, action: PayloadAction<Error>) => {
-			console.log('errror');
-			state.error = action.payload;
-		},
+
 	}
 })
 

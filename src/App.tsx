@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef } from 'react';
 import styled from 'styled-components'
 import Flex from './components/Flex';
-import { closeMenuLng, selectIsLangChange, selectIsLangMenu, } from './redux/LanguageSlice';
+import { closeMenuLng, selectIsLangMenu, } from './redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { strings } from './localization/localization';
 import { Route, Routes } from 'react-router-dom';
@@ -17,7 +17,7 @@ import PreloaderContainer from './components/Preloader/PreloaderContainer';
 import { isRetina } from './utilits/functions';
 import LoginContainer from './components/Login/LoginContainer';
 import { closePopUp, selectIsPopUp } from './redux/LoginSlice';
-import { selectIsFetching, stopIsFetching } from './redux/ItemSlice';
+
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import { routeObj } from './routeObj';
 import { Global } from './GlobalStyle';
@@ -31,6 +31,9 @@ import WithSuspense from './components/HOC/WithSuspense';
 import Main from './components/Main/Main'
 import { delErrorMessage, selectErrorMessage, setErrorMessage } from './redux/ErrorSlice';
 import LoginMessage from './components/Login/LoginForm/LoginMessage/LoginMessage';
+import { selectIsPreloader, setIsFeching } from './redux/PreloaderSlice';
+
+
 const Cart = React.lazy(() => import('./components/Cart/Cart'));
 
 
@@ -116,9 +119,9 @@ const App: FC = () => {
 
 
   const initialazatedApp = useAppSelector(selectInitializated);
-  const isLangChange = useAppSelector(selectIsLangChange);
+
   const isLoginBoxOpen = useAppSelector(selectIsPopUp);
-  const isFetching = useAppSelector(selectIsFetching);
+  const isFetching = useAppSelector(selectIsPreloader);
 
   const RouteElements: JSX.Element[] = routeObj.map((e, i) =>
     <Route key={e.linkText + i} path={e.path}
@@ -130,7 +133,7 @@ const App: FC = () => {
     dispatch(delErrorMessage());
     dispatch(closePopUp());
     dispatch(changeIsBodyLock(false));
-    dispatch(stopIsFetching());
+    dispatch(setIsFeching(false));
   }
 
 
@@ -147,7 +150,7 @@ const App: FC = () => {
     return (
       <StyledAppRef appScroll={appScroll}>
         {errorMessage ? <LoginMessage message={errorMessage} onClickOk={onClickErrorPopUp} /> : null}
-        {isLangChange || isFetching ? <PreloaderContainer /> : null}
+        {isFetching ? <PreloaderContainer /> : null}
         <AppWrapper onClick={onClickApp} direction={'column'}>
           {isLoginBoxOpen ? <LoginContainer /> : null}
           <DropDownMenu />

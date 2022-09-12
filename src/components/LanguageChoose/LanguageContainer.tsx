@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { closeMenuLng, selectIsLangMenu, selectLanguage, setActiveLanguage, setIsLangChange, toggleShowMenuLng } from '../../redux/LanguageSlice';
+import { closeMenuLng, selectIsLangMenu, selectLanguage, setActiveLanguage, toggleShowMenuLng } from '../../redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import Languages from './Languages';
 import { strings } from '../../localization/localization';
@@ -8,6 +8,7 @@ import { loadLanguage } from '../../redux/Thunk/thunkInitApp';
 
 
 import { changeIsBodyLock } from '../../redux/ModalSlice';
+import { setIsFeching } from '../../redux/PreloaderSlice';
 
 
 
@@ -25,7 +26,7 @@ const LanguageContainer: FC = () => {
 
 	const cnahgeActiveLng = (e: string) => {
 		Promise.all([
-			dispatch(setIsLangChange(true)),
+			dispatch(setIsFeching(true)),
 			dispatch(changeIsBodyLock(true)),
 		])
 			.then(() => {
@@ -36,7 +37,7 @@ const LanguageContainer: FC = () => {
 			})
 			.then(() => {
 				setTimeout(() => {
-					dispatch(setIsLangChange(false))
+					dispatch(setIsFeching(false))
 					dispatch(changeIsBodyLock(false))
 				}, 500)
 

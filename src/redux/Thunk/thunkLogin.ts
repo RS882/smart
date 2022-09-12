@@ -19,7 +19,7 @@ export const loginUser = createAsyncThunk(
 					return error.message;
 				}
 			})
-			.catch(reject => thunkAPI.rejectWithValue(reject));//выводим ошибку
+			.catch(reject => thunkAPI.rejectWithValue(reject.message));//выводим ошибку
 
 		return res;
 	}
@@ -30,7 +30,7 @@ export const regNewUser = createAsyncThunk(
 	async (data: ValuesLog, thunkAPI) => {
 		const res = await loginAPI.regUser(data)
 			.then(response => response.data)
-			.catch(reject => thunkAPI.rejectWithValue(reject));//выводим ошибку
+			.catch(reject => thunkAPI.rejectWithValue(reject.message));//выводим ошибку
 
 		return res;
 	}

@@ -12,6 +12,7 @@ export const setLanguages = createAsyncThunk(
 			activeLanguage: data.getLanguage(),
 		} as ILanguages;
 	}
+
 );
 
 export const loadLanguage = createAsyncThunk(
