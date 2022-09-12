@@ -32,4 +32,4 @@ const ItemBannersContainer: FC<IItemBanners> = ({ newItem, bestseller, ...props 
 	);
 };
 
-export default ItemBannersContainer;
+export default React.memo(ItemBannersContainer);

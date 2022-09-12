@@ -81,14 +81,13 @@ export const itemSlice = createSlice({
 
 
 		clearFlyingKoord: (state) => {
-			state.endFlyToCart.left = undefined;
-			state.endFlyToCart.top = undefined;
-			state.startFlyToCart.left = undefined;
-			state.startFlyToCart.top = undefined;
-			state.startFlyToCart.widthK = undefined;
-			state.startFlyToCart.heightK = undefined;
+			let keyEnd: keyof typeof state.endFlyToCart;
+			for (keyEnd in state.endFlyToCart) { state.endFlyToCart[keyEnd] = undefined; };
+			let keyStart: keyof typeof state.startFlyToCart;
+			for (keyStart in state.startFlyToCart) { state.startFlyToCart[keyStart] = undefined; };
 			state.isGetKoord = false;
 		},
+
 		addFlyingItemId: (state, action: PayloadAction<string>) => {
 			state.idFlyingItem = action.payload;
 		},

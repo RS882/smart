@@ -12,6 +12,9 @@ const initialState: IPreloaderState = {
 	isFetching: false,
 
 };
+const changeIsFetching = (is: boolean) => (state: IPreloaderState) => {
+	state.isFetching = is;
+};
 
 export const preloaderSlice = createSlice({
 	name: 'preloader',
@@ -23,37 +26,16 @@ export const preloaderSlice = createSlice({
 
 	},
 	extraReducers: {
-		[getItem.pending.type]: (state) => {
-			state.isFetching = true;
-		},
-		[getItem.fulfilled.type]: (state) => {
-			state.isFetching = false;
-		},
-		[setLanguages.pending.type]: (state) => {
-			state.isFetching = true;
-		},
-		[setLanguages.fulfilled.type]: (state) => {
-			state.isFetching = false;
-		},
-		[loginUser.pending.type]: (state) => {
-			state.isFetching = true;
-		},
-		[loginUser.fulfilled.type]: (state) => {
-			state.isFetching = false;
-		},
-		[regNewUser.pending.type]: (state) => {
-			state.isFetching = true;
-		},
-		[regNewUser.fulfilled.type]: (state) => {
-			state.isFetching = false;
-		},
-		[setScrollWidth.pending.type]: (state) => {
-			state.isFetching = true;
-		},
-		[setScrollWidth.fulfilled.type]: (state) => {
-			state.isFetching = false;
-		},
-
+		[getItem.pending.type]: changeIsFetching(true),
+		[getItem.fulfilled.type]: changeIsFetching(false),
+		[setLanguages.pending.type]: changeIsFetching(true),
+		[setLanguages.fulfilled.type]: changeIsFetching(false),
+		[loginUser.pending.type]: changeIsFetching(true),
+		[loginUser.fulfilled.type]: changeIsFetching(false),
+		[regNewUser.pending.type]: changeIsFetching(true),
+		[regNewUser.fulfilled.type]: changeIsFetching(false),
+		[setScrollWidth.pending.type]: changeIsFetching(true),
+		[setScrollWidth.fulfilled.type]: changeIsFetching(false),
 	}
 })
 export const { setIsFeching } = preloaderSlice.actions;

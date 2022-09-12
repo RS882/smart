@@ -29,22 +29,19 @@ const getObjFalse = (obj: IIsPage): IIsPage => {
 	return obj;
 };
 
+const open = (key: keyof typeof initialState.isMenu) =>
+	(state: IMenuState, action: PayloadAction<boolean>) => {
+		state.isMenu = getObjFalse(state.isMenu);
+		state.isMenu[key] = action.payload;
+	};
+
 export const menuSlice = createSlice({
 	name: 'menu',
 	initialState,
 	reducers: {
-		openCatalog: (state, action: PayloadAction<boolean>) => {
-			state.isMenu = getObjFalse(state.isMenu);
-			state.isMenu.isCatalog = action.payload;
-		},
-		openScearch: (state, action: PayloadAction<boolean>) => {
-			state.isMenu = getObjFalse(state.isMenu);
-			state.isMenu.isScearch = action.payload;
-		},
-		openMore: (state, action: PayloadAction<boolean>) => {
-			state.isMenu = getObjFalse(state.isMenu);
-			state.isMenu.isMore = action.payload;
-		},
+		openCatalog: open('isCatalog'),
+		openScearch: open('isScearch'),
+		openMore: open('isMore'),
 		closeMenu: (state) => {
 			state.isMenu = getObjFalse(state.isMenu);
 		},

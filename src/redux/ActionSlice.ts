@@ -11,16 +11,31 @@ interface IActions {
 	favorites: number;
 	compare: number;
 	cart: number;
-}
-
-export interface IAction extends IIsActionFull {
-	counts: IActions,
+};
+interface IItemsObj {
 	itemsInCart: string[];
 	viewedItems: string[];
 	favoriteItems: string[];
 	compareItems: string[];
+
 };
 
+
+export interface IAction extends IIsActionFull, IItemsObj {
+	counts: IActions,
+
+};
+
+const isObj: IIsActionFull = {
+	isCartFull: false,
+	isMoreFull: true,
+};
+const itemsObj: IItemsObj = {
+	itemsInCart: [],
+	viewedItems: [],
+	favoriteItems: [],
+	compareItems: [],
+};
 
 const initialState: IAction = {
 	counts: {
@@ -29,12 +44,30 @@ const initialState: IAction = {
 		compare: 0,
 		cart: 0,
 	},
-	isCartFull: false,
-	isMoreFull: true,
-	itemsInCart: [],
-	viewedItems: [],
-	favoriteItems: [],
-	compareItems: [],
+	...itemsObj,
+	...isObj,
+};
+
+
+const addCount = (key: keyof typeof initialState.counts, isFull: keyof typeof isObj = 'isMoreFull') =>
+	(state: IAction) => {
+		++state.counts[key];
+		state[isFull] = true;
+	};
+const reduceCount = (key: keyof typeof initialState.counts, isFull: keyof typeof isObj = 'isMoreFull') =>
+	(state: IAction) => {
+		state.counts[key] && --state.counts[key];
+		state[isFull] = state.counts[key] !== 0;
+	};
+
+const addItemsTo = (key: keyof typeof itemsObj) => (state: IAction, action: PayloadAction<string>) => {
+	state[key].push(action.payload);
+};
+const delItemsTo = (key: keyof typeof itemsObj) => (state: IAction, action: PayloadAction<string>) => {
+	state[key] = state[key].filter(e => e !== action.payload);
+};
+const clearAllItems = (key: keyof typeof itemsObj) => (state: IAction) => {
+	state[key] = [];
 };
 
 const ActionSlice = createSlice({
@@ -48,75 +81,29 @@ const ActionSlice = createSlice({
 			state.isMoreFull = (state.counts.viewed + state.counts.compare + state.counts.favorites) !== 0;
 		},
 
-		addViewedCount: (state) => {
-			++state.counts.viewed;
-			state.isMoreFull = true;
-		},
-		addItemToViewed: (state, action: PayloadAction<string>) => {
-			state.viewedItems.push(action.payload);
-		},
-		delItemToViewed: (state, action: PayloadAction<string>) => {
-			state.viewedItems = state.viewedItems.filter(e => e !== action.payload);
-		},
-		clearViewed: (state) => {
-			state.viewedItems = [];
-		},
+		addViewedCount: addCount('viewed'),
+		addItemToViewed: addItemsTo('viewedItems'),
+		delItemToViewed: delItemsTo('viewedItems'),
+		clearViewed: clearAllItems('viewedItems'),
 
-		addFavoritesCount: (state) => {
-			++state.counts.favorites;
-			state.isMoreFull = true;
-		},
-		reduceFavoritesCount: (state) => {
-			state.counts.favorites && --state.counts.favorites;
-			state.isMoreFull = state.counts.favorites !== 0;
-		},
-		addItemToFavorite: (state, action: PayloadAction<string>) => {
-			state.favoriteItems.push(action.payload);
-		},
-		delItemToFavorite: (state, action: PayloadAction<string>) => {
-			state.favoriteItems = state.favoriteItems.filter(e => e !== action.payload);
-		},
-		clearFavorite: (state) => {
-			state.favoriteItems = [];
-		},
+		addFavoritesCount: addCount('favorites'),
+		reduceFavoritesCount: reduceCount('favorites'),
+		addItemToFavorite: addItemsTo('favoriteItems'),
+		delItemToFavorite: delItemsTo('favoriteItems'),
+		clearFavorite: clearAllItems('favoriteItems'),
 
-		addCompareCount: (state) => {
-			++state.counts.compare;
-			state.isMoreFull = true;
-		},
-		reduceCompareCount: (state) => {
-			state.counts.compare && --state.counts.compare;
-			state.isMoreFull = state.counts.compare !== 0;
-		},
-		addItemToCompare: (state, action: PayloadAction<string>) => {
-			state.compareItems.push(action.payload);
-		},
-		delItemToCompare: (state, action: PayloadAction<string>) => {
-			state.compareItems = state.compareItems.filter(e => e !== action.payload);
-		},
-		clearCompare: (state) => {
-			state.compareItems = [];
-		},
+		addCompareCount: addCount('compare'),
+		reduceCompareCount: reduceCount('compare'),
+		addItemToCompare: addItemsTo('compareItems'),
+		delItemToCompare: delItemsTo('compareItems'),
+		clearCompare: clearAllItems('compareItems'),
 
+		addCartCount: addCount('cart', 'isCartFull'),
+		reduceCartCount: reduceCount('cart', 'isCartFull'),
+		addItemToCart: addItemsTo('itemsInCart'),
+		delItemToCart: delItemsTo('itemsInCart'),
+		clearCart: clearAllItems('itemsInCart'),
 
-		addCartCount: (state) => {
-			++state.counts.cart;
-			state.isCartFull = true;
-		},
-		addItemToCart: (state, action: PayloadAction<string>) => {
-			state.itemsInCart.push(action.payload);
-		},
-		delItemToCart: (state, action: PayloadAction<string>) => {
-			state.itemsInCart = state.itemsInCart.filter(e => e !== action.payload);
-		},
-		clearCart: (state) => {
-			state.itemsInCart = [];
-		},
-
-		reduceCartCount: (state) => {
-			state.counts.cart && --state.counts.cart;
-			state.isCartFull = state.counts.cart !== 0;
-		},
 		clearCounts: (state) => {
 			let key: keyof typeof state.counts;
 			for (key in state.counts) { state.counts[key] = 0; }

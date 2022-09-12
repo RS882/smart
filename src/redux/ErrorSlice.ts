@@ -17,7 +17,7 @@ const initialState: IErrorSlice = {
 
 };
 
-
+const addErrorMessage = (state: IErrorSlice, action: PayloadAction<string>) => { state.errorMessage = action.payload };
 
 const ErrorSlice = createSlice({
 	name: 'error',
@@ -31,15 +31,10 @@ const ErrorSlice = createSlice({
 		},
 	},
 	extraReducers: {
-		[getItem.rejected.type]: (state, action: PayloadAction<string>) => {
-			state.errorMessage = action.payload;
-		},
-		[loginUser.rejected.type]: (state, action: PayloadAction<string>) => {
-			state.errorMessage = action.payload;
-		},
-		[regNewUser.rejected.type]: (state, action: PayloadAction<string>) => {
-			state.errorMessage = action.payload;
-		},
+		[getItem.rejected.type]: addErrorMessage,
+		[loginUser.rejected.type]: addErrorMessage,
+		[regNewUser.rejected.type]: addErrorMessage,
+
 	}
 });
 
