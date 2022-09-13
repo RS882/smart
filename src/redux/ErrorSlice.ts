@@ -17,7 +17,11 @@ const initialState: IErrorSlice = {
 
 };
 
-const addErrorMessage = (state: IErrorSlice, action: PayloadAction<string>) => { state.errorMessage = action.payload };
+const addErrorMessage = (state: IErrorSlice, action: PayloadAction<string>) => {
+	console.log(action.payload);
+
+	state.errorMessage = action.payload
+};
 
 const ErrorSlice = createSlice({
 	name: 'error',

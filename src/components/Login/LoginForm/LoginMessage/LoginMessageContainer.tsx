@@ -12,7 +12,6 @@ const LoginMessageContainer: FC = (props) => {
 	const dispatch = useAppDispatch();
 	const message = useAppSelector(selectLoginMessage);
 
-
 	const onClickOk: () => void = () => {
 		dispatch(clearRegMessage());
 		dispatch(closePopUp());
@@ -30,4 +29,4 @@ const LoginMessageContainer: FC = (props) => {
 
 
 
-export default LoginMessageContainer;
+export default React.memo(LoginMessageContainer);

@@ -16,7 +16,7 @@ import { initializatedSuccess, selectInitializated, setIsRetina } from './redux/
 import PreloaderContainer from './components/Preloader/PreloaderContainer';
 import { isRetina } from './utilits/functions';
 import LoginContainer from './components/Login/LoginContainer';
-import { closePopUp, selectIsPopUp } from './redux/LoginSlice';
+import { closePopUp, selectIsPopUp, selectLoginMessage } from './redux/LoginSlice';
 
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import { routeObj } from './routeObj';
@@ -32,6 +32,7 @@ import Main from './components/Main/Main'
 import { delErrorMessage, selectErrorMessage, setErrorMessage } from './redux/ErrorSlice';
 import LoginMessage from './components/Login/LoginForm/LoginMessage/LoginMessage';
 import { selectIsPreloader, setIsFeching } from './redux/PreloaderSlice';
+import LoginMessageContainer from './components/Login/LoginForm/LoginMessage/LoginMessageContainer';
 
 
 const Cart = React.lazy(() => import('./components/Cart/Cart'));
@@ -41,7 +42,7 @@ interface IAppProps {
   ref: React.RefObject<HTMLDivElement>;
   appScroll?: string;
 
-}
+};
 
 const AppWrapper = styled(Flex)`
   min-height: 100%;
@@ -85,8 +86,7 @@ const App: FC = () => {
 
   const catchAllError = (error: PromiseRejectionEvent) => {
     dispatch(setErrorMessage(error.reason.message))
-    console.log("Error occurred: " + error.reason.message);
-    // console.log(error);
+    //console.log("Error occurred: " + error.reason.message);
   };
 
   useEffect(() => {
@@ -102,9 +102,7 @@ const App: FC = () => {
 
   // закрываем меню выбора языка при клике на любой точке
   const isMenu = useAppSelector(selectIsLangMenu);
-  const onClickApp: ArrowFn = () => {
-    isMenu && dispatch(closeMenuLng());
-  };
+  const onClickApp: ArrowFn = () => { isMenu && dispatch(closeMenuLng()) };
 
   // прозрачность модальго окна
   const modalOpacity: string = useAppSelector(selectModalOpacity)
@@ -135,7 +133,7 @@ const App: FC = () => {
     dispatch(changeIsBodyLock(false));
     dispatch(setIsFeching(false));
   }
-
+  const message = useAppSelector(selectLoginMessage)
 
   if (!initialazatedApp) {
     // console.log(store.getState());
@@ -150,6 +148,7 @@ const App: FC = () => {
     return (
       <StyledAppRef appScroll={appScroll}>
         {errorMessage ? <LoginMessage message={errorMessage} onClickOk={onClickErrorPopUp} /> : null}
+        {message ? <LoginMessageContainer /> : null}
         {isFetching ? <PreloaderContainer /> : null}
         <AppWrapper onClick={onClickApp} direction={'column'}>
           {isLoginBoxOpen ? <LoginContainer /> : null}

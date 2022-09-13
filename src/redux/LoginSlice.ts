@@ -27,8 +27,7 @@ export interface ILogin {
 	isSubmit: boolean;
 	isLoginSuccess: boolean;
 	userDate: IUserDate | {};
-	error: any | undefined;
-	errorText: string | undefined;
+
 	regMessage: string | undefined;
 };
 
@@ -39,8 +38,7 @@ const initialState: ILogin = {
 	isShowPassword: false,
 	isSubmit: false,
 	isLoginSuccess: false,
-	error: undefined,
-	errorText: undefined,
+
 	userDate: {},
 	regMessage: undefined,
 }
@@ -84,13 +82,14 @@ export const loginSlice = createSlice({
 	},
 	extraReducers: {
 		[loginUser.fulfilled.type]: (state, action: PayloadAction<IUserDate>) => {
+			console.log(action.payload);
 			if (typeof (action.payload) === 'string') {
-				state.errorText = action.payload;
+				state.regMessage = action.payload;
 				state.isLoginSuccess = false;
 			} else {
 				state.userDate = action.payload;
-				state.errorText = undefined;
-				state.error = undefined;
+				state.regMessage = undefined;
+
 				state.isLoginSuccess = true;
 			}
 		},

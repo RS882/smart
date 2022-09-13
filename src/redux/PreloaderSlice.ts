@@ -28,14 +28,19 @@ export const preloaderSlice = createSlice({
 	extraReducers: {
 		[getItem.pending.type]: changeIsFetching(true),
 		[getItem.fulfilled.type]: changeIsFetching(false),
+		[getItem.rejected.type]: changeIsFetching(false),
 		[setLanguages.pending.type]: changeIsFetching(true),
 		[setLanguages.fulfilled.type]: changeIsFetching(false),
+		[setLanguages.rejected.type]: changeIsFetching(false),
 		[loginUser.pending.type]: changeIsFetching(true),
 		[loginUser.fulfilled.type]: changeIsFetching(false),
+		[loginUser.rejected.type]: changeIsFetching(false),
 		[regNewUser.pending.type]: changeIsFetching(true),
 		[regNewUser.fulfilled.type]: changeIsFetching(false),
+		[regNewUser.rejected.type]: changeIsFetching(false),
 		[setScrollWidth.pending.type]: changeIsFetching(true),
 		[setScrollWidth.fulfilled.type]: changeIsFetching(false),
+		[setScrollWidth.rejected.type]: changeIsFetching(false),
 	}
 })
 export const { setIsFeching } = preloaderSlice.actions;

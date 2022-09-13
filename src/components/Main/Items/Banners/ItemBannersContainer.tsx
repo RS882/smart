@@ -12,7 +12,6 @@ const StyledBannersContainer = styled.div`
 	flex-direction:column;
 	align-items:flex-end;
 	position:absolute;
-	z-index:100;
 	top: 10px;
 	right:10px;
 	height: calc(100% - 10px) ;

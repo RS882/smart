@@ -51,7 +51,7 @@ const LoginContainer: FC = (props) => {
 	const isLoginBox = useAppSelector(selectIsLoginBox);
 	const isRegBox = useAppSelector(selectIsRegBox);
 	const isSubmit = useAppSelector(selectIsSubmit);
-	const message = useAppSelector(selectLoginMessage)
+
 
 	useEffect(() => {
 		dispatch(openLoginBox(true));
@@ -71,7 +71,7 @@ const LoginContainer: FC = (props) => {
 	};
 
 	const closeWрhenTransitionEnd = () => {
-		if (!isOpen && message === undefined) {
+		if (!isOpen) {
 			dispatch(closePopUp());
 			dispatch(changeIsBodyLock(false));
 		}
@@ -87,10 +87,10 @@ const LoginContainer: FC = (props) => {
 					<ClosePopUpContainer onClickClosePopUp={isSubmit ? () => { } : onClickClosePopUp} />
 				</StyledComponetBox>
 			</StyledLoginWrapper>
-			{message !== undefined ? <LoginMessageContainer /> : null}
+
 			<Modal opacity={'0.6'} isModal={true} isOpen={false} />
 		</>
 	);
 };
 
-export default LoginContainer;
+export default React.memo(LoginContainer);
