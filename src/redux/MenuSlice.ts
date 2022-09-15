@@ -22,7 +22,7 @@ const initialState: IMenuState = {
 	isDesktopScearch: false,
 	isUserMenuOpen: false,
 };
-
+// All values of the literals of the object set the FALSE
 const getObjFalse = (obj: IIsPage): IIsPage => {
 	let key: keyof typeof obj;
 	for (key in obj) { obj[key] = false }
@@ -35,6 +35,7 @@ const open = (key: keyof typeof initialState.isMenu) =>
 		state.isMenu[key] = action.payload;
 	};
 
+// Reducer Heder menu
 export const menuSlice = createSlice({
 	name: 'menu',
 	initialState,
@@ -42,12 +43,12 @@ export const menuSlice = createSlice({
 		openCatalog: open('isCatalog'),
 		openScearch: open('isScearch'),
 		openMore: open('isMore'),
-		closeMenu: (state) => {
-			state.isMenu = getObjFalse(state.isMenu);
-		},
+		closeMenu: (state) => { state.isMenu = getObjFalse(state.isMenu) },
+
 		openDesktopScearch: (state, action: PayloadAction<boolean>) => {
 			state.isDesktopScearch = action.payload;
 		},
+
 		openUserMenu: (state, action: PayloadAction<boolean>) => {
 			state.isUserMenuOpen = action.payload;
 		},

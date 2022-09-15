@@ -19,10 +19,9 @@ const initialState: IErrorSlice = {
 
 const addErrorMessage = (state: IErrorSlice, action: PayloadAction<string>) => {
 	console.log(action.payload);
-
 	state.errorMessage = action.payload
 };
-
+// Reducer of error processing
 const ErrorSlice = createSlice({
 	name: 'error',
 	initialState,

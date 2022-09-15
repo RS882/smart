@@ -1,14 +1,14 @@
-import { string } from "yup";
+
 import { IStrings, IStringsWithMethods } from "../localization/localization";
 
 
 export type telFn = (phoneNum: string | undefined) => string;
 
-//преобразуем шаблон пока тел номера из +3801111111 в +38 (011) 111 11 11
+//We convert a phone number of a telephone number from +380111111 V +38 (011) 111 11 11
 export const showPhoneNum: telFn = phoneNum => {
 	if (!phoneNum) return '';
 	const res: string[] = phoneNum.split('');
-	// изменем массив arr : на позиции указанные в массиве arrModPos вставляем строку modElem
+	// We change the arrase Arr: At the positions indicated in the arrmodpos array, we insert the linem line
 	const arrMod = (arr: string[], arrModPos: number[], modElem: string = ' ') => arrModPos.forEach(e => arr.splice(e, 0, modElem));
 	arrMod(res, [3, 7, 11, 14]);
 	arrMod(res, [4], '(');
@@ -16,7 +16,7 @@ export const showPhoneNum: telFn = phoneNum => {
 	return res.join('');
 };
 
-// получает объект без литералов начинающихся на _
+// receives an object without literals starting on _
 export const transformObjStrings = (obj: IStringsWithMethods) => {
 	let stringsText: IStrings = { ...obj };
 	let key: keyof typeof stringsText;
@@ -27,7 +27,8 @@ export const transformObjStrings = (obj: IStringsWithMethods) => {
 };
 
 //----------------------------------------------------------------
-export const isRetina = () => {/*проверка Retina*/
+/*verification Retina*/
+export const isRetina = () => {
 	return !!((window.matchMedia && (window.matchMedia
 		('only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx), only screen and (min-resolution: 75.6dpcm)')
 		.matches || window.matchMedia
@@ -35,7 +36,7 @@ export const isRetina = () => {/*проверка Retina*/
 			.matches)) || (window.devicePixelRatio && window.devicePixelRatio >= 2))
 		&& /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
 };
-
+// We convert the phone number- leave only numbers
 export const converTelNumber = (tel: string | undefined) => {
 	if (tel !== undefined) {
 		return tel.split('').filter(e => /^\d$/.test(e)).join('')

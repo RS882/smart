@@ -67,72 +67,78 @@ const StyledAppRef = styled.div.attrs(props => ({ ref: props.ref, })) <IAppProps
 const App: FC = () => {
 
   const dispatch = useAppDispatch();
-  //заносим в стейт данные о языках
+
   const appRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // We initiate a statement
     Promise.all([
-      dispatch(changeIsBodyLock(true)),
-      dispatch(setLanguages(strings)),
-      dispatch(loadLanguage(strings)),
-      dispatch(setScrollWidth(appRef)),
-      dispatch(setIsRetina(isRetina())),
+      dispatch(changeIsBodyLock(true)),// Block scrolling the screen
+      dispatch(setLanguages(strings)),//Install the language
+      dispatch(loadLanguage(strings)),//We load languages
+      dispatch(setScrollWidth(appRef)),// set the size of the scroll strip
+      dispatch(setIsRetina(isRetina())),// Determine the Retina display
     ])
       .then(() => {
         setTimeout(() => dispatch(initializatedSuccess()), 500);
       })
-      .then(() => dispatch(changeIsBodyLock(false)))
+      .then(() => dispatch(changeIsBodyLock(false)))// We unlock the screen scroll
   }, []);
 
   const catchAllError = (error: PromiseRejectionEvent) => {
+    // We transmit error messages to stat
     dispatch(setErrorMessage(error.reason.message))
     //console.log("Error occurred: " + error.reason.message);
   };
 
   useEffect(() => {
+    // Catch the rampant load errors
     window.addEventListener('unhandledrejection', catchAllError);
-
     return () => {
       window.removeEventListener('unhandledrejection', catchAllError);
-
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);
   //------------------------------------
 
-  // закрываем меню выбора языка при клике на любой точке
+  // Close the language selection menu when clicking on any point
   const isMenu = useAppSelector(selectIsLangMenu);
   const onClickApp: ArrowFn = () => { isMenu && dispatch(closeMenuLng()) };
 
-  // прозрачность модальго окна
+  // The transparency of the modal window
   const modalOpacity: string = useAppSelector(selectModalOpacity)
-  // лочим страницу если isBodyLock true( сработало модальное окно) 
+  // Block the page scrolling if the isbodyLock true (the modal window worked)
   const isBodyLock: boolean = useAppSelector(selectIsBodyLock);
   document.body.style.overflow = isBodyLock ? 'hidden' : 'auto';
 
-  // получаем значение ширины полосы прокрутки
+  // Get the width of the scroll strip
   const scrollWidth: number = useAppSelector(selectScrollWidth);
-  //+ убираем сдивиг при пропадении полосу прокрутки
+  //+ Remove the shift when disappeared the scroll strip
   const appScroll: string = `${isBodyLock ? scrollWidth : 0}px`;
 
-
+  // You initialized the application?
   const initialazatedApp = useAppSelector(selectInitializated);
-
+  //Login window open?
   const isLoginBoxOpen = useAppSelector(selectIsPopUp);
+  // Data downloads?
   const isFetching = useAppSelector(selectIsPreloader);
 
+  // We form a block from route windows of windows
   const RouteElements: JSX.Element[] = routeObj.map((e, i) =>
     <Route key={e.linkText + i} path={e.path}
       element={WithSuspense(e.Component)({ ...e.componentProps })} />);
 
-
+  // We give out a message about processed errors
   const errorMessage = useAppSelector(selectErrorMessage);
+
+  // Close the error message window
   const onClickErrorPopUp = () => {
     dispatch(delErrorMessage());
     dispatch(closePopUp());
     dispatch(changeIsBodyLock(false));
     dispatch(setIsFeching(false));
-  }
+  };
+  //Registration message, login
   const message = useAppSelector(selectLoginMessage)
 
   if (!initialazatedApp) {
@@ -152,14 +158,16 @@ const App: FC = () => {
         {isFetching ? <PreloaderContainer /> : null}
         <AppWrapper onClick={onClickApp} direction={'column'}>
           {isLoginBoxOpen ? <LoginContainer /> : null}
+          {/* drop-down menu */}
           <DropDownMenu />
           <ModalContainer opacity={modalOpacity} />
           <HeaderContainer appScroll={appScroll} />
+          {/* Part of the Header menu with a decrease in the screen exchange is visible below */}
           <HeaderBottomContainer appScroll={appScroll} />
           {/* <Breadcrumbs /> */}
           <Routes>
             <Route index element={<Main />} />
-            <Route path='/cart' element={WithSuspense(Cart)({ rrr: '1234' })} />
+            <Route path='/cart' element={WithSuspense(Cart)({})} />
             {RouteElements}
             <Route path='*' element={<div>404 NOT FOUND</div>} />
           </Routes>

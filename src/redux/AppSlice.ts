@@ -14,6 +14,7 @@ const initialState: IApp = {
 	isRetina: false,
 };
 
+// Reducer initialization of the application
 const AppSlice = createSlice({
 	name: 'app',
 	initialState,

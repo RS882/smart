@@ -25,7 +25,7 @@ const initialState: ILang = {
 	langStrings: null,
 
 }
-
+// Reducer of the language switching
 const LanguageSlice = createSlice({
 
 	name: 'languages',
@@ -46,32 +46,23 @@ const LanguageSlice = createSlice({
 	},
 	extraReducers: {
 
-
-
 		[setLanguages.fulfilled.type]: (state, action: PayloadAction<ILanguages>) => {
 			state.language = action.payload;
 		},
 
 		[loadLanguage.fulfilled.type]: (state, action: PayloadAction<IStrings | null>) => {
 			state.langStrings = action.payload;
-
 		},
 
 	},
-	// [setLanguage.rejected]: rejectedUsers,
-
 
 })
 
 export const { setActiveLanguage, toggleShowMenuLng, closeMenuLng, } = LanguageSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
-
-
 export const selectLanguage = (state: RootState) => state.languages.language;
 export const selectIsLangMenu = (state: RootState) => state.languages.isMenu;
 export const selectActivLng = (state: RootState) => state.languages.language.activeLanguage;
-
 export const selectLangStiringsHeader = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header;
 export const selectLangStiringsHeaderBottomBtn = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header.bottomBtn;
 export const selectLangStiringsHeaderCatalogMenu = (state: RootState) => state.languages.langStrings && state.languages.langStrings.header.catalogMenu;

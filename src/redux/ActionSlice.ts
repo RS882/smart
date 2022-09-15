@@ -48,28 +48,32 @@ const initialState: IAction = {
 	...isObj,
 };
 
-
+// Add a unit to the operation counter
 const addCount = (key: keyof typeof initialState.counts, isFull: keyof typeof isObj = 'isMoreFull') =>
 	(state: IAction) => {
 		++state.counts[key];
 		state[isFull] = true;
 	};
+// Removing a unit to the operation counter
 const reduceCount = (key: keyof typeof initialState.counts, isFull: keyof typeof isObj = 'isMoreFull') =>
 	(state: IAction) => {
 		state.counts[key] && --state.counts[key];
 		state[isFull] = state.counts[key] !== 0;
 	};
-
+// Add the product to the list of activity
 const addItemsTo = (key: keyof typeof itemsObj) => (state: IAction, action: PayloadAction<string>) => {
 	state[key].push(action.payload);
 };
+// We remove the goods from the list of activity
 const delItemsTo = (key: keyof typeof itemsObj) => (state: IAction, action: PayloadAction<string>) => {
 	state[key] = state[key].filter(e => e !== action.payload);
 };
+// Clean the list of acting
 const clearAllItems = (key: keyof typeof itemsObj) => (state: IAction) => {
 	state[key] = [];
 };
 
+//Reducer of actions with goods -examination, comparison, of the basket, likes
 const ActionSlice = createSlice({
 
 	name: 'action',
@@ -121,7 +125,6 @@ export const { addViewedCount, addFavoritesCount, reduceFavoritesCount,
 	addItemToCompare, delItemToCompare, clearCompare }
 	= ActionSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
 
 export const selectViewedCount = (state: RootState) => state.action.counts.viewed;
 export const selectFavoritesCount = (state: RootState) => state.action.counts.favorites;

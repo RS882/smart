@@ -1,3 +1,4 @@
+// Validators of the input fields
 
 export const validatePassword = (value: string) => {
 	let error: string | undefined = undefined;

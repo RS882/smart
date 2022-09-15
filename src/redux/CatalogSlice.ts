@@ -10,7 +10,7 @@ export interface ICatalog {
 const initialState: ICatalog = {
 	selectedItemsType: '',
 };
-
+// Reducer of the Catalog of Products
 const CatalogSlice = createSlice({
 	name: 'catalog',
 	initialState,

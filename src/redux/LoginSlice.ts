@@ -43,7 +43,7 @@ const initialState: ILogin = {
 	regMessage: undefined,
 }
 
-
+// Reducer of the Login menu
 export const loginSlice = createSlice({
 	name: 'login',
 	initialState,
@@ -89,7 +89,6 @@ export const loginSlice = createSlice({
 			} else {
 				state.userDate = action.payload;
 				state.regMessage = undefined;
-
 				state.isLoginSuccess = true;
 			}
 		},

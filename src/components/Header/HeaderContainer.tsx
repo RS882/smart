@@ -40,16 +40,17 @@ const StyledHeader = styled.header<HeaderContainerProps>`
 
 
 const HeaderContainer: FC<HeaderContainerProps> = (props) => {
-
+	//Text in elements components on the selected page
 	const sundry = useAppSelector(selectLangStiringsHeaderSundry);
-
+	//Are the request of the desktop computer included?
 	const isDesktopSearch = useAppSelector(selectIsDesktopScearch);
-
+	// Is a successful login?
 	const isLogSuccess = useAppSelector(selectIsLogSuccess);
+	// Is the user menu open?
 	const isUserMenuOpen = useAppSelector(selectIsUserMenuOpen);
 
 	const dispatch = useAppDispatch();
-
+	// Let the login menu
 	const onClickLogin = () => {
 		dispatch(openPopUp());
 		dispatch(changeIsBodyLock(true));

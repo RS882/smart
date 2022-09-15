@@ -57,11 +57,11 @@ const initialState: IItems = {
 
 };
 
+// Reducer of work with goods
 export const itemSlice = createSlice({
 	name: 'item',
 	initialState,
 	reducers: {
-
 
 		startAddingItemToCart: (state) => {
 			state.isAddingItemToCart = true;

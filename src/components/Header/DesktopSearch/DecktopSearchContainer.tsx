@@ -40,7 +40,7 @@ const StyledScearch = styled.div`
 	margin-top:16px;
 `
 
-const DecktopSearchContainer: FC = (props) => {
+const DecktopSearchContainer: FC = () => {
 
 	const [isShow, setIsShow] = useState(false);
 	const dispatch = useDispatch();

@@ -15,29 +15,29 @@ const initialState: IModalState = {
 	scrollWidth: 0,
 	opacity: '0.8',
 };
-
+// Reducer of the modal window
 export const modalSlice = createSlice({
 	name: 'modal',
 	initialState,
 	reducers: {
-		// устанвливает откыто ли модльное окно и залочена прокрутка страницы
+		// Whether the modal window sets and the scrolling of the page is openly blocked
 		changeIsModal: (state, action: PayloadAction<boolean>) => {
 			state.isModal = action.payload;
 			state.isBodyLock = action.payload;
 		},
-		// устанвливает залочена ли прокрутка страницы
+		// sets whether the scrolling of the page is blocked
 		changeIsBodyLock: (state, action: PayloadAction<boolean>) => {
 			state.isBodyLock = action.payload;
 		},
 
-		// устанавливаем ширину полосы прокрутки
+		// Install the transparency of the modal window
 		setOpacity: (state, action: PayloadAction<string>) => {
 			state.opacity = action.payload;
 		},
 	},
 	extraReducers: {
+		// Install the width of the scroll strip
 		[setScrollWidth.fulfilled.type]: (state, action: PayloadAction<number>) => {
-
 			state.scrollWidth = action.payload;
 		},
 	}

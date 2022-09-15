@@ -12,10 +12,9 @@ const initialState: IPreloaderState = {
 	isFetching: false,
 
 };
-const changeIsFetching = (is: boolean) => (state: IPreloaderState) => {
-	state.isFetching = is;
-};
+const changeIsFetching = (is: boolean) => (state: IPreloaderState) => { state.isFetching = is };
 
+// Reducer of the preloroder
 export const preloaderSlice = createSlice({
 	name: 'preloader',
 	initialState,
