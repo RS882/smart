@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { addCompareCount, addFavoritesCount, addItemToCompare, addItemToFavorite, delItemToCompare, delItemToFavorite, reduceCompareCount, reduceFavoritesCount } from '../../../../redux/ActionSlice';
+import { addItemToCompare, addItemToFavorite, delItemToCompare, delItemToFavorite, } from '../../../../redux/ActionSlice';
 
 
 import IconBtn from '../IconBtn/IconBtn';
@@ -29,10 +29,10 @@ const FavoriteContainer: FC<IFavoriteContainer> = ({ isFavorite, id, isCompare }
 	const toogleItemToFavotite = () => {
 
 		if (isFavorite) {
-			dispatch(reduceFavoritesCount());
+			//dispatch(reduceFavoritesCount());
 			dispatch(delItemToFavorite(id));
 		} else {
-			dispatch(addFavoritesCount());
+			//dispatch(addFavoritesCount());
 			dispatch(addItemToFavorite(id));
 		}
 
@@ -41,10 +41,10 @@ const FavoriteContainer: FC<IFavoriteContainer> = ({ isFavorite, id, isCompare }
 	const toogleItemToCompare = () => {
 
 		if (isCompare) {
-			dispatch(reduceCompareCount());
+			//dispatch(reduceCompareCount());
 			dispatch(delItemToCompare(id));
 		} else {
-			dispatch(addCompareCount());
+			//dispatch(addCompareCount());
 			dispatch(addItemToCompare(id));
 		}
 	};

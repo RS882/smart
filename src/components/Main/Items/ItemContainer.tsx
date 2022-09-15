@@ -5,7 +5,7 @@ import { clearFlyingItemId, clearFlyingKoord, endAddingItemToCart, getFlyingStar
 
 import Item from './Item';
 import { selectEndFlyKoord, selectIdFlyingItem, selectIsGetKoord } from './../../../redux/ItemSlice';
-import { addCartCount, addItemToCart } from '../../../redux/ActionSlice';
+import { addItemToCart } from '../../../redux/ActionSlice';
 
 import { IItemProps } from './ItemsContainer';
 
@@ -95,7 +95,7 @@ const ItemContainer: FC<IItemProps> = ({ itemData }) => {
 
 		dispatch(endAddingItemToCart());
 		dispatch(clearFlyingItemId());
-		dispatch(addCartCount());
+		//dispatch(addCartCount());
 		dispatch(addItemToCart(itemData ? itemData.id : '0'));
 		dispatch(clearFlyingKoord());
 

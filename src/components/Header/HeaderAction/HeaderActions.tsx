@@ -4,14 +4,19 @@ import Flex from '../../Flex';
 import { IActionArray } from '../../../types/HeaderTypes';
 import HeaderAction from './HeaderAction';
 import { useNavigate } from 'react-router';
-import { useDispatch } from 'react-redux';
+
 import { closeMenu } from '../../../redux/MenuSlice';
 import { changeIsModal } from '../../../redux/ModalSlice';
 import { useAppDispatch } from '../../../redux/hooks';
 
 
 interface IHeaderActions {
-	conuts: IAction["counts"];
+	conuts: {
+		viewed: number;
+		favorites: number;
+		compare: number;
+		cart: number;
+	};
 	actionArray: IActionArray[];
 	onClickAction?: () => void;
 }

@@ -6,12 +6,7 @@ export interface IIsActionFull {
 	isMoreFull: boolean,
 }
 
-interface IActions {
-	viewed: number;
-	favorites: number;
-	compare: number;
-	cart: number;
-};
+
 interface IItemsObj {
 	itemsInCart: string[];
 	viewedItems: string[];
@@ -22,8 +17,6 @@ interface IItemsObj {
 
 
 export interface IAction extends IIsActionFull, IItemsObj {
-	counts: IActions,
-
 };
 
 const isObj: IIsActionFull = {
@@ -38,28 +31,12 @@ const itemsObj: IItemsObj = {
 };
 
 const initialState: IAction = {
-	counts: {
-		viewed: 0,
-		favorites: 0,
-		compare: 0,
-		cart: 0,
-	},
+
 	...itemsObj,
 	...isObj,
 };
 
-// Add a unit to the operation counter
-const addCount = (key: keyof typeof initialState.counts, isFull: keyof typeof isObj = 'isMoreFull') =>
-	(state: IAction) => {
-		++state.counts[key];
-		state[isFull] = true;
-	};
-// Removing a unit to the operation counter
-const reduceCount = (key: keyof typeof initialState.counts, isFull: keyof typeof isObj = 'isMoreFull') =>
-	(state: IAction) => {
-		state.counts[key] && --state.counts[key];
-		state[isFull] = state.counts[key] !== 0;
-	};
+
 // Add the product to the list of activity
 const addItemsTo = (key: keyof typeof itemsObj) => (state: IAction, action: PayloadAction<string>) => {
 	state[key].push(action.payload);
@@ -79,38 +56,39 @@ const ActionSlice = createSlice({
 	name: 'action',
 	initialState,
 	reducers: {
-		loadCounts: (state, action: PayloadAction<IActions>) => {
-			state.counts = action.payload;
-			state.isCartFull = state.counts.cart !== 0;
-			state.isMoreFull = (state.counts.viewed + state.counts.compare + state.counts.favorites) !== 0;
+		loadCounts: (state, action: PayloadAction<IItemsObj>) => {
+			const { itemsInCart, viewedItems, favoriteItems, compareItems } = action.payload;
+			state.itemsInCart = itemsInCart;
+			state.viewedItems = viewedItems;
+			state.favoriteItems = favoriteItems;
+			state.compareItems = compareItems;
+			state.isCartFull = itemsInCart.length !== 0;
+			state.isMoreFull = (viewedItems.length + compareItems.length + favoriteItems.length) !== 0;
 		},
 
-		addViewedCount: addCount('viewed'),
+
 		addItemToViewed: addItemsTo('viewedItems'),
 		delItemToViewed: delItemsTo('viewedItems'),
 		clearViewed: clearAllItems('viewedItems'),
 
-		addFavoritesCount: addCount('favorites'),
-		reduceFavoritesCount: reduceCount('favorites'),
 		addItemToFavorite: addItemsTo('favoriteItems'),
 		delItemToFavorite: delItemsTo('favoriteItems'),
 		clearFavorite: clearAllItems('favoriteItems'),
 
-		addCompareCount: addCount('compare'),
-		reduceCompareCount: reduceCount('compare'),
 		addItemToCompare: addItemsTo('compareItems'),
 		delItemToCompare: delItemsTo('compareItems'),
 		clearCompare: clearAllItems('compareItems'),
 
-		addCartCount: addCount('cart', 'isCartFull'),
-		reduceCartCount: reduceCount('cart', 'isCartFull'),
+
 		addItemToCart: addItemsTo('itemsInCart'),
 		delItemToCart: delItemsTo('itemsInCart'),
 		clearCart: clearAllItems('itemsInCart'),
 
 		clearCounts: (state) => {
-			let key: keyof typeof state.counts;
-			for (key in state.counts) { state.counts[key] = 0; }
+			state.itemsInCart = [];
+			state.viewedItems = [];
+			state.favoriteItems = [];
+			state.compareItems = [];
 			state.isCartFull = false;
 			state.isMoreFull = false;
 		},
@@ -118,21 +96,22 @@ const ActionSlice = createSlice({
 })
 
 
-export const { addViewedCount, addFavoritesCount, reduceFavoritesCount,
-	addCompareCount, reduceCompareCount, addCartCount, reduceCartCount, clearCounts, loadCounts,
+export const { clearCounts, loadCounts,
 	addItemToCart, delItemToCart, clearCart, addItemToViewed, delItemToViewed, clearViewed,
 	addItemToFavorite, delItemToFavorite, clearFavorite,
 	addItemToCompare, delItemToCompare, clearCompare }
 	= ActionSlice.actions;
 
 
-export const selectViewedCount = (state: RootState) => state.action.counts.viewed;
-export const selectFavoritesCount = (state: RootState) => state.action.counts.favorites;
-export const selectCompareCount = (state: RootState) => state.action.counts.compare;
-export const selectCartCount = (state: RootState) => state.action.counts.cart;
 export const selectIsCartFull = (state: RootState) => state.action.isCartFull;
 export const selectIsMoreFull = (state: RootState) => state.action.isMoreFull;
-export const selectActionCount = (state: RootState) => state.action.counts;
+export const selectActionCount = (state: RootState) =>
+({
+	viewed: state.action.viewedItems.length,
+	favorites: state.action.favoriteItems.length,
+	compare: state.action.compareItems.length,
+	cart: state.action.itemsInCart.length,
+});
 export const selectItemInCart = (state: RootState) => state.action.itemsInCart;
 export const selectViewedItem = (state: RootState) => state.action.viewedItems;
 export const selectFavoritedItem = (state: RootState) => state.action.favoriteItems;

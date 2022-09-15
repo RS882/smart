@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import itemImg from '../../../assets/image 18.png'
-import { addItemToViewed, addViewedCount, selectCompaedItem, selectViewedItem } from '../../../redux/ActionSlice';
+import { addItemToViewed, selectCompaedItem, selectViewedItem } from '../../../redux/ActionSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 
 import BuyAndCartContainer from './BuyAndCart/BuyAndCartContainer';
@@ -86,13 +86,14 @@ const Item: FC<IItemProps> = ({ itemData }) => {
 	const itemsType = useAppSelector(selectLangStiringsHeaderCatalogMenu);
 	const dispatch = useAppDispatch();
 
-	const isFavorite: boolean = itemData ? favoriteItems.includes(itemId) : false;
-	const isCompare: boolean = itemData ? copmareItems.includes(itemId) : false;
+	const isIncudes = (arr: string[]) => itemData ? arr.includes(itemId) : false;
+	const isFavorite: boolean = isIncudes(favoriteItems);
+	const isCompare: boolean = isIncudes(copmareItems);
 
 
 	const addViewItems = () => {
 		if (itemData && !viewedItems.includes(itemId)) {
-			dispatch(addViewedCount());
+			// dispatch(addViewedCount());
 			dispatch(addItemToViewed(itemId))
 		}
 	};
