@@ -53,7 +53,7 @@ export interface IStrings {
 export interface IStringsWithMethods extends IStrings, LocalizedStringsMethods {
 
 };
-
+// Language selection object
 export let strings: IStringsWithMethods = new LocalizedStrings({
 	en: {
 		header: headerTextEn,

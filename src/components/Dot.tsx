@@ -13,7 +13,7 @@ const StyledDot = styled.div<IDot>`
 	background-color: ${props => props.theme.color.yellow || '#FBB13C'};
 `
 
-
+// component for output points
 const Dot: FC<IDot> = (props) => {
 	return (
 		<StyledDot {...props} />
@@ -21,4 +21,4 @@ const Dot: FC<IDot> = (props) => {
 	);
 };
 
-export default Dot;
+export default React.memo(Dot);

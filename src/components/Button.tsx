@@ -52,7 +52,7 @@ const StyledButton = styled.button.attrs(props => ({
 	}
 	`;
 
-
+//Component button
 const Button: FC<ButtonProps> = (props) => {
 	return (
 		<StyledButton {...props} >

@@ -21,7 +21,7 @@ export interface IAction extends IIsActionFull, IItemsObj {
 
 const isObj: IIsActionFull = {
 	isCartFull: false,
-	isMoreFull: true,
+	isMoreFull: false,
 };
 const itemsObj: IItemsObj = {
 	itemsInCart: [],
@@ -38,16 +38,28 @@ const initialState: IAction = {
 
 
 // Add the product to the list of activity
-const addItemsTo = (key: keyof typeof itemsObj) => (state: IAction, action: PayloadAction<string>) => {
-	state[key].push(action.payload);
-};
+const addItemsTo = (key: keyof typeof itemsObj, isFull: keyof typeof isObj = 'isMoreFull') =>
+	(state: IAction, action: PayloadAction<string>) => {
+		state[key].push(action.payload);
+		state[isFull] = true;
+	};
+// We check to eat goods in the basket
+const setIsCartFull = (items: string[]) => items.length !== 0;
+// Let's check whether there are goods viewed, you like and for comparison
+const setIsMoreFull = (items1: string[], items2: string[], items3: string[]) => (items1.length + items2.length + items3.length) !== 0;
+
 // We remove the goods from the list of activity
-const delItemsTo = (key: keyof typeof itemsObj) => (state: IAction, action: PayloadAction<string>) => {
-	state[key] = state[key].filter(e => e !== action.payload);
-};
+const delItemsTo = (key: keyof typeof itemsObj) =>
+	(state: IAction, action: PayloadAction<string>) => {
+		state[key] = state[key].filter(e => e !== action.payload);
+		state.isCartFull = setIsCartFull(state.itemsInCart);
+		state.isMoreFull = setIsMoreFull(state.viewedItems, state.compareItems, state.favoriteItems);
+	};
 // Clean the list of acting
 const clearAllItems = (key: keyof typeof itemsObj) => (state: IAction) => {
 	state[key] = [];
+	state.isCartFull = setIsCartFull(state.itemsInCart);
+	state.isMoreFull = setIsMoreFull(state.viewedItems, state.compareItems, state.favoriteItems);
 };
 
 //Reducer of actions with goods -examination, comparison, of the basket, likes
@@ -62,10 +74,9 @@ const ActionSlice = createSlice({
 			state.viewedItems = viewedItems;
 			state.favoriteItems = favoriteItems;
 			state.compareItems = compareItems;
-			state.isCartFull = itemsInCart.length !== 0;
-			state.isMoreFull = (viewedItems.length + compareItems.length + favoriteItems.length) !== 0;
+			state.isCartFull = setIsCartFull(itemsInCart);
+			state.isMoreFull = setIsMoreFull(viewedItems, compareItems, favoriteItems);
 		},
-
 
 		addItemToViewed: addItemsTo('viewedItems'),
 		delItemToViewed: delItemsTo('viewedItems'),
@@ -79,8 +90,7 @@ const ActionSlice = createSlice({
 		delItemToCompare: delItemsTo('compareItems'),
 		clearCompare: clearAllItems('compareItems'),
 
-
-		addItemToCart: addItemsTo('itemsInCart'),
+		addItemToCart: addItemsTo('itemsInCart', 'isCartFull'),
 		delItemToCart: delItemsTo('itemsInCart'),
 		clearCart: clearAllItems('itemsInCart'),
 

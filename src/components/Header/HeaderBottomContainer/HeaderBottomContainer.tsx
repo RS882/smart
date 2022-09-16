@@ -28,11 +28,13 @@ const StyledHeaderBottomContainer = styled(Flex) <IHeaderBottom>`
 		padding: 0 104px;
 		padding-right: ${props => props.appScroll};
 	};
+	// show the lower menu only for Tablet and Phone
 	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
 		display:none;
 	};
 	`
 
+// menu at the bottom of the screen
 const HeaderBottomContainer: FC<IHeaderBottom> = (props) => {
 
 	const isMoreFull: boolean = useAppSelector(selectIsMoreFull);

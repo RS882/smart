@@ -29,7 +29,7 @@ export interface IRouteobj {
 	linkText: string;
 	componentProps?: object;
 };
-//             
+// Object for links for route         
 export const routeObj: IRouteobj[] = [
 	{ path: '/viewed', Component: Viewed, linkText: 'Viewed', },
 	{ path: '/compare', Component: Compare, linkText: 'Compare', },

@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
-
+// Numbering of stylization meanings
 export const Global = createGlobalStyle`
 
 * {

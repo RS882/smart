@@ -22,7 +22,7 @@ const StyledFlex = styled.div<FlexProps>`
 	align-items:${props => props.align || 'center'};
 	margin:${props => props.margin || '0px'};
 `;
-
+// Component for flex container
 const Flex: FC<FlexProps> = (props) => {
 
 	return <StyledFlex {...props} />

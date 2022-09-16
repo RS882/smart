@@ -169,6 +169,7 @@ const App: FC = () => {
             <Route index element={<Main />} />
             <Route path='/cart' element={WithSuspense(Cart)({})} />
             {RouteElements}
+            {/* Page 404 */}
             <Route path='*' element={<div>404 NOT FOUND</div>} />
           </Routes>
           <FooterContainer />

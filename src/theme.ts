@@ -1,6 +1,6 @@
 import { DefaultTheme } from 'styled-components';
 
-
+// constant values for stylization
 export const theme: DefaultTheme = {
 	width: {
 		min: '320px',

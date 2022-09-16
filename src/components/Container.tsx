@@ -17,6 +17,7 @@ const StyledContainer = styled.div<ContainerProps>`
 			max-width: ${props => props.theme.width.maxContainer || '1300px'};
 	};
 `;
+// component - limiting container
 const Container: FC<ContainerProps> = (props) => {
 	return <StyledContainer {...props} />;
 };

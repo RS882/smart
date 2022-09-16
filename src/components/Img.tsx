@@ -20,7 +20,7 @@ const StyledImg = styled.img.attrs(props => ({
 	height: 100%;
 `;
 
-
+// component for displaying pictures
 const Image: FC<ImgProps> = (props) => {
 	return (
 		<Flex>
@@ -29,4 +29,4 @@ const Image: FC<ImgProps> = (props) => {
 	);
 };
 
-export default Image;
+export default React.memo(Image);
