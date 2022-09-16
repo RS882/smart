@@ -1,18 +1,13 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-
-export interface IModal {
-	opacity: string;
-	isModal: boolean;
-	isOpen?: boolean;
-};
-
 export interface ModalProps {
 	opacity: string;
 	isOpen?: boolean;
-}
-
+};
+export interface IModal extends ModalProps {
+	isModal: boolean;
+};
 const StyledModal = styled.div<ModalProps>`
 	position: fixed;
 	top: 0;
@@ -27,9 +22,10 @@ const StyledModal = styled.div<ModalProps>`
 		display: ${props => props.isOpen ? 'none' : 'block'};
 	};
 `;
-
+// Modal window: opacity - window transparency 
+//isModal - Is the window open
+// isOpenIs the octite at least one menu in the lower part of the screen (for Tablet and Phone)
 const Modal: FC<IModal> = (props) => {
-
 	const { isModal, ...rest } = props;
 	return (
 		<>
@@ -38,4 +34,4 @@ const Modal: FC<IModal> = (props) => {
 	);
 };
 
-export default Modal;
+export default React.memo(Modal);

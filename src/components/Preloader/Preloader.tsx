@@ -19,8 +19,8 @@ const StyledImg = styled.img`
 	width: 40%;
 	height: 40%;
 `
-
-const Preloader: FC = (props) => {
+// Preloader spiner
+const Preloader: FC = () => {
 	return (
 		<StyledSpiner>
 			<StyledImg src={spiner} alt="spiner" width='100' height='100' />
@@ -28,4 +28,4 @@ const Preloader: FC = (props) => {
 	);
 };
 
-export default Preloader;
+export default React.memo(Preloader);
