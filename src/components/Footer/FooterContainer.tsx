@@ -7,13 +7,17 @@ import FooterMenu from './FooterMenu/FooterMenu';
 import FooterFooterContainer from './FooterFooter/FooterFooterContainer';
 import { useAppSelector } from '../../redux/hooks';
 import { selectLangStiringsFooter } from './../../redux/LanguageSlice';
+import { selectIsCartPage } from '../../redux/CartSlice';
 
+interface IFooterFooterProps {
+	isCartOpen: boolean;
+};
 
-const StyledFooterContainer = styled.div`
+const StyledFooterContainer = styled.div<IFooterFooterProps>`
 	width: 100%;
 	margin-bottom:64px;
 	padding: 0 10px;
-	background-color: ${props => props.theme.color.lightBlue || '#EDF2F6'};
+	background-color: ${props => props.isCartOpen ? '#fff' : props.theme.color.lightBlue || '#EDF2F6'};
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		padding: 0 20px;
 	};
@@ -57,7 +61,7 @@ const StyledFooterMenu2 = styled.div`
 
 const FooterContainer: FC = () => {
 
-
+	const isCartOpen = useAppSelector(selectIsCartPage);
 	const footerNull = useAppSelector(selectLangStiringsFooter);
 
 	const footer: IFooterStings = footerNull !== null ? footerNull : {
@@ -77,17 +81,20 @@ const FooterContainer: FC = () => {
 		footer: { '': '' },
 	}
 	return (
-		<StyledFooterContainer>
+		<StyledFooterContainer isCartOpen={isCartOpen}>
 			<Container>
-				<StyledFooterWrapper>
-					<FooterLogoAdressBlock workTime={strings.header.sundry.workTime} address={footer.address} />
-					<StyledFooterMenu2>
-						<FooterMenu items={footer.store} />
-					</StyledFooterMenu2>
-					<FooterMenu items={footer.client} />
-					<FooterMenu items={footer.cooperation} />
-					<FooterFooterContainer items={footer.footer} />
-				</StyledFooterWrapper>
+				{isCartOpen ? <FooterFooterContainer items={footer.footer} /> :
+					<StyledFooterWrapper>
+
+						<FooterLogoAdressBlock workTime={strings.header.sundry.workTime} address={footer.address} />
+						<StyledFooterMenu2>
+							<FooterMenu items={footer.store} />
+						</StyledFooterMenu2>
+						<FooterMenu items={footer.client} />
+						<FooterMenu items={footer.cooperation} />
+						<FooterFooterContainer items={footer.footer} />
+					</StyledFooterWrapper>}
+
 			</Container>
 		</StyledFooterContainer >
 	);

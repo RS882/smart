@@ -18,7 +18,9 @@ import swatchImg from './../../assets/banner_item/pngwing2.png';
 
 
 
-const StyledMain = styled.main`
+export const StyledMain = styled.main`
+	width: 100%;
+	height: 100%;
 	margin-top: 80px;
 	
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {

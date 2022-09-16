@@ -4,7 +4,7 @@ import Flex from './components/Flex';
 import { closeMenuLng, selectIsLangMenu, } from './redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { strings } from './localization/localization';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { ArrowFn } from './types/fnTypes';
 import { changeIsBodyLock, selectIsBodyLock, selectModalOpacity, selectScrollWidth } from './redux/ModalSlice';
 import DropDownMenu from './components/Header/DropDownMenu/DropDownMenuContainer';
@@ -33,6 +33,7 @@ import { delErrorMessage, selectErrorMessage, setErrorMessage } from './redux/Er
 import LoginMessage from './components/Login/LoginForm/LoginMessage/LoginMessage';
 import { selectIsPreloader, setIsFeching } from './redux/PreloaderSlice';
 import LoginMessageContainer from './components/Login/LoginForm/LoginMessage/LoginMessageContainer';
+import { setIsCartPage } from './redux/CartSlice';
 
 
 const Cart = React.lazy(() => import('./components/Cart/Cart'));
@@ -140,6 +141,12 @@ const App: FC = () => {
   };
   //Registration message, login
   const message = useAppSelector(selectLoginMessage)
+
+  // If the basket is open, we report this in stat
+  const path = useLocation().pathname
+  useEffect(() => {
+    dispatch(setIsCartPage(path === '/cart'))
+  }, [path]);
 
   if (!initialazatedApp) {
     // console.log(store.getState());

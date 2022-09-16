@@ -1,17 +1,27 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import Container from '../Container';
+import { StyledMain } from './../Main/Main';
 
-const Margin1 = styled.main`
-	margin: 150px;
+
+const StyledCartContainer = styled.div`
+
+	border: 1px solid #000;
+	display:flex;
 `
-const Cart: FC<{ rrr?: string }> = (props) => {
 
-	console.log(props.rrr);
+const Cart: FC = (props) => {
+
+
 
 	return (
-		<Margin1>
-			cart
-		</Margin1>
+		<StyledMain>
+			<Container>
+				<StyledCartContainer>
+					cartsOFJAPFASDPFADPJFADPGJDFGJPADGJGDPGFAG
+				</StyledCartContainer>
+			</Container>
+		</StyledMain>
 	);
 };
 
