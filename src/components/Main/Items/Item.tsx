@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import itemImg from '../../../assets/image 18.png'
+
 import { addItemToViewed, selectCompaedItem, selectViewedItem } from '../../../redux/ActionSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 
@@ -18,6 +18,7 @@ import { IItemProps } from './ItemsContainer';
 
 
 const StyledItemColumn = styled.div`
+
 	position:relative;
 	display: flex;
 	flex-direction:column;
@@ -42,7 +43,7 @@ const StyledImg = styled.button`
 `;
 const ImgStyled = styled.img.attrs(props => ({
 	alt: "item image",
-	src: itemImg
+	src: props.src
 }))`
 
 	width: 100%;
@@ -64,12 +65,16 @@ const StyledItemType = styled.button`
 
 const StyledItemName = styled.button`
 	
+	height:200px;
 	font-weight:400;
 	margin-bottom:20px;
-	text-align:start;font-size: 20px;
+	text-align:start;
+	align-self:flex-start;
+	font-size: 20px;
 	line-height: 130%;
 	transition:all 0.3s ease 0s;
 	text-decoration:none;
+
 	&:hover{
 		text-decoration:underline;
 	}
@@ -110,7 +115,7 @@ const Item: FC<IItemProps> = ({ itemData }) => {
 				bestseller={itemData ? itemData.salehit : false} />
 
 			<StyledImg onClick={addViewItems}>
-				<ImgStyled />
+				<ImgStyled src={itemData.src} />
 			</StyledImg>
 
 			<StyledItemType onClick={viewAllItemOfType}>

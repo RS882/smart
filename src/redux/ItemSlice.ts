@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import itemImg from '../assets/image 18.png'
 
 import { RootState } from './store';
 import { getItem } from './Thunk/thunkItem';
@@ -14,7 +15,7 @@ export interface IItemData {
 	salehit: number | boolean;
 	newitem: number | boolean;
 	itemType: string;
-
+	src?: string;
 
 };
 export interface IKoord {
@@ -109,6 +110,7 @@ export const itemSlice = createSlice({
 					e.salehit = e.salehit > 50;
 					e.newitem = e.newitem > 50;
 					e.itemType = `itemsType${Math.round(+e.itemType / 11)}`;
+					e.src = e.src || itemImg;
 
 					// itemsType1: '_icon-hoverboard',
 					// itemsType2: '_icon-e_kick_scooter',

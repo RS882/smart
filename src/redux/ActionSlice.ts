@@ -51,7 +51,8 @@ const setIsMoreFull = (items1: string[], items2: string[], items3: string[]) => 
 // We remove the goods from the list of activity
 const delItemsTo = (key: keyof typeof itemsObj) =>
 	(state: IAction, action: PayloadAction<string>) => {
-		state[key] = state[key].filter(e => e !== action.payload);
+		const index = state[key].indexOf(action.payload);
+		if (index >= 0) state[key].splice(index, 1)
 		state.isCartFull = setIsCartFull(state.itemsInCart);
 		state.isMoreFull = setIsMoreFull(state.viewedItems, state.compareItems, state.favoriteItems);
 	};
