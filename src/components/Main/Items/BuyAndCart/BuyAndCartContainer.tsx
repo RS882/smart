@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
+import { useNavigate } from 'react-router';
 import styled from 'styled-components';
-import { selectItemInCart } from '../../../../redux/ActionSlice';
+import { addItemToCart, selectItemInCart } from '../../../../redux/ActionSlice';
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks';
 import { addFlyingItemId, selectAddItemToCart, startAddingItemToCart } from '../../../../redux/ItemSlice';
 import IconBtn from '../IconBtn/IconBtn';
@@ -53,21 +54,23 @@ const BuyAndCartContainer: FC<ICartProps> = ({ idItem }) => {
 	const btnText = useAppSelector(selectItemBuyBtnText);
 	const isAddingItem = useAppSelector(selectAddItemToCart);
 	const itemInCart = useAppSelector(selectItemInCart)
+	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const addToCart = () => {
 		dispatch(startAddingItemToCart());
 		dispatch(addFlyingItemId(idItem));
 	};
 
-	const gotoBuyMenu = () => {
-
+	const gotoBuyMenu = (id: string) => {
+		dispatch(addItemToCart(id));
+		navigate('/cart');
 	};
 
 	const isItemCart = itemInCart.includes(idItem)
 
 	return (
 		<StyledBuyAndCartContainer>
-			<StyledBuyBtn disabled={isAddingItem} onClick={gotoBuyMenu}>{btnText}</StyledBuyBtn>
+			<StyledBuyBtn disabled={isAddingItem} onClick={() => gotoBuyMenu(idItem)}>{btnText}</StyledBuyBtn>
 			<IconBtn callBack={addToCart} iconClass={isItemCart ? '_icon-empty_cart' : '_icon-cart'} isCartBtn={true} isItemInCart={isItemCart}>
 				{isItemCart ? <StyledInCart className='_icon-checkbox' ></StyledInCart> : null}
 			</IconBtn>

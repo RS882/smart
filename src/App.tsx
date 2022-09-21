@@ -4,7 +4,7 @@ import Flex from './components/Flex';
 import { closeMenuLng, selectIsLangMenu, } from './redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { strings } from './localization/localization';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { ArrowFn } from './types/fnTypes';
 import { changeIsBodyLock, selectIsBodyLock, selectModalOpacity, selectScrollWidth } from './redux/ModalSlice';
 import DropDownMenu from './components/Header/DropDownMenu/DropDownMenuContainer';
@@ -34,9 +34,10 @@ import LoginMessage from './components/Login/LoginForm/LoginMessage/LoginMessage
 import { selectIsPreloader, setIsFeching } from './redux/PreloaderSlice';
 import LoginMessageContainer from './components/Login/LoginForm/LoginMessage/LoginMessageContainer';
 import { setIsCartPage } from './redux/CartSlice';
-
+import { selectItemInCart } from './redux/ActionSlice';
 
 const Cart = React.lazy(() => import('./components/Cart/Cart'));
+
 
 
 interface IAppProps {
@@ -70,6 +71,7 @@ const App: FC = () => {
   const dispatch = useAppDispatch();
 
   const appRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // We initiate a statement
@@ -84,19 +86,31 @@ const App: FC = () => {
         setTimeout(() => dispatch(initializatedSuccess()), 500);
       })
       .then(() => dispatch(changeIsBodyLock(false)))// We unlock the screen scroll
+    navigate('/');
   }, []);
 
   const catchAllError = (error: PromiseRejectionEvent) => {
     // We transmit error messages to stat
     dispatch(setErrorMessage(error.reason.message))
-    //console.log("Error occurred: " + error.reason.message);
+
   };
+  //const itemInCart = useAppSelector(selectItemInCart)
+  const addToLocallocalStorage = () => {
+    console.log('+++');
+
+
+  }
 
   useEffect(() => {
+    console.log(localStorage.length);
+
     // Catch the rampant load errors
     window.addEventListener('unhandledrejection', catchAllError);
+    // We monitor the closing event of the application and starting the function to save data in localStorage
+    window.addEventListener('beforeunload', addToLocallocalStorage);
     return () => {
       window.removeEventListener('unhandledrejection', catchAllError);
+      window.removeEventListener('beforeunload', addToLocallocalStorage);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, []);

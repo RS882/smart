@@ -96,11 +96,11 @@ const OrderItem: FC<IOrderItemPros> = ({ item, itemCount, onClickItem, onClickTr
 				</StyledImg>
 				<StyledItemName>{item.itemname} {item.itemDescription}</StyledItemName>
 			</StyledOrderItemContainer >
-			// The amount of this product in the basket + the ability to change the quantity
+			{/*// The amount of this product in the basket + the ability to change the quantity*/}
 			<ItemOrderCounterCountainer itemCount={itemCount} itemId={item.id} />
-			// The price of this product
+			{/*// The price of this product*/}
 			<OrderItemPreise itemCount={itemCount} item={item} />
-			// garbage basket- removal of goods from the basket
+			{/*// garbage basket- removal of goods from the basket*/}
 			<StyledTrashCan className='_icon-trash_can' onClick={() => onClickTrashCan(item.id)} />
 		</StyledOrderContainer>
 	);

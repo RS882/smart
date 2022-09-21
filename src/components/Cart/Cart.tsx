@@ -2,10 +2,11 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import Container from '../Container';
 import { StyledMain } from './../Main/Main';
-import { selectCartTextTitle } from './../../redux/LanguageSlice';
+import { selectCartTextBtnNext, selectCartTextTitle } from './../../redux/LanguageSlice';
 
 import { useAppSelector } from '../../redux/hooks';
 import OrderContainer from './Order/OrderContainer';
+import Button from '../Button';
 
 
 const StyledCartContainer = styled.div`
@@ -44,6 +45,7 @@ const Cart: FC = (props) => {
 				<StyledCartContainer>
 					<StyledTitle>{titleText}</StyledTitle>
 					<OrderContainer />
+
 				</StyledCartContainer>
 			</Container>
 		</StyledMain>

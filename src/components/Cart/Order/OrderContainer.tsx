@@ -4,6 +4,8 @@ import { selectItemInCart } from '../../../redux/ActionSlice';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectitemsData } from '../../../redux/ItemSlice';
 import { selectCartTextOrder } from '../../../redux/LanguageSlice';
+import Button from '../../Button';
+import BtnNext from '../BtnNext';
 import Order from './Order';
 
 export const StyledCartItemTitle = styled.div`
@@ -20,10 +22,11 @@ export const StyledCartItemTitle = styled.div`
 `;
 
 export const StyledCartItemContainer = styled.div`
-	border-bottom: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
+	margin-bottom:20px;
+	//border-bottom: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		padding:30px;
-		margin-bottom:40px;
+		
 		border: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
 		border-radius: 8px;
 	};
@@ -35,11 +38,19 @@ const OrderContainer: FC = (props) => {
 
 	const items = useAppSelector(selectitemsData).filter((e) => orderItem.includes(e.id));
 
-	return (
+	const setOrderData = () => {
+		console.log('+');
+
+	};
+
+	return (<>
 		<StyledCartItemContainer>
 			<StyledCartItemTitle>{titleText?.title}</StyledCartItemTitle>
 			<Order items={items} orderItem={orderItem} />
+
 		</StyledCartItemContainer>
+		<BtnNext onClickNextBtnCart={setOrderData} />
+	</>
 	);
 };
 
