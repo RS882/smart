@@ -93,6 +93,11 @@ const ActionSlice = createSlice({
 
 		addItemToCart: addItemsTo('itemsInCart', 'isCartFull'),
 		delItemToCart: delItemsTo('itemsInCart'),
+		delAllItemToCart: (state: IAction, action: PayloadAction<string>) => {
+			state.itemsInCart = state.itemsInCart.filter((e) => e !== action.payload);
+			state.isCartFull = setIsCartFull(state.itemsInCart);
+
+		},
 		clearCart: clearAllItems('itemsInCart'),
 
 		clearCounts: (state) => {
@@ -108,7 +113,7 @@ const ActionSlice = createSlice({
 
 
 export const { clearCounts, loadCounts,
-	addItemToCart, delItemToCart, clearCart, addItemToViewed, delItemToViewed, clearViewed,
+	addItemToCart, delItemToCart, delAllItemToCart, clearCart, addItemToViewed, delItemToViewed, clearViewed,
 	addItemToFavorite, delItemToFavorite, clearFavorite,
 	addItemToCompare, delItemToCompare, clearCompare }
 	= ActionSlice.actions;

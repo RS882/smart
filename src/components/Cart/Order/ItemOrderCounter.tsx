@@ -13,7 +13,6 @@ interface IItemOrderCounter extends IMinus {
 };
 
 
-
 const StyledItemOrderCountContaoner = styled.div`
 
 	display: flex;

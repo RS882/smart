@@ -5,6 +5,7 @@ import styled from 'styled-components';
 interface IPrieseContainerProps {
 	prise: string;
 	discount: number;
+	isOrder?: boolean;
 }
 
 const StyledPriseBox = styled.div`
@@ -49,7 +50,7 @@ const StyledDiscountSum = styled.div`
 
 `;
 
-const PriseContainer: FC<IPrieseContainerProps> = ({ prise, discount }) => {
+const PriseContainer: FC<IPrieseContainerProps> = ({ prise, discount, isOrder = false }) => {
 
 	const dicsountPrise = discount !== 0 ? (+prise - (+prise * discount / 100)).toFixed(2) : 0;
 	const discounSum = discount !== 0 ? (+prise - +dicsountPrise).toFixed(2) : 0;
@@ -63,10 +64,10 @@ const PriseContainer: FC<IPrieseContainerProps> = ({ prise, discount }) => {
 			<StyledDiscountPrise>
 				{dicsountPrise} €
 			</StyledDiscountPrise>
-			<StyledDiscountContainer>
+			{isOrder ? null : <StyledDiscountContainer>
 				<StyledDiscountPerc>{discount}%</StyledDiscountPerc>
 				<StyledDiscountSum>- {discounSum} €</StyledDiscountSum>
-			</StyledDiscountContainer>
+			</StyledDiscountContainer>}
 
 		</StyledPriseBox>
 	);

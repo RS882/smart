@@ -28,11 +28,10 @@ export const StyledCartItemContainer = styled.div`
 		border-radius: 8px;
 	};
 `;
-
+//  component of the ordered goods in the basket
 const OrderContainer: FC = (props) => {
 	const titleText = useAppSelector(selectCartTextOrder);
 	const orderItem = useAppSelector(selectItemInCart);
-	// const orderItem = ['1', '4', '3', '7', '26', '4', '3', '7', '26', '3', '7', '26'];
 
 	const items = useAppSelector(selectitemsData).filter((e) => orderItem.includes(e.id));
 
