@@ -14,7 +14,7 @@ import HeaderBottomContainer from './components/Header/HeaderBottomContainer/Hea
 import { loadLanguage, setLanguages, setScrollWidth } from './redux/Thunk/thunkInitApp';
 import { initializatedSuccess, selectInitializated, setIsRetina } from './redux/AppSlice';
 import PreloaderContainer from './components/Preloader/PreloaderContainer';
-import { isRetina } from './utilits/functions';
+import { addArrayToLocalStore, isRetina } from './utilits/functions';
 import LoginContainer from './components/Login/LoginContainer';
 import { closePopUp, selectIsPopUp, selectLoginMessage } from './redux/LoginSlice';
 
@@ -34,7 +34,7 @@ import LoginMessage from './components/Login/LoginForm/LoginMessage/LoginMessage
 import { selectIsPreloader, setIsFeching } from './redux/PreloaderSlice';
 import LoginMessageContainer from './components/Login/LoginForm/LoginMessage/LoginMessageContainer';
 import { setIsCartPage } from './redux/CartSlice';
-import { selectItemInCart } from './redux/ActionSlice';
+import { addItemToCart, addItemToCartStart, addItemToCompare, addItemToCompareStart, addItemToFavorite, addItemToFavoriteStart, addItemToViewed, addItemToViewedStart, selectCompaedItem, selectFavoritedItem, selectItemInCart, selectViewedItem } from './redux/ActionSlice';
 
 const Cart = React.lazy(() => import('./components/Cart/Cart'));
 
@@ -73,6 +73,9 @@ const App: FC = () => {
   const appRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
+
+
+
   useEffect(() => {
     // We initiate a statement
     Promise.all([
@@ -85,8 +88,26 @@ const App: FC = () => {
       .then(() => {
         setTimeout(() => dispatch(initializatedSuccess()), 500);
       })
-      .then(() => dispatch(changeIsBodyLock(false)))// We unlock the screen scroll
+      .then(() => dispatch(changeIsBodyLock(false)))      // We unlock the screen scroll
+      // We download data about the preserved actions localStorage
+      .then(() => {
+        for (let key of Object.keys(localStorage)) {
+          if (key.match(/viewedItems/i)) {
+            dispatch(addItemToViewedStart(localStorage.getItem(key)!));
+          };
+          if (key.match(/itemsInCart/i)) {
+            dispatch(addItemToCartStart(localStorage.getItem(key)!));
+          };
+          if (key.match(/favoriteItems/i)) {
+            dispatch(addItemToFavoriteStart(localStorage.getItem(key)!));
+          };
+          if (key.match(/compareItems/i)) {
+            dispatch(addItemToCompareStart(localStorage.getItem(key)!));
+          };
+        };
+      })
     navigate('/');
+
   }, []);
 
   const catchAllError = (error: PromiseRejectionEvent) => {
@@ -94,15 +115,16 @@ const App: FC = () => {
     dispatch(setErrorMessage(error.reason.message))
 
   };
-  //const itemInCart = useAppSelector(selectItemInCart)
+
+
+
   const addToLocallocalStorage = () => {
     console.log('+++');
 
-
-  }
+  };
 
   useEffect(() => {
-    console.log(localStorage.length);
+
 
     // Catch the rampant load errors
     window.addEventListener('unhandledrejection', catchAllError);
@@ -172,6 +194,8 @@ const App: FC = () => {
 
   } else {
     console.log(store.getState());
+
+
     return (
       <StyledAppRef appScroll={appScroll}>
         {errorMessage ? <LoginMessage message={errorMessage} onClickOk={onClickErrorPopUp} /> : null}

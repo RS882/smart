@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { selectItemInCart } from '../../../redux/ActionSlice';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectitemsData } from '../../../redux/ItemSlice';
 import { selectCartTextOrder } from '../../../redux/LanguageSlice';
+import { addArrayToLocalStore } from '../../../utilits/functions';
 import Button from '../../Button';
 import BtnNext from '../BtnNext';
 import Order from './Order';
@@ -36,10 +37,15 @@ const OrderContainer: FC = (props) => {
 	const titleText = useAppSelector(selectCartTextOrder);
 	const orderItem = useAppSelector(selectItemInCart);
 
+
 	const items = useAppSelector(selectitemsData).filter((e) => orderItem.includes(e.id));
 
+
+
+
+
 	const setOrderData = () => {
-		console.log('+');
+		localStorage.clear();
 
 	};
 

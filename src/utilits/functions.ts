@@ -38,8 +38,14 @@ export const isRetina = () => {
 };
 // We convert the phone number- leave only numbers
 export const converTelNumber = (tel: string | undefined) => {
+
 	if (tel !== undefined) {
 		return tel.split('').filter(e => /^\d$/.test(e)).join('')
 	}
+};
+//---------------------------------------------
+// We enter the data of the array in localStorage
+export const addArrayToLocalStore = <T>(arr: T[], baseKey: string): void => {
+	arr.map((e, i) => localStorage.setItem(baseKey + i, e + ''));
 };
 

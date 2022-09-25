@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { addArrayToLocalStore } from "../utilits/functions";
 import { RootState } from "./store";
 
 export interface IIsActionFull {
@@ -36,12 +37,23 @@ const initialState: IAction = {
 	...isObj,
 };
 
+// Clean localStorage and then enters data on actions in localStorage
+const updateLocalStore = (state: IItemsObj) => {
+	localStorage.clear();
+	addArrayToLocalStore(state.itemsInCart, 'itemsInCart');
+	addArrayToLocalStore(state.viewedItems, 'viewedItems');
+	addArrayToLocalStore(state.favoriteItems, 'favoriteItems');
+	addArrayToLocalStore(state.compareItems, 'compareItems');
+
+}
 
 // Add the product to the list of activity
-const addItemsTo = (key: keyof typeof itemsObj, isFull: keyof typeof isObj = 'isMoreFull') =>
+const addItemsTo = (key: keyof typeof itemsObj, isFull: keyof typeof isObj = 'isMoreFull', isStart: boolean = false) =>
 	(state: IAction, action: PayloadAction<string>) => {
 		state[key].push(action.payload);
 		state[isFull] = true;
+		!isStart && updateLocalStore(state);
+
 	};
 // We check to eat goods in the basket
 const setIsCartFull = (items: string[]) => items.length !== 0;
@@ -55,12 +67,19 @@ const delItemsTo = (key: keyof typeof itemsObj) =>
 		if (index >= 0) state[key].splice(index, 1)
 		state.isCartFull = setIsCartFull(state.itemsInCart);
 		state.isMoreFull = setIsMoreFull(state.viewedItems, state.compareItems, state.favoriteItems);
+		console.log(state);
+		updateLocalStore(state);
+
 	};
+
+
 // Clean the list of acting
 const clearAllItems = (key: keyof typeof itemsObj) => (state: IAction) => {
 	state[key] = [];
 	state.isCartFull = setIsCartFull(state.itemsInCart);
 	state.isMoreFull = setIsMoreFull(state.viewedItems, state.compareItems, state.favoriteItems);
+
+	updateLocalStore(state);
 };
 
 //Reducer of actions with goods -examination, comparison, of the basket, likes
@@ -82,23 +101,27 @@ const ActionSlice = createSlice({
 		addItemToViewed: addItemsTo('viewedItems'),
 		delItemToViewed: delItemsTo('viewedItems'),
 		clearViewed: clearAllItems('viewedItems'),
+		addItemToViewedStart: addItemsTo('viewedItems', 'isMoreFull', true),
 
 		addItemToFavorite: addItemsTo('favoriteItems'),
 		delItemToFavorite: delItemsTo('favoriteItems'),
 		clearFavorite: clearAllItems('favoriteItems'),
+		addItemToFavoriteStart: addItemsTo('favoriteItems', 'isMoreFull', true),
 
 		addItemToCompare: addItemsTo('compareItems'),
 		delItemToCompare: delItemsTo('compareItems'),
 		clearCompare: clearAllItems('compareItems'),
+		addItemToCompareStart: addItemsTo('compareItems', 'isMoreFull', true),
 
 		addItemToCart: addItemsTo('itemsInCart', 'isCartFull'),
 		delItemToCart: delItemsTo('itemsInCart'),
+		addItemToCartStart: addItemsTo('itemsInCart', 'isCartFull', true),
+		clearCart: clearAllItems('itemsInCart'),
 		delAllItemToCart: (state: IAction, action: PayloadAction<string>) => {
 			state.itemsInCart = state.itemsInCart.filter((e) => e !== action.payload);
 			state.isCartFull = setIsCartFull(state.itemsInCart);
-
+			updateLocalStore(state);
 		},
-		clearCart: clearAllItems('itemsInCart'),
 
 		clearCounts: (state) => {
 			state.itemsInCart = [];
@@ -107,15 +130,18 @@ const ActionSlice = createSlice({
 			state.compareItems = [];
 			state.isCartFull = false;
 			state.isMoreFull = false;
+			localStorage.clear();
 		},
 	}
 })
 
 
 export const { clearCounts, loadCounts,
-	addItemToCart, delItemToCart, delAllItemToCart, clearCart, addItemToViewed, delItemToViewed, clearViewed,
+	addItemToCart, delItemToCart, delAllItemToCart, clearCart,
+	addItemToViewed, delItemToViewed, clearViewed,
 	addItemToFavorite, delItemToFavorite, clearFavorite,
-	addItemToCompare, delItemToCompare, clearCompare }
+	addItemToCompare, delItemToCompare, clearCompare,
+	addItemToViewedStart, addItemToFavoriteStart, addItemToCompareStart, addItemToCartStart }
 	= ActionSlice.actions;
 
 
