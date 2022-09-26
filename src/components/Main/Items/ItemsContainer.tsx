@@ -23,7 +23,7 @@ interface IItemsProps {
 
 const StyledItemsContainer = styled.div<IItemsProps>`
 	display: grid;
-		// автозаполнение с переносом если не помещаются
+		// Automation with transfer if not placed
 		grid-template-columns: repeat(auto-fit, minmax(280px, ${props => props.isFixWidth ? '365px' : '1fr'}));
 		row-gap:20px;
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {

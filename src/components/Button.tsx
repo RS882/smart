@@ -44,7 +44,7 @@ const StyledButton = styled.button.attrs(props => ({
 		background-color: ${props => props.hoverBgColor || props.theme.color.blue};
 	color: ${props => props.hoverColor || props.theme.color.text.mainLight};
 	border: ${props => props.hoverBorder || 'none'};
-
+ 
 	}
 	&:disabled{
 		background-color: ${props => props.theme.color.cardBorder};

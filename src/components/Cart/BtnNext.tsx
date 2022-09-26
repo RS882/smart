@@ -20,6 +20,7 @@ const StyledBtnNext = styled.div`
 	};
 
 `;
+// Component NEXT button
 const BtnNext: FC<INextBtnCart> = ({ onClickNextBtnCart }) => {
 	const btnNextText = useAppSelector(selectCartTextBtnNext);
 	return (

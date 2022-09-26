@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { selectItemInCart } from '../../../redux/ActionSlice';
 import { useAppSelector } from '../../../redux/hooks';
@@ -8,6 +8,9 @@ import { addArrayToLocalStore } from '../../../utilits/functions';
 import Button from '../../Button';
 import BtnNext from '../BtnNext';
 import Order from './Order';
+import imgItem from './../../../assets/image 18.png'
+import OrderShort from './OrderShort';
+import { truncate } from 'fs/promises';
 
 export const StyledCartItemTitle = styled.div`
 	font-weight: 700;
@@ -36,26 +39,26 @@ export const StyledCartItemContainer = styled.div`
 const OrderContainer: FC = (props) => {
 	const titleText = useAppSelector(selectCartTextOrder);
 	const orderItem = useAppSelector(selectItemInCart);
-
-
+	// whether the button is pressedressed
+	const [isNext, setIsNext] = useState(false);
+	// Choosing goods that are in the order
 	const items = useAppSelector(selectitemsData).filter((e) => orderItem.includes(e.id));
 
+	const setOrderData = () => { setIsNext(true) };
 
-
-
-
-	const setOrderData = () => {
-		localStorage.clear();
-
+	const cangeOrderData = () => { setIsNext(false) };
+	// Action when pressing the picture or describing the goods
+	const onClickItem = (id: string) => {
+		console.log(id);
 	};
 
 	return (<>
 		<StyledCartItemContainer>
 			<StyledCartItemTitle>{titleText?.title}</StyledCartItemTitle>
-			<Order items={items} orderItem={orderItem} />
-
+			{isNext ? null : <Order items={items} orderItem={orderItem} onClickItem={onClickItem} />}
+			{isNext ? <OrderShort items={items} onClickImg={onClickItem} cangeOrderData={cangeOrderData} /> : null}
 		</StyledCartItemContainer>
-		<BtnNext onClickNextBtnCart={setOrderData} />
+		{isNext ? null : <BtnNext onClickNextBtnCart={setOrderData} />}
 	</>
 	);
 };

@@ -10,6 +10,7 @@ import { delAllItemToCart } from '../../../redux/ActionSlice';
 interface IOrderPros {
 	items: IItemData[];
 	orderItem: string[];
+	onClickItem: (id: string) => void;
 };
 
 const StyledOrder = styled.div`
@@ -25,12 +26,10 @@ const StyledOrderElem = styled.div`
 	}	
 `;
 
-const Order: FC<IOrderPros> = ({ items, orderItem }) => {
+const Order: FC<IOrderPros> = ({ items, orderItem, onClickItem }) => {
 	const dispatch = useAppDispatch();
 	// action when pressed on a drawing or description of the goods
-	const onClickItem = (id: string) => {
-		console.log(id);
-	};
+
 	// Action when pressing the icon of the murosa basket, we remove the goods from the basket
 	const onClickTrashCan = (id: string) => {
 		dispatch(delAllItemToCart(id))

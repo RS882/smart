@@ -15,12 +15,13 @@ interface IOrderItemPros extends IItemOrderProps {
 };
 
 
-const ImgStyled = styled.img.attrs(props => ({
+export const ImgStyled = styled.img.attrs(props => ({
 	alt: "order item image",
 	src: props.src
 }))`
 	width: 100%;
 	height:100%;
+	border-radius:4px;
 `;
 
 const StyledImg = styled.div`
