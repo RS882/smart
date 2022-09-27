@@ -7,10 +7,14 @@ import { selectCartTextBtnNext, selectCartTextTitle } from './../../redux/Langua
 import { useAppSelector } from '../../redux/hooks';
 import OrderContainer from './Order/OrderContainer';
 import Button from '../Button';
+import DeliveryContainer from './Delivery/DeliveryContainer';
+
+import PaymentMethodContainer from './PaymentMethod/PaymentMethodContainer';
+import RecipientContainer from './Recipient/RecipientContainer';
 
 
 const StyledCartContainer = styled.div`
-	//border: 1px solid #000;
+	
 	display:flex;
 	padding: 0 10px;
 	display: grid;
@@ -45,7 +49,9 @@ const Cart: FC = (props) => {
 				<StyledCartContainer>
 					<StyledTitle>{titleText}</StyledTitle>
 					<OrderContainer />
-
+					<DeliveryContainer />
+					<PaymentMethodContainer />
+					<RecipientContainer />
 				</StyledCartContainer>
 			</Container>
 		</StyledMain>

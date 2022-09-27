@@ -27,7 +27,7 @@ export const StyledCartItemTitle = styled.div`
 
 export const StyledCartItemContainer = styled.div`
 	margin-bottom:20px;
-	//border-bottom: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
+	
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		padding:30px;
 		
