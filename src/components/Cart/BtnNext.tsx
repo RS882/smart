@@ -30,4 +30,4 @@ const BtnNext: FC<INextBtnCart> = ({ onClickNextBtnCart }) => {
 	);
 };
 
-export default BtnNext;
+export default React.memo(BtnNext);

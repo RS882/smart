@@ -36,4 +36,4 @@ const BtnChange: FC<ICangeBtnCart> = ({ onClickCangeBtnCart }) => {
 	);
 };
 
-export default BtnChange;
+export default React.memo(BtnChange);

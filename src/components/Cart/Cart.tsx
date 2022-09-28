@@ -2,15 +2,12 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import Container from '../Container';
 import { StyledMain } from './../Main/Main';
-import { selectCartTextBtnNext, selectCartTextTitle } from './../../redux/LanguageSlice';
+import { selectCartTextBtnNext, selectCartTextDeliveryMethod, selectCartTextPaymentMethod, selectCartTextRecipient, selectCartTextTitle } from './../../redux/LanguageSlice';
 
 import { useAppSelector } from '../../redux/hooks';
 import OrderContainer from './Order/OrderContainer';
 import Button from '../Button';
-import DeliveryContainer from './Delivery/DeliveryContainer';
-
-import PaymentMethodContainer from './PaymentMethod/PaymentMethodContainer';
-import RecipientContainer from './Recipient/RecipientContainer';
+import CartMetodNotActiv from './CartMetodNotActiv';
 
 
 const StyledCartContainer = styled.div`
@@ -41,17 +38,18 @@ const StyledTitle = styled.div`
 const Cart: FC = (props) => {
 
 	const titleText = useAppSelector(selectCartTextTitle);
-
-
+	const deliveryText = useAppSelector(selectCartTextDeliveryMethod);
+	const paymentText = useAppSelector(selectCartTextPaymentMethod);
+	const recipientText = useAppSelector(selectCartTextRecipient);
 	return (
 		<StyledMain>
 			<Container>
 				<StyledCartContainer>
 					<StyledTitle>{titleText}</StyledTitle>
 					<OrderContainer />
-					<DeliveryContainer />
-					<PaymentMethodContainer />
-					<RecipientContainer />
+					<CartMetodNotActiv title={deliveryText?.title!} />
+					<CartMetodNotActiv title={paymentText?.title!} />
+					<CartMetodNotActiv title={recipientText?.title!} />
 				</StyledCartContainer>
 			</Container>
 		</StyledMain>
