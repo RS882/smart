@@ -10,6 +10,8 @@ import OrderShort from './OrderShort';
 
 interface IOrederContainer {
 	setTotalPrise: (totalPrise: string) => void;
+	setIsNext: (el: boolean) => void;
+	isNext: boolean;
 };
 
 
@@ -37,14 +39,12 @@ export const StyledCartItemContainer = styled.div`
 	};
 `;
 //  component of the ordered goods in the basket
-const OrderContainer: FC<IOrederContainer> = ({ setTotalPrise }) => {
+const OrderContainer: FC<IOrederContainer> = ({ setTotalPrise, setIsNext, isNext }) => {
 	// The text of the section order
 	const titleText = useAppSelector(selectCartTextOrder);
 	// array ID of goods in the basket
 	const orderItem = useAppSelector(selectItemInCart);
-	// whether the button is pressedressed
-	const [isNext, setIsNext] = useState(false);
-	// Choosing goods that are in the order
+		// Choosing goods that are in the order
 	const items = useAppSelector(selectitemsData).filter((e) => orderItem.includes(e.id));
 
 	// The final price of all selected goods

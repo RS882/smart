@@ -52,6 +52,8 @@ const StyledCartBlock = styled.div`
 const Cart: FC = () => {
 	// The total price of goods in the basket
 	const [totalPrise, setTotalPreise] = useState('0.00');
+	// whether the button is pressedressed Order
+	const [isNextOrder, setIsNextOrder] = useState(false);
 	//The title is common text
 	const titleText = useAppSelector(selectCartTextTitle);
 	// The text of the Delivery section
@@ -76,7 +78,7 @@ const Cart: FC = () => {
 
 					<StyledTitle>{titleText}</StyledTitle>
 					<StyledCartBlock>
-						<OrderContainer setTotalPrise={setTotalPreise} />
+						<OrderContainer setTotalPrise={setTotalPreise} setIsNext={setIsNextOrder} isNext={isNextOrder} />
 						<CartMetodNotActiv title={deliveryText?.title!} />
 						<CartMetodNotActiv title={paymentText?.title!} />
 						<CartMetodNotActiv title={recipientText?.title!} />
