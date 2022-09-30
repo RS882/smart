@@ -11,10 +11,12 @@ import CartTotalContainer from './Total/CartTotalContainer';
 
 
 const StyledCartContainer = styled.div`
-	
-	display:flex;
 	padding: 0 20px;
 	display: grid;
+	column-gap:20px;
+	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
+		grid-template-columns: 1fr 420px;
+	};
 `;
 
 const StyledTitle = styled.div`
@@ -32,7 +34,19 @@ const StyledTitle = styled.div`
 		margin-top:60px;
 		margin-bottom:50px;
 		font-size: 36px;
+		grid-column:1/3;
 	};
+`;
+
+const StyledTotal = styled.div`
+	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
+		grid-column:2/3;
+		
+	};
+`;
+
+const StyledCartBlock = styled.div`
+	display: grid;
 `;
 
 const Cart: FC = () => {
@@ -59,14 +73,19 @@ const Cart: FC = () => {
 		<StyledMain>
 			<Container>
 				<StyledCartContainer>
+
 					<StyledTitle>{titleText}</StyledTitle>
-					<OrderContainer setTotalPrise={setTotalPreise} />
-					<CartMetodNotActiv title={deliveryText?.title!} />
-					<CartMetodNotActiv title={paymentText?.title!} />
-					<CartMetodNotActiv title={recipientText?.title!} />
-					<CartTotalContainer totalPrise={totalPrise}
-						isCheckout={true} onCheckout={onCheckout}
-						goToUserAagreement={goToUserAagreement} />
+					<StyledCartBlock>
+						<OrderContainer setTotalPrise={setTotalPreise} />
+						<CartMetodNotActiv title={deliveryText?.title!} />
+						<CartMetodNotActiv title={paymentText?.title!} />
+						<CartMetodNotActiv title={recipientText?.title!} />
+					</StyledCartBlock>
+					<StyledTotal>
+						<CartTotalContainer totalPrise={totalPrise}
+							isCheckout={true} onCheckout={onCheckout}
+							goToUserAagreement={goToUserAagreement} />
+					</StyledTotal>
 				</StyledCartContainer>
 			</Container>
 		</StyledMain>

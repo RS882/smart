@@ -108,16 +108,19 @@ const StyledAToUserAagreementBnt = styled.button`
 
 const CartTotalContainer: FC<ICartTotalContainer> = ({ totalPrise, deliveryPrise = 0,
 	isCheckout, onCheckout, goToUserAagreement }) => {
+	// Text for total
 	const cartTotalText = useAppSelector(selectCartTextTotal);
+	//The number of goods in the basket
 	const countItwm = useAppSelector(selectItemInCart).length;
+	// total amount per case( including delivery)
 	const prise: string = (+totalPrise + deliveryPrise).toFixed(2) + '€';
+	// STATE checkbox clicks
 	const [isChecked, setIsChecked] = useState(false)
+	// invert the state
+	const handleChange = () => { setIsChecked(!isChecked); }
 
-
-	const handleChange = () => {
-		setIsChecked(!isChecked); // инвертируем стейт
-	}
 	return (<>
+
 		<StyledCartTotelBox>
 			<StyledTotalTitle>
 				<StyledCartItemTitle>{cartTotalText?.title}</StyledCartItemTitle>
@@ -144,7 +147,8 @@ const CartTotalContainer: FC<ICartTotalContainer> = ({ totalPrise, deliveryPrise
 			</StyledCheckboxBlock>
 			<StyledAToUserAagreementBnt onClick={goToUserAagreement}>{cartTotalText?.byConfirming[1]}</StyledAToUserAagreementBnt>
 		</StyledAcceptUserAagreement>
-	</>);
+	</>
+	);
 };
 
 export default React.memo(CartTotalContainer);
