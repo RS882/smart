@@ -67,7 +67,6 @@ const delItemsTo = (key: keyof typeof itemsObj) =>
 		if (index >= 0) state[key].splice(index, 1)
 		state.isCartFull = setIsCartFull(state.itemsInCart);
 		state.isMoreFull = setIsMoreFull(state.viewedItems, state.compareItems, state.favoriteItems);
-		console.log(state);
 		updateLocalStore(state);
 
 	};

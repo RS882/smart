@@ -18,7 +18,7 @@ export const cartOderTextEn: ICartOder = {
 	},
 	total: {
 		title: 'Total',
-		goodForAmmount: 'goods/s/s worth',
+		goodForAmmount: 'goods worth',
 		costOfDelivery: 'Delivery cost',
 		free: 'free',
 		toPay: 'Payable',

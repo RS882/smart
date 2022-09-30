@@ -47,7 +47,7 @@ const StyledButton = styled.button.attrs(props => ({
  
 	}
 	&:disabled{
-		background-color: ${props => props.theme.color.cardBorder};
+		background-color: ${props => props.theme.color.text.second || '#838688'};
 		cursor:auto;
 	}
 	`;

@@ -15,7 +15,7 @@ const StyledBtnNext = styled.div`
 	border-bottom: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		width:200px;
-		margin-bottom:40px;
+		margin-bottom:20px;
 		border-bottom: 1px solid transparent;
 	};
 

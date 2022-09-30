@@ -4,13 +4,14 @@ import { selectItemInCart } from '../../../redux/ActionSlice';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectitemsData } from '../../../redux/ItemSlice';
 import { selectCartTextOrder } from '../../../redux/LanguageSlice';
-import { addArrayToLocalStore } from '../../../utilits/functions';
-import Button from '../../Button';
 import BtnNext from '../BtnNext';
 import Order from './Order';
-import imgItem from './../../../assets/image 18.png'
 import OrderShort from './OrderShort';
-import { truncate } from 'fs/promises';
+
+interface IOrederContainer {
+	setTotalPrise: (totalPrise: string) => void;
+};
+
 
 export const StyledCartItemTitle = styled.div`
 	font-weight: 700;
@@ -26,27 +27,39 @@ export const StyledCartItemTitle = styled.div`
 `;
 
 export const StyledCartItemContainer = styled.div`
-	margin-bottom:20px;
 	
+	padding:30px;
+	border-bottom: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-		padding:30px;
-		
+		margin-bottom:40px;
 		border: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
 		border-radius: 8px;
 	};
 `;
 //  component of the ordered goods in the basket
-const OrderContainer: FC = (props) => {
+const OrderContainer: FC<IOrederContainer> = ({ setTotalPrise }) => {
+	// The text of the section order
 	const titleText = useAppSelector(selectCartTextOrder);
+	// array ID of goods in the basket
 	const orderItem = useAppSelector(selectItemInCart);
 	// whether the button is pressedressed
 	const [isNext, setIsNext] = useState(false);
 	// Choosing goods that are in the order
 	const items = useAppSelector(selectitemsData).filter((e) => orderItem.includes(e.id));
 
-	const setOrderData = () => { setIsNext(true) };
+	// The final price of all selected goods
+	const totalPrise = items.reduce((prev, e) => {
+		const dicsountPrise: number = +(+e.prise - (+e.prise * e.discount / 100)).toFixed(2);
+		const itemCount: number = orderItem.filter((el) => el === e.id).length;
+		return prev + Number((dicsountPrise * itemCount).toFixed(2));
+	}, 0);
 
-	const cangeOrderData = () => { setIsNext(false) };
+
+	useEffect(() => {
+		// We transfer the amount of all goods to the local Store
+		setTotalPrise(totalPrise.toFixed(2))
+	}, [totalPrise]);
+
 	// Action when pressing the picture or describing the goods
 	const onClickItem = (id: string) => {
 		console.log(id);
@@ -56,9 +69,9 @@ const OrderContainer: FC = (props) => {
 		<StyledCartItemContainer>
 			<StyledCartItemTitle>{titleText?.title}</StyledCartItemTitle>
 			{isNext ? null : <Order items={items} orderItem={orderItem} onClickItem={onClickItem} />}
-			{isNext ? <OrderShort items={items} onClickImg={onClickItem} cangeOrderData={cangeOrderData} /> : null}
+			{isNext ? <OrderShort items={items} onClickImg={onClickItem} cangeOrderData={() => setIsNext(false)} /> : null}
 		</StyledCartItemContainer>
-		{isNext ? null : <BtnNext onClickNextBtnCart={setOrderData} />}
+		{isNext ? null : <BtnNext onClickNextBtnCart={() => setIsNext(true)} />}
 	</>
 	);
 };
