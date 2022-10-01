@@ -4,6 +4,7 @@ import { selectItemInCart } from '../../../redux/ActionSlice';
 import { useAppSelector } from '../../../redux/hooks';
 import { ArrowFn } from '../../../types/fnTypes';
 import Button from '../../Button';
+import RememberMe from '../../Login/LoginForm/RememeberMe/RememberMe';
 import { StyledCartItemTitle } from '../Order/OrderContainer';
 import { selectCartTextTotal } from './../../../redux/LanguageSlice';
 
@@ -87,7 +88,7 @@ const StyledCheckboxBlock = styled.div`
 	display: flex;
 	align-items:center;
 `;
-const StyledCheckbox = styled.input`
+const StyledCheckboxLabel = styled.label`
 	width:24px;
 	height:24px;
 	margin-right:10px;
@@ -142,10 +143,16 @@ const CartTotalContainer: FC<ICartTotalContainer> = ({ totalPrise, deliveryPrise
 
 		<StyledAcceptUserAagreement>
 			<StyledCheckboxBlock>
-				<StyledCheckbox type='checkbox' checked={isChecked} onChange={handleChange} />
+				<StyledCheckboxLabel onChange={handleChange}>
+					<input hidden type='checkbox' />
+					<RememberMe value={isChecked} />
+				</StyledCheckboxLabel>
 				{cartTotalText?.byConfirming[0]}
 			</StyledCheckboxBlock>
-			<StyledAToUserAagreementBnt onClick={goToUserAagreement}>{cartTotalText?.byConfirming[1]}</StyledAToUserAagreementBnt>
+			<StyledAToUserAagreementBnt onClick={goToUserAagreement}>
+
+				{cartTotalText?.byConfirming[1]}
+			</StyledAToUserAagreementBnt>
 		</StyledAcceptUserAagreement>
 	</>
 	);
