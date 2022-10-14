@@ -4,9 +4,11 @@ import { headerTextEn, headerTextRu, headerTextUa } from "./localHeader";
 import { footerTextEn, footerTextRu, footerTextUa } from './localFooter';
 import { sliderTextEn, sliderTextRu, sliderTextUa } from './localSlider';
 import { IRegBoxStrings } from './../types/LocalizationTypes';
-import { loginTextEn, loginTextRu } from './localLogin';
+import { loginTextEn, loginTextRu, loginTextUa } from './localLogin';
 import { itemCardTextEn, itemCardTextRu, itemCardTextUa } from "./localItemCart";
 import { cartOderTextEn, cartOderTextRu, cartOderTextUa } from "./localCartOder";
+import { cartDeliveryTextEn, cartDeliveryTextRu, cartDeliveryTextUa } from "./localCartDelivery";
+
 
 export interface IHeaderStings {
 	sundry: ISundry;
@@ -65,9 +67,32 @@ export interface ICartOder {
 		toPay: string;
 		checkout: string;
 		byConfirming: string[];
-
 	};
+};
 
+export interface ICartDelivery {
+	city: string;
+	deliveryMethod: {
+		delivery: {
+			method: string;
+			date: string;
+			time: string;
+			street: string;
+			flat: string;
+			comment: string;
+		};
+		pickup: {
+			method: string;
+			productIsAvailable: [string, string,];
+			shope: { city: string, adress: string, mode: string }[];
+		},
+	},
+
+}
+
+export interface ICart {
+	cartOrder: ICartOder;
+	cartDelivery: ICartDelivery;
 }
 
 export interface IStrings {
@@ -76,7 +101,7 @@ export interface IStrings {
 	slider: ISlides;
 	login: ILoginStings;
 	itemCard: IItemCard;
-	cart: ICartOder;
+	cart: ICart;
 };
 
 
@@ -92,15 +117,18 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 		slider: sliderTextEn,
 		login: loginTextEn,
 		itemCard: itemCardTextEn,
-		cart: cartOderTextEn,
+		cart: {
+			cartOrder: cartOderTextEn,
+			cartDelivery: cartDeliveryTextEn,
+		},
 	},
 	ua: {
 		header: headerTextUa,
 		footer: footerTextUa,
 		slider: sliderTextUa,
-		login: loginTextRu,
+		login: loginTextUa,
 		itemCard: itemCardTextUa,
-		cart: cartOderTextUa,
+		cart: { cartOrder: cartOderTextUa, cartDelivery: cartDeliveryTextUa, },
 	},
 	ru: {
 		header: headerTextRu,
@@ -108,7 +136,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 		slider: sliderTextRu,
 		login: loginTextRu,
 		itemCard: itemCardTextRu,
-		cart: cartOderTextRu,
+		cart: { cartOrder: cartOderTextRu, cartDelivery: cartDeliveryTextRu, },
 	},
 });
 

@@ -87,13 +87,17 @@ export const selectItemHitBannersText = (state: RootState) => state.languages.la
 export const selectItemsBoxName = (state: RootState) => state.languages.langStrings && state.languages.langStrings.itemCard.itemsBox;
 export const selectViewAllItems = (state: RootState) => state.languages.langStrings && state.languages.langStrings.itemCard.allItems;
 export const selectBannersItemText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.itemCard.bannerItemText;
-export const selectCartTextTitle = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.title;
-export const selectCartTextBtnNext = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.btnNext;
-export const selectCartTextBtnChange = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.btnChange;
-export const selectCartTextOrder = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.order;
-export const selectCartTextDeliveryMethod = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.deliveryMethod;
-export const selectCartTextPaymentMethod = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.paymentMethod;
-export const selectCartTextRecipient = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.recipient;
-export const selectCartTextTotal = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.total;
+export const selectCartTextTitle = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.cartOrder.title;
+export const selectCartTextBtnNext = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.cartOrder.btnNext;
+export const selectCartTextBtnChange = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.cartOrder.btnChange;
+export const selectCartTextOrder = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.cartOrder.order;
+export const selectCartTextDeliveryMethod = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.cartOrder.deliveryMethod;
+export const selectCartTextPaymentMethod = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.cartOrder.paymentMethod;
+export const selectCartTextRecipient = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.cartOrder.recipient;
+export const selectCartTextTotal = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.cartOrder.total;
+export const selectCartDeliveryTextCity = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.cartDelivery.city;
+export const selectCartDeliveryTextDelivery = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.cartDelivery.deliveryMethod.delivery;
+export const selectCartDeliveryTextPickup = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.cartDelivery.deliveryMethod.pickup;
+
 
 export default LanguageSlice.reducer

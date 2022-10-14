@@ -8,6 +8,7 @@ import { useAppSelector } from '../../redux/hooks';
 import OrderContainer from './Order/OrderContainer';
 import CartMetodNotActiv from './CartMetodNotActiv';
 import CartTotalContainer from './Total/CartTotalContainer';
+import CartDeliveryContainer from './Delivery/CartDeliveryContainer';
 
 
 const StyledCartContainer = styled.div`
@@ -80,6 +81,7 @@ const Cart: FC = () => {
 					<StyledCartBlock>
 						<OrderContainer setTotalPrise={setTotalPreise} setIsNext={setIsNextOrder} isNext={isNextOrder} />
 						<CartMetodNotActiv title={deliveryText?.title!} />
+						<CartDeliveryContainer />
 						<CartMetodNotActiv title={paymentText?.title!} />
 						<CartMetodNotActiv title={recipientText?.title!} />
 					</StyledCartBlock>
