@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { IItemData } from '../../../redux/ItemSlice';
 import { ArrowFn } from '../../../types/fnTypes';
-import BtnChange from '../BtnChange';
+import ShortShow from '../ShortShow';
 import { ImgStyled } from './OrderItem';
 
 interface IOrderShort {
@@ -11,16 +11,7 @@ interface IOrderShort {
 	cangeOrderData: ArrowFn;
 };
 
-const StyledOrderShortContainer = styled.div`
-	display: flex;
-	flex-direction:column;
-	margin-top:20px;
-	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-		flex-direction:row;
-		justify-content: space-between;
-		margin-top:30px;
-	};
-`;
+
 const StyledItemsImg = styled.div`
 	flex: 1 1 80%;
 	display: grid;
@@ -37,11 +28,7 @@ const StyledImgBox = styled.button`
 		border: 1px solid ${props => props.theme.color.blue || '#4878A6'};
 	}
 `;
-const StyledBtnChange = styled.div`
-	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-				align-self:flex-end;
-			};
-`;
+
 
 // List of goods in the basket if the Next button is pressed
 const OrderShort: FC<IOrderShort> = ({ items, onClickImg, cangeOrderData }) => {
@@ -49,14 +36,9 @@ const OrderShort: FC<IOrderShort> = ({ items, onClickImg, cangeOrderData }) => {
 		<StyledImgBox key={e.itemDescription + i} onClick={() => onClickImg(e.id)}>	<ImgStyled src={e.src ? e.src : ''} /></StyledImgBox>
 	);
 	return (
-		<StyledOrderShortContainer>
-			<StyledItemsImg>
-				{imgItmeElems}
-			</StyledItemsImg>
-			<StyledBtnChange>
-				<BtnChange onClickCangeBtnCart={cangeOrderData} />
-			</StyledBtnChange>
-		</StyledOrderShortContainer>
+		<ShortShow cangeOrderData={cangeOrderData}>
+			{<StyledItemsImg>{imgItmeElems}</StyledItemsImg>}
+		</ShortShow>
 	);
 };
 

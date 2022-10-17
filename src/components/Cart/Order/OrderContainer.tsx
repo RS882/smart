@@ -44,7 +44,7 @@ const OrderContainer: FC<IOrederContainer> = ({ setTotalPrise, setIsNext, isNext
 	const titleText = useAppSelector(selectCartTextOrder);
 	// array ID of goods in the basket
 	const orderItem = useAppSelector(selectItemInCart);
-		// Choosing goods that are in the order
+	// Choosing goods that are in the order
 	const items = useAppSelector(selectitemsData).filter((e) => orderItem.includes(e.id));
 
 	// The final price of all selected goods
@@ -68,8 +68,8 @@ const OrderContainer: FC<IOrederContainer> = ({ setTotalPrise, setIsNext, isNext
 	return (<>
 		<StyledCartItemContainer>
 			<StyledCartItemTitle>{titleText?.title}</StyledCartItemTitle>
-			{isNext ? null : <Order items={items} orderItem={orderItem} onClickItem={onClickItem} />}
-			{isNext ? <OrderShort items={items} onClickImg={onClickItem} cangeOrderData={() => setIsNext(false)} /> : null}
+			{isNext ? <OrderShort items={items} onClickImg={onClickItem} cangeOrderData={() => setIsNext(false)} /> :
+				<Order items={items} orderItem={orderItem} onClickItem={onClickItem} />}
 		</StyledCartItemContainer>
 		{isNext ? null : <BtnNext onClickNextBtnCart={() => setIsNext(true)} />}
 	</>
