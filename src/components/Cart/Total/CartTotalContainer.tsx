@@ -18,6 +18,7 @@ interface ICartTotalContainer {
 
 const StyledCartTotelBox = styled.div`
 	background-color:${props => props.theme.color.lightBlue || '#EDF2F6'};
+	border-radius: 8px;
 	margin: 20px -20px 20px;
 	padding:  20px;
 	display: flex;

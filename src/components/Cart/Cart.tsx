@@ -11,6 +11,13 @@ import CartTotalContainer from './Total/CartTotalContainer';
 import CartDeliveryContainer from './Delivery/CartDeliveryContainer';
 
 
+export interface ISetNext {
+	setIsNext: (el: boolean) => void;
+	isNext: boolean;
+}
+
+
+
 const StyledCartContainer = styled.div`
 	padding: 0 20px;
 	display: grid;
@@ -55,6 +62,8 @@ const Cart: FC = () => {
 	const [totalPrise, setTotalPreise] = useState('0.00');
 	// whether the button is pressedressed Order
 	const [isNextOrder, setIsNextOrder] = useState(false);
+	// whether the button is pressedressed Delivety
+	const [isNextDelivery, setIsNextDelivery] = useState(false);
 	//The title is common text
 	const titleText = useAppSelector(selectCartTextTitle);
 	// The text of the Delivery section
@@ -80,8 +89,11 @@ const Cart: FC = () => {
 					<StyledTitle>{titleText}</StyledTitle>
 					<StyledCartBlock>
 						<OrderContainer setTotalPrise={setTotalPreise} setIsNext={setIsNextOrder} isNext={isNextOrder} />
-						<CartMetodNotActiv title={deliveryText?.title!} />
-						<CartDeliveryContainer />
+
+						{isNextOrder ?
+							<CartDeliveryContainer title={deliveryText?.title!} setIsNext={setIsNextDelivery} isNext={isNextDelivery} />
+							: <CartMetodNotActiv title={deliveryText?.title!} />}
+
 						<CartMetodNotActiv title={paymentText?.title!} />
 						<CartMetodNotActiv title={recipientText?.title!} />
 					</StyledCartBlock>

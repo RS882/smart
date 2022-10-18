@@ -5,13 +5,15 @@ import { useAppSelector } from '../../../redux/hooks';
 import { selectitemsData } from '../../../redux/ItemSlice';
 import { selectCartTextOrder } from '../../../redux/LanguageSlice';
 import BtnNext from '../BtnNext';
+import { ISetNext } from '../Cart';
 import Order from './Order';
 import OrderShort from './OrderShort';
 
-interface IOrederContainer {
+
+
+interface IOrederContainer extends ISetNext {
 	setTotalPrise: (totalPrise: string) => void;
-	setIsNext: (el: boolean) => void;
-	isNext: boolean;
+
 };
 
 

@@ -50,3 +50,9 @@ export const validateTelAndForamt = (value: string) => {
 
 export const validateEmailOrTel = (value: string) =>
 	(validateEmail(value) !== undefined) ? validateTelAndForamt(value) : undefined;
+
+export const validateSelectIsEnpty = (value: string) => {
+	let error: string | undefined = undefined;
+	if (!value) error = 'Required';
+	return error;
+};

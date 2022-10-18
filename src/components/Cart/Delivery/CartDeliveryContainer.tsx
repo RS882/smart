@@ -1,23 +1,32 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../../redux/hooks';
-import { selectCartTextDeliveryMethod } from '../../../redux/LanguageSlice';
+import BtnNext from '../BtnNext';
+import { ISetNext } from '../Cart';
+
 
 import { StyledCartItemContainer, StyledCartItemTitle } from '../Order/OrderContainer';
 import CartDeliveryForm from './CartDeliveryForm';
 
+interface ICartDeliveryContainer extends ISetNext {
+	title: string;
+
+}
+
 
 // Delivery unit in the basket
-const CartDeliveryContainer: FC = (props) => {
+const CartDeliveryContainer: FC<ICartDeliveryContainer> = ({ title, isNext, setIsNext }) => {
 
-	const title = useAppSelector(selectCartTextDeliveryMethod);
 
-	return (
+
+	return (<>
 		<StyledCartItemContainer>
-			<StyledCartItemTitle>{title?.title}</StyledCartItemTitle>
+			<StyledCartItemTitle>{title}</StyledCartItemTitle>
 			<CartDeliveryForm />
 
 		</StyledCartItemContainer>
+		{isNext ? null : <BtnNext onClickNextBtnCart={() => setIsNext(true)} />}
+	</>
 	);
 };
 
