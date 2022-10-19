@@ -16,6 +16,7 @@ const StyledDateCartBox = styled.div<ICartDateBox>`
 	align-items:center;
 	padding:0 20px;
 	transition: all 0.3s ease 0s;
+
 `;
 
 // stylized boxing boxes in the basket

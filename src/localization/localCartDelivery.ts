@@ -7,6 +7,7 @@ export const cartDeliveryTextEn: ICartDelivery = {
 			method: 'Delivery',
 			date: 'Data',
 			time: 'Time',
+			timePlasholder: 'Choose delivery time',
 			street: 'Street, house/corps',
 			flat: 'flat',
 			comment: 'Commentary to the courier',
@@ -29,6 +30,7 @@ export const cartDeliveryTextUa: ICartDelivery = {
 			method: 'Доставка',
 			date: 'Дата',
 			time: 'Час',
+			timePlasholder: 'Оберить час доставки',
 			street: 'Вулиця, будинок/корпус',
 			flat: 'Квартира',
 			comment: "Rоментар кур'єру"
@@ -51,6 +53,7 @@ export const cartDeliveryTextRu: ICartDelivery = {
 			method: 'Доставка',
 			date: 'Дата',
 			time: 'Время',
+			timePlasholder: 'Выберите время доставки',
 			street: 'Улица, дом/корпус',
 			flat: 'Квартира',
 			comment: 'Комментарий курьеру',

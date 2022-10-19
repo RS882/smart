@@ -8,6 +8,7 @@ import { loginTextEn, loginTextRu, loginTextUa } from './localLogin';
 import { itemCardTextEn, itemCardTextRu, itemCardTextUa } from "./localItemCart";
 import { cartOderTextEn, cartOderTextRu, cartOderTextUa } from "./localCartOder";
 import { cartDeliveryTextEn, cartDeliveryTextRu, cartDeliveryTextUa } from "./localCartDelivery";
+import { DateMonDayEn, DateMonDayRu, DateMonDayUa } from "./localDateMonDay";
 
 
 export interface IHeaderStings {
@@ -77,6 +78,7 @@ export interface ICartDelivery {
 			method: string;
 			date: string;
 			time: string;
+			timePlasholder: string;
 			street: string;
 			flat: string;
 			comment: string;
@@ -88,11 +90,18 @@ export interface ICartDelivery {
 		},
 	},
 
-}
+};
+
+export interface IDateMonDay {
+	month: string[];
+	day: string[];
+	futureDays: string[];
+};
 
 export interface ICart {
 	cartOrder: ICartOder;
 	cartDelivery: ICartDelivery;
+	dateMonDay: IDateMonDay
 }
 
 export interface IStrings {
@@ -120,6 +129,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 		cart: {
 			cartOrder: cartOderTextEn,
 			cartDelivery: cartDeliveryTextEn,
+			dateMonDay: DateMonDayEn,
 		},
 	},
 	ua: {
@@ -128,7 +138,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 		slider: sliderTextUa,
 		login: loginTextUa,
 		itemCard: itemCardTextUa,
-		cart: { cartOrder: cartOderTextUa, cartDelivery: cartDeliveryTextUa, },
+		cart: { cartOrder: cartOderTextUa, cartDelivery: cartDeliveryTextUa, dateMonDay: DateMonDayUa, },
 	},
 	ru: {
 		header: headerTextRu,
@@ -136,7 +146,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 		slider: sliderTextRu,
 		login: loginTextRu,
 		itemCard: itemCardTextRu,
-		cart: { cartOrder: cartOderTextRu, cartDelivery: cartDeliveryTextRu, },
+		cart: { cartOrder: cartOderTextRu, cartDelivery: cartDeliveryTextRu, dateMonDay: DateMonDayRu, },
 	},
 });
 

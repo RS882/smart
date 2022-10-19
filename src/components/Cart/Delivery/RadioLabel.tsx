@@ -38,6 +38,7 @@ const StyledLabels = styled.div`
 `;
 const StyledTextLebel = styled.div`
 	margin-left:10px;
+	cursor: pointer;
 `;
 
 // A stylized radio

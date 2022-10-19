@@ -3,10 +3,13 @@ import { Form, Formik, FormikProps } from 'formik';
 
 import CartFormRadio from './CartFormRadio';
 import { useAppSelector } from '../../../redux/hooks';
-import { selectCartDeliveryTextDelivery, selectCartDeliveryTextPickup } from './../../../redux/LanguageSlice';
+import { selectCartDeliveryTextCity, selectCartDeliveryTextDelivery, selectCartDeliveryTextPickup } from './../../../redux/LanguageSlice';
 import styled from 'styled-components';
 import SelectCityContainer, { StyledTitleDateBox } from './SelectCity/SelectCityContainer';
-import { validateSelectIsEnpty } from '../../../utilits/validators';
+
+import { cityArr } from './../../../localization/uu';
+import DeliveryDateBoxContainer from './DeliveryDateBox/DeliveryDateBoxContainer';
+import { getDateIsMoreTodayForString } from '../../../utilits/functions';
 
 export interface IDeliveryFormDate {
 	city: string;
@@ -28,6 +31,7 @@ const StyledRadioGruppeAndSelectCity = styled.div`
 	grid-row-gap:10px;
 	border-bottom: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
 	padding-bottom:10px;
+	margin-bottom:30px;
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
 		padding-bottom:30px;
 		grid-template-columns:repeat(2,1fr);
@@ -35,7 +39,7 @@ const StyledRadioGruppeAndSelectCity = styled.div`
 	};
 	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
 		grid-row-gap:20px;
-		grid-template-columns: repeat(2, minmax(1fr, 310px));
+	
 		grid-column-gap :30px;
 		
 	};
@@ -57,7 +61,7 @@ const StyledTitelDelivery = styled.span`
 const initialValues: IDeliveryFormDate = {
 	city: '',
 	delivery: 'delivery',
-	deliveryDate: '',
+	deliveryDate: getDateIsMoreTodayForString(),
 	deliveryTime: '',
 	deliveryStreet: '',
 	deliveryFlat: '',
@@ -68,8 +72,15 @@ const initialValues: IDeliveryFormDate = {
 
 const CartDeliveryForm: FC = (props) => {
 
-	const deliveyText = useAppSelector(selectCartDeliveryTextDelivery);
-	const pickupText = useAppSelector(selectCartDeliveryTextPickup);
+	const deliveyText = useAppSelector(selectCartDeliveryTextDelivery)!;
+	const pickupText = useAppSelector(selectCartDeliveryTextPickup)!;
+	const yourCityName = useAppSelector(selectCartDeliveryTextCity)!;
+
+
+
+	const cityNames = cityArr.city;
+
+	const timeInterval = [['09:00–12:00', '(free)'], ['12:00–15:00', '(free)'], ['15:00–18:00', '(free)'], ['18:00–21:00', '(10.00€)'], ['21:00–24:00', '(10.00€)'],];
 
 	return (
 		<Formik initialValues={initialValues}
@@ -77,7 +88,7 @@ const CartDeliveryForm: FC = (props) => {
 			{(props: FormikProps<IDeliveryFormDate>) =>
 			(<StyledDeliveryForm>
 				<StyledRadioGruppeAndSelectCity>
-					<SelectCityContainer name={'city'} validate={validateSelectIsEnpty} />
+					<SelectCityContainer name={'city'} option={cityNames} title={yourCityName!} />
 					<div>
 						<StyledTitleDateBox><StyledTitelDelivery>Delivery</StyledTitelDelivery></StyledTitleDateBox>
 						<StyledRadioGruppe>
@@ -86,6 +97,11 @@ const CartDeliveryForm: FC = (props) => {
 						</StyledRadioGruppe>
 					</div>
 				</StyledRadioGruppeAndSelectCity>
+				<DeliveryDateBoxContainer name={'deliveryDate'}
+					dateMinMax={[getDateIsMoreTodayForString(), getDateIsMoreTodayForString(7)]}
+					title={deliveyText?.date} />
+				<SelectCityContainer name={'deliveryTime'} optionPlus={timeInterval} placholderText={deliveyText.timePlasholder} title={deliveyText.time} />
+
 			</StyledDeliveryForm>)
 			}
 
