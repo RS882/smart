@@ -15,10 +15,10 @@ interface IDeliveryDateBoxContainer {
 };
 
 
-const StyledInputBox = styled.div`
+export const StyledInputBox = styled.div`
 	position: relative;
 	width: 100%;
-`
+`;
 const StyledInputDateInput = styled.input`
 	width: 100%;
 	 opacity:0; 
@@ -28,12 +28,13 @@ const StyledInputDateInput = styled.input`
 		cursor: pointer;
 	}
 `;
-const StyledInputDateMask = styled.div`
+export const StyledInputDateMask = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
+	color: ${props => props.theme.color.text.main};
 	background-repeat: no-repeat;
 	background-position: calc(100% - 0.25em) 0.35em;
 	background-size: 0.85em auto;
@@ -52,6 +53,8 @@ const DeliveryDateBoxContainer = ({ title, dateMinMax, ...props }: IDeliveryDate
 		dateText.futureDays[dayofDifferent] + ', ' : '';
 	const dateElem: string = `${dayW}${fieldDate.getDate()} ${dateText.month[fieldDate.getMonth()]},
 	 ${dateText.day[fieldDate.getDay()]}`;
+
+	sessionStorage.setItem(field.name, field.value);
 
 	return (<div>
 		<StyledTitleDateBox>{title}</StyledTitleDateBox>

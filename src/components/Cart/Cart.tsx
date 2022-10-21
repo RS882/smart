@@ -14,8 +14,10 @@ import CartDeliveryContainer from './Delivery/CartDeliveryContainer';
 export interface ISetNext {
 	setIsNext: (el: boolean) => void;
 	isNext: boolean;
-}
-
+};
+export interface IUseStateCartDeliveryForm {
+	setDeliveryPreise?: React.Dispatch<React.SetStateAction<number>>;
+};
 
 
 const StyledCartContainer = styled.div`
@@ -60,6 +62,8 @@ const StyledCartBlock = styled.div`
 const Cart: FC = () => {
 	// The total price of goods in the basket
 	const [totalPrise, setTotalPreise] = useState('0.00');
+	// The delivery price of goods in the basket
+	const [deliveryPrise, setDeliveryPreise] = useState(0);
 	// whether the button is pressedressed Order
 	const [isNextOrder, setIsNextOrder] = useState(false);
 	// whether the button is pressedressed Delivety
@@ -91,7 +95,9 @@ const Cart: FC = () => {
 						<OrderContainer setTotalPrise={setTotalPreise} setIsNext={setIsNextOrder} isNext={isNextOrder} />
 
 						{isNextOrder ?
-							<CartDeliveryContainer title={deliveryText?.title!} setIsNext={setIsNextDelivery} isNext={isNextDelivery} />
+							<CartDeliveryContainer title={deliveryText?.title!}
+								setIsNext={setIsNextDelivery} isNext={isNextDelivery}
+								setDeliveryPreise={setDeliveryPreise} />
 							: <CartMetodNotActiv title={deliveryText?.title!} />}
 
 						<CartMetodNotActiv title={paymentText?.title!} />
@@ -100,7 +106,7 @@ const Cart: FC = () => {
 					<StyledTotal>
 						<CartTotalContainer totalPrise={totalPrise}
 							isCheckout={true} onCheckout={onCheckout}
-							goToUserAagreement={goToUserAagreement} />
+							goToUserAagreement={goToUserAagreement} deliveryPrise={deliveryPrise} />
 					</StyledTotal>
 				</StyledCartContainer>
 			</Container>

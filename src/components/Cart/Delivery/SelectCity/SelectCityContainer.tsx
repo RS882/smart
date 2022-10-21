@@ -1,38 +1,27 @@
 import { ErrorMessage, FieldHookConfig, useField } from 'formik';
-import React, { FC } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { validateSelectIsEnpty } from '../../../../utilits/validators';
+import { IUseStateCartDeliveryForm } from '../../Cart';
 
 import CartDateBox from '../../CartDateBox';
+import { StyledInputBox, StyledInputDateMask } from '../DeliveryDateBox/DeliveryDateBoxContainer';
 
 
 
-interface ISelectCityContainer {
+interface ISelectCityContainer extends IUseStateCartDeliveryForm {
 	option?: string[];
 	title: string;
 	placholderText?: string;
-	optionPlus?: string[][];
+	optionPlus?: [string, number][];
+	priseDelivery?: string;
+
 };
 
 export const StyledCitySelect = styled.select`
-  width: 100%;
-  font: inherit;
-  letter-spacing: inherit;
-  word-spacing: inherit;
-  -webkit-appearance: none;
-   -moz-appearance: none;
-  appearance: none;
-  cursor: pointer;
-  &:not([multiple]) {
-  background-repeat: no-repeat;
-  background-position: calc(100% - 0.25em) 0.35em;
-  background-size: 0.85em auto;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Cpath d='M70.3 13.8L40 66.3 9.7 13.8z' fill='%23000'%3E%3C/path%3E%3C/svg%3E");
-};
-  &::-ms-expand {
-  display: none;
-};
+	opacity:0;
+	width: 100%;
 `;
 export const StyledTitleDateBox = styled.div`
 	margin-bottom:8px;
@@ -44,33 +33,49 @@ const StyledErrorMessage = styled.div`
 	color:${props => props.theme.color.red || '#F15152'};
 	z-index:30;
 `;
+const StyledPriseText = styled.span`
+	color:${props => props.theme.color.text.second || '#838688'};
+`;
 
 
 
-const SelectCityContainer = ({ option, title, placholderText, optionPlus, ...props }: ISelectCityContainer & FieldHookConfig<string> & React.SelectHTMLAttributes<HTMLSelectElement> & React.ClassAttributes<HTMLSelectElement>) => {
+const SelectCityContainer = ({ option, title, placholderText, optionPlus, priseDelivery, setDeliveryPreise,
+	...props }: ISelectCityContainer & FieldHookConfig<string> & React.SelectHTMLAttributes<HTMLSelectElement> & React.ClassAttributes<HTMLSelectElement>) => {
+
 	const [field, meta,] = useField({ ...props, validate: props.validate || validateSelectIsEnpty });
 
-	const getOptionElemrnt = (option?: string[], optionPlus?: string[][]) => {
+	//set the delivery price format
+	const getPriseFormat = (prise: number, text: string = 'free'): string =>
+		prise ? ` (${prise.toFixed(2) + '€'})` : ` (${text})`;
+
+	// List output for the list Select
+	const getOptionElemrnt = (option?: string[], optionPlus?: [string, number][]): JSX.Element[] | null => {
 		if (!option && !optionPlus) return null;
-		if (optionPlus) {
-			return optionPlus!.map((e, i) => <option value={e[0]} key={e[0] + i}>{e[0]}{e[1]}</option>)
-		} else {
-			return option!.sort().map((e, i) => <option value={e} key={e + i}>{e}</option>)
-		};
-
+		if (optionPlus) return optionPlus!.map((e, i) =>
+			<option value={e[0]} key={e[0] + i}>{e[0]}{getPriseFormat(e[1], priseDelivery)}</option>);
+		return option!.sort().map((e, i) => <option value={e} key={e + i}>{e}</option>)
 	};
-
-
-	console.log(optionPlus?.filter(e => e[0] === field.value)[0][1]);
-
-
+	// We form a text for show 
+	const valueText: string = field.value;
+	const arr: [string, number] | null = optionPlus ? optionPlus!.filter(e => e[0] === valueText)[0] : null;
+	const inputDate: JSX.Element = arr ?
+		<span>{valueText}<StyledPriseText> {`${getPriseFormat(arr[1], priseDelivery)}`}</StyledPriseText></span>
+		: <span>{valueText || placholderText || title}</span>;
+	sessionStorage.setItem(field.name, field.value);
+	// We set the delivery price
+	useEffect(() => {
+		arr && setDeliveryPreise !== undefined && setDeliveryPreise(arr[1]);
+	}, arr!);
 	return (<div>
 		<StyledTitleDateBox>{title}</StyledTitleDateBox>
 		<CartDateBox bdColor={meta.error && meta.touched ? '#F15152' : ''}>
-			<StyledCitySelect id='city' {...field} {...props}>
-				<option value=''>{placholderText || title}</option>
-				{getOptionElemrnt(option, optionPlus)}
-			</StyledCitySelect>
+			<StyledInputBox>
+				<StyledCitySelect id='city' {...field} {...props}>
+					<option value=''>{placholderText || title}</option>
+					{getOptionElemrnt(option, optionPlus)}
+				</StyledCitySelect>
+				<StyledInputDateMask>{inputDate}</StyledInputDateMask>
+			</StyledInputBox>
 		</CartDateBox>
 		<StyledErrorMessage>	<ErrorMessage name={field.name} /></StyledErrorMessage>
 	</div>

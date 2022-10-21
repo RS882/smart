@@ -10,6 +10,7 @@ import SelectCityContainer, { StyledTitleDateBox } from './SelectCity/SelectCity
 import { cityArr } from './../../../localization/uu';
 import DeliveryDateBoxContainer from './DeliveryDateBox/DeliveryDateBoxContainer';
 import { getDateIsMoreTodayForString } from '../../../utilits/functions';
+import { IUseStateCartDeliveryForm } from '../Cart';
 
 export interface IDeliveryFormDate {
 	city: string;
@@ -22,6 +23,10 @@ export interface IDeliveryFormDate {
 	shopAdress: string;
 
 };
+
+
+
+
 const StyledDeliveryForm = styled(Form)`
 	margin-top:30px;
 `;
@@ -59,10 +64,10 @@ const StyledTitelDelivery = styled.span`
 `;
 
 const initialValues: IDeliveryFormDate = {
-	city: '',
-	delivery: 'delivery',
-	deliveryDate: getDateIsMoreTodayForString(),
-	deliveryTime: '',
+	city: sessionStorage.getItem('city') || '',
+	delivery: sessionStorage.getItem('delivery') || 'delivery',
+	deliveryDate: sessionStorage.getItem('deliveryDate') || getDateIsMoreTodayForString(),
+	deliveryTime: sessionStorage.getItem('deliveryTime') || '',
 	deliveryStreet: '',
 	deliveryFlat: '',
 	comment: '',
@@ -70,7 +75,7 @@ const initialValues: IDeliveryFormDate = {
 
 };
 
-const CartDeliveryForm: FC = (props) => {
+const CartDeliveryForm: FC<IUseStateCartDeliveryForm> = ({ setDeliveryPreise }) => {
 
 	const deliveyText = useAppSelector(selectCartDeliveryTextDelivery)!;
 	const pickupText = useAppSelector(selectCartDeliveryTextPickup)!;
@@ -80,7 +85,7 @@ const CartDeliveryForm: FC = (props) => {
 
 	const cityNames = cityArr.city;
 
-	const timeInterval = [['09:00–12:00', '(free)'], ['12:00–15:00', '(free)'], ['15:00–18:00', '(free)'], ['18:00–21:00', '(10.00€)'], ['21:00–24:00', '(10.00€)'],];
+	const timeInterval: [string, number][] = [['09:00–12:00', 0], ['12:00–15:00', 0], ['15:00–18:00', 0], ['18:00–21:00', 10], ['21:00–24:00', 15],];
 
 	return (
 		<Formik initialValues={initialValues}
@@ -100,7 +105,9 @@ const CartDeliveryForm: FC = (props) => {
 				<DeliveryDateBoxContainer name={'deliveryDate'}
 					dateMinMax={[getDateIsMoreTodayForString(), getDateIsMoreTodayForString(7)]}
 					title={deliveyText?.date} />
-				<SelectCityContainer name={'deliveryTime'} optionPlus={timeInterval} placholderText={deliveyText.timePlasholder} title={deliveyText.time} />
+				<SelectCityContainer name={'deliveryTime'} optionPlus={timeInterval}
+					placholderText={deliveyText.timePlasholder} title={deliveyText.time}
+					priseDelivery={deliveyText.price} setDeliveryPreise={setDeliveryPreise} />
 
 			</StyledDeliveryForm>)
 			}

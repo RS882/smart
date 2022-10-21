@@ -12,6 +12,7 @@ interface ICartFormRadio {
 // field for choosing a delivery method - radio
 const CartFormRadio = ({ label, ...props }: ICartFormRadio & FieldHookConfig<string> & React.InputHTMLAttributes<HTMLInputElement> & React.ClassAttributes<HTMLInputElement>) => {
 	const [field] = useField({ ...props, type: 'radio', });
+	sessionStorage.setItem(field.name, field.value);
 	return (
 		<label>
 			<CartDateBox bdColor={field.checked ? '#4878A6' : ''}>

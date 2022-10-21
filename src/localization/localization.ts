@@ -79,6 +79,7 @@ export interface ICartDelivery {
 			date: string;
 			time: string;
 			timePlasholder: string;
+			price: string;
 			street: string;
 			flat: string;
 			comment: string;
