@@ -1,26 +1,27 @@
 
-import { FieldHookConfig, useField } from 'formik';
+import { useField } from 'formik';
 import React from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../../../redux/hooks';
 import { selectDateMonDayText } from '../../../../redux/LanguageSlice';
 import CartDateBox from '../../CartDateBox';
+import { InputAttrProps } from '../CartDeliveryForm';
 import { StyledTitleDateBox } from '../SelectCity/SelectCityContainer';
 
 interface IDeliveryDateBoxContainer {
 	dateMinMax: string[];
 	title: string;
-
-
 };
 
 
 export const StyledInputBox = styled.div`
 	position: relative;
 	width: 100%;
+	height: 100%;
 `;
 const StyledInputDateInput = styled.input`
 	width: 100%;
+	height: 100%;
 	 opacity:0; 
 	&::-webkit-calendar-picker-indicator{
 		background-color:red;
@@ -34,16 +35,18 @@ export const StyledInputDateMask = styled.div`
 	left: 0;
 	width: 100%;
 	height: 100%;
+	display: flex;
+	align-items:center;
 	color: ${props => props.theme.color.text.main};
 	background-repeat: no-repeat;
-	background-position: calc(100% - 0.25em) 0.35em;
+	background-position: calc(100% - 0.25em) 50%;
 	background-size: 0.85em auto;
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Cpath d='M70.3 13.8L40 66.3 9.7 13.8z' fill='%23000'%3E%3C/path%3E%3C/svg%3E");
 	pointer-events: none;
 	z-index:10;
 `;
 //Delivery Day component
-const DeliveryDateBoxContainer = ({ title, dateMinMax, ...props }: IDeliveryDateBoxContainer & FieldHookConfig<string> & React.InputHTMLAttributes<HTMLInputElement> & React.ClassAttributes<HTMLInputElement>) => {
+const DeliveryDateBoxContainer = ({ title, dateMinMax, ...props }: IDeliveryDateBoxContainer & InputAttrProps) => {
 	const [field, meta] = useField({ ...props, type: 'date', });
 	const dateText = useAppSelector(selectDateMonDayText)!;
 	//formates the date for the output
@@ -68,4 +71,4 @@ const DeliveryDateBoxContainer = ({ title, dateMinMax, ...props }: IDeliveryDate
 	);
 };
 
-export default DeliveryDateBoxContainer;
+export default React.memo(DeliveryDateBoxContainer);

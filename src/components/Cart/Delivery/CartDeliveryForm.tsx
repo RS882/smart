@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Form, Formik, FormikProps } from 'formik';
+import { FieldHookConfig, Form, Formik, FormikProps } from 'formik';
 
 import CartFormRadio from './CartFormRadio';
 import { useAppSelector } from '../../../redux/hooks';
@@ -11,6 +11,7 @@ import { cityArr } from './../../../localization/uu';
 import DeliveryDateBoxContainer from './DeliveryDateBox/DeliveryDateBoxContainer';
 import { getDateIsMoreTodayForString } from '../../../utilits/functions';
 import { IUseStateCartDeliveryForm } from '../Cart';
+import FieldTextCart from './InputText.tsx/InputTextCart';
 
 export interface IDeliveryFormDate {
 	city: string;
@@ -24,7 +25,8 @@ export interface IDeliveryFormDate {
 
 };
 
-
+export type InputAttrProps = FieldHookConfig<string> & React.InputHTMLAttributes<HTMLInputElement> & React.ClassAttributes<HTMLInputElement>;
+export type SelectAttrProps = FieldHookConfig<string> & React.SelectHTMLAttributes<HTMLSelectElement> & React.ClassAttributes<HTMLSelectElement>;
 
 
 const StyledDeliveryForm = styled(Form)`
@@ -58,22 +60,26 @@ grid-row-gap:10px;
 	
 };
 `;
-
 const StyledTitelDelivery = styled.span`
 	color:transparent;
 `;
+const StyledDeliveryGroup = styled.div`
+	display: grid;
+	grid-gap:20px;
+	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+		grid-template-columns:repeat(2,1fr);
+		
+	};
+`;
+const StyledCommentBox = styled.div`
+	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+		grid-column:1/3;
+		
+	};
+	
+`;
 
-const initialValues: IDeliveryFormDate = {
-	city: sessionStorage.getItem('city') || '',
-	delivery: sessionStorage.getItem('delivery') || 'delivery',
-	deliveryDate: sessionStorage.getItem('deliveryDate') || getDateIsMoreTodayForString(),
-	deliveryTime: sessionStorage.getItem('deliveryTime') || '',
-	deliveryStreet: '',
-	deliveryFlat: '',
-	comment: '',
-	shopAdress: '',
 
-};
 
 const CartDeliveryForm: FC<IUseStateCartDeliveryForm> = ({ setDeliveryPreise }) => {
 
@@ -81,35 +87,58 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm> = ({ setDeliveryPreise }) 
 	const pickupText = useAppSelector(selectCartDeliveryTextPickup)!;
 	const yourCityName = useAppSelector(selectCartDeliveryTextCity)!;
 
+	const initialValues: IDeliveryFormDate = {
+		city: sessionStorage.getItem('city') || '',
+		delivery: sessionStorage.getItem('delivery') || 'delivery',
+		deliveryDate: sessionStorage.getItem('deliveryDate') || getDateIsMoreTodayForString(),
+		deliveryTime: sessionStorage.getItem('deliveryTime') || '',
+		deliveryStreet: sessionStorage.getItem('deliveryStreet') || '',
+		deliveryFlat: sessionStorage.getItem('deliveryFlat') || '',
+		comment: sessionStorage.getItem('comment') || '',
+		shopAdress: '',
+
+	};
+
 
 
 	const cityNames = cityArr.city;
 
 	const timeInterval: [string, number][] = [['09:00–12:00', 0], ['12:00–15:00', 0], ['15:00–18:00', 0], ['18:00–21:00', 10], ['21:00–24:00', 15],];
 
+
+
 	return (
 		<Formik initialValues={initialValues}
 			onSubmit={() => { }}>
-			{(props: FormikProps<IDeliveryFormDate>) =>
-			(<StyledDeliveryForm>
-				<StyledRadioGruppeAndSelectCity>
-					<SelectCityContainer name={'city'} option={cityNames} title={yourCityName!} />
-					<div>
-						<StyledTitleDateBox><StyledTitelDelivery>Delivery</StyledTitelDelivery></StyledTitleDateBox>
-						<StyledRadioGruppe>
-							<CartFormRadio name={'delivery'} value='delivery' label={deliveyText?.method!} />
-							<CartFormRadio name={'delivery'} value='pickup' label={pickupText?.method!} />
-						</StyledRadioGruppe>
-					</div>
-				</StyledRadioGruppeAndSelectCity>
-				<DeliveryDateBoxContainer name={'deliveryDate'}
-					dateMinMax={[getDateIsMoreTodayForString(), getDateIsMoreTodayForString(7)]}
-					title={deliveyText?.date} />
-				<SelectCityContainer name={'deliveryTime'} optionPlus={timeInterval}
-					placholderText={deliveyText.timePlasholder} title={deliveyText.time}
-					priseDelivery={deliveyText.price} setDeliveryPreise={setDeliveryPreise} />
-
-			</StyledDeliveryForm>)
+			{(props: FormikProps<IDeliveryFormDate>) => {
+				sessionStorage.setItem('delivery', props.values.delivery);
+				return (<StyledDeliveryForm>
+					<StyledRadioGruppeAndSelectCity>
+						<SelectCityContainer name={'city'} option={cityNames} title={yourCityName!} />
+						<div>
+							<StyledTitleDateBox><StyledTitelDelivery>Delivery</StyledTitelDelivery></StyledTitleDateBox>
+							<StyledRadioGruppe>
+								<CartFormRadio name={'delivery'} value='delivery' label={deliveyText?.method!} />
+								<CartFormRadio name={'delivery'} value='pickup' label={pickupText?.method!} />
+							</StyledRadioGruppe>
+						</div>
+					</StyledRadioGruppeAndSelectCity>
+					{props.values.delivery === 'delivery' ?
+						<StyledDeliveryGroup>
+							<DeliveryDateBoxContainer name={'deliveryDate'}
+								dateMinMax={[getDateIsMoreTodayForString(), getDateIsMoreTodayForString(7)]}
+								title={deliveyText?.date} />
+							<SelectCityContainer name={'deliveryTime'} optionPlus={timeInterval}
+								placholderText={deliveyText.timePlasholder} title={deliveyText.time}
+								priseDelivery={deliveyText.price} setDeliveryPreise={setDeliveryPreise} />
+							<FieldTextCart name='deliveryStreet' title={deliveyText?.street} />
+							<FieldTextCart name='deliveryFlat' title={deliveyText?.flat} />
+							<StyledCommentBox>
+								<FieldTextCart name='comment' title={deliveyText?.comment} FormType='textArea' />
+							</StyledCommentBox>
+						</StyledDeliveryGroup> : null}
+				</StyledDeliveryForm>)
+			}
 			}
 
 		</Formik >

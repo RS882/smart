@@ -1,7 +1,8 @@
-import { useField, FieldHookConfig } from 'formik';
-import React, { FC } from 'react';
+import { useField } from 'formik';
+import React from 'react';
 
 import CartDateBox from '../CartDateBox';
+import { InputAttrProps } from './CartDeliveryForm';
 import RadioLabel from './RadioLabel';
 
 interface ICartFormRadio {
@@ -10,9 +11,9 @@ interface ICartFormRadio {
 
 
 // field for choosing a delivery method - radio
-const CartFormRadio = ({ label, ...props }: ICartFormRadio & FieldHookConfig<string> & React.InputHTMLAttributes<HTMLInputElement> & React.ClassAttributes<HTMLInputElement>) => {
+const CartFormRadio = ({ label, ...props }: ICartFormRadio & InputAttrProps) => {
 	const [field] = useField({ ...props, type: 'radio', });
-	sessionStorage.setItem(field.name, field.value);
+
 	return (
 		<label>
 			<CartDateBox bdColor={field.checked ? '#4878A6' : ''}>
