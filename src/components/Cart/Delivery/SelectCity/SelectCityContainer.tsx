@@ -7,8 +7,12 @@ import CartDateBox from '../../CartDateBox';
 import { SelectAttrProps } from '../CartDeliveryForm';
 import { StyledInputBox, StyledInputDateMask } from '../DeliveryDateBox/DeliveryDateBoxContainer';
 
+interface ICartFormRadio {
+	cityName?: string;
+};
 
-interface ISelectCityContainer extends IUseStateCartDeliveryForm {
+
+interface ISelectCityContainer extends IUseStateCartDeliveryForm, ICartFormRadio {
 	option?: string[];
 	title: string;
 	placholderText?: string;
@@ -28,16 +32,18 @@ const StyledErrorMessage = styled.div`
 	font-weight:700;
 	color:${props => props.theme.color.red || '#F15152'};
 	z-index:30;
+	
 `;
 const StyledPriseText = styled.span`
 	color:${props => props.theme.color.text.second || '#838688'};
 `;
 
 
-const SelectCityContainer = ({ option, title, placholderText, optionPlus, priseDelivery, setDeliveryPreise,
+const SelectCityContainer = ({ option, title, placholderText, optionPlus,
+	priseDelivery, setDeliveryPreise, cityName,
 	...props }: ISelectCityContainer & SelectAttrProps) => {
 
-	const [field, meta,] = useField({ ...props, validate: props.validate || validateSelectIsEnpty });
+	const [field, meta, helpers] = useField({ ...props, validate: props.validate || validateSelectIsEnpty });
 	//set the delivery price format
 	const getPriseFormat = (prise: number, text: string = 'free'): string =>
 		prise ? ` (${prise.toFixed(2) + '€'})` : ` (${text})`;
@@ -56,7 +62,9 @@ const SelectCityContainer = ({ option, title, placholderText, optionPlus, priseD
 		: <span>{valueText || placholderText || title}</span>;
 	sessionStorage.setItem(field.name, field.value);
 	// We set the delivery price
-	useEffect(() => { arr && setDeliveryPreise !== undefined && setDeliveryPreise(arr[1]) }, arr!);
+	useEffect(() => { arr && setDeliveryPreise !== undefined && setDeliveryPreise(arr[1]) }, [arr]);
+
+	useEffect(() => { helpers.setValue(cityName!); }, [cityName]);
 
 	return (<div>
 		<StyledTitleDateBox>{title}</StyledTitleDateBox>

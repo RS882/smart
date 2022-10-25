@@ -87,7 +87,7 @@ export interface ICartDelivery {
 		pickup: {
 			method: string;
 			productIsAvailable: [string, string,];
-			shope: { city: string, adress: string, mode: string }[];
+			shope: { city: string, adress: string, mode: string, idShop: string, }[];
 		},
 	},
 

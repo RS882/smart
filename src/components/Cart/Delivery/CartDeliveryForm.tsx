@@ -12,6 +12,8 @@ import DeliveryDateBoxContainer from './DeliveryDateBox/DeliveryDateBoxContainer
 import { getDateIsMoreTodayForString } from '../../../utilits/functions';
 import { IUseStateCartDeliveryForm } from '../Cart';
 import FieldTextCart from './InputText.tsx/InputTextCart';
+import PickupContainer from './PickupContainer/PickupContainer';
+import { setConstantValue } from 'typescript';
 
 export interface IDeliveryFormDate {
 	city: string;
@@ -46,19 +48,16 @@ const StyledRadioGruppeAndSelectCity = styled.div`
 	};
 	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
 		grid-row-gap:20px;
-	
 		grid-column-gap :30px;
-		
 	};
 `;
 const StyledRadioGruppe = styled.div`
-display: grid;
-grid-row-gap:10px;
+	display: grid;
+	grid-row-gap:10px;
 
 @media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
 	grid-row-gap:20px;
-	
-};
+	};
 `;
 const StyledTitelDelivery = styled.span`
 	color:transparent;
@@ -80,7 +79,6 @@ const StyledCommentBox = styled.div`
 `;
 
 
-
 const CartDeliveryForm: FC<IUseStateCartDeliveryForm> = ({ setDeliveryPreise }) => {
 
 	const deliveyText = useAppSelector(selectCartDeliveryTextDelivery)!;
@@ -90,7 +88,7 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm> = ({ setDeliveryPreise }) 
 	const initialValues: IDeliveryFormDate = {
 		city: sessionStorage.getItem('city') || '',
 		delivery: sessionStorage.getItem('delivery') || 'delivery',
-		deliveryDate: sessionStorage.getItem('deliveryDate') || getDateIsMoreTodayForString(),
+		deliveryDate: new Date(sessionStorage.getItem('deliveryDate')!) < new Date(getDateIsMoreTodayForString()) ? getDateIsMoreTodayForString()! : sessionStorage.getItem('deliveryDate')!,
 		deliveryTime: sessionStorage.getItem('deliveryTime') || '',
 		deliveryStreet: sessionStorage.getItem('deliveryStreet') || '',
 		deliveryFlat: sessionStorage.getItem('deliveryFlat') || '',
@@ -99,30 +97,38 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm> = ({ setDeliveryPreise }) 
 
 	};
 
+	const cityNames: string[] = cityArr.city;
+	const setCity: Set<string> = new Set();
+	pickupText.shope.forEach(e => setCity.add(e.city));
 
-
-	const cityNames = cityArr.city;
 
 	const timeInterval: [string, number][] = [['09:00–12:00', 0], ['12:00–15:00', 0], ['15:00–18:00', 0], ['18:00–21:00', 10], ['21:00–24:00', 15],];
-
-
 
 	return (
 		<Formik initialValues={initialValues}
 			onSubmit={() => { }}>
 			{(props: FormikProps<IDeliveryFormDate>) => {
+
 				sessionStorage.setItem('delivery', props.values.delivery);
+				//sessionStorage.setItem('shopAdress', props.values.shopAdress);
+				const cityNameFromShopAdress: string = props.values.shopAdress ?
+					pickupText.shope.filter(e => e.idShop === props.values.shopAdress)[0].city : '';
+
+
+
 				return (<StyledDeliveryForm>
 					<StyledRadioGruppeAndSelectCity>
-						<SelectCityContainer name={'city'} option={cityNames} title={yourCityName!} />
+						<SelectCityContainer name={'city'} title={yourCityName!} cityName={cityNameFromShopAdress}
+							option={props.values.delivery === 'delivery' ? cityNames : Array.from(setCity)} />
 						<div>
 							<StyledTitleDateBox><StyledTitelDelivery>Delivery</StyledTitelDelivery></StyledTitleDateBox>
 							<StyledRadioGruppe>
-								<CartFormRadio name={'delivery'} value='delivery' label={deliveyText?.method!} />
-								<CartFormRadio name={'delivery'} value='pickup' label={pickupText?.method!} />
+								<CartFormRadio name={'delivery'} value='delivery'>{deliveyText?.method!}</CartFormRadio>
+								<CartFormRadio name={'delivery'} value='pickup' >{pickupText?.method!}</CartFormRadio>
 							</StyledRadioGruppe>
 						</div>
 					</StyledRadioGruppeAndSelectCity>
+
 					{props.values.delivery === 'delivery' ?
 						<StyledDeliveryGroup>
 							<DeliveryDateBoxContainer name={'deliveryDate'}
@@ -137,6 +143,9 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm> = ({ setDeliveryPreise }) 
 								<FieldTextCart name='comment' title={deliveyText?.comment} FormType='textArea' />
 							</StyledCommentBox>
 						</StyledDeliveryGroup> : null}
+
+					<PickupContainer city={props.values.city} />
+
 				</StyledDeliveryForm>)
 			}
 			}

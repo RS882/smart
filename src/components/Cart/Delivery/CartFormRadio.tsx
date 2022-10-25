@@ -1,26 +1,26 @@
 import { useField } from 'formik';
 import React from 'react';
 
-import CartDateBox from '../CartDateBox';
+import CartDateBox, { ICartDateBox } from '../CartDateBox';
 import { InputAttrProps } from './CartDeliveryForm';
 import RadioLabel from './RadioLabel';
 
-interface ICartFormRadio {
-	label: string;
-};
 
 
 // field for choosing a delivery method - radio
-const CartFormRadio = ({ label, ...props }: ICartFormRadio & InputAttrProps) => {
-	const [field] = useField({ ...props, type: 'radio', });
+const CartFormRadio = ({ children, bdColor, isOnlyBdColor, heigthBox, ...props }: ICartDateBox & InputAttrProps) => {
+	const [field, meta, helpers] = useField({ ...props, type: 'radio', });
+
+
 
 	return (
 		<label>
-			<CartDateBox bdColor={field.checked ? '#4878A6' : ''}>
+			<CartDateBox bdColor={bdColor ? bdColor : field.checked ? '#4878A6' : ''}
+				isOnlyBdColor={isOnlyBdColor} heigthBox={heigthBox}>
 				<input hidden type="radio" {...field} {...props} />
-				<RadioLabel isChecked={field.checked!} label={label} />
+				<RadioLabel isChecked={field.checked!} >{children}</RadioLabel>
 			</CartDateBox>
-		</label>
+		</label >
 
 	);
 };

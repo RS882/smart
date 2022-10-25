@@ -5,9 +5,7 @@ interface IRadioProps {
 	isChecked: boolean;
 };
 
-interface IRadioLabel extends IRadioProps {
-	label: string
-};
+
 
 const StyledRadioDot = styled.div<IRadioProps>`
 	height:20px;
@@ -34,7 +32,7 @@ const StyledRadioDot = styled.div<IRadioProps>`
 `;
 const StyledLabels = styled.div`
 	display: flex;
-	align-items:center;
+	/* align-items:center; */
 `;
 const StyledTextLebel = styled.div`
 	margin-left:10px;
@@ -42,11 +40,11 @@ const StyledTextLebel = styled.div`
 `;
 
 // A stylized radio
-const RadioLabel: FC<IRadioLabel> = ({ isChecked, label }) => {
+const RadioLabel: FC<IRadioProps> = ({ isChecked, children }) => {
 	return (
 		<StyledLabels>
 			<StyledRadioDot isChecked={isChecked} />
-			<StyledTextLebel>{label}</StyledTextLebel>
+			<StyledTextLebel>{children}</StyledTextLebel>
 		</StyledLabels>
 	);
 };

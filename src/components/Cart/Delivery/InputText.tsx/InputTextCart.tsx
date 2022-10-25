@@ -29,7 +29,7 @@ const FieldTextCart = ({ title, FormType = 'input', ...props }: IFiledTextCart &
 		<div>
 			<StyledTitleDateBox>{title}</StyledTitleDateBox>
 			<CartDateBox bdColor={meta.error && meta.touched ? '#F15152' : ''}
-				heigth={FormType === 'input' ? '48px' : '96px'}>
+				heigthBox={FormType === 'input' ? '48px' : '96px'}>
 				{FormType === 'input' ? <StyledInput  {...field} {...props} /> : <StyledTextArea  {...field} {...props} />}
 			</CartDateBox>
 		</div>
