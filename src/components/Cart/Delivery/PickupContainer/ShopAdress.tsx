@@ -15,6 +15,8 @@ const StyledMode = styled.div`
 	color:${props => props.theme.color.text.second || '#838688'};
 `;
 
+
+
 const ShopAdress: FC<IShopAdress> = ({ city, adress, mode }) => {
 	return (
 		<>
@@ -24,4 +26,4 @@ const ShopAdress: FC<IShopAdress> = ({ city, adress, mode }) => {
 	);
 };
 
-export default ShopAdress;
+export default React.memo(ShopAdress);

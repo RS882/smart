@@ -98,8 +98,13 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm> = ({ setDeliveryPreise }) 
 	};
 
 	const cityNames: string[] = cityArr.city;
-	const setCity: Set<string> = new Set();
-	pickupText.shope.forEach(e => setCity.add(e.city));
+
+	const getCityArrWithShops: () => string[] = () => {
+		const setCity: Set<string> = new Set();
+		pickupText.shope.forEach(e => setCity.add(e.city));
+		return Array.from(setCity);
+	};
+
 
 
 	const timeInterval: [string, number][] = [['09:00–12:00', 0], ['12:00–15:00', 0], ['15:00–18:00', 0], ['18:00–21:00', 10], ['21:00–24:00', 15],];
@@ -111,6 +116,8 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm> = ({ setDeliveryPreise }) 
 
 				sessionStorage.setItem('delivery', props.values.delivery);
 				//sessionStorage.setItem('shopAdress', props.values.shopAdress);
+
+
 				const cityNameFromShopAdress: string = props.values.shopAdress ?
 					pickupText.shope.filter(e => e.idShop === props.values.shopAdress)[0].city : '';
 
@@ -119,7 +126,7 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm> = ({ setDeliveryPreise }) 
 				return (<StyledDeliveryForm>
 					<StyledRadioGruppeAndSelectCity>
 						<SelectCityContainer name={'city'} title={yourCityName!} cityName={cityNameFromShopAdress}
-							option={props.values.delivery === 'delivery' ? cityNames : Array.from(setCity)} />
+							option={props.values.delivery === 'delivery' ? cityNames : getCityArrWithShops()} />
 						<div>
 							<StyledTitleDateBox><StyledTitelDelivery>Delivery</StyledTitelDelivery></StyledTitleDateBox>
 							<StyledRadioGruppe>
@@ -144,7 +151,8 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm> = ({ setDeliveryPreise }) 
 							</StyledCommentBox>
 						</StyledDeliveryGroup> : null}
 
-					<PickupContainer city={props.values.city} />
+
+					{props.values.delivery === 'pickup' ? <PickupContainer city={props.values.city} getCityArrWithShops={getCityArrWithShops} /> : null}
 
 				</StyledDeliveryForm>)
 			}

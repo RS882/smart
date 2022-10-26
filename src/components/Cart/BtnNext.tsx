@@ -4,10 +4,12 @@ import { useAppSelector } from '../../redux/hooks';
 import { selectCartTextBtnNext } from '../../redux/LanguageSlice';
 import { ArrowFn } from '../../types/fnTypes';
 import Button from '../Button';
+import { IBtnStyleProps } from './BtnChange';
 
 
-interface INextBtnCart {
+interface INextBtnCart extends IBtnStyleProps {
 	onClickNextBtnCart: ArrowFn;
+	type?: string;
 }
 
 const StyledBtnNext = styled.div`
@@ -21,11 +23,11 @@ const StyledBtnNext = styled.div`
 
 `;
 // Component NEXT button
-const BtnNext: FC<INextBtnCart> = ({ onClickNextBtnCart }) => {
+const BtnNext: FC<INextBtnCart> = ({ onClickNextBtnCart, type = 'button' }) => {
 	const btnNextText = useAppSelector(selectCartTextBtnNext);
 	return (
 		<StyledBtnNext>
-			<Button width='100%' height='48px' onClick={onClickNextBtnCart}>{btnNextText}</Button>
+			<Button width='100%' height='48px' onClick={onClickNextBtnCart} type={type}>{btnNextText}</Button>
 		</StyledBtnNext>
 	);
 };

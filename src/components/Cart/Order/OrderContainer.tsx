@@ -31,10 +31,11 @@ export const StyledCartItemTitle = styled.div`
 `;
 
 export const StyledCartItemContainer = styled.div`
+	padding:30px 0;
 	
-	padding:30px;
 	border-bottom: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
 	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+		padding:30px;
 		margin-bottom:40px;
 		border: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
 		border-radius: 8px;

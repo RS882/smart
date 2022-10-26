@@ -16,6 +16,7 @@ export const cartDeliveryTextEn: ICartDelivery = {
 		pickup: {
 			method: 'Pickup',
 			productIsAvailable: ['The goods are available in ', 'stores',],
+			btnNext: 'Show more',
 			shope: [{ city: 'Berlin', adress: 'Miru avenue , 78', mode: 'MN-SN 09:00 — 22:00', idShop: '1', },
 			{ city: 'Hamburg', adress: 'Vishneva street, 35 k.2', mode: 'MN-SN 09:00 — 22:00', idShop: '2', },
 			{ city: 'Berlin', adress: 'Peremogy avenue, 44', mode: 'MN-SN 09:00 — 22:00', idShop: '3', },
@@ -60,6 +61,7 @@ export const cartDeliveryTextUa: ICartDelivery = {
 		pickup: {
 			method: 'Самовивіз',
 			productIsAvailable: ['Товар доступений у ', 'магазинах',],
+			btnNext: 'Показати ще',
 			shope: [{ city: 'Berlin', adress: 'проспект Миру, 78', mode: 'ПН-НД 09:00 — 22:00', idShop: '1', },
 			{ city: 'Hamburg', adress: 'вулица Вишнева, 35 к.2', mode: 'ПН-НД 09:00 — 22:00', idShop: '2', },
 			{ city: 'Berlin', adress: 'проспект Перемоги, 44', mode: 'ПН-НД 09:00 — 22:00', idShop: '3', },
@@ -104,6 +106,7 @@ export const cartDeliveryTextRu: ICartDelivery = {
 		pickup: {
 			method: 'Самовывоз',
 			productIsAvailable: ['Товар доступен в ', 'магазинах',],
+			btnNext: 'Показать еще',
 			shope: [{ city: 'Berlin', adress: ' проспект Мира, 78', mode: 'ПН-ВС 09:00 — 22:00', idShop: '1', },
 			{ city: 'Hamburg', adress: 'улица Вишневая, 35 к.2', mode: 'ПН-ВС 09:00 — 22:00', idShop: '2', },
 			{ city: 'Berlin', adress: ' проспект Победы, 44', mode: 'ПН-ВС 09:00 — 22:00', idShop: '3', },

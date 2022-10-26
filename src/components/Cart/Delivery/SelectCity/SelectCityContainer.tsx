@@ -64,7 +64,7 @@ const SelectCityContainer = ({ option, title, placholderText, optionPlus,
 	// We set the delivery price
 	useEffect(() => { arr && setDeliveryPreise !== undefined && setDeliveryPreise(arr[1]) }, [arr]);
 
-	useEffect(() => { helpers.setValue(cityName!); }, [cityName]);
+	useEffect(() => { helpers.setValue(cityName === undefined ? '' : cityName); }, [cityName]);
 
 	return (<div>
 		<StyledTitleDateBox>{title}</StyledTitleDateBox>
