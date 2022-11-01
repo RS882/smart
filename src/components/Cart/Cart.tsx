@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Container from '../Container';
 import { StyledMain } from './../Main/Main';
@@ -9,10 +9,13 @@ import OrderContainer from './Order/OrderContainer';
 import CartMetodNotActiv from './CartMetodNotActiv';
 import CartTotalContainer from './Total/CartTotalContainer';
 import CartDeliveryContainer from './Delivery/CartDeliveryContainer';
+import { useAppDispatch } from './../../redux/hooks';
+import { setTotalPiese } from '../../redux/CartSlice';
 
-
-export interface ISetNext {
+export interface ISetIsNext {
 	setIsNext: (el: boolean) => void;
+};
+export interface ISetNext extends ISetIsNext {
 	isNext: boolean;
 };
 export interface IUseStateCartDeliveryForm {
@@ -60,6 +63,7 @@ const StyledCartBlock = styled.div`
 `;
 
 const Cart: FC = () => {
+	const dispatch = useAppDispatch();
 	// The total price of goods in the basket
 	const [totalPrise, setTotalPreise] = useState('0.00');
 	// The delivery price of goods in the basket
@@ -78,6 +82,8 @@ const Cart: FC = () => {
 	const recipientText = useAppSelector(selectCartTextRecipient);
 	// sending order data
 	const onCheckout = () => {
+		// Distribute the total amount of the order
+		dispatch(setTotalPiese(+totalPrise + deliveryPrise))
 		console.log('Checkout');
 
 	};
@@ -85,6 +91,11 @@ const Cart: FC = () => {
 		console.log('UserAagreement');
 
 	};
+
+
+
+
+
 	return (
 		<StyledMain>
 			<Container>

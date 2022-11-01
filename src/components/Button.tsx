@@ -21,6 +21,7 @@ export interface ButtonProps {
 	type?: string;
 	heigth768?: string;
 	disabled?: boolean;
+	form?: string;
 };
 
 

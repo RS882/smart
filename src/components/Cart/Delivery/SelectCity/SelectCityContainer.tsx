@@ -44,9 +44,12 @@ const SelectCityContainer = ({ option, title, placholderText, optionPlus,
 	...props }: ISelectCityContainer & SelectAttrProps) => {
 
 	const [field, meta, helpers] = useField({ ...props, validate: props.validate || validateSelectIsEnpty });
+
+
 	//set the delivery price format
 	const getPriseFormat = (prise: number, text: string = 'free'): string =>
 		prise ? ` (${prise.toFixed(2) + '€'})` : ` (${text})`;
+
 	// List output for the list Select
 	const getOptionElemrnt = (option?: string[], optionPlus?: [string, number][]): JSX.Element[] | null => {
 		if (!option && !optionPlus) return null;
@@ -54,17 +57,19 @@ const SelectCityContainer = ({ option, title, placholderText, optionPlus,
 			<option value={e[0]} key={e[0] + i}>{e[0]}{getPriseFormat(e[1], priseDelivery)}</option>);
 		return option!.sort().map((e, i) => <option value={e} key={e + i}>{e}</option>)
 	};
+
 	// We form a text for show 
 	const valueText: string = field.value;
 	const arr: [string, number] | null = optionPlus ? optionPlus!.filter(e => e[0] === valueText)[0] : null;
 	const inputDate: JSX.Element = arr ?
 		<span>{valueText}<StyledPriseText> {`${getPriseFormat(arr[1], priseDelivery)}`}</StyledPriseText></span>
 		: <span>{valueText || placholderText || title}</span>;
-	sessionStorage.setItem(field.name, field.value);
+
+	sessionStorage.setItem(field.name, valueText);
+
 	// We set the delivery price
 	useEffect(() => { arr && setDeliveryPreise !== undefined && setDeliveryPreise(arr[1]) }, [arr]);
 
-	useEffect(() => { helpers.setValue(cityName === undefined ? '' : cityName); }, [cityName]);
 
 	return (<div>
 		<StyledTitleDateBox>{title}</StyledTitleDateBox>

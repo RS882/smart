@@ -13,7 +13,10 @@ import { getDateIsMoreTodayForString } from '../../../utilits/functions';
 import { IUseStateCartDeliveryForm } from '../Cart';
 import FieldTextCart from './InputText.tsx/InputTextCart';
 import PickupContainer from './PickupContainer/PickupContainer';
-import { setConstantValue } from 'typescript';
+import { ISetIsNext } from './../Cart';
+import { useAppDispatch } from './../../../redux/hooks';
+import { setDeliveryDate } from '../../../redux/CartSlice';
+
 
 export interface IDeliveryFormDate {
 	city: string;
@@ -79,8 +82,9 @@ const StyledCommentBox = styled.div`
 `;
 
 
-const CartDeliveryForm: FC<IUseStateCartDeliveryForm> = ({ setDeliveryPreise }) => {
+const CartDeliveryForm: FC<IUseStateCartDeliveryForm & ISetIsNext> = ({ setDeliveryPreise, setIsNext }) => {
 
+	const dispatch = useAppDispatch();
 	const deliveyText = useAppSelector(selectCartDeliveryTextDelivery)!;
 	const pickupText = useAppSelector(selectCartDeliveryTextPickup)!;
 	const yourCityName = useAppSelector(selectCartDeliveryTextCity)!;
@@ -93,8 +97,7 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm> = ({ setDeliveryPreise }) 
 		deliveryStreet: sessionStorage.getItem('deliveryStreet') || '',
 		deliveryFlat: sessionStorage.getItem('deliveryFlat') || '',
 		comment: sessionStorage.getItem('comment') || '',
-		shopAdress: '',
-
+		shopAdress: sessionStorage.getItem('shopAdress') || '',
 	};
 
 	const cityNames: string[] = cityArr.city;
@@ -111,19 +114,25 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm> = ({ setDeliveryPreise }) 
 
 	return (
 		<Formik initialValues={initialValues}
-			onSubmit={() => { }}>
+			onSubmit={(values) => {
+				setIsNext(true);
+				values.delivery === 'delivery' && dispatch(setDeliveryDate({ ...values, shopAdress: '', }));
+				values.delivery === 'pickup' && dispatch(setDeliveryDate({
+					...values,
+					deliveryDate: '',
+					deliveryTime: '',
+					deliveryStreet: '',
+					deliveryFlat: '',
+					comment: '',
+				}));
+			}}>
 			{(props: FormikProps<IDeliveryFormDate>) => {
-
 				sessionStorage.setItem('delivery', props.values.delivery);
-				//sessionStorage.setItem('shopAdress', props.values.shopAdress);
-
-
+				sessionStorage.setItem('shopAdress', props.values.shopAdress);
 				const cityNameFromShopAdress: string = props.values.shopAdress ?
 					pickupText.shope.filter(e => e.idShop === props.values.shopAdress)[0].city : '';
 
-
-
-				return (<StyledDeliveryForm>
+				return (<StyledDeliveryForm id='DeliveryForm'>
 					<StyledRadioGruppeAndSelectCity>
 						<SelectCityContainer name={'city'} title={yourCityName!} cityName={cityNameFromShopAdress}
 							option={props.values.delivery === 'delivery' ? cityNames : getCityArrWithShops()} />

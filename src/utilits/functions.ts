@@ -52,6 +52,7 @@ export const addArrayToLocalStore = <T>(arr: T[], baseKey: string): void => {
 // We get a date in format string 'yyyy-mm-dd'
 export const getDateIsMoreTodayForString = (day: number = 0): string => {
 	const dateNow = new Date();
-	return `${dateNow.getFullYear()}-${dateNow.getMonth() + 1}-${dateNow.getDate() + day}`;
+	const dayNowPlus = dateNow.getDate() + day;
+	return `${dateNow.getFullYear()}-${dateNow.getMonth() + 1}-${dayNowPlus < 10 ? `0${dayNowPlus}` : `${dayNowPlus}`}`;
 };
 

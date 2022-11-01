@@ -8,8 +8,9 @@ import { IBtnStyleProps } from './BtnChange';
 
 
 interface INextBtnCart extends IBtnStyleProps {
-	onClickNextBtnCart: ArrowFn;
+	onClickNextBtnCart?: ArrowFn;
 	type?: string;
+	form?: string;
 }
 
 const StyledBtnNext = styled.div`
@@ -23,11 +24,13 @@ const StyledBtnNext = styled.div`
 
 `;
 // Component NEXT button
-const BtnNext: FC<INextBtnCart> = ({ onClickNextBtnCart, type = 'button' }) => {
+const BtnNext: FC<INextBtnCart> = ({ onClickNextBtnCart, type = 'button', form }) => {
 	const btnNextText = useAppSelector(selectCartTextBtnNext);
 	return (
 		<StyledBtnNext>
-			<Button width='100%' height='48px' onClick={onClickNextBtnCart} type={type}>{btnNextText}</Button>
+			<Button width='100%' height='48px' onClick={onClickNextBtnCart}
+				type={type} form={form || ''}>{btnNextText}
+			</Button>
 		</StyledBtnNext>
 	);
 };

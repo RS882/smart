@@ -121,6 +121,7 @@ const CartTotalContainer: FC<ICartTotalContainer> = ({ totalPrise, deliveryPrise
 	// invert the state
 	const handleChange = () => { setIsChecked(!isChecked); }
 
+
 	return (<>
 
 		<StyledCartTotelBox>

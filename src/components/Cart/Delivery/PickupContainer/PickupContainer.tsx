@@ -47,21 +47,22 @@ const PickupContainer: FC<IPickupContainer> = ({ city, getCityArrWithShops }) =>
 	const [elemAmount, setElemAmount] = useState(10);
 	// show the button or not
 	const [isBtnShow, setIsBtnShow] = useState(true);
+	// List of stores in the selected city
+	const shopInCityList = pickupText.shope.filter(e => city && getCityArrWithShops().includes(city) ? e.city === city : e);
 	// We get JSX to display the store list
 	const getRadioElemFromArr = (arr: {
 		city: string;
 		adress: string;
 		mode: string;
 		idShop: string;
-	}[]) => arr.filter(e => city && getCityArrWithShops().includes(city) ? e.city === city : e).
-		map((e, i) =>
-			<li key={e.city + e.adress + i}>
-				<CartFormRadio name={'shopAdress'} value={e.idShop}
-					bdColor='transparent' isOnlyBdColor={true} heigthBox='auto'>
-					<ShopAdress city={e.city} adress={e.adress} mode={e.mode} />
-				</CartFormRadio>
-			</li>
-		);
+	}[]) => arr.map((e, i) =>
+		<li key={e.city + e.adress + i}>
+			<CartFormRadio name={'shopAdress'} value={e.idShop}
+				bdColor='transparent' isOnlyBdColor={true} heigthBox='auto'>
+				<ShopAdress city={e.city} adress={e.adress} mode={e.mode} />
+			</CartFormRadio>
+		</li>
+	);
 	// get a new array of the required number of elements
 	const getCutArr = <T,>(arr: T[], amount: number) =>
 		amount <= 0 || arr.length === 0 || arr.length < amount ? arr : arr.slice(0, amount);
@@ -81,12 +82,12 @@ const PickupContainer: FC<IPickupContainer> = ({ city, getCityArrWithShops }) =>
 				{`${pickupText.productIsAvailable[0]} ${pickupText.shope.length} ${pickupText.productIsAvailable[1]}`}
 			</StyledTitleDateBox>
 			<StyledRadioBoxForNabletAndDesktop>
-				<StyledRadioBox>{getRadioElemFromArr(pickupText.shope)}</StyledRadioBox>
+				<StyledRadioBox>{getRadioElemFromArr(shopInCityList)}</StyledRadioBox>
 			</StyledRadioBoxForNabletAndDesktop>
 
 			<StyledRadioBoxForMobil>
-				<StyledRadioBox>{getRadioElemFromArr(getCutArr(pickupText.shope, elemAmount))}</StyledRadioBox>
-				{isBtnShow ? <BtnChange onClickCangeBtnCart={showNext10} isBottomBd={false} textBtn={`${pickupText.btnNext} 10`} /> : null}
+				<StyledRadioBox>{getRadioElemFromArr(getCutArr(shopInCityList, elemAmount))}</StyledRadioBox>
+				{isBtnShow && shopInCityList.length > 10 ? <BtnChange onClickCangeBtnCart={showNext10} isBottomBd={false} textBtn={`${pickupText.btnNext} 10`} /> : null}
 			</StyledRadioBoxForMobil>
 		</>
 	);

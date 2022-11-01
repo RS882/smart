@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { selectItemInCart } from '../../../redux/ActionSlice';
-import { useAppSelector } from '../../../redux/hooks';
+import { setOrderItems } from '../../../redux/CartSlice';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { selectitemsData } from '../../../redux/ItemSlice';
 import { selectCartTextOrder } from '../../../redux/LanguageSlice';
 import BtnNext from '../BtnNext';
@@ -43,10 +44,12 @@ export const StyledCartItemContainer = styled.div`
 `;
 //  component of the ordered goods in the basket
 const OrderContainer: FC<IOrederContainer> = ({ setTotalPrise, setIsNext, isNext }) => {
+	const dispatch = useAppDispatch();
 	// The text of the section order
 	const titleText = useAppSelector(selectCartTextOrder);
 	// array ID of goods in the basket
 	const orderItem = useAppSelector(selectItemInCart);
+
 	// Choosing goods that are in the order
 	const items = useAppSelector(selectitemsData).filter((e) => orderItem.includes(e.id));
 
@@ -60,13 +63,23 @@ const OrderContainer: FC<IOrederContainer> = ({ setTotalPrise, setIsNext, isNext
 
 	useEffect(() => {
 		// We transfer the amount of all goods to the local Store
-		setTotalPrise(totalPrise.toFixed(2))
+		setTotalPrise(totalPrise.toFixed(2));
 	}, [totalPrise]);
+
+
 
 	// Action when pressing the picture or describing the goods
 	const onClickItem = (id: string) => {
 		console.log(id);
 	};
+
+	const onNextClick = () => {
+		setIsNext(true);
+		dispatch(setOrderItems(orderItem));
+		console.log('+');
+
+	}
+
 
 	return (<>
 		<StyledCartItemContainer>
@@ -74,7 +87,7 @@ const OrderContainer: FC<IOrederContainer> = ({ setTotalPrise, setIsNext, isNext
 			{isNext ? <OrderShort items={items} onClickImg={onClickItem} cangeOrderData={() => setIsNext(false)} /> :
 				<Order items={items} orderItem={orderItem} onClickItem={onClickItem} />}
 		</StyledCartItemContainer>
-		{isNext ? null : <BtnNext onClickNextBtnCart={() => setIsNext(true)} />}
+		{isNext ? null : <BtnNext onClickNextBtnCart={onNextClick} />}
 	</>
 	);
 };
