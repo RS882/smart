@@ -83,8 +83,10 @@ export interface ICartDelivery {
 			street: string;
 			flat: string;
 			comment: string;
+			shortTitle: string;
 		};
 		pickup: {
+			shortTitle: string;
 			method: string;
 			productIsAvailable: [string, string,];
 			btnNext: string,

@@ -2,6 +2,10 @@ import { ICartDelivery } from "./localization";
 
 export const cartDeliveryTextEn: ICartDelivery = {
 	city: 'Your city',
+	// shortTitle: {
+	// 	delivery: 'Delivery to:',
+	// 	pickup: 'Pickup from:',
+	// },
 	deliveryMethod: {
 		delivery: {
 			method: 'Delivery',
@@ -12,8 +16,10 @@ export const cartDeliveryTextEn: ICartDelivery = {
 			street: 'Street, house/corps',
 			flat: 'flat',
 			comment: 'Commentary to the courier',
+			shortTitle: 'Delivery to:',
 		},
 		pickup: {
+			shortTitle: 'Pickup from:',
 			method: 'Pickup',
 			productIsAvailable: ['The goods are available in ', 'stores',],
 			btnNext: 'Show more',
@@ -56,9 +62,11 @@ export const cartDeliveryTextUa: ICartDelivery = {
 			price: 'бескоштовно',
 			street: 'Вулиця, будинок/корпус',
 			flat: 'Квартира',
-			comment: "Rоментар кур'єру"
+			comment: "Коментар кур'єру",
+			shortTitle: 'Доставка до:',
 		},
 		pickup: {
+			shortTitle: 'Самовивіз is:',
 			method: 'Самовивіз',
 			productIsAvailable: ['Товар доступений у ', 'магазинах',],
 			btnNext: 'Показати ще',
@@ -102,9 +110,11 @@ export const cartDeliveryTextRu: ICartDelivery = {
 			street: 'Улица, дом/корпус',
 			flat: 'Квартира',
 			comment: 'Комментарий курьеру',
+			shortTitle: 'Доставка в:',
 		},
 		pickup: {
 			method: 'Самовывоз',
+			shortTitle: 'Самовывоз из:',
 			productIsAvailable: ['Товар доступен в ', 'магазинах',],
 			btnNext: 'Показать еще',
 			shope: [{ city: 'Berlin', adress: ' проспект Мира, 78', mode: 'ПН-ВС 09:00 — 22:00', idShop: '1', },

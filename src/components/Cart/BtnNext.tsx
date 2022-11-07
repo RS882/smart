@@ -11,6 +11,7 @@ interface INextBtnCart extends IBtnStyleProps {
 	onClickNextBtnCart?: ArrowFn;
 	type?: string;
 	form?: string;
+	isDisabled?: boolean;
 }
 
 const StyledBtnNext = styled.div`
@@ -24,11 +25,12 @@ const StyledBtnNext = styled.div`
 
 `;
 // Component NEXT button
-const BtnNext: FC<INextBtnCart> = ({ onClickNextBtnCart, type = 'button', form }) => {
+const BtnNext: FC<INextBtnCart> = ({ onClickNextBtnCart, type = 'button', form, isDisabled = false, ...props }) => {
 	const btnNextText = useAppSelector(selectCartTextBtnNext);
+
 	return (
 		<StyledBtnNext>
-			<Button width='100%' height='48px' onClick={onClickNextBtnCart}
+			<Button width='100%' height='48px' onClick={onClickNextBtnCart} disabled={isDisabled}
 				type={type} form={form || ''}>{btnNextText}
 			</Button>
 		</StyledBtnNext>

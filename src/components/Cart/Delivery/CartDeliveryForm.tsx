@@ -15,7 +15,8 @@ import FieldTextCart from './InputText.tsx/InputTextCart';
 import PickupContainer from './PickupContainer/PickupContainer';
 import { ISetIsNext } from './../Cart';
 import { useAppDispatch } from './../../../redux/hooks';
-import { setDeliveryDate } from '../../../redux/CartSlice';
+import { setDeliveryDate, } from '../../../redux/CartSlice';
+import { validateSelectIsEnpty } from './../../../utilits/validators';
 
 
 export interface IDeliveryFormDate {
@@ -29,6 +30,8 @@ export interface IDeliveryFormDate {
 	shopAdress: string;
 
 };
+
+
 
 export type InputAttrProps = FieldHookConfig<string> & React.InputHTMLAttributes<HTMLInputElement> & React.ClassAttributes<HTMLInputElement>;
 export type SelectAttrProps = FieldHookConfig<string> & React.SelectHTMLAttributes<HTMLSelectElement> & React.ClassAttributes<HTMLSelectElement>;
@@ -97,7 +100,7 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm & ISetIsNext> = ({ setDeliv
 		deliveryStreet: sessionStorage.getItem('deliveryStreet') || '',
 		deliveryFlat: sessionStorage.getItem('deliveryFlat') || '',
 		comment: sessionStorage.getItem('comment') || '',
-		shopAdress: sessionStorage.getItem('shopAdress') || '',
+		shopAdress: sessionStorage.getItem('shopAdress') || pickupText.shope[0].idShop,
 	};
 
 	const cityNames: string[] = cityArr.city;
@@ -108,14 +111,14 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm & ISetIsNext> = ({ setDeliv
 		return Array.from(setCity);
 	};
 
-
-
 	const timeInterval: [string, number][] = [['09:00–12:00', 0], ['12:00–15:00', 0], ['15:00–18:00', 0], ['18:00–21:00', 10], ['21:00–24:00', 15],];
 
 	return (
 		<Formik initialValues={initialValues}
-			onSubmit={(values) => {
-				setIsNext(true);
+			onSubmit={(values, actions) => {
+
+				actions.validateForm(values);
+				const pickupAdress = values.delivery === 'pickup' ? pickupText.shope.filter(e => e.idShop === values.shopAdress)[0] : null;
 				values.delivery === 'delivery' && dispatch(setDeliveryDate({ ...values, shopAdress: '', }));
 				values.delivery === 'pickup' && dispatch(setDeliveryDate({
 					...values,
@@ -124,18 +127,24 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm & ISetIsNext> = ({ setDeliv
 					deliveryStreet: '',
 					deliveryFlat: '',
 					comment: '',
+					city: '',
+					shopAdress: `${pickupAdress!.city}, ${pickupAdress!.adress}`
 				}));
+				setIsNext(true);
 			}}>
 			{(props: FormikProps<IDeliveryFormDate>) => {
+
 				sessionStorage.setItem('delivery', props.values.delivery);
 				sessionStorage.setItem('shopAdress', props.values.shopAdress);
 				const cityNameFromShopAdress: string = props.values.shopAdress ?
 					pickupText.shope.filter(e => e.idShop === props.values.shopAdress)[0].city : '';
 
+
 				return (<StyledDeliveryForm id='DeliveryForm'>
 					<StyledRadioGruppeAndSelectCity>
 						<SelectCityContainer name={'city'} title={yourCityName!} cityName={cityNameFromShopAdress}
-							option={props.values.delivery === 'delivery' ? cityNames : getCityArrWithShops()} />
+							option={props.values.delivery === 'delivery' ? cityNames : getCityArrWithShops()}
+							validate={props.values.delivery === 'delivery' ? validateSelectIsEnpty : () => { }} />
 						<div>
 							<StyledTitleDateBox><StyledTitelDelivery>Delivery</StyledTitelDelivery></StyledTitleDateBox>
 							<StyledRadioGruppe>
@@ -156,12 +165,14 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm & ISetIsNext> = ({ setDeliv
 							<FieldTextCart name='deliveryStreet' title={deliveyText?.street} />
 							<FieldTextCart name='deliveryFlat' title={deliveyText?.flat} />
 							<StyledCommentBox>
-								<FieldTextCart name='comment' title={deliveyText?.comment} FormType='textArea' />
+								<FieldTextCart name='comment' title={deliveyText?.comment} FormType='textArea'
+									validate={() => { }} />
 							</StyledCommentBox>
 						</StyledDeliveryGroup> : null}
 
 
-					{props.values.delivery === 'pickup' ? <PickupContainer city={props.values.city} getCityArrWithShops={getCityArrWithShops} /> : null}
+					{props.values.delivery === 'pickup' ? <PickupContainer city={props.values.city}
+						getCityArrWithShops={getCityArrWithShops} /> : null}
 
 				</StyledDeliveryForm>)
 			}

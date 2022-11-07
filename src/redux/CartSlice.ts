@@ -15,6 +15,7 @@ const initialState: ICartSlice = {
 	isCartPage: false,
 	itemsOrder: [],
 	totalPriese: 0,
+
 	delivery: {
 		city: '',
 		delivery: '',
@@ -44,6 +45,7 @@ const CartSlice = createSlice({
 		setDeliveryDate: (state, action: PayloadAction<IDeliveryFormDate>) => {
 			state.delivery = action.payload;
 		},
+
 		clearCart: (state) => {
 			state.itemsOrder = [];
 			state.totalPriese = 0;
@@ -53,8 +55,10 @@ const CartSlice = createSlice({
 	}
 });
 
-export const { setIsCartPage, setOrderItems, setTotalPiese, setDeliveryDate, clearCart } = CartSlice.actions;
+export const { setIsCartPage, setOrderItems, setTotalPiese, setDeliveryDate, clearCart,
+} = CartSlice.actions;
 
 export const selectIsCartPage = (state: RootState) => state.cart.isCartPage;
-//export const selectdeliveryPrise = (state: RootState) => state.cart.deliveryPrise;
+export const selectDeliveryDetails = (state: RootState) => state.cart.delivery;
+
 export default CartSlice.reducer

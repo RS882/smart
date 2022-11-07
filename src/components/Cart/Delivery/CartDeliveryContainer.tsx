@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
+import { useAppSelector } from '../../../redux/hooks';
 
 import BtnNext from '../BtnNext';
 import { ISetNext, IUseStateCartDeliveryForm } from '../Cart';
@@ -6,6 +7,8 @@ import { ISetNext, IUseStateCartDeliveryForm } from '../Cart';
 
 import { StyledCartItemContainer, StyledCartItemTitle } from '../Order/OrderContainer';
 import CartDeliveryForm from './CartDeliveryForm';
+import CartDeliveryShort from './CartDeliveryShort';
+
 
 
 interface ICartDeliveryContainer extends ISetNext, IUseStateCartDeliveryForm {
@@ -23,7 +26,9 @@ const CartDeliveryContainer: FC<ICartDeliveryContainer> = ({ title, isNext, setI
 	return (<>
 		<StyledCartItemContainer>
 			<StyledCartItemTitle>{title}</StyledCartItemTitle>
-			<CartDeliveryForm setDeliveryPreise={setDeliveryPreise} setIsNext={setIsNext} />
+			{!isNext ? <CartDeliveryForm setDeliveryPreise={setDeliveryPreise} setIsNext={setIsNext}
+			/> :
+				<CartDeliveryShort onClickBtnChange={() => setIsNext(false)} />}
 		</StyledCartItemContainer>
 		{isNext ? null : <BtnNext type='submit' form='DeliveryForm' />}
 	</>
