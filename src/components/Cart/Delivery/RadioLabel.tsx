@@ -32,7 +32,7 @@ const StyledRadioDot = styled.div<IRadioProps>`
 `;
 const StyledLabels = styled.div`
 	display: flex;
-	/* align-items:center; */
+
 `;
 const StyledTextLebel = styled.div`
 	margin-left:10px;

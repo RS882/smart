@@ -9,9 +9,7 @@ import RadioLabel from './RadioLabel';
 
 // field for choosing a delivery method - radio
 const CartFormRadio = ({ children, bdColor, isOnlyBdColor, heigthBox, ...props }: ICartDateBox & InputAttrProps) => {
-	const [field, meta, helpers] = useField({ ...props, type: 'radio', });
-
-
+	const [field] = useField({ ...props, type: 'radio', });
 
 	return (
 		<label>

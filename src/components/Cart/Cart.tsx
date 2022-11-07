@@ -62,7 +62,7 @@ const StyledCartBlock = styled.div`
 	display: grid;
 `;
 
-const Cart: FC = () => {
+const Cart = () => {
 	const dispatch = useAppDispatch();
 	// The total price of goods in the basket
 	const [totalPrise, setTotalPreise] = useState('0.00');
@@ -87,6 +87,7 @@ const Cart: FC = () => {
 		console.log('Checkout');
 
 	};
+	// transition to a user agreement
 	const goToUserAagreement = () => {
 		console.log('UserAagreement');
 

@@ -38,12 +38,12 @@ const StyledPriseText = styled.span`
 	color:${props => props.theme.color.text.second || '#838688'};
 `;
 
-
+// component of the type of Select to the form of a dozen
 const SelectCityContainer = ({ option, title, placholderText, optionPlus,
 	priseDelivery, setDeliveryPreise, cityName,
 	...props }: ISelectCityContainer & SelectAttrProps) => {
 
-	const [field, meta, helpers] = useField({ ...props, validate: props.validate || validateSelectIsEnpty });
+	const [field, meta] = useField({ ...props, validate: props.validate || validateSelectIsEnpty });
 
 
 	//set the delivery price format

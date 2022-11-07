@@ -28,14 +28,10 @@ export interface IDeliveryFormDate {
 	deliveryFlat: string;
 	comment: string;
 	shopAdress: string;
-
 };
-
-
 
 export type InputAttrProps = FieldHookConfig<string> & React.InputHTMLAttributes<HTMLInputElement> & React.ClassAttributes<HTMLInputElement>;
 export type SelectAttrProps = FieldHookConfig<string> & React.SelectHTMLAttributes<HTMLSelectElement> & React.ClassAttributes<HTMLSelectElement>;
-
 
 const StyledDeliveryForm = styled(Form)`
 	margin-top:30px;
@@ -84,7 +80,7 @@ const StyledCommentBox = styled.div`
 	
 `;
 
-
+// Form for delivery of goods
 const CartDeliveryForm: FC<IUseStateCartDeliveryForm & ISetIsNext> = ({ setDeliveryPreise, setIsNext }) => {
 
 	const dispatch = useAppDispatch();
@@ -102,23 +98,25 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm & ISetIsNext> = ({ setDeliv
 		comment: sessionStorage.getItem('comment') || '',
 		shopAdress: sessionStorage.getItem('shopAdress') || pickupText.shope[0].idShop,
 	};
-
+	// List of cities
 	const cityNames: string[] = cityArr.city;
+	// List of delivery intervals and delivery costs
+	const timeInterval: [string, number][] = [['09:00–12:00', 0], ['12:00–15:00', 0], ['15:00–18:00', 0], ['18:00–21:00', 10], ['21:00–24:00', 15],];
 
+	//List of cities where there are shops
 	const getCityArrWithShops: () => string[] = () => {
 		const setCity: Set<string> = new Set();
 		pickupText.shope.forEach(e => setCity.add(e.city));
 		return Array.from(setCity);
 	};
 
-	const timeInterval: [string, number][] = [['09:00–12:00', 0], ['12:00–15:00', 0], ['15:00–18:00', 0], ['18:00–21:00', 10], ['21:00–24:00', 15],];
+
 
 	return (
 		<Formik initialValues={initialValues}
 			onSubmit={(values, actions) => {
-
 				actions.validateForm(values);
-				const pickupAdress = values.delivery === 'pickup' ? pickupText.shope.filter(e => e.idShop === values.shopAdress)[0] : null;
+				// сохраняем данные в зависимости от способа доставки
 				values.delivery === 'delivery' && dispatch(setDeliveryDate({ ...values, shopAdress: '', }));
 				values.delivery === 'pickup' && dispatch(setDeliveryDate({
 					...values,
@@ -128,23 +126,25 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm & ISetIsNext> = ({ setDeliv
 					deliveryFlat: '',
 					comment: '',
 					city: '',
-					shopAdress: `${pickupAdress!.city}, ${pickupAdress!.adress}`
+
 				}));
 				setIsNext(true);
 			}}>
 			{(props: FormikProps<IDeliveryFormDate>) => {
-
 				sessionStorage.setItem('delivery', props.values.delivery);
 				sessionStorage.setItem('shopAdress', props.values.shopAdress);
+				// The city in which a pickup store is chosen
 				const cityNameFromShopAdress: string = props.values.shopAdress ?
 					pickupText.shope.filter(e => e.idShop === props.values.shopAdress)[0].city : '';
 
 
 				return (<StyledDeliveryForm id='DeliveryForm'>
 					<StyledRadioGruppeAndSelectCity>
+
 						<SelectCityContainer name={'city'} title={yourCityName!} cityName={cityNameFromShopAdress}
 							option={props.values.delivery === 'delivery' ? cityNames : getCityArrWithShops()}
 							validate={props.values.delivery === 'delivery' ? validateSelectIsEnpty : () => { }} />
+
 						<div>
 							<StyledTitleDateBox><StyledTitelDelivery>Delivery</StyledTitelDelivery></StyledTitleDateBox>
 							<StyledRadioGruppe>

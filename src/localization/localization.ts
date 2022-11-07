@@ -70,6 +70,7 @@ export interface ICartOder {
 		byConfirming: string[];
 	};
 };
+export interface IPickupShop { city: string, adress: string, mode: string, idShop: string, };
 
 export interface ICartDelivery {
 	city: string;
@@ -90,7 +91,7 @@ export interface ICartDelivery {
 			method: string;
 			productIsAvailable: [string, string,];
 			btnNext: string,
-			shope: { city: string, adress: string, mode: string, idShop: string, }[];
+			shope: IPickupShop[];
 		},
 	},
 
