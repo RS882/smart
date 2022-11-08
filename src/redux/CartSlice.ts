@@ -9,13 +9,13 @@ export interface ICartSlice {
 	itemsOrder: string[];
 	totalPriese: number;
 	delivery: IDeliveryFormDate;
+	paymentMethod: string,
 };
 
 const initialState: ICartSlice = {
 	isCartPage: false,
 	itemsOrder: [],
 	totalPriese: 0,
-
 	delivery: {
 		city: '',
 		delivery: '',
@@ -26,6 +26,7 @@ const initialState: ICartSlice = {
 		comment: '',
 		shopAdress: '',
 	},
+	paymentMethod: '',
 
 };
 // Reducer of the Cart
@@ -45,20 +46,34 @@ const CartSlice = createSlice({
 		setDeliveryDate: (state, action: PayloadAction<IDeliveryFormDate>) => {
 			state.delivery = action.payload;
 		},
+		setPaymentMethod: (state, action: PayloadAction<string>) => {
+			state.paymentMethod = action.payload;
+		},
 
 		clearCart: (state) => {
 			state.itemsOrder = [];
 			state.totalPriese = 0;
-		}
+			state.delivery = {
+				city: '',
+				delivery: '',
+				deliveryDate: '',
+				deliveryTime: '',
+				deliveryStreet: '',
+				deliveryFlat: '',
+				comment: '',
+				shopAdress: '',
+			};
+			state.paymentMethod = '';
+		},
 
 
 	}
 });
 
-export const { setIsCartPage, setOrderItems, setTotalPiese, setDeliveryDate, clearCart,
+export const { setIsCartPage, setOrderItems, setTotalPiese, setDeliveryDate, setPaymentMethod, clearCart,
 } = CartSlice.actions;
 
 export const selectIsCartPage = (state: RootState) => state.cart.isCartPage;
 export const selectDeliveryDetails = (state: RootState) => state.cart.delivery;
-
+export const selectPaymentMethodDetails = (state: RootState) => state.cart.paymentMethod;
 export default CartSlice.reducer

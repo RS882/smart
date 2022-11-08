@@ -14,7 +14,7 @@ interface ICartFormRadio {
 
 interface ISelectCityContainer extends IUseStateCartDeliveryForm, ICartFormRadio {
 	option?: string[];
-	title: string;
+	title?: string;
 	placholderText?: string;
 	optionPlus?: [string, number][];
 	priseDelivery?: string;
@@ -55,7 +55,10 @@ const SelectCityContainer = ({ option, title, placholderText, optionPlus,
 		if (!option && !optionPlus) return null;
 		if (optionPlus) return optionPlus!.map((e, i) =>
 			<option value={e[0]} key={e[0] + i}>{e[0]}{getPriseFormat(e[1], priseDelivery)}</option>);
-		return option!.sort().map((e, i) => <option value={e} key={e + i}>{e}</option>)
+
+		const res = field.name === 'paymentMethod' ? option!.map((e, i) => <option value={e} key={e + i}>{e}</option>) :
+			option!.sort().map((e, i) => <option value={e} key={e + i}>{e}</option>);
+		return res;
 	};
 
 	// We form a text for show 

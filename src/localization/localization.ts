@@ -9,6 +9,7 @@ import { itemCardTextEn, itemCardTextRu, itemCardTextUa } from "./localItemCart"
 import { cartOderTextEn, cartOderTextRu, cartOderTextUa } from "./localCartOder";
 import { cartDeliveryTextEn, cartDeliveryTextRu, cartDeliveryTextUa } from "./localCartDelivery";
 import { DateMonDayEn, DateMonDayRu, DateMonDayUa } from "./localDateMonDay";
+import { paymentMethodEn, paymentMethodRu, paymentMethodUa } from "./localCartPaymentMethod";
 
 
 export interface IHeaderStings {
@@ -97,6 +98,11 @@ export interface ICartDelivery {
 
 };
 
+
+export interface ICartPaymentMethod {
+	paymentMethod: string[];
+}
+
 export interface IDateMonDay {
 	month: string[];
 	day: string[];
@@ -106,7 +112,8 @@ export interface IDateMonDay {
 export interface ICart {
 	cartOrder: ICartOder;
 	cartDelivery: ICartDelivery;
-	dateMonDay: IDateMonDay
+	dateMonDay: IDateMonDay;
+	cartPaymentMethod: ICartPaymentMethod;
 }
 
 export interface IStrings {
@@ -135,6 +142,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			cartOrder: cartOderTextEn,
 			cartDelivery: cartDeliveryTextEn,
 			dateMonDay: DateMonDayEn,
+			cartPaymentMethod: paymentMethodEn,
 		},
 	},
 	ua: {
@@ -143,7 +151,12 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 		slider: sliderTextUa,
 		login: loginTextUa,
 		itemCard: itemCardTextUa,
-		cart: { cartOrder: cartOderTextUa, cartDelivery: cartDeliveryTextUa, dateMonDay: DateMonDayUa, },
+		cart: {
+			cartOrder: cartOderTextUa,
+			cartDelivery: cartDeliveryTextUa,
+			dateMonDay: DateMonDayUa,
+			cartPaymentMethod: paymentMethodUa,
+		},
 	},
 	ru: {
 		header: headerTextRu,
@@ -151,7 +164,12 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 		slider: sliderTextRu,
 		login: loginTextRu,
 		itemCard: itemCardTextRu,
-		cart: { cartOrder: cartOderTextRu, cartDelivery: cartDeliveryTextRu, dateMonDay: DateMonDayRu, },
+		cart: {
+			cartOrder: cartOderTextRu,
+			cartDelivery: cartDeliveryTextRu,
+			dateMonDay: DateMonDayRu,
+			cartPaymentMethod: paymentMethodRu,
+		},
 	},
 });
 

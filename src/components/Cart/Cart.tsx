@@ -11,6 +11,7 @@ import CartTotalContainer from './Total/CartTotalContainer';
 import CartDeliveryContainer from './Delivery/CartDeliveryContainer';
 import { useAppDispatch } from './../../redux/hooks';
 import { setTotalPiese } from '../../redux/CartSlice';
+import PaymentMethodContainer from './PaymentMethod/PaymentMethodContainer';
 
 export interface ISetIsNext {
 	setIsNext: (el: boolean) => void;
@@ -72,6 +73,8 @@ const Cart = () => {
 	const [isNextOrder, setIsNextOrder] = useState(false);
 	// whether the button is pressedressed Delivety
 	const [isNextDelivery, setIsNextDelivery] = useState(false);
+	// whether the button is pressedressed PaymentMethod
+	const [isNextPMethod, setIsNextPMethod] = useState(false);
 	//The title is common text
 	const titleText = useAppSelector(selectCartTextTitle);
 	// The text of the Delivery section
@@ -111,8 +114,12 @@ const Cart = () => {
 								setIsNext={setIsNextDelivery} isNext={isNextDelivery}
 								setDeliveryPreise={setDeliveryPreise} />
 							: <CartMetodNotActiv title={deliveryText?.title!} />}
+						{isNextDelivery ?
+							<PaymentMethodContainer title={paymentText?.title!}
+								setIsNext={setIsNextPMethod} isNext={isNextPMethod} /> :
+							<CartMetodNotActiv title={paymentText?.title!} />
+						}
 
-						<CartMetodNotActiv title={paymentText?.title!} />
 						<CartMetodNotActiv title={recipientText?.title!} />
 					</StyledCartBlock>
 					<StyledTotal>

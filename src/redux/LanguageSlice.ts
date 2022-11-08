@@ -99,5 +99,6 @@ export const selectCartDeliveryTextCity = (state: RootState) => state.languages.
 export const selectCartDeliveryTextDelivery = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.cartDelivery.deliveryMethod.delivery;
 export const selectCartDeliveryTextPickup = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.cartDelivery.deliveryMethod.pickup;
 export const selectDateMonDayText = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.dateMonDay;
+export const selectPaymentMethodTaxt = (state: RootState) => state.languages.langStrings && state.languages.langStrings.cart.cartPaymentMethod.paymentMethod;
 
 export default LanguageSlice.reducer
