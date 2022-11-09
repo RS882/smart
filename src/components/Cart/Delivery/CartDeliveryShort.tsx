@@ -14,7 +14,7 @@ interface ICartDeliveryShort {
 };
 
 
-const StyledDeliveryShortBox = styled.div`
+export const StyledDeliveryShortBox = styled.div`
 	display: flex;
 	flex-direction:column;
 	

@@ -18,12 +18,15 @@ interface ISelectCityContainer extends IUseStateCartDeliveryForm, ICartFormRadio
 	placholderText?: string;
 	optionPlus?: [string, number][];
 	priseDelivery?: string;
+
 };
 export const StyledCitySelect = styled.select`
 	opacity:0;
 	width: 100%;
 	height: 100%;
 `;
+
+
 export const StyledTitleDateBox = styled.div`
 	margin-bottom:8px;
 `;
@@ -37,6 +40,7 @@ const StyledErrorMessage = styled.div`
 const StyledPriseText = styled.span`
 	color:${props => props.theme.color.text.second || '#838688'};
 `;
+
 
 // component of the type of Select to the form of a dozen
 const SelectCityContainer = ({ option, title, placholderText, optionPlus,
@@ -56,12 +60,16 @@ const SelectCityContainer = ({ option, title, placholderText, optionPlus,
 		if (optionPlus) return optionPlus!.map((e, i) =>
 			<option value={e[0]} key={e[0] + i}>{e[0]}{getPriseFormat(e[1], priseDelivery)}</option>);
 
-		const res = field.name === 'paymentMethod' ? option!.map((e, i) => <option value={e} key={e + i}>{e}</option>) :
+
+
+		const res = field.name === 'paymentMethod' ?
+			option!.map((e, i) => <option value={e} key={e + i}>{e}</option>) :
 			option!.sort().map((e, i) => <option value={e} key={e + i}>{e}</option>);
 		return res;
 	};
 
 	// We form a text for show 
+
 	const valueText: string = field.value;
 	const arr: [string, number] | null = optionPlus ? optionPlus!.filter(e => e[0] === valueText)[0] : null;
 	const inputDate: JSX.Element = arr ?
@@ -79,7 +87,7 @@ const SelectCityContainer = ({ option, title, placholderText, optionPlus,
 		<CartDateBox bdColor={meta.error && meta.touched ? '#F15152' : ''}>
 			<StyledInputBox>
 				<StyledCitySelect  {...field} {...props}>
-					<option value=''>{placholderText || title}</option>
+					<option value='' disabled>{placholderText || title}</option>
 					{getOptionElemrnt(option, optionPlus)}
 				</StyledCitySelect>
 				<StyledInputDateMask>{inputDate}</StyledInputDateMask>

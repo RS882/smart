@@ -97,9 +97,6 @@ const Cart = () => {
 	};
 
 
-
-
-
 	return (
 		<StyledMain>
 			<Container>

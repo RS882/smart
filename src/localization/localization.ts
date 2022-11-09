@@ -99,6 +99,7 @@ export interface ICartDelivery {
 };
 
 
+
 export interface ICartPaymentMethod {
 	paymentMethod: string[];
 }
