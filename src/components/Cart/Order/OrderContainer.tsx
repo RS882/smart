@@ -1,12 +1,12 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { selectItemInCart } from '../../../redux/ActionSlice';
 import { setOrderItems } from '../../../redux/CartSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { selectitemsData } from '../../../redux/ItemSlice';
 import { selectCartTextOrder } from '../../../redux/LanguageSlice';
-import BtnNext from '../BtnNext';
 import { ISetNext } from '../Cart';
+import CartItemBox from '../CartItemBox';
 import Order from './Order';
 import OrderShort from './OrderShort';
 
@@ -17,31 +17,6 @@ interface IOrederContainer extends ISetNext {
 
 };
 
-
-export const StyledCartItemTitle = styled.div`
-	font-weight: 700;
-	font-size: 20px;
-	line-height: 120%;
-	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-		font-size: 24px;
-	};
-	
-	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
-		font-size: 28px;
-	};
-`;
-
-export const StyledCartItemContainer = styled.div`
-	padding:30px 0;
-	
-	border-bottom: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
-	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
-		padding:30px;
-		margin-bottom:40px;
-		border: 1px solid ${props => props.theme.color.divider || '#C8CACB'};
-		border-radius: 8px;
-	};
-`;
 //  component of the ordered goods in the basket
 const OrderContainer: FC<IOrederContainer> = ({ setTotalPrise, setIsNext, isNext }) => {
 	const dispatch = useAppDispatch();
@@ -65,9 +40,6 @@ const OrderContainer: FC<IOrederContainer> = ({ setTotalPrise, setIsNext, isNext
 		// We transfer the amount of all goods to the local Store
 		setTotalPrise(totalPrise.toFixed(2));
 	}, [totalPrise]);
-
-
-
 	// Action when pressing the picture or describing the goods
 	const onClickItem = (id: string) => {
 		console.log(id);
@@ -76,18 +48,14 @@ const OrderContainer: FC<IOrederContainer> = ({ setTotalPrise, setIsNext, isNext
 	const onNextClick = () => {
 		setIsNext(true);
 		dispatch(setOrderItems(orderItem));
-		console.log('+');
-
-	}
+	};
 
 
 	return (<>
-		<StyledCartItemContainer>
-			<StyledCartItemTitle>{titleText?.title}</StyledCartItemTitle>
-			{isNext ? <OrderShort items={items} onClickImg={onClickItem} cangeOrderData={() => setIsNext(false)} /> :
-				<Order items={items} orderItem={orderItem} onClickItem={onClickItem} />}
-		</StyledCartItemContainer>
-		{isNext ? null : <BtnNext onClickNextBtnCart={onNextClick} />}
+		<CartItemBox title={titleText?.title} isNext={isNext} onClickNextBtnCart={onNextClick}
+			FullElement={<Order items={items} orderItem={orderItem} onClickItem={onClickItem} />}
+			ShortElement={<OrderShort items={items} onClickImg={onClickItem} cangeOrderData={() => setIsNext(false)} />} />
+
 	</>
 	);
 };

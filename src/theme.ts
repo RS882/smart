@@ -9,8 +9,8 @@ export const theme: DefaultTheme = {
 		containerPadding: '20px',
 	},
 	media: {
-		tablet: '(min-width: 767.98px)',
-		desktop: '(min-width: 991.98px)',
+		tablet: '(width >= 767.98px)',
+		desktop: '(width >= 991.98px)',
 	},
 	font: {
 		family: {

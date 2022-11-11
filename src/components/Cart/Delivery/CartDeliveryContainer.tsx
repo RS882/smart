@@ -3,12 +3,8 @@ import React, { FC } from 'react';
 import { selectDeliveryDetails } from '../../../redux/CartSlice';
 import { useAppSelector } from '../../../redux/hooks';
 import { selectCartDeliveryTextDelivery, selectCartDeliveryTextPickup } from '../../../redux/LanguageSlice';
-
-import BtnNext from '../BtnNext';
 import { ISetNext, IUseStateCartDeliveryForm } from '../Cart';
-
-
-import { StyledCartItemContainer, StyledCartItemTitle } from '../Order/OrderContainer';
+import CartItemBox from '../CartItemBox';
 import CartDeliveryForm from './CartDeliveryForm';
 import CartDeliveryShort from './CartDeliveryShort';
 
@@ -47,15 +43,13 @@ const CartDeliveryContainer: FC<ICartDeliveryContainer> = ({ title, isNext, setI
 
 	const deliveryTitelShort: string = deliveryDetails.delivery === 'delivery' ? deliveyText.shortTitle : pickupText.shortTitle;
 
-	return (<>
-		<StyledCartItemContainer>
-			<StyledCartItemTitle>{title}</StyledCartItemTitle>
-			{!isNext ? <CartDeliveryForm setDeliveryPreise={setDeliveryPreise} setIsNext={setIsNext} /> :
-				<CartDeliveryShort onClickBtnChange={() => setIsNext(false)}
-					deliveryDetals={deliveryDetalsShort} titel={deliveryTitelShort} />}
-		</StyledCartItemContainer>
-		{isNext ? null : <BtnNext type='submit' form='DeliveryForm' />}
-	</>
+	return (
+		<CartItemBox title={title} isNext={isNext} formId='DeliveryForm'
+			FullElement={<CartDeliveryForm setDeliveryPreise={setDeliveryPreise} setIsNext={setIsNext} />}
+			ShortElement={<CartDeliveryShort onClickBtnChange={() => setIsNext(false)}
+				deliveryDetals={deliveryDetalsShort} titel={deliveryTitelShort} />} />
+
+
 	);
 };
 

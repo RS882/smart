@@ -28,7 +28,7 @@ const StyledCartContainer = styled.div`
 	padding: 0 20px;
 	display: grid;
 	column-gap:20px;
-	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
+	@media ${props => props.theme.media?.desktop || `(width >= 991.98px)`} {
 		grid-template-columns: 1fr 420px;
 	};
 `;
@@ -39,12 +39,12 @@ const StyledTitle = styled.div`
 	line-height: 130%;
 	margin-top:30px;
 	margin-bottom:30px;
-	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+	@media ${props => props.theme.media?.tablet || '(width >= 767.98px)'} {
 		margin-top:50px;
 		font-size: 28px;
 	};
 	
-	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
+	@media ${props => props.theme.media?.desktop || `(width >= 991.98px)`} {
 		margin-top:60px;
 		margin-bottom:50px;
 		font-size: 36px;
@@ -53,7 +53,7 @@ const StyledTitle = styled.div`
 `;
 
 const StyledTotal = styled.div`
-	@media ${props => props.theme.media?.desktop || `(min-width: 991.98px)`} {
+	@media ${props => props.theme.media?.desktop || `(width >= 991.98px)`} {
 		grid-column:2/3;
 		
 	};

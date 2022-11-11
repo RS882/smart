@@ -5,7 +5,8 @@ import { useAppSelector } from '../../../redux/hooks';
 import { ArrowFn } from '../../../types/fnTypes';
 import Button from '../../Button';
 import RememberMe from '../../Login/LoginForm/RememeberMe/RememberMe';
-import { StyledCartItemTitle } from '../Order/OrderContainer';
+import { StyledCartItemTitle } from '../CartItemBox';
+
 import { selectCartTextTotal } from './../../../redux/LanguageSlice';
 
 interface ICartTotalContainer {

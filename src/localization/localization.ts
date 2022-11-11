@@ -10,6 +10,8 @@ import { cartOderTextEn, cartOderTextRu, cartOderTextUa } from "./localCartOder"
 import { cartDeliveryTextEn, cartDeliveryTextRu, cartDeliveryTextUa } from "./localCartDelivery";
 import { DateMonDayEn, DateMonDayRu, DateMonDayUa } from "./localDateMonDay";
 import { paymentMethodEn, paymentMethodRu, paymentMethodUa } from "./localCartPaymentMethod";
+import { ArrayDestructuringAssignment } from "typescript";
+import { recipientEn, recipientRu, recipientUa } from './localCartReciepient';
 
 
 export interface IHeaderStings {
@@ -98,11 +100,20 @@ export interface ICartDelivery {
 
 };
 
-
+export interface ICartRecipientText {
+	name: string;
+	namePlaceholder: string;
+	surname: string;
+	surnamePlaceholder: string;
+	phoneNumber: string;
+	eMail: string;
+	forExample: string;
+	dontCallMe: string;
+};
 
 export interface ICartPaymentMethod {
 	paymentMethod: string[];
-}
+};
 
 export interface IDateMonDay {
 	month: string[];
@@ -115,6 +126,7 @@ export interface ICart {
 	cartDelivery: ICartDelivery;
 	dateMonDay: IDateMonDay;
 	cartPaymentMethod: ICartPaymentMethod;
+	recipient: ICartRecipientText;
 }
 
 export interface IStrings {
@@ -144,6 +156,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			cartDelivery: cartDeliveryTextEn,
 			dateMonDay: DateMonDayEn,
 			cartPaymentMethod: paymentMethodEn,
+			recipient: recipientEn,
 		},
 	},
 	ua: {
@@ -157,6 +170,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			cartDelivery: cartDeliveryTextUa,
 			dateMonDay: DateMonDayUa,
 			cartPaymentMethod: paymentMethodUa,
+			recipient: recipientUa,
 		},
 	},
 	ru: {
@@ -170,6 +184,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			cartDelivery: cartDeliveryTextRu,
 			dateMonDay: DateMonDayRu,
 			cartPaymentMethod: paymentMethodRu,
+			recipient: recipientRu,
 		},
 	},
 });

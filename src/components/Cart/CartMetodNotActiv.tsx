@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { StyledCartItemContainer } from './Order/OrderContainer';
+import { StyledCartItemContainer } from './CartItemBox';
+
 
 interface ICartMetodNotActivProps {
 	title: string;
