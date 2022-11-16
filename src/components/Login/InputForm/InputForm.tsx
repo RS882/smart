@@ -109,7 +109,7 @@ const InputForm = (props: IIptumForm & FormikProps<ValuesLog>) => {
 			props.setFieldValue(props.name, formatted);
 		}
 		props.handleBlur(event);
-	}
+	};
 
 	return (
 		<StyledInputWrapper>

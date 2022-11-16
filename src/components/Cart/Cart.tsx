@@ -12,6 +12,7 @@ import CartDeliveryContainer from './Delivery/CartDeliveryContainer';
 import { useAppDispatch } from './../../redux/hooks';
 import { setTotalPiese } from '../../redux/CartSlice';
 import PaymentMethodContainer from './PaymentMethod/PaymentMethodContainer';
+import ReciepientContainer from './Recipient/ReciepientContainer';
 
 export interface ISetIsNext {
 	setIsNext: (el: boolean) => void;
@@ -109,15 +110,17 @@ const Cart = () => {
 						{isNextOrder ?
 							<CartDeliveryContainer title={deliveryText?.title!}
 								setIsNext={setIsNextDelivery} isNext={isNextDelivery}
-								setDeliveryPreise={setDeliveryPreise} />
-							: <CartMetodNotActiv title={deliveryText?.title!} />}
+								setDeliveryPreise={setDeliveryPreise} /> :
+							<CartMetodNotActiv title={deliveryText?.title!} />}
 						{isNextDelivery ?
 							<PaymentMethodContainer title={paymentText?.title!}
 								setIsNext={setIsNextPMethod} isNext={isNextPMethod} /> :
 							<CartMetodNotActiv title={paymentText?.title!} />
 						}
 
+						<ReciepientContainer title={recipientText?.title!} />
 						<CartMetodNotActiv title={recipientText?.title!} />
+
 					</StyledCartBlock>
 					<StyledTotal>
 						<CartTotalContainer totalPrise={totalPrise}

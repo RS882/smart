@@ -23,7 +23,7 @@ export const validateEmail = (value: string) => {
 	if (!value) {
 		error = 'Required';
 	} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-		error = 'Invalid email address/phone number';
+		error = 'Invalid email address';
 	}
 	return error;
 };
@@ -33,7 +33,7 @@ export const validateTel = (value: string) => {
 	if (!value) {
 		error = 'Required';
 	} else if (!/(?<!\d)\d{10}(?!\d)/i.test(value)) {
-		error = 'Invalid email address/phone number';
+		error = 'Invalid phone number';
 	}
 	return error;
 };
@@ -54,5 +54,11 @@ export const validateEmailOrTel = (value: string) =>
 export const validateSelectIsEnpty = (value: string) => {
 	let error: string | undefined = undefined;
 	if (!value) error = 'Required';
+	return error;
+};
+
+export const validateTelNumberCartFormFormat = (value: string) => {
+	let error: string | undefined = undefined;
+	if (!/^\+\d{2}\(\d{3}\)\s\d{3}-\d{2}-\d{2}/.test(value)) error = 'An unacceptable symbol';
 	return error;
 };

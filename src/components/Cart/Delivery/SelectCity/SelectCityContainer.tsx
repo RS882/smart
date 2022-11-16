@@ -30,7 +30,7 @@ export const StyledCitySelect = styled.select`
 export const StyledTitleDateBox = styled.div`
 	margin-bottom:8px;
 `;
-const StyledErrorMessage = styled.div`
+export const StyledErrorMessage = styled.div`
 	font-size:12px;
 	font-weight:700;
 	color:${props => props.theme.color.red || '#F15152'};

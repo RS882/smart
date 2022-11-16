@@ -20,7 +20,7 @@ const StyledErrorMessageWrapper = styled.div`
 `;
 
 const ErrorMessageContainer: FC<IErrorMessageContainer> = (props) => {
-	console.log(props.name);
+
 
 	return (
 		<StyledErrorMessageWrapper>

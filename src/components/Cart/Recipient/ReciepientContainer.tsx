@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { FC } from 'react';
+import CartItemBox from '../CartItemBox';
+import RecipientForm from './RecipientForm';
 
-const ReciepientContainer = () => {
+interface IRecipientContainer {
+	title: string;
+}
+
+const ReciepientContainer: FC<IRecipientContainer> = ({ title }) => {
+
+
 	return (
-		<>
-			{/* <StyledCartItemContainer>
-				<StyledCartItemTitle>{title}</StyledCartItemTitle>
 
-			</StyledCartItemContainer>
-			{isNext ? null : <BtnNext type='submit' form='PaymentMethod' />} */}
-		</>
+		<CartItemBox title={title} FullElement={<RecipientForm />} />
+
 	);
 };
 

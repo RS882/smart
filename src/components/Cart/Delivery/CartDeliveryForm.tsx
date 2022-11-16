@@ -11,7 +11,7 @@ import { cityArr } from './../../../localization/uu';
 import DeliveryDateBoxContainer from './DeliveryDateBox/DeliveryDateBoxContainer';
 import { getDateIsMoreTodayForString } from '../../../utilits/functions';
 import { IUseStateCartDeliveryForm } from '../Cart';
-import FieldTextCart from './InputText.tsx/InputTextCart';
+import FieldTextCart from './InputText/InputTextCart';
 import PickupContainer from './PickupContainer/PickupContainer';
 import { ISetIsNext } from './../Cart';
 import { useAppDispatch } from './../../../redux/hooks';

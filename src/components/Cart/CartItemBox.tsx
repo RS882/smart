@@ -6,7 +6,7 @@ import BtnNext from './BtnNext';
 
 interface ICartItemBox {
 	title: string;
-	isNext: boolean;
+	isNext?: boolean;
 	FullElement: JSX.Element;
 	ShortElement?: JSX.Element;
 	onClickNextBtnCart?: ArrowFn;
@@ -36,7 +36,7 @@ export const StyledCartItemTitle = styled.div`
 	};
 `;
 // Box-component for basket blocks
-const CartItemBox: FC<ICartItemBox> = ({ title, isNext, FullElement, ShortElement, onClickNextBtnCart, formId }) => {
+const CartItemBox: FC<ICartItemBox> = ({ title, isNext = true, FullElement, ShortElement, onClickNextBtnCart, formId }) => {
 	return (
 		<>
 			<StyledCartItemContainer>
