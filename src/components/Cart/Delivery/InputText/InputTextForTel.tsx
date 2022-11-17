@@ -38,37 +38,53 @@ const FieldTextCartForTel = ({ title, FormType = 'input', ...props }: IFiledText
 	// console.log(props);
 	const TELNUMBERSHABLON: string = '+49(___) ___-__-__';
 
+
 	// const [step, setStep] = useState(0);
-	// const numberPosition: number[] = [4, 5, 6, 9, 10, 11, 13, 14.16, 17,];
+	const numberPosition: number[] = [4, 5, 6, 9, 10, 11, 13, 14, 16, 17,];
 
 	//const [cursorPosition, setCursorPosition] = useState(numberPosition[step]);
 	const [isClick, setIsClick] = useState(false);
 
+	const setCursorPosition = (elem: EventTarget & HTMLInputElement, position: number = 4) =>
+		setTimeout(() => elem.selectionStart = elem.selectionEnd = position);
+
 	useEffect(() => {
 		isClick && !field.value && helpers.setValue(TELNUMBERSHABLON);
-
 	}, [isClick, field.value])
 
 
 	const onClickTelField = (e: React.PointerEvent<HTMLInputElement>) => {
 		const target = e.currentTarget;
 		isClick || setIsClick(true);
-		console.log(field.value);
-		field.value === TELNUMBERSHABLON &&
-			setTimeout(() => { target.selectionStart = target.selectionEnd = 4; });
-
+		!field.value && setCursorPosition(target);
+		field.value === TELNUMBERSHABLON && setCursorPosition(target);
 	};
 
 	const onChangeTelNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-		// field.value === TELNUMBERSHABLON &&
-		// 	setTimeout(() => { target.selectionStart = target.selectionEnd = 4; });
+
+		const isElemNumber = (num: string) => /\d/.test(num);
+
 		const target = e.currentTarget;
-		const telTextArr = target.value.split('').map((e, i) => {
-			const isElemNumber = (num: string) => /\d/.test(num);
+
+		field.value === TELNUMBERSHABLON && setCursorPosition(target);
+
+		const telTextArr = target.value.split('');
+
+		const getNextCursorPosition = (arr: string[], numPosition: number[]) => {
+			const nextCursorPosition = arr.findIndex((e, i) => numPosition.includes(i) && !isElemNumber(e));
+			const nextCursorPositionIndex = numPosition.findIndex(e => e === nextCursorPosition);
+			console.log(numberPosition[nextCursorPositionIndex]);
+
+			return numberPosition[nextCursorPositionIndex];
+		};
+
+		//console.log();
+
+		const res = telTextArr.map((e, i) => {
 			if (i === 0) return '+';
 			if (i === 1 && !isElemNumber(e)) return '4';
 			if (i === 2 && !isElemNumber(e)) return '9';
-			if ([4, 5, 6, 9, 10, 11, 13, 14, 16, 17,].includes(i) && !isElemNumber(e)) return '_';
+			if (numberPosition.includes(i) && !isElemNumber(e)) return '_';
 			if (i === 3) return '(';
 			if (i === 7) return ')';
 			if (i === 8) return ' ';
@@ -77,7 +93,8 @@ const FieldTextCartForTel = ({ title, FormType = 'input', ...props }: IFiledText
 			return e
 		}).join('');
 
-		helpers.setValue(telTextArr);
+		helpers.setValue(res);
+		field.value !== TELNUMBERSHABLON && setCursorPosition(target, getNextCursorPosition(telTextArr, numberPosition));
 
 		// const getTelIfLengthIsOk = (value: string): string => {
 		// 	if (/^\+[\d]{2}\([\d]{3}\)\s[\d]{3}-[\d]{2}-[\d]{2}/.test(value)) {
