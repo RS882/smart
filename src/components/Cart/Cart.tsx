@@ -117,9 +117,10 @@ const Cart = () => {
 								setIsNext={setIsNextPMethod} isNext={isNextPMethod} /> :
 							<CartMetodNotActiv title={paymentText?.title!} />
 						}
-
-						<ReciepientContainer title={recipientText?.title!} />
-						<CartMetodNotActiv title={recipientText?.title!} />
+						{isNextPMethod ?
+							<ReciepientContainer title={recipientText?.title!} /> :
+							<CartMetodNotActiv title={recipientText?.title!} />
+						}
 
 					</StyledCartBlock>
 					<StyledTotal>

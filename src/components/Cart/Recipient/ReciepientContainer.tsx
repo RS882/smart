@@ -16,4 +16,4 @@ const ReciepientContainer: FC<IRecipientContainer> = ({ title }) => {
 	);
 };
 
-export default ReciepientContainer;
+export default React.memo(ReciepientContainer);

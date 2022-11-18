@@ -33,8 +33,6 @@ const StyledTextArea = styled.textarea`
 const FieldTextCart = ({ title, FormType = 'input', ...props }: IFiledTextCart & InputAttrProps) => {
 	const [field, meta] = useField({ ...props, validate: props.validate || validateSelectIsEnpty });
 
-	const [telValue, setTelValue] = useState('+38(___) ___-__-__');
-
 
 
 	sessionStorage.setItem(field.name, field.value);

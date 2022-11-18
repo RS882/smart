@@ -86,11 +86,11 @@ const StyledAcceptUserAagreement = styled.div`
 	};
 `;
 
-const StyledCheckboxBlock = styled.div`
+export const StyledCheckboxBlock = styled.div`
 	display: flex;
 	align-items:center;
 `;
-const StyledCheckboxLabel = styled.label`
+export const StyledCheckboxLabel = styled.label`
 	width:24px;
 	height:24px;
 	margin-right:10px;

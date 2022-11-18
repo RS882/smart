@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { IDeliveryFormDate } from '../components/Cart/Delivery/CartDeliveryForm';
+import { IRecipientFormDate } from '../components/Cart/Recipient/RecipientForm';
 import { RootState } from './store';
 
 
@@ -10,6 +11,7 @@ export interface ICartSlice {
 	totalPriese: number;
 	delivery: IDeliveryFormDate;
 	paymentMethod: string,
+	recipient: IRecipientFormDate,
 };
 
 const initialState: ICartSlice = {
@@ -25,6 +27,13 @@ const initialState: ICartSlice = {
 		deliveryFlat: '',
 		comment: '',
 		shopAdress: '',
+	},
+	recipient: {
+		name: '',
+		surname: '',
+		phone: '',
+		email: '',
+		dontCall: true,
 	},
 	paymentMethod: '',
 
@@ -49,6 +58,9 @@ const CartSlice = createSlice({
 		setPaymentMethod: (state, action: PayloadAction<string>) => {
 			state.paymentMethod = action.payload;
 		},
+		setRecipient: (state, action: PayloadAction<IRecipientFormDate>) => {
+			state.recipient = action.payload;
+		},
 
 		clearCart: (state) => {
 			state.itemsOrder = [];
@@ -63,6 +75,13 @@ const CartSlice = createSlice({
 				comment: '',
 				shopAdress: '',
 			};
+			state.recipient = {
+				name: '',
+				surname: '',
+				phone: '',
+				email: '',
+				dontCall: true,
+			};
 			state.paymentMethod = '';
 		},
 
@@ -70,10 +89,12 @@ const CartSlice = createSlice({
 	}
 });
 
-export const { setIsCartPage, setOrderItems, setTotalPiese, setDeliveryDate, setPaymentMethod, clearCart,
+export const { setIsCartPage, setOrderItems, setTotalPiese, setDeliveryDate, setPaymentMethod, setRecipient, clearCart,
 } = CartSlice.actions;
 
 export const selectIsCartPage = (state: RootState) => state.cart.isCartPage;
 export const selectDeliveryDetails = (state: RootState) => state.cart.delivery;
 export const selectPaymentMethodDetails = (state: RootState) => state.cart.paymentMethod;
+export const selectRecipientCart = (state: RootState) => state.cart.recipient;
+
 export default CartSlice.reducer
