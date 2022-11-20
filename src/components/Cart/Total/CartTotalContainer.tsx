@@ -1,7 +1,8 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { selectItemInCart } from '../../../redux/ActionSlice';
-import { useAppSelector } from '../../../redux/hooks';
+import { setTotalPiese } from '../../../redux/CartSlice';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { ArrowFn } from '../../../types/fnTypes';
 import Button from '../../Button';
 import RememberMe from '../../Login/LoginForm/RememeberMe/RememberMe';
@@ -111,6 +112,8 @@ const StyledAToUserAagreementBnt = styled.button`
 
 const CartTotalContainer: FC<ICartTotalContainer> = ({ totalPrise, deliveryPrise = 0,
 	isCheckout, onCheckout, goToUserAagreement }) => {
+
+	const dispatch = useAppDispatch();
 	// Text for total
 	const cartTotalText = useAppSelector(selectCartTextTotal);
 	//The number of goods in the basket
@@ -120,7 +123,9 @@ const CartTotalContainer: FC<ICartTotalContainer> = ({ totalPrise, deliveryPrise
 	// STATE checkbox clicks
 	const [isChecked, setIsChecked] = useState(false)
 	// invert the state
-	const handleChange = () => { setIsChecked(!isChecked); }
+	const handleChange = () => { setIsChecked(!isChecked); };
+	// Distribute the total amount of the order
+	useEffect(() => { dispatch(setTotalPiese(+totalPrise + deliveryPrise)) }, [prise])
 
 
 	return (<>

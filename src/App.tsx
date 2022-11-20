@@ -33,7 +33,7 @@ import { delErrorMessage, selectErrorMessage, setErrorMessage } from './redux/Er
 import LoginMessage from './components/Login/LoginForm/LoginMessage/LoginMessage';
 import { selectIsPreloader, setIsFeching } from './redux/PreloaderSlice';
 import LoginMessageContainer from './components/Login/LoginForm/LoginMessage/LoginMessageContainer';
-import { setIsCartPage } from './redux/CartSlice';
+import { clearOrderMessage, selectOrderMessage, setIsCartPage } from './redux/CartSlice';
 import { addItemToCart, addItemToCartStart, addItemToCompare, addItemToCompareStart, addItemToFavorite, addItemToFavoriteStart, addItemToViewed, addItemToViewedStart, selectCompaedItem, selectFavoritedItem, selectItemInCart, selectViewedItem } from './redux/ActionSlice';
 
 const Cart = React.lazy(() => import('./components/Cart/Cart'));
@@ -176,7 +176,16 @@ const App: FC = () => {
     dispatch(setIsFeching(false));
   };
   //Registration message, login
-  const message = useAppSelector(selectLoginMessage)
+  const message = useAppSelector(selectLoginMessage);
+  // Order processing message
+  const orderMessage = useAppSelector(selectOrderMessage);
+  //Close the window posting about the order
+  const onClickOrderMessage = () => {
+    dispatch(clearOrderMessage());
+    dispatch(closePopUp());
+    dispatch(changeIsBodyLock(false));
+  };
+
 
   // If the basket is open, we report this in stat
   const path = useLocation().pathname
@@ -199,6 +208,7 @@ const App: FC = () => {
     return (
       <StyledAppRef appScroll={appScroll}>
         {errorMessage ? <LoginMessage message={errorMessage} onClickOk={onClickErrorPopUp} /> : null}
+        {orderMessage ? <LoginMessage message={orderMessage} onClickOk={onClickOrderMessage} /> : null}
         {message ? <LoginMessageContainer /> : null}
         {isFetching ? <PreloaderContainer /> : null}
         <AppWrapper onClick={onClickApp} direction={'column'}>

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { setRecipient } from '../../../redux/CartSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { validateEmail, validateTelNumberCartFormFormat } from '../../../utilits/validators';
+import AutoSubmit from '../../FormilkComponent/AutoSubmit ';
 import { StyledDeliveryForm } from '../Delivery/CartDeliveryForm';
 import FieldTextCart from '../Delivery/InputText/InputTextCart';
 import FieldTextCartForTel from '../Delivery/InputText/InputTextForTel';
@@ -29,12 +30,7 @@ const StyledDontCallMe = styled.div`
 	grid-column: 1/3;
 `;
 
-// Automatic sending of the form 
-const AutoSubmit = () => {
-	const { values, submitForm } = useFormikContext();
-	useEffect(() => { submitForm() }, [values, submitForm]);
-	return null;
-};
+
 
 const RecipientForm: FC = () => {
 	const recipientText = useAppSelector(selectRecipientTaxt);

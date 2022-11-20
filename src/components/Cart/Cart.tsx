@@ -10,9 +10,10 @@ import CartMetodNotActiv from './CartMetodNotActiv';
 import CartTotalContainer from './Total/CartTotalContainer';
 import CartDeliveryContainer from './Delivery/CartDeliveryContainer';
 import { useAppDispatch } from './../../redux/hooks';
-import { setTotalPiese } from '../../redux/CartSlice';
+import { selectOrder, setTotalPiese } from '../../redux/CartSlice';
 import PaymentMethodContainer from './PaymentMethod/PaymentMethodContainer';
 import ReciepientContainer from './Recipient/ReciepientContainer';
+import { setOrder } from '../../redux/Thunk/thunkOrder';
 
 export interface ISetIsNext {
 	setIsNext: (el: boolean) => void;
@@ -85,17 +86,19 @@ const Cart = () => {
 	// The text of the section is the recipient
 	const recipientText = useAppSelector(selectCartTextRecipient);
 	// sending order data
+
+	const orderPayload = useAppSelector(selectOrder);
 	const onCheckout = () => {
-		// Distribute the total amount of the order
-		dispatch(setTotalPiese(+totalPrise + deliveryPrise))
+		dispatch(setOrder(orderPayload));
 		console.log('Checkout');
 
 	};
 	// transition to a user agreement
 	const goToUserAagreement = () => {
-		console.log('UserAagreement');
+		console.log('UserAgreement');
 
 	};
+
 
 
 	return (
@@ -106,7 +109,6 @@ const Cart = () => {
 					<StyledTitle>{titleText}</StyledTitle>
 					<StyledCartBlock>
 						<OrderContainer setTotalPrise={setTotalPreise} setIsNext={setIsNextOrder} isNext={isNextOrder} />
-
 						{isNextOrder ?
 							<CartDeliveryContainer title={deliveryText?.title!}
 								setIsNext={setIsNextDelivery} isNext={isNextDelivery}
@@ -121,7 +123,6 @@ const Cart = () => {
 							<ReciepientContainer title={recipientText?.title!} /> :
 							<CartMetodNotActiv title={recipientText?.title!} />
 						}
-
 					</StyledCartBlock>
 					<StyledTotal>
 						<CartTotalContainer totalPrise={totalPrise}

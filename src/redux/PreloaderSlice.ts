@@ -3,6 +3,7 @@ import { RootState } from "./store";
 import { setLanguages, setScrollWidth } from './Thunk/thunkInitApp';
 import { getItem } from "./Thunk/thunkItem";
 import { loginUser, regNewUser } from "./Thunk/thunkLogin";
+import { setOrder } from './Thunk/thunkOrder';
 
 interface IPreloaderState {
 	isFetching: boolean;
@@ -34,12 +35,19 @@ export const preloaderSlice = createSlice({
 		[loginUser.pending.type]: changeIsFetching(true),
 		[loginUser.fulfilled.type]: changeIsFetching(false),
 		[loginUser.rejected.type]: changeIsFetching(false),
+
 		[regNewUser.pending.type]: changeIsFetching(true),
 		[regNewUser.fulfilled.type]: changeIsFetching(false),
 		[regNewUser.rejected.type]: changeIsFetching(false),
+
 		[setScrollWidth.pending.type]: changeIsFetching(true),
 		[setScrollWidth.fulfilled.type]: changeIsFetching(false),
 		[setScrollWidth.rejected.type]: changeIsFetching(false),
+
+		[setOrder.pending.type]: changeIsFetching(true),
+		[setOrder.fulfilled.type]: changeIsFetching(false),
+		[setOrder.rejected.type]: changeIsFetching(false),
+
 	}
 })
 export const { setIsFeching } = preloaderSlice.actions;
