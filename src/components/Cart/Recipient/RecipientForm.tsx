@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import { setRecipient } from '../../../redux/CartSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { validateEmail, validateTelNumberCartFormFormat } from '../../../utilits/validators';
-import AutoSubmit from '../../FormilkComponent/AutoSubmit ';
+
+import { ISetNext, ISetStateIsNext } from '../Cart';
 import { StyledDeliveryForm } from '../Delivery/CartDeliveryForm';
 import FieldTextCart from '../Delivery/InputText/InputTextCart';
 import FieldTextCartForTel from '../Delivery/InputText/InputTextForTel';
@@ -30,9 +31,17 @@ const StyledDontCallMe = styled.div`
 	grid-column: 1/3;
 `;
 
+//
 
-
-const RecipientForm: FC = () => {
+// Automatic sending of the form (for Formik)
+const AutoSubmit = () => {
+	const { values, submitForm } = useFormikContext();
+	useEffect(() => {
+		submitForm();
+	}, [values, submitForm]);
+	return null;
+};
+const RecipientForm: FC<ISetNext> = ({ setIsNext }) => {
 	const recipientText = useAppSelector(selectRecipientTaxt);
 	const initialValues: IRecipientFormDate = {
 		name: sessionStorage.getItem('name') || '',
@@ -48,9 +57,15 @@ const RecipientForm: FC = () => {
 		<Formik initialValues={initialValues}
 			onSubmit={(values, actions) => {
 				actions.validateForm(values);
-				dispatch(setRecipient(values))
+				dispatch(setRecipient(values));
+				setIsNext(true);
+
 			}}>
 			{(props: FormikProps<IRecipientFormDate>) => {
+
+
+				Object.keys(props.errors).length !== 0 && setIsNext(false);
+
 
 				return (<StyledDeliveryForm id='RecipientInCart'>
 					<StyledRecipientFilds>

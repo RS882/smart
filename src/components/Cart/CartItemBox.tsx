@@ -37,6 +37,10 @@ export const StyledCartItemTitle = styled.div`
 `;
 // Box-component for basket blocks
 const CartItemBox: FC<ICartItemBox> = ({ title, isNext = true, FullElement, ShortElement, onClickNextBtnCart, formId }) => {
+
+
+
+
 	return (
 		<>
 			<StyledCartItemContainer>

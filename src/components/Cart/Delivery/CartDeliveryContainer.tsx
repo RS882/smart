@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-import { selectDeliveryDetails } from '../../../redux/CartSlice';
-import { useAppSelector } from '../../../redux/hooks';
+import { selectDeliveryDetails, setIsDeliveryValided } from '../../../redux/CartSlice';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { selectCartDeliveryTextDelivery, selectCartDeliveryTextPickup } from '../../../redux/LanguageSlice';
 import { ISetNext, IUseStateCartDeliveryForm } from '../Cart';
 import CartItemBox from '../CartItemBox';
@@ -23,7 +23,7 @@ export interface IDeliveryDetalsShort {
 // Delivery unit in the basket
 const CartDeliveryContainer: FC<ICartDeliveryContainer> = ({ title, isNext, setIsNext, setDeliveryPreise }) => {
 
-
+	const dispatch = useAppDispatch();
 	const deliveyText = useAppSelector(selectCartDeliveryTextDelivery)!;
 	const pickupText = useAppSelector(selectCartDeliveryTextPickup)!;
 	const deliveryDetails = useAppSelector(selectDeliveryDetails);
@@ -43,10 +43,19 @@ const CartDeliveryContainer: FC<ICartDeliveryContainer> = ({ title, isNext, setI
 
 	const deliveryTitelShort: string = deliveryDetails.delivery === 'delivery' ? deliveyText.shortTitle : pickupText.shortTitle;
 
+	const onNextClick = () => {
+		setIsNext(true);
+		dispatch(setIsDeliveryValided(true));
+	};
+	const onChangeClick = () => {
+		setIsNext(false)
+		dispatch(setIsDeliveryValided(false));
+	};
+
 	return (
 		<CartItemBox title={title} isNext={isNext} formId='DeliveryForm'
-			FullElement={<CartDeliveryForm setDeliveryPreise={setDeliveryPreise} setIsNext={setIsNext} />}
-			ShortElement={<CartDeliveryShort onClickBtnChange={() => setIsNext(false)}
+			FullElement={<CartDeliveryForm setDeliveryPreise={setDeliveryPreise} setIsNext={onNextClick} />}
+			ShortElement={<CartDeliveryShort onClickBtnChange={onChangeClick}
 				deliveryDetals={deliveryDetalsShort} titel={deliveryTitelShort} />} />
 
 

@@ -14,11 +14,11 @@ import HeaderBottomContainer from './components/Header/HeaderBottomContainer/Hea
 import { loadLanguage, setLanguages, setScrollWidth } from './redux/Thunk/thunkInitApp';
 import { initializatedSuccess, selectInitializated, setIsRetina } from './redux/AppSlice';
 import PreloaderContainer from './components/Preloader/PreloaderContainer';
-import { addArrayToLocalStore, isRetina } from './utilits/functions';
+import { isRetina } from './utilits/functions';
 import LoginContainer from './components/Login/LoginContainer';
 import { closePopUp, selectIsPopUp, selectLoginMessage } from './redux/LoginSlice';
 
-import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
+//import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import { routeObj } from './routeObj';
 import { Global } from './GlobalStyle';
 import { ThemeProvider } from 'styled-components';
@@ -33,8 +33,8 @@ import { delErrorMessage, selectErrorMessage, setErrorMessage } from './redux/Er
 import LoginMessage from './components/Login/LoginForm/LoginMessage/LoginMessage';
 import { selectIsPreloader, setIsFeching } from './redux/PreloaderSlice';
 import LoginMessageContainer from './components/Login/LoginForm/LoginMessage/LoginMessageContainer';
-import { clearOrderMessage, selectOrderMessage, setIsCartPage } from './redux/CartSlice';
-import { addItemToCart, addItemToCartStart, addItemToCompare, addItemToCompareStart, addItemToFavorite, addItemToFavoriteStart, addItemToViewed, addItemToViewedStart, selectCompaedItem, selectFavoritedItem, selectItemInCart, selectViewedItem } from './redux/ActionSlice';
+import { clearOrderMessage, selectOrderMessage, setIsCartPage, setIsOrderSuccess } from './redux/CartSlice';
+import { addItemToCartStart, addItemToCompareStart, addItemToFavoriteStart, addItemToViewedStart } from './redux/ActionSlice';
 
 const Cart = React.lazy(() => import('./components/Cart/Cart'));
 
@@ -72,8 +72,6 @@ const App: FC = () => {
 
   const appRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-
-
 
 
   useEffect(() => {
@@ -184,6 +182,8 @@ const App: FC = () => {
     dispatch(clearOrderMessage());
     dispatch(closePopUp());
     dispatch(changeIsBodyLock(false));
+    dispatch(setIsOrderSuccess(false));
+
   };
 
 
@@ -194,7 +194,7 @@ const App: FC = () => {
   }, [path]);
 
   if (!initialazatedApp) {
-    // console.log(store.getState());
+
     return (
       <div ref={appRef}>
         <PreloaderContainer />
@@ -209,6 +209,7 @@ const App: FC = () => {
       <StyledAppRef appScroll={appScroll}>
         {errorMessage ? <LoginMessage message={errorMessage} onClickOk={onClickErrorPopUp} /> : null}
         {orderMessage ? <LoginMessage message={orderMessage} onClickOk={onClickOrderMessage} /> : null}
+
         {message ? <LoginMessageContainer /> : null}
         {isFetching ? <PreloaderContainer /> : null}
         <AppWrapper onClick={onClickApp} direction={'column'}>

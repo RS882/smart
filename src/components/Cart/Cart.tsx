@@ -10,15 +10,20 @@ import CartMetodNotActiv from './CartMetodNotActiv';
 import CartTotalContainer from './Total/CartTotalContainer';
 import CartDeliveryContainer from './Delivery/CartDeliveryContainer';
 import { useAppDispatch } from './../../redux/hooks';
-import { selectOrder, setTotalPiese } from '../../redux/CartSlice';
+import { clearCartOrder, selectIsOrderSuccess, selectOrder } from '../../redux/CartSlice';
 import PaymentMethodContainer from './PaymentMethod/PaymentMethodContainer';
 import ReciepientContainer from './Recipient/ReciepientContainer';
 import { setOrder } from '../../redux/Thunk/thunkOrder';
+import { clearCart, selectIsCartFull } from '../../redux/ActionSlice';
+import { useNavigate } from 'react-router-dom';
 
 export interface ISetIsNext {
+	setIsNext: () => void;
+};
+export interface ISetStateIsNext {
 	setIsNext: (el: boolean) => void;
 };
-export interface ISetNext extends ISetIsNext {
+export interface ISetNext extends ISetStateIsNext {
 	isNext: boolean;
 };
 export interface IUseStateCartDeliveryForm {
@@ -67,6 +72,7 @@ const StyledCartBlock = styled.div`
 
 const Cart = () => {
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	// The total price of goods in the basket
 	const [totalPrise, setTotalPreise] = useState('0.00');
 	// The delivery price of goods in the basket
@@ -77,6 +83,8 @@ const Cart = () => {
 	const [isNextDelivery, setIsNextDelivery] = useState(false);
 	// whether the button is pressedressed PaymentMethod
 	const [isNextPMethod, setIsNextPMethod] = useState(false);
+	// whether  submit is pressedressed Recipient
+	const [isPecipient, setIsPecipient] = useState(false);
 	//The title is common text
 	const titleText = useAppSelector(selectCartTextTitle);
 	// The text of the Delivery section
@@ -85,8 +93,22 @@ const Cart = () => {
 	const paymentText = useAppSelector(selectCartTextPaymentMethod);
 	// The text of the section is the recipient
 	const recipientText = useAppSelector(selectCartTextRecipient);
-	// sending order data
+	// The result of sending data data
+	const isOrderSuccess = useAppSelector(selectIsOrderSuccess);
+	useEffect(() => {
+		isOrderSuccess && dispatch(clearCartOrder());
+		isOrderSuccess && sessionStorage.clear();
+		isOrderSuccess && dispatch(clearCart());
+	}, [isOrderSuccess]);
 
+	const isCartFull = useAppSelector(selectIsCartFull);
+
+	useEffect(() => {
+		!isCartFull && navigate('/')
+	}, [isCartFull])
+
+
+	// sending order data
 	const orderPayload = useAppSelector(selectOrder);
 	const onCheckout = () => {
 		dispatch(setOrder(orderPayload));
@@ -98,6 +120,10 @@ const Cart = () => {
 		console.log('UserAgreement');
 
 	};
+
+	const isValid: boolean = ![isNextOrder, isNextDelivery, isNextPMethod, isPecipient,].includes(false);
+
+
 
 
 
@@ -120,13 +146,13 @@ const Cart = () => {
 							<CartMetodNotActiv title={paymentText?.title!} />
 						}
 						{isNextPMethod ?
-							<ReciepientContainer title={recipientText?.title!} /> :
+							<ReciepientContainer title={recipientText?.title!} setIsNext={setIsPecipient} isNext={isPecipient} /> :
 							<CartMetodNotActiv title={recipientText?.title!} />
 						}
 					</StyledCartBlock>
 					<StyledTotal>
 						<CartTotalContainer totalPrise={totalPrise}
-							isCheckout={true} onCheckout={onCheckout}
+							isCheckout={isValid} onCheckout={onCheckout}
 							goToUserAagreement={goToUserAagreement} deliveryPrise={deliveryPrise} />
 					</StyledTotal>
 				</StyledCartContainer>

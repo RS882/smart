@@ -3,10 +3,15 @@ import React, { useEffect } from 'react';
 
 
 // Automatic sending of the form (for Formik)
-const AutoSubmit = () => {
+const AutoSubmit1 = () => {
 	const { values, submitForm } = useFormikContext();
-	useEffect(() => { submitForm() }, [values, submitForm]);
+	useEffect(() => {
+		console.log('submit');
+
+		submitForm()
+
+	}, [values, submitForm]);
 	return null;
 };
 
-export default AutoSubmit;
+export default AutoSubmit1;

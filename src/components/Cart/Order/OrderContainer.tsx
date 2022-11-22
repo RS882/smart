@@ -1,7 +1,8 @@
+import { PayloadAction } from '@reduxjs/toolkit';
 import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { selectItemInCart } from '../../../redux/ActionSlice';
-import { setOrderItems } from '../../../redux/CartSlice';
+import { ICartSlice, setIsItemsValided, setOrderItems } from '../../../redux/CartSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { selectitemsData } from '../../../redux/ItemSlice';
 import { selectCartTextOrder } from '../../../redux/LanguageSlice';
@@ -45,16 +46,23 @@ const OrderContainer: FC<IOrederContainer> = ({ setTotalPrise, setIsNext, isNext
 		console.log(id);
 	};
 
+
+
 	const onNextClick = () => {
 		setIsNext(true);
 		dispatch(setOrderItems(orderItem));
+		dispatch(setIsItemsValided(true));
+	};
+	const onChangeClick = () => {
+		setIsNext(false)
+		dispatch(setIsItemsValided(false));
 	};
 
 
 	return (<>
 		<CartItemBox title={titleText?.title} isNext={isNext} onClickNextBtnCart={onNextClick}
 			FullElement={<Order items={items} orderItem={orderItem} onClickItem={onClickItem} />}
-			ShortElement={<OrderShort items={items} onClickImg={onClickItem} cangeOrderData={() => setIsNext(false)} />} />
+			ShortElement={<OrderShort items={items} onClickImg={onClickItem} cangeOrderData={onChangeClick} />} />
 
 	</>
 	);

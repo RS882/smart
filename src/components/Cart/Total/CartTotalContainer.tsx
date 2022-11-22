@@ -127,7 +127,6 @@ const CartTotalContainer: FC<ICartTotalContainer> = ({ totalPrise, deliveryPrise
 	// Distribute the total amount of the order
 	useEffect(() => { dispatch(setTotalPiese(+totalPrise + deliveryPrise)) }, [prise])
 
-
 	return (<>
 
 		<StyledCartTotelBox>
@@ -146,7 +145,7 @@ const CartTotalContainer: FC<ICartTotalContainer> = ({ totalPrise, deliveryPrise
 				<StyledTotalText>{cartTotalText?.toPay}</StyledTotalText>
 				<StyledPrise>{prise}</StyledPrise>
 			</StyledTotal>
-			<Button disabled={!isChecked && isCheckout} width='100%' onClick={onCheckout}>{cartTotalText?.checkout}</Button>
+			<Button disabled={!(isChecked && isCheckout)} width='100%' onClick={onCheckout}>{cartTotalText?.checkout}</Button>
 		</StyledCartTotelBox>
 
 		<StyledAcceptUserAagreement>

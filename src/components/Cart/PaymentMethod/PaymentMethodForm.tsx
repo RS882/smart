@@ -31,7 +31,7 @@ const PaymentMethodForm: FC<IPMForm & ISetIsNext> = ({ plHolder, setIsNext }) =>
 			onSubmit={(values, actions) => {
 				actions.validateForm(values);
 				dispatch(setPaymentMethod(values.paymentMethod!));
-				setIsNext(true);
+				setIsNext();
 			}}>
 			{(props: FormikProps<IPMValues>) =>
 				<StyledDeliveryForm id='PaymentMethod'>

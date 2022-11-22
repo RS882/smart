@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IAction } from '../../../redux/ActionSlice';
+
 import Flex from '../../Flex';
 import { IActionArray } from '../../../types/HeaderTypes';
 import HeaderAction from './HeaderAction';
@@ -7,7 +7,10 @@ import { useNavigate } from 'react-router';
 
 import { closeMenu } from '../../../redux/MenuSlice';
 import { changeIsModal } from '../../../redux/ModalSlice';
-import { useAppDispatch } from '../../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { selectIsCartFull } from '../../../redux/ActionSlice';
+import { setOrderMessage } from '../../../redux/CartSlice';
+
 
 
 interface IHeaderActions {
@@ -24,10 +27,21 @@ interface IHeaderActions {
 const HeaderActions: FC<IHeaderActions> = (props) => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
+
+	const isCartFull = useAppSelector(selectIsCartFull);
+
 	const onClickAction1 = (actionName: string) => {
 		dispatch(closeMenu());
 		dispatch(changeIsModal(false));
-		navigate(`/${actionName}`);
+		if (!isCartFull && actionName === 'cart') {
+			navigate(`/`);
+			dispatch(setOrderMessage('Your basket is empty'))
+		} else {
+			navigate(`/${actionName}`)
+		}
+
+
+		// navigate(`/${actionName}`);
 	}
 
 

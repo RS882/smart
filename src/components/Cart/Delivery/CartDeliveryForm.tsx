@@ -128,7 +128,7 @@ const CartDeliveryForm: FC<IUseStateCartDeliveryForm & ISetIsNext> = ({ setDeliv
 					city: '',
 
 				}));
-				setIsNext(true);
+				setIsNext();
 			}}>
 			{(props: FormikProps<IDeliveryFormDate>) => {
 				sessionStorage.setItem('delivery', props.values.delivery);

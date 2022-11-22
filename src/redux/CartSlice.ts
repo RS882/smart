@@ -18,6 +18,13 @@ export interface ICartDate {
 export interface ICartSlice extends ICartDate {
 	isCartPage: boolean;
 	orderMessage: string;
+	isOrderSuccess: boolean;
+	isOrderValided: {
+		isItemsValided: boolean,
+		isDeliveryValided: boolean,
+		isPayMethodValided: boolean,
+		isRecipientValided: boolean,
+	};
 };
 
 interface IOrderId {
@@ -28,8 +35,15 @@ interface IOrderId {
 
 const initialState: ICartSlice = {
 	isCartPage: false,
+	isOrderSuccess: false,
 	orderMessage: '',
 	itemsOrder: [],
+	isOrderValided: {
+		isItemsValided: false,
+		isDeliveryValided: false,
+		isPayMethodValided: false,
+		isRecipientValided: false,
+	},
 
 	totalPriese: 0,
 	delivery: {
@@ -75,11 +89,29 @@ const CartSlice = createSlice({
 		setRecipient: (state, action: PayloadAction<IRecipientFormDate>) => {
 			state.recipient = action.payload;
 		},
+		setIsOrderSuccess: (state, action: PayloadAction<boolean>) => {
+			state.isOrderSuccess = action.payload;
+		},
 		clearOrderMessage: (state) => {
 			state.orderMessage = '';
 		},
+		setOrderMessage: (state, action: PayloadAction<string>) => {
+			state.orderMessage = action.payload;
+		},
+		setIsItemsValided: (state, action: PayloadAction<boolean>) => {
+			state.isOrderValided.isItemsValided = action.payload;
+		},
+		setIsDeliveryValided: (state, action: PayloadAction<boolean>) => {
+			state.isOrderValided.isDeliveryValided = action.payload;
+		},
+		setIsPayMethodValided: (state, action: PayloadAction<boolean>) => {
+			state.isOrderValided.isPayMethodValided = action.payload;
+		},
+		setIsRecipientValided: (state, action: PayloadAction<boolean>) => {
+			state.isOrderValided.isRecipientValided = action.payload;
+		},
 
-		clearCart: (state) => {
+		clearCartOrder: (state) => {
 			state.itemsOrder = [];
 			state.totalPriese = 0;
 			state.delivery = {
@@ -109,10 +141,11 @@ const CartSlice = createSlice({
 			const odredId = action.payload.id
 			if (odredId !== undefined) {
 				state.orderMessage = `Order №${odredId} accepted. Thanks for your order!`;
+				state.isOrderSuccess = true;
 
 			} else {
-				// state.userDate = {};
-				// state.isLoginSuccess = false;
+
+				state.isOrderSuccess = false;
 				state.orderMessage = 'The order is not accepted.  Something went wrong ...(';
 			}
 
@@ -120,8 +153,9 @@ const CartSlice = createSlice({
 	},
 });
 
-export const { setIsCartPage, setOrderItems, setTotalPiese, setDeliveryDate, setPaymentMethod, setRecipient, clearCart, clearOrderMessage,
-} = CartSlice.actions;
+export const { setIsCartPage, setOrderItems, setTotalPiese, setDeliveryDate, setPaymentMethod,
+	setRecipient, clearCartOrder, setOrderMessage, clearOrderMessage, setIsOrderSuccess,
+	setIsItemsValided, setIsDeliveryValided, setIsPayMethodValided, setIsRecipientValided } = CartSlice.actions;
 
 export const selectIsCartPage = (state: RootState) => state.cart.isCartPage;
 export const selectDeliveryDetails = (state: RootState) => state.cart.delivery;
@@ -136,5 +170,6 @@ export const selectOrder = (state: RootState) => ({
 
 });
 export const selectOrderMessage = (state: RootState) => state.cart.orderMessage;
+export const selectIsOrderSuccess = (state: RootState) => state.cart.isOrderSuccess;
 
 export default CartSlice.reducer
