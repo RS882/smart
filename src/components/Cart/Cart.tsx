@@ -101,8 +101,8 @@ const Cart = () => {
 		isOrderSuccess && dispatch(clearCart());
 	}, [isOrderSuccess]);
 
+	// If the empty basket is moving to the main page
 	const isCartFull = useAppSelector(selectIsCartFull);
-
 	useEffect(() => {
 		!isCartFull && navigate('/')
 	}, [isCartFull])
@@ -120,12 +120,8 @@ const Cart = () => {
 		console.log('UserAgreement');
 
 	};
-
+// Check all the data blocks have passed the validation
 	const isValid: boolean = ![isNextOrder, isNextDelivery, isNextPMethod, isPecipient,].includes(false);
-
-
-
-
 
 	return (
 		<StyledMain>

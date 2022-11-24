@@ -12,6 +12,7 @@ export interface ICartDate {
 	delivery: IDeliveryFormDate;
 	paymentMethod: string,
 	recipient: IRecipientFormDate,
+	userId?: string,
 
 };
 
@@ -19,12 +20,7 @@ export interface ICartSlice extends ICartDate {
 	isCartPage: boolean;
 	orderMessage: string;
 	isOrderSuccess: boolean;
-	isOrderValided: {
-		isItemsValided: boolean,
-		isDeliveryValided: boolean,
-		isPayMethodValided: boolean,
-		isRecipientValided: boolean,
-	};
+
 };
 
 interface IOrderId {
@@ -38,12 +34,7 @@ const initialState: ICartSlice = {
 	isOrderSuccess: false,
 	orderMessage: '',
 	itemsOrder: [],
-	isOrderValided: {
-		isItemsValided: false,
-		isDeliveryValided: false,
-		isPayMethodValided: false,
-		isRecipientValided: false,
-	},
+	userId: undefined,
 
 	totalPriese: 0,
 	delivery: {
@@ -98,22 +89,15 @@ const CartSlice = createSlice({
 		setOrderMessage: (state, action: PayloadAction<string>) => {
 			state.orderMessage = action.payload;
 		},
-		setIsItemsValided: (state, action: PayloadAction<boolean>) => {
-			state.isOrderValided.isItemsValided = action.payload;
+		setUserIdToOrder: (state, action: PayloadAction<string>) => {
+			state.userId = action.payload;
 		},
-		setIsDeliveryValided: (state, action: PayloadAction<boolean>) => {
-			state.isOrderValided.isDeliveryValided = action.payload;
-		},
-		setIsPayMethodValided: (state, action: PayloadAction<boolean>) => {
-			state.isOrderValided.isPayMethodValided = action.payload;
-		},
-		setIsRecipientValided: (state, action: PayloadAction<boolean>) => {
-			state.isOrderValided.isRecipientValided = action.payload;
-		},
+
 
 		clearCartOrder: (state) => {
 			state.itemsOrder = [];
 			state.totalPriese = 0;
+			state.userId = undefined;
 			state.delivery = {
 				city: '',
 				delivery: '',
@@ -154,8 +138,8 @@ const CartSlice = createSlice({
 });
 
 export const { setIsCartPage, setOrderItems, setTotalPiese, setDeliveryDate, setPaymentMethod,
-	setRecipient, clearCartOrder, setOrderMessage, clearOrderMessage, setIsOrderSuccess,
-	setIsItemsValided, setIsDeliveryValided, setIsPayMethodValided, setIsRecipientValided } = CartSlice.actions;
+	setRecipient, clearCartOrder, setOrderMessage, clearOrderMessage, setIsOrderSuccess, setUserIdToOrder,
+} = CartSlice.actions;
 
 export const selectIsCartPage = (state: RootState) => state.cart.isCartPage;
 export const selectDeliveryDetails = (state: RootState) => state.cart.delivery;
@@ -167,6 +151,7 @@ export const selectOrder = (state: RootState) => ({
 	recipient: state.cart.recipient,
 	paymentMethod: state.cart.paymentMethod,
 	totalPriese: state.cart.totalPriese,
+	userId: state.cart.userId || 'Unregistered user',
 
 });
 export const selectOrderMessage = (state: RootState) => state.cart.orderMessage;

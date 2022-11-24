@@ -169,21 +169,24 @@ const App: FC = () => {
   // Close the error message window
   const onClickErrorPopUp = () => {
     dispatch(delErrorMessage());
+
     dispatch(closePopUp());
     dispatch(changeIsBodyLock(false));
     dispatch(setIsFeching(false));
   };
   //Registration message, login
   const message = useAppSelector(selectLoginMessage);
+
   // Order processing message
   const orderMessage = useAppSelector(selectOrderMessage);
   //Close the window posting about the order
   const onClickOrderMessage = () => {
     dispatch(clearOrderMessage());
-    dispatch(closePopUp());
-    dispatch(changeIsBodyLock(false));
     dispatch(setIsOrderSuccess(false));
 
+    dispatch(closePopUp());
+    dispatch(changeIsBodyLock(false));
+    dispatch(setIsFeching(false));
   };
 
 
@@ -194,7 +197,6 @@ const App: FC = () => {
   }, [path]);
 
   if (!initialazatedApp) {
-
     return (
       <div ref={appRef}>
         <PreloaderContainer />

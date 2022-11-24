@@ -5,7 +5,7 @@ import { setRecipient } from '../../../redux/CartSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { validateEmail, validateTelNumberCartFormFormat } from '../../../utilits/validators';
 
-import { ISetNext, ISetStateIsNext } from '../Cart';
+import { ISetNext } from '../Cart';
 import { StyledDeliveryForm } from '../Delivery/CartDeliveryForm';
 import FieldTextCart from '../Delivery/InputText/InputTextCart';
 import FieldTextCartForTel from '../Delivery/InputText/InputTextForTel';
@@ -41,6 +41,7 @@ const AutoSubmit = () => {
 	}, [values, submitForm]);
 	return null;
 };
+
 const RecipientForm: FC<ISetNext> = ({ setIsNext }) => {
 	const recipientText = useAppSelector(selectRecipientTaxt);
 	const initialValues: IRecipientFormDate = {
@@ -59,11 +60,10 @@ const RecipientForm: FC<ISetNext> = ({ setIsNext }) => {
 				actions.validateForm(values);
 				dispatch(setRecipient(values));
 				setIsNext(true);
-
 			}}>
 			{(props: FormikProps<IRecipientFormDate>) => {
 
-
+				// If there are errors, we transmit data about this
 				Object.keys(props.errors).length !== 0 && setIsNext(false);
 
 

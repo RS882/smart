@@ -1,8 +1,8 @@
-import { PayloadAction } from '@reduxjs/toolkit';
+
 import React, { FC, useEffect } from 'react';
-import styled from 'styled-components';
+
 import { selectItemInCart } from '../../../redux/ActionSlice';
-import { ICartSlice, setIsItemsValided, setOrderItems } from '../../../redux/CartSlice';
+import { setOrderItems } from '../../../redux/CartSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { selectitemsData } from '../../../redux/ItemSlice';
 import { selectCartTextOrder } from '../../../redux/LanguageSlice';
@@ -45,17 +45,12 @@ const OrderContainer: FC<IOrederContainer> = ({ setTotalPrise, setIsNext, isNext
 	const onClickItem = (id: string) => {
 		console.log(id);
 	};
-
-
-
 	const onNextClick = () => {
 		setIsNext(true);
 		dispatch(setOrderItems(orderItem));
-		dispatch(setIsItemsValided(true));
 	};
 	const onChangeClick = () => {
 		setIsNext(false)
-		dispatch(setIsItemsValided(false));
 	};
 
 
