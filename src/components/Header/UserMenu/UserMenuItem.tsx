@@ -39,13 +39,16 @@ const StyledUserItem = styled.div <IHeaderMenuItemProps>`
 `;
 
 const UserMenuItem: FC<IMenuItemProps> = (props) => {
+
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
 	const onClickBtn = () => {
 		dispatch(openUserMenu(false));
 		dispatch(changeIsBodyLock(false));
-		props.$attr_last ? dispatch(setLogOut()) : navigate(`/${props.item_name}`);
+		props.$attr_last ? dispatch(setLogOut()) :
+			//navigate(`/privateOffice`);
+			navigate(`/privateOffice/${props.item_name}`);
 	};
 
 

@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 
 interface IBreadcrumbsProps {
-	link: string;
-	text: string;
+	link?: string;
+	text: string[];
 }
 
 const StyledBreadcrumbsBox = styled.div`
@@ -26,32 +26,29 @@ const StyledBreadcrumbsActive = styled.div`
 	color:${props => props.theme.color.text.second || '#838688'};
 `;
 
-const Breadcrumbs: FC<IBreadcrumbsProps> = (props) => {
-	//const url = useLocation().pathname;
-	const url = '/advantages/howToBuy/iwuwuqiu/uoppp/939382/1ssss';
+const Breadcrumbs: FC<IBreadcrumbsProps> = ({ link, text }) => {
+	const urlPath = useLocation().pathname;
+	const url = link || urlPath;
 
-	const urlArr = url.split('/').map(e => '/' + e)
+	const linkElem = url.split('/').map(e => '/' + e).map((e, i, arr) => {
+		const textT = text[i];
+		return arr.length !== i + 1 ?
+			<StyledBreadcrumbsLink to={i !== 0 ? e : '/'} key={e + i}>
+				{textT}
+				<StyledBreadcrumbsArrow className={'_icon-arrow-right'} />
+			</StyledBreadcrumbsLink > :
+			<StyledBreadcrumbsActive key={e + i}>{textT}</StyledBreadcrumbsActive>;
 
-
-	const linkElem = urlArr.map((e, i, arr) => {
-		const text = e.slice(1)
-
-
-		return arr.length !== i + 1 ? <StyledBreadcrumbsLink to={i !== 0 ? e : '/'} key={e + i}>
-			{i !== 0 ? text : 'Home'} <StyledBreadcrumbsArrow className={'_icon-arrow-right'} />
-		</StyledBreadcrumbsLink > :
-			<StyledBreadcrumbsActive >{i !== 0 ? text : 'Home'}</StyledBreadcrumbsActive>;
-
-	})
+	});
 
 
 	return (
 		<>
-			{/* {url !== '/' && url !== '/cart' ? */}
+
 			<StyledBreadcrumbsBox>
 				{linkElem}
 			</StyledBreadcrumbsBox>
-			{/* : null} */}
+
 		</>
 	);
 };

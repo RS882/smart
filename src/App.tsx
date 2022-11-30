@@ -19,7 +19,7 @@ import LoginContainer from './components/Login/LoginContainer';
 import { closePopUp, selectIsPopUp, selectLoginMessage } from './redux/LoginSlice';
 
 //import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
-import { routeObj } from './routeObj';
+import { IRouteobj, routeObj } from './routeObj';
 import { Global } from './GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme';
@@ -35,9 +35,11 @@ import { selectIsPreloader, setIsFeching } from './redux/PreloaderSlice';
 import LoginMessageContainer from './components/Login/LoginForm/LoginMessage/LoginMessageContainer';
 import { clearOrderMessage, selectOrderMessage, setIsCartPage, setIsOrderSuccess } from './redux/CartSlice';
 import { addItemToCartStart, addItemToCompareStart, addItemToFavoriteStart, addItemToViewedStart } from './redux/ActionSlice';
+import BreadcrumbsContainer from './components/Breadcrumbs/BreadcrumbsContainer';
+import getRouteElement from './components/HOC/RouteComponent';
 
 const Cart = React.lazy(() => import('./components/Cart/Cart'));
-
+const News = React.lazy(() => import('./components/News/News'));
 
 
 interface IAppProps {
@@ -158,10 +160,6 @@ const App: FC = () => {
   // Data downloads?
   const isFetching = useAppSelector(selectIsPreloader);
 
-  // We form a block from route windows of windows
-  const RouteElements: JSX.Element[] = routeObj.map((e, i) =>
-    <Route key={e.linkText + i} path={e.path}
-      element={WithSuspense(e.Component)({ ...e.componentProps })} />);
 
   // We give out a message about processed errors
   const errorMessage = useAppSelector(selectErrorMessage);
@@ -222,18 +220,18 @@ const App: FC = () => {
           <HeaderContainer appScroll={appScroll} />
           {/* Part of the Header menu with a decrease in the screen exchange is visible below */}
           <HeaderBottomContainer appScroll={appScroll} />
-          {/* <Breadcrumbs /> */}
+
           <Routes>
             <Route index element={<Main />} />
             <Route path='/cart' element={WithSuspense(Cart)({})} />
-            {RouteElements}
+            {getRouteElement(routeObj)}
             {/* Page 404 */}
-            <Route path='*' element={<div>404 NOT FOUND</div>} />
-          </Routes>
+            < Route path='*' element={<div> 404 NOT FOUND</div>} />
+          </Routes >
           <FooterContainer />
 
-        </AppWrapper>
-      </StyledAppRef>
+        </AppWrapper >
+      </StyledAppRef >
     );
   }
 };

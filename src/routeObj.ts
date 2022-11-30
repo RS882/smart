@@ -22,12 +22,15 @@ const PrivacyPolicy = React.lazy(() => import('./components/PrivacyPolicy/Privac
 const Faq = React.lazy(() => import('./components/Faq/Faq'));
 const Wholesale = React.lazy(() => import('./components/Wholesale/Wholesale'));
 const Dropshipping = React.lazy(() => import('./components/Dropshipping/Dropshipping'));
+const News = React.lazy(() => import('./components/News/News'));
+const PrivateOffice = React.lazy(() => import('./components/PrivateOffice/PrivateOffice'));
 
 export interface IRouteobj {
 	path: string;
 	Component: React.LazyExoticComponent<() => JSX.Element>;
 	linkText: string;
 	componentProps?: object;
+	childrRout?: IRouteobj[];
 };
 // Object for links for route         
 export const routeObj: IRouteobj[] = [
@@ -53,4 +56,18 @@ export const routeObj: IRouteobj[] = [
 	{ path: '/faq', Component: Faq, linkText: 'faq', },
 	{ path: '/wholesale', Component: Wholesale, linkText: 'Wholesale', },
 	{ path: '/dropshipping', Component: Dropshipping, linkText: 'Dropshipping', },
+	{ path: '/news', Component: News, linkText: 'News', },
+	{
+		path: '/privateOffice/*', Component: PrivateOffice, linkText: 'Private office',
+
+		// childrRout: [
+		// 	{ path: 'generalInformation', Component: News, linkText: 'General information', },
+		// 	{ path: 'personalData', Component: News, linkText: 'Personal data', },
+		// 	{ path: 'shoppingHistory', Component: News, linkText: 'Shopping history', },
+		// 	{ path: 'favorites', Component: News, linkText: 'Favorites', },
+		// 	{ path: 'changePassword', Component: News, linkText: 'Change password', },
+		// ],
+	},
 ];
+
+

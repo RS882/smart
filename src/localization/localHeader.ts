@@ -75,12 +75,12 @@ export const headerTextEn: IHeaderStings = {
 		itemsType11: 'Smart Watch',
 	},
 	userMenuItem: {
-		GeneralInformation: 'General information',
-		PersonalData: 'Personal data',
-		ShoppingHistory: 'Shopping history',
-		Favorites: 'Favorites',
-		ChangePassword: 'Change password',
-		LogOff: 'Log off',
+		generalInformation: 'General information',
+		personalData: 'Personal data',
+		shoppingHistory: 'Shopping history',
+		favorites: 'Favorites',
+		changePassword: 'Change password',
+		logOff: 'Log off',
 	},
 
 };
@@ -160,12 +160,12 @@ export const headerTextUa: IHeaderStings = {
 		itemsType11: 'Smart Watch',
 	},
 	userMenuItem: {
-		GeneralInformation: 'Загальні відомості',
-		PersonalData: 'Особисті дані',
-		ShoppingHistory: 'Історія покупок',
-		Favorites: 'Вибране',
-		ChangePassword: 'Змінити пароль',
-		LogOff: 'Вийти',
+		generalInformation: 'Загальні відомості',
+		personalData: 'Особисті дані',
+		shoppingHistory: 'Історія покупок',
+		favorites: 'Вибране',
+		changePassword: 'Змінити пароль',
+		logOff: 'Вийти',
 	},
 
 };
@@ -245,11 +245,11 @@ export const headerTextRu: IHeaderStings = {
 		itemsType11: 'Smart Watch',
 	},
 	userMenuItem: {
-		GeneralInformation: 'Общие сведения',
-		PersonalData: 'Личные данные',
-		ShoppingHistory: 'История покупок',
-		Favorites: 'Избранное',
-		ChangePassword: 'Сменить пароль',
-		LogOff: 'Выйти',
+		generalInformation: 'Общие сведения',
+		personalData: 'Личные данные',
+		shoppingHistory: 'История покупок',
+		favorites: 'Избранное',
+		changePassword: 'Сменить пароль',
+		logOff: 'Выйти',
 	},
 };
