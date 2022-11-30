@@ -14,7 +14,7 @@ height:100px;
 `;
 
 
-const PrivateOffice: FC = () => {
+const PrivateOffice = () => {
 
 
 	return (

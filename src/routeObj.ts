@@ -57,17 +57,7 @@ export const routeObj: IRouteobj[] = [
 	{ path: '/wholesale', Component: Wholesale, linkText: 'Wholesale', },
 	{ path: '/dropshipping', Component: Dropshipping, linkText: 'Dropshipping', },
 	{ path: '/news', Component: News, linkText: 'News', },
-	{
-		path: '/privateOffice/*', Component: PrivateOffice, linkText: 'Private office',
-
-		// childrRout: [
-		// 	{ path: 'generalInformation', Component: News, linkText: 'General information', },
-		// 	{ path: 'personalData', Component: News, linkText: 'Personal data', },
-		// 	{ path: 'shoppingHistory', Component: News, linkText: 'Shopping history', },
-		// 	{ path: 'favorites', Component: News, linkText: 'Favorites', },
-		// 	{ path: 'changePassword', Component: News, linkText: 'Change password', },
-		// ],
-	},
+	{ path: '/privateOffice/*', Component: PrivateOffice, linkText: 'Private office', },
 ];
 
 
