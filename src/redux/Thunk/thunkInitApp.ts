@@ -26,12 +26,15 @@ export const setScrollWidth = createAsyncThunk(
 	'modal/setScrollWidth',
 	async (data: React.RefObject<HTMLDivElement>) => {
 		const elem = data.current;
+
 		let res: number = 0;
 		if (elem !== null) {
 			elem.style.overflowY = `scroll`;
 			res = await elem.offsetWidth - elem.clientWidth;
 			elem.style.overflowY = `auto`;
+
 		};
+
 
 
 		return await res as number;

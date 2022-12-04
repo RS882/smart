@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef } from 'react';
 import styled from 'styled-components'
 import Flex from './components/Flex';
-import { closeMenuLng, selectIsLangMenu, } from './redux/LanguageSlice';
+import { closeMenuLng, selectIsLangMenu, selectLangStiringsHeaderMenuItem, } from './redux/LanguageSlice';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { strings } from './localization/localization';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
@@ -33,10 +33,11 @@ import { delErrorMessage, selectErrorMessage, setErrorMessage } from './redux/Er
 import LoginMessage from './components/Login/LoginForm/LoginMessage/LoginMessage';
 import { selectIsPreloader, setIsFeching } from './redux/PreloaderSlice';
 import LoginMessageContainer from './components/Login/LoginForm/LoginMessage/LoginMessageContainer';
-import { clearOrderMessage, selectOrderMessage, setIsCartPage, setIsOrderSuccess } from './redux/CartSlice';
+import { clearOrderMessage, selectIsCartPage, selectOrderMessage, setIsCartPage, setIsOrderSuccess } from './redux/CartSlice';
 import { addItemToCartStart, addItemToCompareStart, addItemToFavoriteStart, addItemToViewedStart } from './redux/ActionSlice';
 import BreadcrumbsContainer from './components/Breadcrumbs/BreadcrumbsContainer';
 import getRouteElement from './components/HOC/RouteComponent';
+import HeaderMenuContainer from './components/Header/HeaderMenu/HeaderMenuContainer';
 
 const Cart = React.lazy(() => import('./components/Cart/Cart'));
 const News = React.lazy(() => import('./components/News/News'));
@@ -124,8 +125,6 @@ const App: FC = () => {
   };
 
   useEffect(() => {
-
-
     // Catch the rampant load errors
     window.addEventListener('unhandledrejection', catchAllError);
     // We monitor the closing event of the application and starting the function to save data in localStorage
@@ -159,7 +158,7 @@ const App: FC = () => {
   const isLoginBoxOpen = useAppSelector(selectIsPopUp);
   // Data downloads?
   const isFetching = useAppSelector(selectIsPreloader);
-
+  // const menuItem = useAppSelector(selectLangStiringsHeaderMenuItem);
 
   // We give out a message about processed errors
   const errorMessage = useAppSelector(selectErrorMessage);
@@ -181,11 +180,13 @@ const App: FC = () => {
   const onClickOrderMessage = () => {
     dispatch(clearOrderMessage());
     dispatch(setIsOrderSuccess(false));
-
     dispatch(closePopUp());
     dispatch(changeIsBodyLock(false));
     dispatch(setIsFeching(false));
   };
+  // 
+  const isCartPage = useAppSelector(selectIsCartPage);
+
 
 
   // If the basket is open, we report this in stat
@@ -218,6 +219,7 @@ const App: FC = () => {
           <DropDownMenu />
           <ModalContainer opacity={modalOpacity} />
           <HeaderContainer appScroll={appScroll} />
+          {isCartPage ? null : <HeaderMenuContainer />}
           {/* Part of the Header menu with a decrease in the screen exchange is visible below */}
           <HeaderBottomContainer appScroll={appScroll} />
 

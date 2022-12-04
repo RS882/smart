@@ -82,7 +82,7 @@ export const loginSlice = createSlice({
 	},
 	extraReducers: {
 		[loginUser.fulfilled.type]: (state, action: PayloadAction<IUserDate>) => {
-			console.log(action.payload);
+
 			if (typeof (action.payload) === 'string') {
 				state.regMessage = action.payload;
 				state.isLoginSuccess = false;

@@ -23,11 +23,11 @@ export const StyledMain = styled.main`
 	height: 100%;
 	margin-top: 80px;
 	
-	@media ${props => props.theme.media?.tablet || '(min-width: 767.98px)'} {
+	@media ${props => props.theme.media?.tablet || '(width >= 767.98px)'} {
 		margin: 92px 20px 0 20px;
 		
 	};
-	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
+	@media ${props => props.theme.media?.desktop || '(width >= 991.98px)'} {
 		margin: 80px 0px 0 0px;
 	};
 `;
@@ -41,7 +41,7 @@ const StyledBannerBox = styled.div`
 	display:grid;
 	grid-template-rows: repeat(2, 1fr);
 	gap:20px;
-	@media ${props => props.theme.media?.desktop || '(min-width: 991.98px)'} {
+	@media ${props => props.theme.media?.desktop || '(width >= 991.98px)'} {
 		grid-template-rows: 1fr;
 		grid-template-columns: repeat(2, 1fr);
 	};
@@ -51,7 +51,7 @@ const Main: FC = (props) => {
 
 	const itemsData = useAppSelector(selectitemsData);
 	const namesItemsBox = useAppSelector(selectItemsBoxName);
-	const menuItem = useAppSelector(selectLangStiringsHeaderMenuItem)
+
 	const bannerItemsText = useAppSelector(selectBannersItemText)
 
 	const dispatch = useAppDispatch();
@@ -119,7 +119,7 @@ const Main: FC = (props) => {
 		<StyledMain>
 			<Container>
 				<StyledWrapper>
-					<HeaderMenuContainer strings={menuItem} />
+					{/* <HeaderMenuContainer /> */}
 					<FirstScreen />
 					{itemsBoxs}
 

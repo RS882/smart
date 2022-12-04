@@ -10,6 +10,8 @@ import { changeIsModal } from '../../../redux/ModalSlice';
 import HeaderBottomBtnItem from './HeaderBottomBtnItem';
 import { closeMenu, openCatalog, openMore, openScearch } from '../../../redux/MenuSlice';
 import { selectLangStiringsHeaderBottomBtn } from '../../../redux/LanguageSlice';
+import { setOrderMessage } from '../../../redux/CartSlice';
+
 
 interface IHeaderBottom {
 	appScroll?: string;
@@ -47,15 +49,26 @@ const HeaderBottomContainer: FC<IHeaderBottom> = (props) => {
 	const onClickOpenCatalog = () => {
 		dispatch(changeIsModal(true));
 		dispatch(openCatalog(true));
-	}
+	};
 	const onClickOpenSearch = () => {
 		dispatch(changeIsModal(true));
 		dispatch(openScearch(true));
-	}
+	};
 	const onClickOpenMore = () => {
 		dispatch(changeIsModal(true));
 		dispatch(openMore(true));
-	}
+	};
+
+	const onClickCart = () => {
+		dispatch(closeMenu());
+		dispatch(changeIsModal(false));
+		if (!isCartFull) {
+			navigate(`/`);
+			dispatch(setOrderMessage('Your basket is empty'));
+		} else {
+			navigate(`/cart`)
+		};
+	};
 
 	const str: IBottomBtn | null = useAppSelector(selectLangStiringsHeaderBottomBtn);
 	const string: IBottomBtn = str !== null ? str : { '': '' };
@@ -63,7 +76,7 @@ const HeaderBottomContainer: FC<IHeaderBottom> = (props) => {
 	const btnArray: IHeaderBottomItem[] =
 		[{ name: '', classItem: '_icon-home', },
 		{ name: 'catalog', classItem: '_icon-catalog', fnItem: onClickOpenCatalog, },
-		{ name: 'cart', classItem: '_icon-cart', },
+		{ name: 'cart', classItem: '_icon-cart', fnItem: onClickCart, },
 		{ name: 'search', classItem: '_icon-search', fnItem: onClickOpenSearch, },
 		{ name: 'more', classItem: '_icon-dots', fnItem: onClickOpenMore, }]
 			.map((e) => ({ ...e, itemText: string[e.name || 'home'] }));

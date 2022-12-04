@@ -9,9 +9,10 @@ export const loginUser = createAsyncThunk(
 	async (data: ValuesLog, thunkAPI) => {
 		const res = await loginAPI.сheckPassword(data.password)
 			.then(response => {
-				return response.data.lenght > 0 && response.data[0];
+				return response.data && response.data[0];
 			})
 			.then(response => {
+
 
 				if (data.userEmailFild === response.email ||
 					converTelNumber(data.userEmailFild) === converTelNumber(response.phone)) {
