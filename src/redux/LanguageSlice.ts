@@ -101,4 +101,8 @@ export const selectCartDeliveryTextPickup = (state: RootState) => state.language
 export const selectDateMonDayText = (state: RootState) => state.languages.langStrings!.cart.dateMonDay;
 export const selectPaymentMethodTaxt = (state: RootState) => state.languages.langStrings!.cart.cartPaymentMethod.paymentMethod;
 export const selectRecipientTaxt = (state: RootState) => state.languages.langStrings!.cart.recipient;
+export const selectGeneralInformationTaxt = (state: RootState) => state.languages.langStrings!.privatOffice.generalInformation;
+
+
+
 export default LanguageSlice.reducer

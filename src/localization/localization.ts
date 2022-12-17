@@ -12,6 +12,7 @@ import { DateMonDayEn, DateMonDayRu, DateMonDayUa } from "./localDateMonDay";
 import { paymentMethodEn, paymentMethodRu, paymentMethodUa } from "./localCartPaymentMethod";
 import { ArrayDestructuringAssignment } from "typescript";
 import { recipientEn, recipientRu, recipientUa } from './localCartReciepient';
+import { generalInformationEn, generalInformationRu, generalInformationUa } from "./localGeneralInformation";
 
 
 export interface IHeaderStings {
@@ -127,7 +128,21 @@ export interface ICart {
 	dateMonDay: IDateMonDay;
 	cartPaymentMethod: ICartPaymentMethod;
 	recipient: ICartRecipientText;
-}
+};
+
+
+export interface IGenetalInformation {
+	regData: string;
+	numOfOrders: string;
+	btnText: string;
+	articleText: string[];
+};
+
+export interface IPrivatOffice {
+	generalInformation: IGenetalInformation;
+
+};
+
 
 export interface IStrings {
 	header: IHeaderStings;
@@ -136,6 +151,7 @@ export interface IStrings {
 	login: ILoginStings;
 	itemCard: IItemCard;
 	cart: ICart;
+	privatOffice: IPrivatOffice;
 };
 
 
@@ -158,6 +174,9 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			cartPaymentMethod: paymentMethodEn,
 			recipient: recipientEn,
 		},
+		privatOffice: {
+			generalInformation: generalInformationEn,
+		},
 	},
 	ua: {
 		header: headerTextUa,
@@ -172,6 +191,9 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			cartPaymentMethod: paymentMethodUa,
 			recipient: recipientUa,
 		},
+		privatOffice: {
+			generalInformation: generalInformationUa,
+		},
 	},
 	ru: {
 		header: headerTextRu,
@@ -185,6 +207,9 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			dateMonDay: DateMonDayRu,
 			cartPaymentMethod: paymentMethodRu,
 			recipient: recipientRu,
+		},
+		privatOffice: {
+			generalInformation: generalInformationRu,
 		},
 	},
 });

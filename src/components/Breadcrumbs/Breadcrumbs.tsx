@@ -10,7 +10,7 @@ interface IBreadcrumbsProps {
 }
 
 const StyledBreadcrumbsBox = styled.div`
-	margin-top:100px;
+	
 	display:flex;
 `;
 
@@ -32,6 +32,7 @@ const Breadcrumbs: FC<IBreadcrumbsProps> = ({ link, text }) => {
 
 	const linkElem = url.split('/').map(e => '/' + e).map((e, i, arr) => {
 		const textT = text[i];
+
 		return arr.length !== i + 1 ?
 			<StyledBreadcrumbsLink to={i !== 0 ? e : '/'} key={e + i}>
 				{textT}

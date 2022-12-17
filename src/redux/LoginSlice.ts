@@ -26,7 +26,7 @@ export interface ILogin {
 	isShowPassword: boolean;
 	isSubmit: boolean;
 	isLoginSuccess: boolean;
-	userDate: IUserDate | {};
+	userDate: IUserDate | undefined;
 
 	regMessage: string | undefined;
 };
@@ -39,7 +39,7 @@ const initialState: ILogin = {
 	isSubmit: false,
 	isLoginSuccess: false,
 
-	userDate: {},
+	userDate: undefined,
 	regMessage: undefined,
 }
 
@@ -74,7 +74,7 @@ export const loginSlice = createSlice({
 		},
 		setLogOut: (state) => {
 			state.isLoginSuccess = false;
-			state.userDate = {};
+			state.userDate = undefined;
 		},
 		clearRegMessage: (state) => {
 			state.regMessage = undefined;
@@ -100,7 +100,7 @@ export const loginSlice = createSlice({
 				state.isLoginSuccess = true;
 
 			} else {
-				state.userDate = {};
+				state.userDate = undefined;
 				state.isLoginSuccess = false;
 				state.regMessage = 'Registration failed...(';
 			}
@@ -121,5 +121,6 @@ export const selectIsShowPassword = (state: RootState) => state.login.isShowPass
 export const selectIsSubmit = (state: RootState) => state.login.isSubmit;
 export const selectIsLogSuccess = (state: RootState) => state.login.isLoginSuccess;
 export const selectLoginMessage = (state: RootState) => state.login.regMessage;
+export const selectUserData = (state: RootState) => state.login.userDate!;
 
 export default loginSlice.reducer;
