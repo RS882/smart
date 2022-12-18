@@ -13,6 +13,7 @@ import { paymentMethodEn, paymentMethodRu, paymentMethodUa } from "./localCartPa
 import { ArrayDestructuringAssignment } from "typescript";
 import { recipientEn, recipientRu, recipientUa } from './localCartReciepient';
 import { generalInformationEn, generalInformationRu, generalInformationUa } from "./localGeneralInformation";
+import { PersonalDataEn, PersonalDataRu, PersonalDataUa } from "./localPersonalData";
 
 
 export interface IHeaderStings {
@@ -138,9 +139,22 @@ export interface IGenetalInformation {
 	articleText: string[];
 };
 
+export interface IPersonalData {
+	name: string;
+	email: string;
+	phoneNumber: string;
+	city: string;
+	postcode: string;
+	adress: string;
+	payMethod: string;
+	deliveryMethod: string;
+	avatar: string;
+	btnText: string;
+}
+
 export interface IPrivatOffice {
 	generalInformation: IGenetalInformation;
-
+	personalData: IPersonalData;
 };
 
 
@@ -176,6 +190,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 		},
 		privatOffice: {
 			generalInformation: generalInformationEn,
+			personalData: PersonalDataEn,
 		},
 	},
 	ua: {
@@ -193,6 +208,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 		},
 		privatOffice: {
 			generalInformation: generalInformationUa,
+			personalData: PersonalDataUa,
 		},
 	},
 	ru: {
@@ -210,6 +226,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 		},
 		privatOffice: {
 			generalInformation: generalInformationRu,
+			personalData: PersonalDataRu,
 		},
 	},
 });

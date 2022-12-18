@@ -1,28 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppSelector } from '../../redux/hooks';
 import { selectGeneralInformationTaxt } from '../../redux/LanguageSlice';
 import { selectUserData } from '../../redux/LoginSlice';
 import Button from '../Button';
+import noAvatar from '../../assets/noAvatar.png';
 
 
 export const StyledPrivatOfficebox = styled.div`
-	margin: 0 20px 0px 20px;
+	margin: 0 20px 50px 20px;
+	@media ${props => props.theme.media?.tablet || '(width >= 767.98px)'}{
+		margin-bottom:60px;
+	};
 	@media ${props => props.theme.media?.desktop || '(width >= 991.98px)'} {
 		margin: 0 0px 0px 135px;
 	}
 `;
 
-const StyledGeneralInformationBox = styled(StyledPrivatOfficebox)`
-	margin-bottom:50px;
-@media ${props => props.theme.media?.tablet || '(width >= 767.98px)'}{
-	margin-bottom:60px;
-	};
-	@media ${props => props.theme.media?.desktop || '(width >= 991.98px)'} {
-		margin-bottom: 0px;
-	};
-`;
+
 
 const StyledName = styled.div`
 	font-weight: 600;
@@ -89,20 +85,28 @@ const StyledBtn = styled.div`
 
 const GeneralInformation = () => {
 
+	const navigate = useNavigate();
+
 	const user = useAppSelector(selectUserData);
 	const text = useAppSelector(selectGeneralInformationTaxt);
 
-	const getArticleText = (text: string): JSX.Element => <><StyledArticleText>{text}</StyledArticleText>{` `} </>
+	const regDate = new Date(Date.parse(user.registrationDate));
+	const addNullAfter = (num: number): string => num > 0 && num < 10 ? `0${num}` : `${num}`;
+	const regDateText: string = `${regDate.getDate()}-${addNullAfter(regDate.getMonth() + 1)}-${regDate.getFullYear()}`;
+
+	const getArticleText = (text: string): JSX.Element => <><StyledArticleText>{text}</StyledArticleText>{` `} </>;
+
+	const onClickGoToPersData = () => navigate('/privateOffice/personalData');
 
 	return (
-		<StyledGeneralInformationBox>
+		<StyledPrivatOfficebox>
 			<StyledName>{user.name}</StyledName>
 			<StyledAvatarAndUserInfoBox>
 				<StyledAvatarBox>
-					<SyledAvatar src={user.avatar} height='101' width='101' alt='User avatar' />
+					<SyledAvatar src={user.avatar || noAvatar} height='101' width='101' alt='User avatar' />
 				</StyledAvatarBox>
 				<StyledUserInfoBox>
-					<StyledUserInformation> {`${text.regData} ${user.registrationDate}`}</StyledUserInformation>
+					<StyledUserInformation> {`${text.regData} ${regDateText}`}</StyledUserInformation>
 					<StyledUserInformation> {`${text.numOfOrders} ${user.shoppingHistory.length}`}</StyledUserInformation>
 				</StyledUserInfoBox>
 			</StyledAvatarAndUserInfoBox>
@@ -119,10 +123,10 @@ const GeneralInformation = () => {
 			</StyledArticle>
 
 			<StyledBtn>
-				<Button width='100%' >{text.btnText}</Button>
+				<Button width='100%' onClick={onClickGoToPersData}>{text.btnText}</Button>
 			</StyledBtn>
 
-		</StyledGeneralInformationBox>
+		</StyledPrivatOfficebox>
 	);
 };
 
