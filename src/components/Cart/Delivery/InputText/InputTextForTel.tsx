@@ -1,6 +1,7 @@
 import { ErrorMessage, useField } from 'formik';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useFocusedField } from '../../../../utilits/hooks';
 import { validateSelectIsEnpty } from '../../../../utilits/validators';
 import CartDateBox from '../../CartDateBox';
 import { InputAttrProps } from '../CartDeliveryForm';
@@ -83,12 +84,16 @@ const FieldTextCartForTel = ({ title, ...props }: IFiledTextCart & InputAttrProp
 
 	};
 
+	const [isFocus, onFocusFn] = useFocusedField(field.onBlur);
+
+	const brdColor = meta.error && meta.touched ? '#F15152' : isFocus ? '#838688' : '';
+
 	sessionStorage.setItem(field.name, field.value);
 	return (
 		<div>
 			<StyledTitleDateBox>{title}</StyledTitleDateBox>
-			<CartDateBox bdColor={meta.error && meta.touched ? '#F15152' : ''} heigthBox='48px' >
-				<StyledInput  {...field} {...props} onClick={onClickTelField} onChange={onChangeTelNumber} />
+			<CartDateBox bdColor={brdColor} heigthBox='48px' >
+				<StyledInput  {...field} {...props} onClick={onClickTelField} onChange={onChangeTelNumber} {...onFocusFn} />
 			</CartDateBox>
 			<StyledHelpers>Use only numbers</StyledHelpers>
 			<StyledErrorMessage>	<ErrorMessage name={field.name} /></StyledErrorMessage>

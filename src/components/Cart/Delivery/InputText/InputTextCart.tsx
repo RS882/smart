@@ -1,6 +1,7 @@
 import { ErrorMessage, useField } from 'formik';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useFocusedField } from '../../../../utilits/hooks';
 import { validateSelectIsEnpty } from '../../../../utilits/validators';
 import CartDateBox from '../../CartDateBox';
 import { InputAttrProps } from '../CartDeliveryForm';
@@ -9,6 +10,7 @@ import { StyledErrorMessage, StyledTitleDateBox } from '../SelectCity/SelectCity
 interface IFiledTextCart {
 	title: string;
 	FormType?: string;
+	isStorage?: boolean;
 };
 
 const StyledInput = styled.input`
@@ -30,16 +32,27 @@ const StyledTextArea = styled.textarea`
 
 
 // Components for text output
-const FieldTextCart = ({ title, FormType = 'input', ...props }: IFiledTextCart & InputAttrProps) => {
-	const [field, meta] = useField({ ...props, validate: props.validate || validateSelectIsEnpty });
+const FieldTextCart = ({ title, FormType = 'input', isStorage = true, ...props }: IFiledTextCart & InputAttrProps) => {
 
-	sessionStorage.setItem(field.name, field.value);
+
+
+	const [field, meta] = useField({ ...props, validate: props.validate || validateSelectIsEnpty, });
+
+
+	const [isFocus, onFocusFn] = useFocusedField(field.onBlur);
+
+	const brdColor = meta.error && meta.touched ? '#F15152' : isFocus ? '#838688' : '';
+
+
+	isStorage && sessionStorage.setItem(field.name, field.value);
+
 	return (
 		<div>
 			<StyledTitleDateBox>{title}</StyledTitleDateBox>
-			<CartDateBox bdColor={meta.error && meta.touched ? '#F15152' : ''}
+			<CartDateBox bdColor={brdColor}
 				heigthBox={FormType === 'input' ? '48px' : '96px'}>
-				{FormType === 'input' ? <StyledInput  {...field} {...props} /> : <StyledTextArea  {...field} {...props} />}
+				{FormType === 'input' ? <StyledInput {...field} {...props} {...onFocusFn} />
+					: <StyledTextArea  {...field} {...props} {...onFocusFn} />}
 			</CartDateBox>
 			<StyledErrorMessage>	<ErrorMessage name={field.name} /></StyledErrorMessage>
 		</div>
@@ -47,3 +60,5 @@ const FieldTextCart = ({ title, FormType = 'input', ...props }: IFiledTextCart &
 };
 
 export default React.memo(FieldTextCart);
+
+

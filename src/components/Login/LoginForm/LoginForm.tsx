@@ -118,8 +118,8 @@ const LoginForm: FC<ILoginForm> = (props) => {
 		isLog && !isReg ? logText : !isLog && isReg ? regText : '';
 
 	const initialValues: ValuesLog = {
-		userEmailFild: '',
-		password: '',
+		userEmailFild: 'Sadie.Paucek32@gmail.com',
+		password: 'nKIHRB4AayWArOh',
 		renemberMe: true,
 		userRegName: '',
 		userRegEmail: '',
