@@ -93,6 +93,8 @@ export const selectCartTextBtnChange = (state: RootState) => state.languages.lan
 export const selectCartTextOrder = (state: RootState) => state.languages.langStrings!.cart.cartOrder.order;
 export const selectCartTextDeliveryMethod = (state: RootState) => state.languages.langStrings!.cart.cartOrder.deliveryMethod;
 export const selectCartTextPaymentMethod = (state: RootState) => state.languages.langStrings!.cart.cartOrder.paymentMethod;
+export const selectDeliveryMethods = (state: RootState) => [state.languages.langStrings!.cart.cartDelivery.deliveryMethod.delivery.method,
+state.languages.langStrings!.cart.cartDelivery.deliveryMethod.pickup.method];
 export const selectCartTextRecipient = (state: RootState) => state.languages.langStrings!.cart.cartOrder.recipient;
 export const selectCartTextTotal = (state: RootState) => state.languages.langStrings!.cart.cartOrder.total;
 export const selectCartDeliveryTextCity = (state: RootState) => state.languages.langStrings!.cart.cartDelivery.city;

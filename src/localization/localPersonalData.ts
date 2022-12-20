@@ -12,6 +12,7 @@ export const PersonalDataEn: IPersonalData = {
 	deliveryMethod: 'Preferred delivery method',
 	avatar: 'Avatar',
 	btnText: 'Save',
+	placeholder: 'Not specified',
 };
 export const PersonalDataUa: IPersonalData = {
 	name: "Ім'я",
@@ -24,6 +25,7 @@ export const PersonalDataUa: IPersonalData = {
 	deliveryMethod: 'Переважний спосіб доставки',
 	avatar: 'Аватар',
 	btnText: 'Зберегти',
+	placeholder: 'Не вказан',
 };
 export const PersonalDataRu: IPersonalData = {
 	name: 'Имя',
@@ -36,8 +38,9 @@ export const PersonalDataRu: IPersonalData = {
 	deliveryMethod: 'Предпочитаемый способ доставки',
 	avatar: 'Аватар',
 	btnText: 'Сохранить',
-
+	placeholder: 'Не указан',
 };
+
 
 
 

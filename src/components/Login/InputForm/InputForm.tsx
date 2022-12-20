@@ -75,6 +75,7 @@ const StyledInputWrapper = styled.div`
 
 const InputForm = (props: IIptumForm & FormikProps<ValuesLog>) => {
 
+
 	const isCheckbox: boolean = props.type === 'checkbox';
 	const isPassword: boolean = props.name === 'password';
 	const labelElem: JSX.Element = !isCheckbox ? <>{props.labeltext}</> :

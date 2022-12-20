@@ -75,7 +75,7 @@ const StyledArticleLink = styled(Link)`
 	}
 `;
 
-const StyledBtn = styled.div`
+export const StyledBtn = styled.div`
 	width:100%;
 	@media ${props => props.theme.media?.tablet || '(width >= 767.98px)'} {
 		width: 310px;

@@ -1,6 +1,7 @@
 import { ErrorMessage, useField } from 'formik';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useFocusedField } from '../../../../utilits/hooks';
 import { validateSelectIsEnpty } from '../../../../utilits/validators';
 import { IUseStateCartDeliveryForm } from '../../Cart';
 import CartDateBox from '../../CartDateBox';
@@ -18,12 +19,16 @@ interface ISelectCityContainer extends IUseStateCartDeliveryForm, ICartFormRadio
 	placholderText?: string;
 	optionPlus?: [string, number][];
 	priseDelivery?: string;
+	isStorage?: boolean;
 
 };
 export const StyledCitySelect = styled.select`
 	opacity:0;
 	width: 100%;
 	height: 100%;
+	
+		color:${props => props.theme.color.text.second || '#838688'};
+	
 `;
 
 
@@ -44,8 +49,9 @@ const StyledPriseText = styled.span`
 
 // component of the type of Select to the form of a dozen
 const SelectCityContainer = ({ option, title, placholderText, optionPlus,
-	priseDelivery, setDeliveryPreise, cityName,
+	priseDelivery, setDeliveryPreise, cityName, isStorage = true,
 	...props }: ISelectCityContainer & SelectAttrProps) => {
+	console.log(option);
 
 	const [field, meta] = useField({ ...props, validate: props.validate || validateSelectIsEnpty });
 
@@ -62,7 +68,7 @@ const SelectCityContainer = ({ option, title, placholderText, optionPlus,
 
 
 
-		const res = field.name === 'paymentMethod' ?
+		const res = field.name === 'paymentMethod' || 'payMethod' || 'deliveryMethod' ?
 			option!.map((e, i) => <option value={e} key={e + i}>{e}</option>) :
 			option!.sort().map((e, i) => <option value={e} key={e + i}>{e}</option>);
 		return res;
@@ -76,17 +82,21 @@ const SelectCityContainer = ({ option, title, placholderText, optionPlus,
 		<span>{valueText}<StyledPriseText> {`${getPriseFormat(arr[1], priseDelivery)}`}</StyledPriseText></span>
 		: <span>{valueText || placholderText || title}</span>;
 
-	sessionStorage.setItem(field.name, valueText);
+	isStorage && sessionStorage.setItem(field.name, valueText);
 
 	// We set the delivery price
 	useEffect(() => { arr && setDeliveryPreise !== undefined && setDeliveryPreise(arr[1]) }, [arr]);
 
+	const [isFocus, onFocusFn] = useFocusedField(field.onBlur);
+
+	const brdColor = meta.error && meta.touched ? '#F15152' : isFocus ? '#838688' : '';
+
 
 	return (<div>
 		<StyledTitleDateBox>{title}</StyledTitleDateBox>
-		<CartDateBox bdColor={meta.error && meta.touched ? '#F15152' : ''}>
+		<CartDateBox bdColor={brdColor}>
 			<StyledInputBox>
-				<StyledCitySelect  {...field} {...props}>
+				<StyledCitySelect  {...field} {...props} {...onFocusFn}>
 					<option value='' disabled>{placholderText || title}</option>
 					{getOptionElemrnt(option, optionPlus)}
 				</StyledCitySelect>

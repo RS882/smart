@@ -66,7 +66,7 @@ export const cartDeliveryTextUa: ICartDelivery = {
 			shortTitle: 'Доставка до:',
 		},
 		pickup: {
-			shortTitle: 'Самовивіз is:',
+			shortTitle: 'Самовивіз iз:',
 			method: 'Самовивіз',
 			productIsAvailable: ['Товар доступений у ', 'магазинах',],
 			btnNext: 'Показати ще',

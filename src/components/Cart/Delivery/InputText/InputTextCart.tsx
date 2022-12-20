@@ -16,9 +16,15 @@ interface IFiledTextCart {
 const StyledInput = styled.input`
 	width:100%;
 	height: 100%;
+
 	&::placeholder{
 		color: ${props => props.theme.color.text.second || '#838688'};
 		margin-left:20px;
+		
+	};
+	&::file-selector-button {
+		margin: 12px 12px 12px 0;
+
 	}
 `;
 const StyledTextArea = styled.textarea`
@@ -37,10 +43,7 @@ const FieldTextCart = ({ title, FormType = 'input', isStorage = true, ...props }
 
 
 	const [field, meta] = useField({ ...props, validate: props.validate || validateSelectIsEnpty, });
-
-
 	const [isFocus, onFocusFn] = useFocusedField(field.onBlur);
-
 	const brdColor = meta.error && meta.touched ? '#F15152' : isFocus ? '#838688' : '';
 
 

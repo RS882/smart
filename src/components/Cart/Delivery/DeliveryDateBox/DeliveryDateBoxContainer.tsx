@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useAppSelector } from '../../../../redux/hooks';
 import { selectDateMonDayText } from '../../../../redux/LanguageSlice';
+import { useFocusedField } from '../../../../utilits/hooks';
 import CartDateBox from '../../CartDateBox';
 import { InputAttrProps } from '../CartDeliveryForm';
 import { StyledTitleDateBox } from '../SelectCity/SelectCityContainer';
@@ -59,11 +60,15 @@ const DeliveryDateBoxContainer = ({ title, dateMinMax, ...props }: IDeliveryDate
 
 	sessionStorage.setItem(field.name, field.value);
 
+	const [isFocus, onFocusFn] = useFocusedField(field.onBlur);
+
+	const brdColor = meta.error && meta.touched ? '#F15152' : isFocus ? '#838688' : ''
+
 	return (<div>
 		<StyledTitleDateBox>{title}</StyledTitleDateBox>
-		<CartDateBox bdColor={meta.error && meta.touched ? '#F15152' : ''}>
+		<CartDateBox bdColor={brdColor}>
 			<StyledInputBox>
-				<StyledInputDateInput type="date" {...field} {...props} min={dateMinMax[0]} max={dateMinMax[1]} />
+				<StyledInputDateInput type="date" {...field} {...props} {...onFocusFn} min={dateMinMax[0]} max={dateMinMax[1]} />
 				<StyledInputDateMask  >{dateElem}</StyledInputDateMask>
 			</StyledInputBox>
 		</CartDateBox>

@@ -150,6 +150,8 @@ export interface IPersonalData {
 	deliveryMethod: string;
 	avatar: string;
 	btnText: string;
+	placeholder: string;
+
 }
 
 export interface IPrivatOffice {

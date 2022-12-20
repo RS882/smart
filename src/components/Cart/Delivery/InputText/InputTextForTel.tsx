@@ -9,7 +9,7 @@ import { StyledErrorMessage, StyledTitleDateBox } from '../SelectCity/SelectCity
 
 interface IFiledTextCart {
 	title: string;
-
+	isStorage?: boolean;
 };
 
 const StyledInput = styled.input`
@@ -28,7 +28,7 @@ const StyledHelpers = styled.div`
 
 
 // Components for text output For a telephone number
-const FieldTextCartForTel = ({ title, ...props }: IFiledTextCart & InputAttrProps) => {
+const FieldTextCartForTel = ({ title, isStorage = true, ...props }: IFiledTextCart & InputAttrProps) => {
 	const [field, meta, helpers] = useField({ ...props, validate: props.validate || validateSelectIsEnpty });
 	// Filling template 
 	const TELNUMBERSHABLON: string = '+49(';
@@ -88,7 +88,7 @@ const FieldTextCartForTel = ({ title, ...props }: IFiledTextCart & InputAttrProp
 
 	const brdColor = meta.error && meta.touched ? '#F15152' : isFocus ? '#838688' : '';
 
-	sessionStorage.setItem(field.name, field.value);
+	isStorage && sessionStorage.setItem(field.name, field.value);
 	return (
 		<div>
 			<StyledTitleDateBox>{title}</StyledTitleDateBox>
