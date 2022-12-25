@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunksmart=self.webpackChunksmart||[]).push([[205],{8205:function(n,r,t){t.r(r);var u,a=t(168),e=(t(2791),t(5751)),s=t(184),c=e.ZP.main(u||(u=(0,a.Z)(["\n\tmargin: 150px;\n"])));r.default=function(){return(0,s.jsx)(c,{children:"HowToBuy"})}}}]);
-//# sourceMappingURL=205.2ba76a7d.chunk.js.map

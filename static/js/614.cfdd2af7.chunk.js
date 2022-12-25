@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksmart=self.webpackChunksmart||[]).push([[614],{6614:function(n,e,r){r.r(e);var s,t=r(168),a=(r(2791),r(5751)),u=r(184),c=a.ZP.main(s||(s=(0,t.Z)(["\n\tmargin: 150px;\n"])));e.default=function(){return(0,u.jsx)(c,{children:"News"})}}}]);
+//# sourceMappingURL=614.cfdd2af7.chunk.js.map

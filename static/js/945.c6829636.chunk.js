@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksmart=self.webpackChunksmart||[]).push([[945],{1945:function(n,e,r){r.r(e);var t,a=r(168),s=(r(2791),r(5751)),u=r(184),i=s.ZP.main(t||(t=(0,a.Z)(["\n\tmargin: 150px;\n"])));e.default=function(){return(0,u.jsx)(i,{children:"Viewed"})}}}]);
+//# sourceMappingURL=945.c6829636.chunk.js.map

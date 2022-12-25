@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksmart=self.webpackChunksmart||[]).push([[196],{7196:function(n,r,a){a.r(r);var e,t=a(168),s=(a(2791),a(5751)),u=a(184),c=s.ZP.main(e||(e=(0,t.Z)(["\n\tmargin: 150px;\n"])));r.default=function(){return(0,u.jsx)(c,{children:"Compare"})}}}]);
+//# sourceMappingURL=196.8d8fc1e4.chunk.js.map

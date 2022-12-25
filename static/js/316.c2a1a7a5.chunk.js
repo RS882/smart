@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksmart=self.webpackChunksmart||[]).push([[316],{5316:function(n,e,r){r.r(e);var s,a=r(168),t=(r(2791),r(5751)),i=r(184),u=t.ZP.main(s||(s=(0,a.Z)(["\n\tmargin: 150px;\n"])));e.default=function(){return(0,i.jsx)(u,{children:"Wholesale/Dropshipping"})}}}]);
+//# sourceMappingURL=316.c2a1a7a5.chunk.js.map

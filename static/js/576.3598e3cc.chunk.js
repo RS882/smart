@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunksmart=self.webpackChunksmart||[]).push([[576],{5576:function(n,a,t){t.r(a);var e,r=t(168),s=(t(2791),t(5751)),u=t(184),c=s.ZP.main(e||(e=(0,r.Z)(["\n\tmargin: 150px;\n"])));a.default=function(){return(0,u.jsx)(c,{children:"Advantages"})}}}]);
+//# sourceMappingURL=576.3598e3cc.chunk.js.map
