@@ -3,7 +3,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from './store';
 import { getItem } from './Thunk/thunkItem';
-import { loginUser, regNewUser } from './Thunk/thunkLogin';
+import { changeUserData, loginUser, regNewUser } from './Thunk/thunkLogin';
 import { setOrder } from './Thunk/thunkOrder';
 
 
@@ -38,6 +38,7 @@ const ErrorSlice = createSlice({
 		[getItem.rejected.type]: addErrorMessage,
 		[loginUser.rejected.type]: addErrorMessage,
 		[regNewUser.rejected.type]: addErrorMessage,
+		[changeUserData.rejected.type]: addErrorMessage,
 		[setOrder.rejected.type]: addErrorMessage,
 	}
 });

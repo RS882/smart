@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import { loginUser, regNewUser } from "./Thunk/thunkLogin";
+import { changeUserData, loginUser, regNewUser } from "./Thunk/thunkLogin";
 
 export interface IUserDate {
 	id: string;
@@ -104,6 +104,22 @@ export const loginSlice = createSlice({
 				state.isLoginSuccess = false;
 				state.regMessage = 'Registration failed...(';
 			}
+
+		},
+
+		[changeUserData.fulfilled.type]: (state, action: PayloadAction<IUserDate>) => {
+			if (action.payload.id !== undefined) {
+				state.userDate = action.payload;
+				state.regMessage = 'Your data is changed!';
+				state.isLoginSuccess = true;
+
+			} else {
+				state.userDate = undefined;
+				state.isLoginSuccess = false;
+				state.regMessage = 'Something went wrong..(';
+			}
+
+
 
 		},
 

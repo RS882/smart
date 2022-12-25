@@ -56,7 +56,7 @@ const StyledTitel = styled(StyledBreadcrumbs)`
 	};
 	@media ${props => props.theme.media?.desktop || '(width >= 991.98px)'} {
 		font-size: 36px;
-	}
+	};
 `;
 
 const PrivateOffice = () => {

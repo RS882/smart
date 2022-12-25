@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { setLanguages, setScrollWidth } from './Thunk/thunkInitApp';
 import { getItem } from "./Thunk/thunkItem";
-import { loginUser, regNewUser } from "./Thunk/thunkLogin";
+import { changeUserData, loginUser, regNewUser } from "./Thunk/thunkLogin";
 import { setOrder } from './Thunk/thunkOrder';
 
 interface IPreloaderState {
@@ -39,6 +39,10 @@ export const preloaderSlice = createSlice({
 		[regNewUser.pending.type]: changeIsFetching(true),
 		[regNewUser.fulfilled.type]: changeIsFetching(false),
 		[regNewUser.rejected.type]: changeIsFetching(false),
+
+		[changeUserData.pending.type]: changeIsFetching(true),
+		[changeUserData.fulfilled.type]: changeIsFetching(false),
+		[changeUserData.rejected.type]: changeIsFetching(false),
 
 		[setScrollWidth.pending.type]: changeIsFetching(true),
 		[setScrollWidth.fulfilled.type]: changeIsFetching(false),
