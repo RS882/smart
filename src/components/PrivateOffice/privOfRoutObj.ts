@@ -1,6 +1,6 @@
 import React from 'react';
 
-const News = React.lazy(() => import('../..//components/News/News'));
+const News = React.lazy(() => import('../InDeveloping/News/News'));
 const GeneralInformation = React.lazy(() => import('../PrivateOffice/GeneralInformation'));
 const PersonalData = React.lazy(() => import('../PrivateOffice/PersonalData'));
 

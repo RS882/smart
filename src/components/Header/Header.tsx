@@ -103,12 +103,12 @@ const Header: FC<HeaderPropsMain> = (props) => {
 
 	const showUserMenu = () => {
 		dispatch(openUserMenu(true));
-		dispatch(changeIsBodyLock(true));
+		// dispatch(changeIsBodyLock(true));
 	}
 
 	const closeUserMenu = () => {
 		dispatch(openUserMenu(false));
-		dispatch(changeIsBodyLock(false));
+		// dispatch(changeIsBodyLock(false));
 	}
 
 	return (

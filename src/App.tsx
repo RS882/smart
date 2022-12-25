@@ -35,12 +35,12 @@ import { selectIsPreloader, setIsFeching } from './redux/PreloaderSlice';
 import LoginMessageContainer from './components/Login/LoginForm/LoginMessage/LoginMessageContainer';
 import { clearOrderMessage, selectIsCartPage, selectOrderMessage, setIsCartPage, setIsOrderSuccess } from './redux/CartSlice';
 import { addItemToCartStart, addItemToCompareStart, addItemToFavoriteStart, addItemToViewedStart } from './redux/ActionSlice';
-import BreadcrumbsContainer from './components/Breadcrumbs/BreadcrumbsContainer';
+
 import getRouteElement from './components/HOC/RouteComponent';
 import HeaderMenuContainer from './components/Header/HeaderMenu/HeaderMenuContainer';
 
 const Cart = React.lazy(() => import('./components/Cart/Cart'));
-const News = React.lazy(() => import('./components/News/News'));
+const News = React.lazy(() => import('./components/InDeveloping/News/News'));
 
 
 interface IAppProps {

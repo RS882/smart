@@ -1,13 +1,33 @@
-import { Formik, FormikProps } from 'formik';
+import { Formik, Form } from 'formik';
 import React from 'react';
 import { useAppSelector } from '../../redux/hooks';
 import { selectDeliveryMethods, selectPaymentMethodTaxt, selectPersonalDataText } from '../../redux/LanguageSlice';
-import { selectUserData } from '../../redux/LoginSlice';
+import { IUserDate, selectUserData } from '../../redux/LoginSlice';
 import { StyledBtn, StyledPrivatOfficebox } from './GeneralInformation';
 import FieldTextCart from '../Cart/Delivery/InputText/InputTextCart'
 import { validateEmail } from '../../utilits/validators';
 import Button from '../Button';
 import SelectCityContainer from '../Cart/Delivery/SelectCity/SelectCityContainer';
+import styled from 'styled-components';
+
+interface IInitialValuesPersData {
+	name: string;
+	email: string;
+	phoneNumber: string;
+	city: string;
+	postcode: string;
+	adress: string;
+	payMethod: string;
+	deliveryMethod: string;
+	avatar: string;
+}
+
+
+const StyledPersonalDataForm = styled(Form)`
+	height:100%;
+	width:100%;
+
+`;
 
 
 const PersonalData = () => {
@@ -16,9 +36,25 @@ const PersonalData = () => {
 	const payMethod = useAppSelector(selectPaymentMethodTaxt);
 	const deliveryMethod = useAppSelector(selectDeliveryMethods);
 
+	// console.log(user);
+
+	// id: string;
+	// name: string;
+	// password: string;
+	// email: string;
+	// phone: string;
+	// registrationDate: string;
+	// city: string;
+	// address: string;
+	// zipIndex: string;
+	// paymentMethod: string;
+	// deliveryMethod: string;
+	// avatar: string;
+	// shoppingHistory: string[];
+	// favorites: string[];
 
 
-	const initialValues = {
+	const initialValues: IInitialValuesPersData = {
 		name: user.name,
 		email: user.email,
 		phoneNumber: user.phone,
@@ -33,7 +69,24 @@ const PersonalData = () => {
 	return (
 		<Formik initialValues={initialValues}
 			onSubmit={(values, actions) => {
-				// actions.validateForm(values);
+
+				const resData: IUserDate = {
+					...user,
+					name: values.name,
+					email: values.email,
+					phone: values.phoneNumber,
+					city: values.city,
+					zipIndex: values.postcode,
+					address: values.adress,
+					paymentMethod: values.adress,
+					deliveryMethod: values.deliveryMethod,
+					avatar: values.avatar,
+				};
+
+
+				console.log(resData);
+
+				actions.validateForm(values);
 				// dispatch(setRecipient(values));
 				// setIsNext(true);
 			}}>
@@ -44,25 +97,27 @@ const PersonalData = () => {
 
 				return (
 					<StyledPrivatOfficebox>
-						<FieldTextCart name='name' title={textPersData.name} isStorage={false} placeholder={textPersData.placeholder} />
-						<FieldTextCart name='email' title={textPersData.email} isStorage={false} validate={validateEmail} placeholder={textPersData.placeholder} />
-						<FieldTextCart name='phoneNumber' isStorage={false} title={textPersData.phoneNumber}
-							placeholder={textPersData.placeholder} validate={() => { }} />
-						<FieldTextCart name='city' isStorage={false} title={textPersData.city}
-							placeholder={textPersData.placeholder} validate={() => { }} />
-						<FieldTextCart name='postcode' isStorage={false} title={textPersData.postcode}
-							placeholder={textPersData.placeholder} validate={() => { }} />
-						<FieldTextCart name='adress' isStorage={false} title={textPersData.adress}
-							placeholder={textPersData.placeholder} validate={() => { }} />
-						<SelectCityContainer name='payMethod' isStorage={false} title={textPersData.payMethod}
-							placholderText={textPersData.placeholder} option={payMethod} validate={() => { }} />
-						<SelectCityContainer name='deliveryMethod' isStorage={false} title={textPersData.deliveryMethod}
-							placholderText={textPersData.placeholder} option={deliveryMethod} validate={() => { }} />
+						<StyledPersonalDataForm>
+							<FieldTextCart name='name' title={textPersData.name} isStorage={false} placeholder={textPersData.placeholder} />
+							<FieldTextCart name='email' title={textPersData.email} isStorage={false} validate={validateEmail} placeholder={textPersData.placeholder} />
+							<FieldTextCart name='phoneNumber' isStorage={false} title={textPersData.phoneNumber}
+								placeholder={textPersData.placeholder} validate={() => { }} />
+							<FieldTextCart name='city' isStorage={false} title={textPersData.city}
+								placeholder={textPersData.placeholder} validate={() => { }} />
+							<FieldTextCart name='postcode' isStorage={false} title={textPersData.postcode}
+								placeholder={textPersData.placeholder} validate={() => { }} />
+							<FieldTextCart name='adress' isStorage={false} title={textPersData.adress}
+								placeholder={textPersData.placeholder} validate={() => { }} />
+							<SelectCityContainer name='payMethod' isStorage={false} title={textPersData.payMethod}
+								placholderText={textPersData.placeholder} option={payMethod} validate={() => { }} />
+							<SelectCityContainer name='deliveryMethod' isStorage={false} title={textPersData.deliveryMethod}
+								placholderText={textPersData.placeholder} option={deliveryMethod} validate={() => { }} />
 
-						<FieldTextCart name='avatar' isStorage={false} title={textPersData.avatar} type='file' validate={() => { }} />
-						<StyledBtn>
-							<Button width='100%' type='submit'>{textPersData.btnText}</Button>
-						</StyledBtn>
+							<FieldTextCart name='avatar' isStorage={false} title={textPersData.avatar} type='file' validate={() => { }} />
+							<StyledBtn>
+								<Button width='100%' type='submit'>{textPersData.btnText}</Button>
+							</StyledBtn>
+						</StyledPersonalDataForm>
 					</StyledPrivatOfficebox>
 				)
 			}

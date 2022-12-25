@@ -51,7 +51,7 @@ const StyledPriseText = styled.span`
 const SelectCityContainer = ({ option, title, placholderText, optionPlus,
 	priseDelivery, setDeliveryPreise, cityName, isStorage = true,
 	...props }: ISelectCityContainer & SelectAttrProps) => {
-	console.log(option);
+
 
 	const [field, meta] = useField({ ...props, validate: props.validate || validateSelectIsEnpty });
 

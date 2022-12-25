@@ -24,7 +24,6 @@ const StyledInput = styled.input`
 	};
 	&::file-selector-button {
 		margin: 12px 12px 12px 0;
-
 	}
 `;
 const StyledTextArea = styled.textarea`
