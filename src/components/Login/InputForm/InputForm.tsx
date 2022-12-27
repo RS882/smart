@@ -1,4 +1,4 @@
-import { ErrorMessage, Field, FormikProps } from 'formik';
+import { ErrorMessage, Field, FormikProps, useField } from 'formik';
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import ErrorTextIcon from './InputStatusIcon/ErrorTextIcon';
@@ -10,7 +10,7 @@ import EyeIconContainer from './InputStatusIcon/EyeIconContainer';
 import RemembeMeContainer from '../LoginForm/RememeberMe/RemembeMeContainer';
 import LoockIcon from './InputStatusIcon/LoockIcon';
 import ErrorMessageContainer from './ErrorMessageContainer';
-import { ValuesLog } from '../LoginForm/LoginForm';
+import { InputAttrProps } from '../../Cart/Delivery/CartDeliveryForm';
 
 
 interface IIptumForm {
@@ -20,13 +20,6 @@ interface IIptumForm {
 	validate?: (value: string) => string | undefined;
 	validateTel?: (value: string) => string | undefined;
 };
-
-// interface IFormValues {
-// 	userEmailFild: string;
-// 	password: string;
-// 	renemberMe: boolean;
-// }
-
 
 
 const StyledLabel = styled.label<{ isCheckbox: boolean, isPassword: boolean, }>`
@@ -73,26 +66,23 @@ const StyledInputWrapper = styled.div`
 `
 
 
-const InputForm = (props: IIptumForm & FormikProps<ValuesLog>) => {
+const InputForm = ({ type = 'text', labeltext, validateTel, ...props }: IIptumForm & InputAttrProps) => {
+
+	const [field, meta, helpers] = useField(props);
+
+	const isCheckbox: boolean = type === 'checkbox';
+	const isPassword: boolean = field.name === 'password';
+	const isChecked: boolean = !!field.value;
+
+	const labelElem: JSX.Element = !isCheckbox ? <>{labeltext}</> : <RemembeMeContainer value={isChecked} text={labeltext} />;
 
 
-	const isCheckbox: boolean = props.type === 'checkbox';
-	const isPassword: boolean = props.name === 'password';
-	const labelElem: JSX.Element = !isCheckbox ? <>{props.labeltext}</> :
-		<RemembeMeContainer value={!!props.values.renemberMe} text={props.labeltext} />;
+	const IconComponent = isPassword ? EyeIconContainer : !meta.touched ? undefined : meta.error ? ErrorTextIcon : RichtTextIcon;
 
-	type ErrorsKey = keyof typeof props.errors;
-	type TouchedKey = keyof typeof props.touched;
-
-	const IconComponent = isPassword ? EyeIconContainer :
-		!props.touched[props.name as TouchedKey] ? undefined :
-			props.errors[props.name as ErrorsKey] ? ErrorTextIcon : RichtTextIcon;
-
-	const inputColorBrd: string = !props.touched[props.name as TouchedKey] ? '#EAEAF0' :
-		props.errors[props.name as ErrorsKey] ? '#F15152' : '#22A44E';
+	const inputColorBrd: string = !meta.touched ? '#EAEAF0' : meta.error ? '#F15152' : '#22A44E';
 
 	const formatPhoneNumber = (value: any) => {
-		if (props.validateTel && !!props.validateTel(value) === false) {
+		if (validateTel && !!validateTel(value) === false) {
 			const res = value.split('')
 			const arrMod = (arr: string[], arrModPos: number[], modElem = '-') => arrModPos.forEach(e => arr.splice(e, 0, modElem));
 			arrMod(res, [0], '(');
@@ -104,13 +94,14 @@ const InputForm = (props: IIptumForm & FormikProps<ValuesLog>) => {
 		return value;
 	};
 
-	const onBlurFormatTel = (event: any) => {
-		if (props.name === 'userEmailFild' || props.name === 'userRegTelNumber') {
-			const formatted = formatPhoneNumber(props.values[props.name]);
-			props.setFieldValue(props.name, formatted);
-		}
-		props.handleBlur(event);
+	const onBlurFormatTel = (event: React.FocusEvent<any, Element>) => {
+		if (field.name === 'userEmailFild' || field.name === 'userRegTelNumber') {
+			const formatted = formatPhoneNumber(field.value);
+			helpers.setValue(formatted);
+		};
+		field.onBlur(event)
 	};
+
 
 	return (
 		<StyledInputWrapper>
@@ -118,15 +109,12 @@ const InputForm = (props: IIptumForm & FormikProps<ValuesLog>) => {
 				<Styledlabeltext>{labelElem}</Styledlabeltext>
 				<StyledInputBox isCheckbox={isCheckbox} >
 					<StyledLooCkIcon $isPassword={isPassword} />
-					<StyledInput name={props.name}
-						type={props.type ? props.type : 'text'} $isPassword={isPassword}
-						validate={props.validate} color={inputColorBrd}
-						onBlur={onBlurFormatTel}
-					/>
+					<StyledInput {...field} {...props} type={type} $isPassword={isPassword}
+						color={inputColorBrd} onBlur={onBlurFormatTel} checked={isChecked} />
 					<StyledInputStatusIcon color={inputColorBrd} Component={IconComponent} />
 				</StyledInputBox>
 			</StyledLabel>
-			<ErrorMessageContainer name={props.name} />
+			<ErrorMessageContainer name={field.name} />
 		</StyledInputWrapper>
 	);
 };

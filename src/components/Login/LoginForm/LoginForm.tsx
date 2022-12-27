@@ -138,28 +138,28 @@ const LoginForm: FC<ILoginForm> = (props) => {
 				// validationSchema={validators}
 				onSubmit={onLoginSubmit(props.isLogBox, props.isRegBox)}
 			>
-				{({ ...propsFormik }) => {
+				{(propsFormik) => {
 					return <StyledForm>
-						{isLog ? <InputForm  {...propsFormik} name={'userEmailFild'}
+						{isLog ? <InputForm name={'userEmailFild'}
 							labeltext={loginStings?.emailOrTel} type={'text'}
 							validate={validateEmailOrTel} validateTel={validateTel} /> : null}
 
-						{isReg ? <InputForm  {...propsFormik} name={'userRegName'}
+						{isReg ? <InputForm name={'userRegName'}
 							labeltext={regStrings?.name} type={'text'}
 							validate={validateLength} /> : null}
 
-						{isReg ? <InputForm  {...propsFormik} name={'userRegEmail'}
+						{isReg ? <InputForm name={'userRegEmail'}
 							labeltext={regStrings?.email} type={'text'}
 							validate={validateEmail} /> : null}
 
-						{isReg ? <InputForm  {...propsFormik} name={'userRegTelNumber'}
+						{isReg ? <InputForm name={'userRegTelNumber'}
 							labeltext={regStrings?.tel} type={'text'}
 							validate={validateTelAndForamt} validateTel={validateTel} /> : null}
 
 
 						<InputForm labeltext={choseLogOrRegText(loginStings?.password, regStrings?.createPassword)}
 							name={'password'} type={isShowPassword ? 'text' : 'password'}
-							validate={validatePassword} {...propsFormik} />
+							validate={validatePassword} />
 
 
 						{isLog ? <StyledForgotPasswordBtn type='button'>{loginStings?.forgotPassword}
@@ -168,7 +168,7 @@ const LoginForm: FC<ILoginForm> = (props) => {
 						{isReg ? <UserAgreementBtn regText={regStrings?.regText} /> : null}
 
 						{isLog ? <InputForm labeltext={loginStings?.renemberMe}
-							name={'renemberMe'} type={'checkbox'} {...propsFormik} /> : null}
+							name={'renemberMe'} type={'checkbox'} /> : null}
 
 						<StyledSubmiiBtn width='100%' height='36px' heigth768='48px'
 							type="submit" disabled={propsFormik.isSubmitting}>

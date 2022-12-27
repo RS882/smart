@@ -14,6 +14,8 @@ import { ArrayDestructuringAssignment } from "typescript";
 import { recipientEn, recipientRu, recipientUa } from './localCartReciepient';
 import { generalInformationEn, generalInformationRu, generalInformationUa } from "./localGeneralInformation";
 import { PersonalDataEn, PersonalDataRu, PersonalDataUa } from "./localPersonalData";
+import { StringifyOptions } from "querystring";
+import { changePasswortEn, changePasswortRu, changePasswortUa } from "./localChangePasswort";
 
 
 export interface IHeaderStings {
@@ -152,11 +154,20 @@ export interface IPersonalData {
 	btnText: string;
 	placeholder: string;
 
+};
+
+export interface IChangePasswort {
+	enterOldPasswort?: string;
+	enterNewPasswort: string;
+	confirmNewPasswort: string;
+	btnText: string;
+
 }
 
 export interface IPrivatOffice {
 	generalInformation: IGenetalInformation;
 	personalData: IPersonalData;
+	changePasswort: IChangePasswort;
 };
 
 
@@ -193,6 +204,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 		privatOffice: {
 			generalInformation: generalInformationEn,
 			personalData: PersonalDataEn,
+			changePasswort: changePasswortEn,
 		},
 	},
 	ua: {
@@ -211,6 +223,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 		privatOffice: {
 			generalInformation: generalInformationUa,
 			personalData: PersonalDataUa,
+			changePasswort: changePasswortUa,
 		},
 	},
 	ru: {
@@ -229,6 +242,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 		privatOffice: {
 			generalInformation: generalInformationRu,
 			personalData: PersonalDataRu,
+			changePasswort: changePasswortRu,
 		},
 	},
 });

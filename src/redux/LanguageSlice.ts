@@ -105,6 +105,6 @@ export const selectPaymentMethodTaxt = (state: RootState) => state.languages.lan
 export const selectRecipientTaxt = (state: RootState) => state.languages.langStrings!.cart.recipient;
 export const selectGeneralInformationTaxt = (state: RootState) => state.languages.langStrings!.privatOffice.generalInformation;
 export const selectPersonalDataText = (state: RootState) => state.languages.langStrings!.privatOffice.personalData;
-
+export const selectchangePasswortText = (state: RootState) => state.languages.langStrings!.privatOffice.changePasswort;
 
 export default LanguageSlice.reducer
