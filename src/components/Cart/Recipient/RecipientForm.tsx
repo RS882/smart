@@ -3,6 +3,7 @@ import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { setRecipient } from '../../../redux/CartSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { selectUserData } from '../../../redux/LoginSlice';
 import { validateEmail, validateTelNumberCartFormFormat } from '../../../utilits/validators';
 
 import { ISetNext } from '../Cart';
@@ -44,11 +45,13 @@ const AutoSubmit = () => {
 
 const RecipientForm: FC<ISetNext> = ({ setIsNext }) => {
 	const recipientText = useAppSelector(selectRecipientTaxt);
+	const user = useAppSelector(selectUserData);
+
 	const initialValues: IRecipientFormDate = {
-		name: sessionStorage.getItem('name') || '',
-		surname: sessionStorage.getItem('surname') || '',
-		phone: sessionStorage.getItem('phone') || '',
-		email: sessionStorage.getItem('email') || '',
+		name: user && user.name || sessionStorage.getItem('name') || '',
+		surname: user && user.name || sessionStorage.getItem('surname') || '',
+		phone: user && user.phone || sessionStorage.getItem('phone') || '',
+		email: user && user.email || sessionStorage.getItem('email') || '',
 		dontCall: true,
 	};
 	// We form PLACEHOLDER for Input

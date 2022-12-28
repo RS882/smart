@@ -12,6 +12,7 @@ import { useAppDispatch } from './../../../redux/hooks';
 import { ArrowFn } from '../../../types/fnTypes';
 import UserAgreementBtn from './RegForm/UserAgreementBtn';
 import { loginUser, regNewUser } from '../../../redux/Thunk/thunkLogin';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -68,7 +69,7 @@ const LoginForm: FC<ILoginForm> = (props) => {
 	const dispatch = useAppDispatch();
 	const loginStings = useAppSelector(selectLoginText);
 	const regStrings = useAppSelector(selectRegText);
-
+	const navigate = useNavigate();
 
 
 	const onLoginSubmit = (isLogin: boolean, isRegistr: boolean) =>
@@ -82,6 +83,7 @@ const LoginForm: FC<ILoginForm> = (props) => {
 					renemberMe: values.renemberMe,
 				};
 				dispatch(loginUser(logValues));
+				navigate(`/`);
 
 			};
 			if (isRegistr) {

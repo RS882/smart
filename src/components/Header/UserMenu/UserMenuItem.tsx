@@ -50,6 +50,7 @@ const UserMenuItem: FC<IMenuItemProps> = (props) => {
 		const logOut = () => {
 			dispatch(setLogOut());
 			navigate(`/`);
+			sessionStorage.clear();
 		};
 		props.$attr_last ? logOut() : navigate(`/privateOffice/${props.item_name}`);
 	};
