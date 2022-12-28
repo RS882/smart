@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
+interface IEyeIcon {
+	setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
+};
+interface IBtn {
+	isShow: boolean;
+};
 
 
-export interface IEyeIcon {
-	isShow?: boolean;
-	showText?: (arg: boolean) => void;
-}
-
-
-const StyledRichtWraper = styled.button<IEyeIcon>`
+const StyledRichtWraper = styled.button<IBtn>`
 	display:flex;
 	justify-content:center;
 	align-items:center;
@@ -21,14 +21,14 @@ const StyledRichtWraper = styled.button<IEyeIcon>`
 `;
 
 
-const EyeIcon: FC<IEyeIcon> = (props) => {
+const EyeIcon: FC<IEyeIcon & IBtn> = ({ setShowPassword, isShow }) => {
 
-	const eyeClassName = props.isShow ? '_icon-eye1' : '_icon-eye_off';
+	const eyeClassName = isShow ? '_icon-eye1' : '_icon-eye_off';
 
 	return (
-		<StyledRichtWraper type='button' isShow={props.isShow}
-			onPointerDown={() => props.showText ? props.showText(true) : null}
-			onPointerUp={() => props.showText ? props.showText(false) : null}
+		<StyledRichtWraper type='button' isShow={isShow}
+			onPointerDown={() => setShowPassword(true)}
+			onPointerUp={() => setShowPassword(false)}
 			className={eyeClassName} />
 	);
 }

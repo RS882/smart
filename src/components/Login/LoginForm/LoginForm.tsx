@@ -1,5 +1,5 @@
 import { Form, Formik, FormikHelpers } from 'formik';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import * as Yup from 'yup';
 import { useAppSelector } from '../../../redux/hooks';
@@ -158,8 +158,8 @@ const LoginForm: FC<ILoginForm> = (props) => {
 
 
 						<InputForm labeltext={choseLogOrRegText(loginStings?.password, regStrings?.createPassword)}
-							name={'password'} type={isShowPassword ? 'text' : 'password'}
-							validate={validatePassword} />
+							name={'password'} type={ 'password'}
+							validate={validatePassword}  />
 
 
 						{isLog ? <StyledForgotPasswordBtn type='button'>{loginStings?.forgotPassword}

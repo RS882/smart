@@ -40,7 +40,7 @@ const StyledPersonalDataForm = styled(Form)`
 	};
 
 `;
-const StyledBtnPrivatData = styled.div`
+export const StyledBtnPrivatData = styled.div`
 	width: 100%;
 	display: flex;
 	align-items:flex-end;
@@ -86,7 +86,7 @@ const PersonalData = () => {
 				dispatsch(changeUserData(resData));
 
 			}}>
-			{() => (
+			{(propsFormik) => (
 				<StyledPrivatOfficebox>
 					<StyledPersonalDataForm>
 						<FieldTextCart name='name' title={textPersData.name} isStorage={false} placeholder={textPersData.placeholder} />
@@ -105,7 +105,7 @@ const PersonalData = () => {
 							placholderText={textPersData.placeholder} option={deliveryMethod} validate={() => { }} />
 						<FieldTextCart name='avatar' isStorage={false} title={textPersData.avatar} type='file' validate={() => { }} />
 						<StyledBtnPrivatData>
-							<Button width='100%' height='48px' heigth768='48px' type='submit'>{textPersData.btnText}</Button>
+							<Button width='100%' height='48px' heigth768='48px' type='submit'  >{textPersData.btnText}</Button>
 						</StyledBtnPrivatData>
 					</StyledPersonalDataForm>
 				</StyledPrivatOfficebox>

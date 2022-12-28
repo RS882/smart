@@ -6,7 +6,7 @@ import Flex from '../../../Flex';
 
 
 interface IInputStatusIcon {
-	Component?: FC;
+
 	color: string;
 };
 
@@ -23,10 +23,10 @@ const StyledComponetWrapper = styled(Flex)`
 	height: 24px;
 `;
 
-const InputStatusIcon: FC<IInputStatusIcon> = (props) => {
+const InputStatusIcon: FC<IInputStatusIcon> = ({ color, children }) => {
 	return (
-		<StyledInputStatusIcon color={props.color}>
-			{props.Component ? <StyledComponetWrapper><props.Component /></StyledComponetWrapper> : null}
+		<StyledInputStatusIcon color={color}>
+			{children ? <StyledComponetWrapper>{children}</StyledComponetWrapper> : null}
 		</StyledInputStatusIcon>
 	);
 };
