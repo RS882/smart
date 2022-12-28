@@ -1,18 +1,18 @@
 import { Form, Formik, FormikHelpers } from 'formik';
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
-import * as Yup from 'yup';
+
 import { useAppSelector } from '../../../redux/hooks';
 import { selectLoginText, selectRegText } from '../../../redux/LanguageSlice';
 import { validateEmail, validateEmailOrTel, validateLength, validatePassword, validateTel, validateTelAndForamt } from '../../../utilits/validators';
 import Button from '../../Button';
 import InputForm from '../InputForm/InputForm';
-import { changeIsSubmit, selectIsShowPassword } from './../../../redux/LoginSlice';
+import { changeIsSubmit } from './../../../redux/LoginSlice';
 import { useAppDispatch } from './../../../redux/hooks';
 import { ArrowFn } from '../../../types/fnTypes';
 import UserAgreementBtn from './RegForm/UserAgreementBtn';
 import { loginUser, regNewUser } from '../../../redux/Thunk/thunkLogin';
-import { loginAPI } from './../../../API/api';
+
 
 
 export interface ILoginForm {
@@ -68,7 +68,6 @@ const LoginForm: FC<ILoginForm> = (props) => {
 	const dispatch = useAppDispatch();
 	const loginStings = useAppSelector(selectLoginText);
 	const regStrings = useAppSelector(selectRegText);
-	const isShowPassword = useAppSelector(selectIsShowPassword);
 
 
 
@@ -119,7 +118,7 @@ const LoginForm: FC<ILoginForm> = (props) => {
 
 	const initialValues: ValuesLog = {
 		userEmailFild: 'Sadie.Paucek32@gmail.com',
-		password: 'nKIHRB4AayWArOh',
+		password: '4444',
 		renemberMe: true,
 		userRegName: '',
 		userRegEmail: '',
@@ -158,8 +157,8 @@ const LoginForm: FC<ILoginForm> = (props) => {
 
 
 						<InputForm labeltext={choseLogOrRegText(loginStings?.password, regStrings?.createPassword)}
-							name={'password'} type={ 'password'}
-							validate={validatePassword}  />
+							name={'password'} type={'password'}
+							validate={validatePassword} />
 
 
 						{isLog ? <StyledForgotPasswordBtn type='button'>{loginStings?.forgotPassword}

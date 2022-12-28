@@ -6,7 +6,7 @@ const PersonalData = React.lazy(() => import('../PrivateOffice/PersonalData'));
 const ChangePasswort = React.lazy(() => import('../PrivateOffice/ChangePasswort'));
 
 export const routePrivOff = [
-	{ path: '', Component: News, linkText: 'General information', },
+	{ path: '', Component: GeneralInformation, linkText: 'General information', },
 	{ path: 'generalInformation', Component: GeneralInformation, linkText: 'General information', },
 	{ path: 'personalData', Component: PersonalData, linkText: 'Personal data', },
 	{ path: 'shoppingHistory', Component: News, linkText: 'Shopping history', },

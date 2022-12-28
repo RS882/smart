@@ -20,14 +20,11 @@ const StyledInputForm = styled.div`
 
 const InputFormForChangePass: FC<IFormForChangePass> = ({ text, name }) => {
 
-
-
 	return (
 		<StyledFormForChangePassWrapper>
 			<StyledInputForm>
 				<InputForm labeltext={text} name={name} type={'password'} validate={validatePassword} isStatusIcon={true} />
 			</StyledInputForm>
-
 		</StyledFormForChangePassWrapper>
 	);
 };

@@ -23,7 +23,7 @@ export interface ILogin {
 	isPopUp: boolean;
 	isLoginBox: boolean;
 	isRegBox: boolean;
-	isShowPassword: boolean;
+	isPasswordChange: boolean;
 	isSubmit: boolean;
 	isLoginSuccess: boolean;
 	userDate: IUserDate | undefined;
@@ -35,7 +35,7 @@ const initialState: ILogin = {
 	isPopUp: false,
 	isLoginBox: false,
 	isRegBox: false,
-	isShowPassword: false,
+	isPasswordChange: false,
 	isSubmit: false,
 	isLoginSuccess: false,
 
@@ -66,8 +66,8 @@ export const loginSlice = createSlice({
 			state.isLoginBox = false;
 			state.isRegBox = action.payload;
 		},
-		changeIsShowPassword: (state, action: PayloadAction<boolean>) => {
-			state.isShowPassword = action.payload;
+		changeisPasswordChange: (state, action: PayloadAction<boolean>) => {
+			state.isPasswordChange = action.payload;
 		},
 		changeIsSubmit: (state, action: PayloadAction<boolean>) => {
 			state.isSubmit = action.payload;
@@ -128,12 +128,12 @@ export const loginSlice = createSlice({
 
 
 export const { openLoginBox, openRegBox, openPopUp,
-	closePopUp, changeIsShowPassword, changeIsSubmit, setLogOut, clearRegMessage } = loginSlice.actions;
+	closePopUp, changeisPasswordChange, changeIsSubmit, setLogOut, clearRegMessage } = loginSlice.actions;
 
 export const selectIsLoginBox = (state: RootState) => state.login.isLoginBox;
 export const selectIsRegBox = (state: RootState) => state.login.isRegBox;
 export const selectIsPopUp = (state: RootState) => state.login.isPopUp;
-export const selectIsShowPassword = (state: RootState) => state.login.isShowPassword;
+export const selectIsPasswordChange = (state: RootState) => state.login.isPasswordChange;
 export const selectIsSubmit = (state: RootState) => state.login.isSubmit;
 export const selectIsLogSuccess = (state: RootState) => state.login.isLoginSuccess;
 export const selectLoginMessage = (state: RootState) => state.login.regMessage;

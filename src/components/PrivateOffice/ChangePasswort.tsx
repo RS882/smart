@@ -1,16 +1,17 @@
 import { Form, Formik } from 'formik';
 import React from 'react';
 import styled from 'styled-components';
-import { IUserDate, selectIsShowPassword, selectUserData } from '../../redux/LoginSlice';
+import { changeisPasswordChange, selectUserData } from '../../redux/LoginSlice';
 import { changeUserData } from '../../redux/Thunk/thunkLogin';
-import { validatePassword } from '../../utilits/validators';
+
 import Button from '../Button';
-import InputForm, { StyledStatusIcon } from '../Login/InputForm/InputForm';
+import { StyledStatusIcon } from '../Login/InputForm/InputForm';
 import { useAppDispatch, useAppSelector } from './../../redux/hooks';
 import { selectchangePasswortText } from './../../redux/LanguageSlice';
 import { StyledPrivatOfficebox } from './GeneralInformation';
 import InputFormForChangePass from './InputFormForChangePass';
-import { StyledBtnPrivatData } from './PersonalData';
+import { useNavigate } from 'react-router-dom';
+
 
 interface IChangePasswortData {
 	oldPasswort: string;
@@ -36,11 +37,10 @@ const StyledBtnBox = styled.div`
 
 const ChangePasswort = () => {
 
-
+	const navigate = useNavigate();
 	const dispatsch = useAppDispatch();
 	const user = useAppSelector(selectUserData);
 	const textChangepasswort = useAppSelector(selectchangePasswortText);
-
 
 	const initialValues: IChangePasswortData = {
 		oldPasswort: '',
@@ -52,8 +52,6 @@ const ChangePasswort = () => {
 		<Formik
 			initialValues={initialValues}
 			onSubmit={(values, actions) => {
-				console.log(actions);
-
 
 				if (values.oldPasswort !== user.password) {
 					actions.setFieldError('oldPasswort', 'Wrong password');
@@ -63,38 +61,27 @@ const ChangePasswort = () => {
 					actions.setFieldError('confirmPasswort', 'Error when re-entering password');
 				} else {
 					actions.validateForm(values);
-
-					const resData: IUserDate = {
-						...user,
-						password: values.newPasswort,
-					};
-					dispatsch(changeUserData(resData));
+					dispatsch(changeUserData({ ...user, password: values.newPasswort, }));
 					actions.resetForm();
+					dispatsch(changeisPasswordChange(true));
+					navigate('/privateOffice')
 				};
 				actions.setSubmitting(false);
 
 			}}>
-			{({ ...propsFormik }) => {
-
-
-
-
-
-				return (
-					<StyledPrivatOfficebox>
-						<StyledChangePasswortForm>
-							<InputFormForChangePass text={textChangepasswort.enterOldPasswort} name={'oldPasswort'} />
-							<InputFormForChangePass text={textChangepasswort.enterNewPasswort} name={'newPasswort'} />
-							<InputFormForChangePass text={textChangepasswort.confirmNewPasswort} name={'confirmPasswort'} />
-							<StyledBtnBox>
-								<Button width='100%' height='48px' heigth768='48px' type='submit' disabled={propsFormik.isSubmitting} >{textChangepasswort.btnText}</Button>
-								<StyledStatusIcon />
-							</StyledBtnBox>
-						</StyledChangePasswortForm>
-					</StyledPrivatOfficebox>
-				)
-			}
-
+			{({ ...propsFormik }) => (
+				<StyledPrivatOfficebox>
+					<StyledChangePasswortForm>
+						<InputFormForChangePass text={textChangepasswort.enterOldPasswort} name={'oldPasswort'} />
+						<InputFormForChangePass text={textChangepasswort.enterNewPasswort} name={'newPasswort'} />
+						<InputFormForChangePass text={textChangepasswort.confirmNewPasswort} name={'confirmPasswort'} />
+						<StyledBtnBox>
+							<Button width='100%' height='48px' heigth768='48px' type='submit' disabled={propsFormik.isSubmitting} >{textChangepasswort.btnText}</Button>
+							<StyledStatusIcon />
+						</StyledBtnBox>
+					</StyledChangePasswortForm>
+				</StyledPrivatOfficebox>
+			)
 			}
 
 		</Formik>

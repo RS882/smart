@@ -46,9 +46,12 @@ const UserMenuItem: FC<IMenuItemProps> = (props) => {
 	const onClickBtn = () => {
 		dispatch(openUserMenu(false));
 		dispatch(changeIsBodyLock(false));
-		props.$attr_last ? dispatch(setLogOut()) :
-			//navigate(`/privateOffice`);
-			navigate(`/privateOffice/${props.item_name}`);
+
+		const logOut = () => {
+			dispatch(setLogOut());
+			navigate(`/`);
+		};
+		props.$attr_last ? logOut() : navigate(`/privateOffice/${props.item_name}`);
 	};
 
 

@@ -70,7 +70,7 @@ const PersonalData = () => {
 	};
 	return (
 		<Formik initialValues={initialValues}
-			onSubmit={(values) => {
+			onSubmit={(values, actions) => {
 				const resData: IUserDate = {
 					...user,
 					name: values.name,
@@ -84,7 +84,7 @@ const PersonalData = () => {
 					avatar: values.avatar || user.avatar,
 				};
 				dispatsch(changeUserData(resData));
-
+				actions.setSubmitting(false);
 			}}>
 			{(propsFormik) => (
 				<StyledPrivatOfficebox>
@@ -105,7 +105,7 @@ const PersonalData = () => {
 							placholderText={textPersData.placeholder} option={deliveryMethod} validate={() => { }} />
 						<FieldTextCart name='avatar' isStorage={false} title={textPersData.avatar} type='file' validate={() => { }} />
 						<StyledBtnPrivatData>
-							<Button width='100%' height='48px' heigth768='48px' type='submit'  >{textPersData.btnText}</Button>
+							<Button width='100%' height='48px' heigth768='48px' type='submit' disabled={propsFormik.isSubmitting} >{textPersData.btnText}</Button>
 						</StyledBtnPrivatData>
 					</StyledPersonalDataForm>
 				</StyledPrivatOfficebox>
