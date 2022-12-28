@@ -2,7 +2,7 @@ import React from 'react';
 
 const Compare = React.lazy(() => import('./components/InDeveloping/Compare/Compare'));
 const Viewed = React.lazy(() => import('./components/InDeveloping/Viewed/Viewed'));
-const Favorites = React.lazy(() => import('./components/InDeveloping/Favorites/Favorites'));
+const Favorites = React.lazy(() => import('./components/Favorites/Favorites'));
 const Catalog = React.lazy(() => import('./components/InDeveloping/Catalog/Catalog'));
 const About = React.lazy(() => import('./components/InDeveloping/About/About'));
 const Stock = React.lazy(() => import('./components/InDeveloping/Stock/Stock'));

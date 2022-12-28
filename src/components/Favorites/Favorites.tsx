@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Favorits from '../PrivateOffice/Favorits';
 
 
 const Margin1 = styled.main`
@@ -10,6 +11,7 @@ const Favorites = () => {
 		<Margin1>
 
 			Favorites
+			<Favorits />
 		</Margin1>
 	);
 };

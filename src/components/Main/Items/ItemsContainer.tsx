@@ -15,7 +15,7 @@ export interface IItemProps {
 }
 interface IItemsContainer {
 	iData: [] | IItemData[];
-	titleType: string;
+	titleType?: string;
 };
 interface IItemsProps {
 	isFixWidth: boolean;
@@ -32,7 +32,7 @@ const StyledItemsContainer = styled.div<IItemsProps>`
 
 `;
 
-const ItemsContainer: FC<IItemsContainer> = ({ iData, titleType, ...props }) => {
+const ItemsContainer: FC<IItemsContainer> = ({ iData, titleType = '', ...props }) => {
 	const [isViewAll, setIsViewAll] = useState(false);
 	const viewAllItem = () => {
 		setIsViewAll(true);
@@ -47,8 +47,8 @@ const ItemsContainer: FC<IItemsContainer> = ({ iData, titleType, ...props }) => 
 		<>
 			{iData.length > 0 ?
 				<>
-					<TitleItems title={titleType} viewAllItem={viewAllItem} isAll={isViewAll}
-						textBtn={viewAllText !== null ? viewAllText : ''} />
+					{titleType ? <TitleItems title={titleType} viewAllItem={viewAllItem} isAll={isViewAll}
+						textBtn={viewAllText !== null ? viewAllText : ''} /> : null}
 					<StyledItemsContainer isFixWidth={iData.length <= 3} >
 						{isViewAll ? itemsCart : itemsCart.filter((e, i) => i < 4)}
 					</StyledItemsContainer>

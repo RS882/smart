@@ -55,6 +55,10 @@ export const getDateIsMoreTodayForString = (day: number = 0): string => {
 	const dayNowPlus = dateNow.getDate() + day;
 	return `${dateNow.getFullYear()}-${dateNow.getMonth() + 1}-${dayNowPlus < 10 ? `0${dayNowPlus}` : `${dayNowPlus}`}`;
 };
+//------------------------------
+// Changes the first symbol of the text to the title. All other characters become lowercaseex
+export const changeFirstSimbolToUpperCase = (text: string): string =>
+	text.toLowerCase().split('').map((e, i) => i === 0 ? e.toUpperCase() : e).join('');
 
 
 
