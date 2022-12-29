@@ -16,6 +16,7 @@ import { generalInformationEn, generalInformationRu, generalInformationUa } from
 import { PersonalDataEn, PersonalDataRu, PersonalDataUa } from "./localPersonalData";
 import { StringifyOptions } from "querystring";
 import { changePasswortEn, changePasswortRu, changePasswortUa } from "./localChangePasswort";
+import { favoritsPrivatOfficenEn, favoritsPrivatOfficeRu, favoritsPrivatOfficeUa } from "./localFavoritsPrivatOffice";
 
 
 export interface IHeaderStings {
@@ -162,13 +163,20 @@ export interface IChangePasswort {
 	confirmNewPasswort: string;
 	btnText: string;
 
-}
+};
+
+export interface IFavoritsPrivatOffice {
+	allGoods: string;
+
+};
 
 export interface IPrivatOffice {
 	generalInformation: IGenetalInformation;
 	personalData: IPersonalData;
 	changePasswort: IChangePasswort;
+	favotites: IFavoritsPrivatOffice;
 };
+
 
 
 export interface IStrings {
@@ -205,6 +213,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			generalInformation: generalInformationEn,
 			personalData: PersonalDataEn,
 			changePasswort: changePasswortEn,
+			favotites: favoritsPrivatOfficenEn,
 		},
 	},
 	ua: {
@@ -224,6 +233,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			generalInformation: generalInformationUa,
 			personalData: PersonalDataUa,
 			changePasswort: changePasswortUa,
+			favotites: favoritsPrivatOfficeUa,
 		},
 	},
 	ru: {
@@ -243,6 +253,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			generalInformation: generalInformationRu,
 			personalData: PersonalDataRu,
 			changePasswort: changePasswortRu,
+			favotites: favoritsPrivatOfficeRu,
 		},
 	},
 });

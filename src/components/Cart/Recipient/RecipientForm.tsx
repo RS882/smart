@@ -1,9 +1,10 @@
-import { Formik, FormikProps, useFormikContext } from 'formik';
-import React, { FC, useEffect } from 'react';
+import { Formik, FormikProps } from 'formik';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { setRecipient } from '../../../redux/CartSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { selectUserData } from '../../../redux/LoginSlice';
+import AutoSubmitForFromik from '../../../utilits/AutoSubmitForFromik';
 import { validateEmail, validateTelNumberCartFormFormat } from '../../../utilits/validators';
 
 import { ISetNext } from '../Cart';
@@ -32,16 +33,7 @@ const StyledDontCallMe = styled.div`
 	grid-column: 1/3;
 `;
 
-//
 
-// Automatic sending of the form (for Formik)
-const AutoSubmit = () => {
-	const { values, submitForm } = useFormikContext();
-	useEffect(() => {
-		submitForm();
-	}, [values, submitForm]);
-	return null;
-};
 
 const RecipientForm: FC<ISetNext> = ({ setIsNext }) => {
 	const recipientText = useAppSelector(selectRecipientTaxt);
@@ -84,7 +76,7 @@ const RecipientForm: FC<ISetNext> = ({ setIsNext }) => {
 							<DontCall name='dontCall' />
 						</StyledDontCallMe>
 					</StyledRecipientFilds>
-					<AutoSubmit />
+					<AutoSubmitForFromik />
 				</StyledDeliveryForm>)
 			}
 			}

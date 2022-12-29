@@ -29,4 +29,4 @@ const InputFormForChangePass: FC<IFormForChangePass> = ({ text, name }) => {
 	);
 };
 
-export default InputFormForChangePass;
+export default React.memo(InputFormForChangePass);
