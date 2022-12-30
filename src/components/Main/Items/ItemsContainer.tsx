@@ -16,6 +16,7 @@ export interface IItemProps {
 interface IItemsContainer {
 	iData: [] | IItemData[];
 	titleType?: string;
+	isViewAllItem?: boolean;
 };
 interface IItemsProps {
 	isFixWidth: boolean;
@@ -32,8 +33,8 @@ const StyledItemsContainer = styled.div<IItemsProps>`
 
 `;
 
-const ItemsContainer: FC<IItemsContainer> = ({ iData, titleType = '', ...props }) => {
-	const [isViewAll, setIsViewAll] = useState(false);
+const ItemsContainer: FC<IItemsContainer> = ({ iData, titleType = '', isViewAllItem = false, ...props }) => {
+	const [isViewAll, setIsViewAll] = useState(isViewAllItem);
 	const viewAllItem = () => {
 		setIsViewAll(true);
 	};

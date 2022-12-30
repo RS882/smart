@@ -2,7 +2,7 @@ import React, { FC, useEffect, useRef } from 'react';
 
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { endAddingItemToCart, getFlyingEndKoord, selectAddItemToCart, selectEndFlyKoord } from '../../../redux/ItemSlice';
+import { getFlyingEndKoord, selectAddItemToCart, } from '../../../redux/ItemSlice';
 import { ArrowFn } from '../../../types/fnTypes';
 import Flex from '../../Flex';
 import HeaderActionCount from './HeaderActionCount';

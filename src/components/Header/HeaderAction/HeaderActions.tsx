@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router';
 import { closeMenu } from '../../../redux/MenuSlice';
 import { changeIsModal } from '../../../redux/ModalSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { selectIsCartFull } from '../../../redux/ActionSlice';
+import { selectFavoritedItem, selectIsCartFull } from '../../../redux/ActionSlice';
 import { setOrderMessage } from '../../../redux/CartSlice';
 
 
@@ -29,6 +29,7 @@ const HeaderActions: FC<IHeaderActions> = (props) => {
 	const dispatch = useAppDispatch();
 
 	const isCartFull = useAppSelector(selectIsCartFull);
+	const favotiteItem = useAppSelector(selectFavoritedItem)
 
 	const onClickAction1 = (actionName: string) => {
 		dispatch(closeMenu());
@@ -36,6 +37,9 @@ const HeaderActions: FC<IHeaderActions> = (props) => {
 		if (!isCartFull && actionName === 'cart') {
 			navigate(`/`);
 			dispatch(setOrderMessage('Your basket is empty'))
+		} else if (favotiteItem.length === 0 && actionName === 'favorites') {
+			navigate(`/`);
+			dispatch(setOrderMessage('You have no selected goods'));
 		} else {
 			navigate(`/${actionName}`)
 		}

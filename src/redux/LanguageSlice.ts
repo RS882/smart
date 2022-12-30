@@ -107,5 +107,7 @@ export const selectGeneralInformationTaxt = (state: RootState) => state.language
 export const selectPersonalDataText = (state: RootState) => state.languages.langStrings!.privatOffice.personalData;
 export const selectchangePasswortText = (state: RootState) => state.languages.langStrings!.privatOffice.changePasswort;
 export const selectFavotitsPrivatOfficeText = (state: RootState) => state.languages.langStrings!.privatOffice.favotites;
+export const selectFavotitsSortText = (state: RootState) => state.languages.langStrings!.privatOffice.favoritsSort;
+
 
 export default LanguageSlice.reducer

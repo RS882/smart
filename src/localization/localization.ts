@@ -16,7 +16,7 @@ import { generalInformationEn, generalInformationRu, generalInformationUa } from
 import { PersonalDataEn, PersonalDataRu, PersonalDataUa } from "./localPersonalData";
 import { StringifyOptions } from "querystring";
 import { changePasswortEn, changePasswortRu, changePasswortUa } from "./localChangePasswort";
-import { favoritsPrivatOfficenEn, favoritsPrivatOfficeRu, favoritsPrivatOfficeUa } from "./localFavoritsPrivatOffice";
+import { favoritsPrivatOfficenEn, favoritsPrivatOfficeRu, favoritsPrivatOfficeUa, favoritsSortEn, favoritsSortRu, favoritsSortUa } from "./localFavoritsPrivatOffice";
 
 
 export interface IHeaderStings {
@@ -169,12 +169,16 @@ export interface IFavoritsPrivatOffice {
 	allGoods: string;
 
 };
+export interface IFavoritsSort {
+	terms: string[];
+}
 
 export interface IPrivatOffice {
 	generalInformation: IGenetalInformation;
 	personalData: IPersonalData;
 	changePasswort: IChangePasswort;
 	favotites: IFavoritsPrivatOffice;
+	favoritsSort: IFavoritsSort;
 };
 
 
@@ -214,6 +218,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			personalData: PersonalDataEn,
 			changePasswort: changePasswortEn,
 			favotites: favoritsPrivatOfficenEn,
+			favoritsSort: favoritsSortEn,
 		},
 	},
 	ua: {
@@ -234,6 +239,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			personalData: PersonalDataUa,
 			changePasswort: changePasswortUa,
 			favotites: favoritsPrivatOfficeUa,
+			favoritsSort: favoritsSortUa,
 		},
 	},
 	ru: {
@@ -254,6 +260,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			personalData: PersonalDataRu,
 			changePasswort: changePasswortRu,
 			favotites: favoritsPrivatOfficeRu,
+			favoritsSort: favoritsSortRu,
 		},
 	},
 });
