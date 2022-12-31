@@ -12,7 +12,7 @@ export const favoritsPrivatOfficeRu: IFavoritsPrivatOffice = {
 	allGoods: 'Все товары',
 };
 
-export const favoritsSortEn: IFavoritsSort = {
+export const favoritsSortRu: IFavoritsSort = {
 	terms: ['Сначала дорогие',
 		'Сначала дешевые',
 		'Лучшие оценки',
@@ -27,7 +27,7 @@ export const favoritsSortUa: IFavoritsSort = {
 		'Кількість відгуків',
 	],
 };
-export const favoritsSortRu: IFavoritsSort = {
+export const favoritsSortEn: IFavoritsSort = {
 	terms: ['First Dear',
 		'Cheap first',
 		'Best grades',

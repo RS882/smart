@@ -5,28 +5,30 @@ import { IItemData, selectitemsData } from '../../redux/ItemSlice';
 import ItemsContainer from '../Main/Items/ItemsContainer';
 import styled from 'styled-components';
 import { selectFavotitsPrivatOfficeText, selectItemHitBannersText, selectItemNewBannersText, selectLangStiringsHeaderCatalogMenu } from '../../redux/LanguageSlice';
-import { changeFirstSimbolToUpperCase } from '../../utilits/functions';
+import { changeFirstSimbolToUpperCase, getDiscountPrise } from '../../utilits/functions';
 import ItemTypeFilter from './ItemTypeFilter';
 import { selectFavotitsSortText } from './../../redux/LanguageSlice';
 
 export type IGetFunItem = (items: [] | IItemData[]) => [] | IItemData[];
 
 
-
+interface IGetFunObj { [x: string]: IGetFunItem; }
 
 
 const StyledFavoriteBox = styled.div`
 position: relative;
 	@media ${props => props.theme.media?.desktop || '(width >= 991.98px)'} {
-		margin-left:20px;
+		margin:0 20px;
 	};
 	
 `;
 
 const StyledItemTypeFilterBox = styled.div`
 	padding: 0 20px;
+	margin-bottom:20px;
 	@media ${props => props.theme.media?.tablet || '(width >= 767.98px)'} {
-		padding: 0 0 0 20px;
+		/* padding: 0 0 0 20px; */
+		margin-bottom: 0px;
 		width:240px;
 	};
 	@media ${props => props.theme.media?.desktop || '(width >= 991.98px)'} {
@@ -41,6 +43,13 @@ const StyledItemsContainer = styled.div`
 		padding: 0 ;
 	};
 `;
+const StyledFilterWraper = styled.div`
+@media ${props => props.theme.media?.tablet || '(width >= 767.98px)'} {
+	display: flex;
+	justify-content:space-between;
+	margin-bottom:20px;
+	};
+`
 
 const Favorits = () => {
 
@@ -68,7 +77,7 @@ const Favorits = () => {
 	const getTypeItem = (itemType: string): IGetFunItem => (items) =>
 		items.length === 0 ? items : items.filter(e => e.itemType === itemType);
 
-	let actionsItemType: { [x: string]: IGetFunItem; } = {
+	let actionsItemType: IGetFunObj = {
 		[defaultItemType]: (items) => items,
 		[newItemType]: getNewItem,
 		[hitItemType]: getHitItem,
@@ -98,21 +107,41 @@ const Favorits = () => {
 
 	const favoriteItemTypeArr = Array.from(favoriteItemType)
 
+	// List of goods after filtering
+	const itemsFilter = actionsItemType[selectetItemType](favoritedItems)
+
+
+	//------------------------------------------------------
+	// Types of sorting conditions
+	const [selectetSortType, setSelectetSortType] = useState(sortTerms[0]);
+
+	// Object where the key is the type of sorting. Value- Function for Finding
+	let actionSortType: IGetFunObj = {
+		[sortTerms[0]]: (items) =>
+			items.length === 0 ? items : items.sort((a, b) => (getDiscountPrise(b.prise, b.discount) - getDiscountPrise(a.prise, a.discount))),
+		[sortTerms[1]]: (items) =>
+			items.length === 0 ? items : items.sort((a, b) => (getDiscountPrise(a.prise, a.discount) - getDiscountPrise(b.prise, b.discount))),
+		[sortTerms[2]]: (items) =>
+			items.length === 0 ? items : items.sort((a, b) => (+b.starts - (+a.starts))),
+		[sortTerms[3]]: (items) =>
+			items.length === 0 ? items : items.sort((a, b) => (+b.reviews - (+a.reviews))),
+
+	};
 
 
 	// array of goods for display
-	const items = actionsItemType[selectetItemType](favoritedItems);
-
-	//------------------------------------------------------
-
-
-
+	const items = actionSortType[selectetSortType](itemsFilter);
 
 	return (
 		<StyledFavoriteBox>
-			<StyledItemTypeFilterBox>
-				<ItemTypeFilter itemType={favoriteItemTypeArr} setSelectedItemType={setSelectedItemType} />
-			</StyledItemTypeFilterBox>
+			<StyledFilterWraper>
+				<StyledItemTypeFilterBox>
+					<ItemTypeFilter itemType={favoriteItemTypeArr} setSelectedItemType={setSelectedItemType} />
+				</StyledItemTypeFilterBox>
+				<StyledItemTypeFilterBox>
+					<ItemTypeFilter itemType={sortTerms} setSelectedItemType={setSelectetSortType} />
+				</StyledItemTypeFilterBox>
+			</StyledFilterWraper>
 			<StyledItemsContainer>
 				<ItemsContainer iData={items} isViewAllItem={true} />
 			</StyledItemsContainer>

@@ -59,6 +59,10 @@ export const getDateIsMoreTodayForString = (day: number = 0): string => {
 // Changes the first symbol of the text to the title. All other characters become lowercaseex
 export const changeFirstSimbolToUpperCase = (text: string): string =>
 	text.toLowerCase().split('').map((e, i) => i === 0 ? e.toUpperCase() : e).join('');
+//------------------------
+// calculates the price with a discount from the initial price
+export	const getDiscountPrise = (prise: string | number, discount: string | number): number =>
+		+discount !== 0 ? +(+prise - (+prise * +discount / 100)).toFixed(2) : 0;
 
 
 
