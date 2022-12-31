@@ -3,7 +3,7 @@ import React, { FC, } from 'react';
 import { Form, Formik } from 'formik';
 import styled from 'styled-components';
 
-import SelectTypeFilter from './SelectTypeFilter';
+import SelectTypeFilter from './PrivateOffice/SelectTypeFilter';
 
 
 interface IItemTypeFilter {
