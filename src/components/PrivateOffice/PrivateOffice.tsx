@@ -14,7 +14,7 @@ import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 
 
 
-const StyledPrivateOfficeBox = styled.div`
+export const StyledPrivateOfficeBox = styled.div`
 	width:100%;
 	margin-top: 20px;
 	display: grid;
@@ -29,7 +29,7 @@ const StyledPrivateOfficeBox = styled.div`
 
 `;
 
-const StyledBreadcrumbs = styled.div`
+export const StyledBreadcrumbs = styled.div`
 	padding-left:20px;
 	@media ${props => props.theme.media?.desktop || '(width >= 991.98px)'} {
 		grid-column:1/3;
@@ -38,7 +38,7 @@ const StyledBreadcrumbs = styled.div`
 `;
 
 
-const StyledDestopMenu = styled.div`
+export const StyledDestopMenu = styled.div`
 	display:none;
 	@media ${props => props.theme.media?.desktop || '(width >= 991.98px)'} {
 		display:block;
@@ -46,7 +46,7 @@ const StyledDestopMenu = styled.div`
 	};
 `;
 
-const StyledTitel = styled(StyledBreadcrumbs)`
+export const StyledTitel = styled(StyledBreadcrumbs)`
 	
 	font-weight: 700;
 	font-size: 24px;

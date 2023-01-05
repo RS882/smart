@@ -1,24 +1,21 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
-import { selectFavoritedItem } from '../redux/ActionSlice';
-
 import { IItemData, selectitemsData } from '../redux/ItemSlice';
 import { selectFavotitsPrivatOfficeText, selectFavotitsSortText, selectItemHitBannersText, selectItemNewBannersText, selectLangStiringsHeaderCatalogMenu } from '../redux/LanguageSlice';
 import { changeFirstSimbolToUpperCase, getDiscountPrise } from '../utilits/functions';
 import ItemsContainer from './Main/Items/ItemsContainer';
 import ItemTypeFilter from './ItemTypeFilter';
 import { useAppSelector } from '../redux/hooks';
+import { useEffect } from 'react';
 
 
 export type IGetFunItem = (items: [] | IItemData[]) => [] | IItemData[];
-
-
 interface IGetFunObj { [x: string]: IGetFunItem; }
 
 
 
 const StyledFavoriteBox = styled.div`
-position: relative;
+	position: relative;
 	@media ${props => props.theme.media?.desktop || '(width >= 991.98px)'} {
 		margin:0 20px;
 	};
@@ -55,32 +52,34 @@ const StyledFilterWraper = styled.div`
 
 const ShowItemsWithFiltAndSort: FC<{ itemsDataList: string[] }> = ({ itemsDataList }) => {
 
-
-
-
-
-
 	const itemsData = useAppSelector(selectitemsData);
 	const bannerNewText = useAppSelector(selectItemNewBannersText);
 	const bannerHittext = useAppSelector(selectItemHitBannersText);
-	const objItemType = useAppSelector(selectLangStiringsHeaderCatalogMenu);
+	const objItemType = useAppSelector(selectLangStiringsHeaderCatalogMenu);//
 	const defaultType = useAppSelector(selectFavotitsPrivatOfficeText);
 	const sortTerms = useAppSelector(selectFavotitsSortText).terms.map(e => changeFirstSimbolToUpperCase(e));
 	// We transform the text- only the first letter title
-	const defaultItemType = changeFirstSimbolToUpperCase(defaultType.allGoods);
-	const newItemType = changeFirstSimbolToUpperCase(bannerNewText);
-	const hitItemType = changeFirstSimbolToUpperCase(bannerHittext);
+	const defaultItemType = changeFirstSimbolToUpperCase(defaultType.allGoods);//
+	const newItemType = changeFirstSimbolToUpperCase(bannerNewText);//
+	const hitItemType = changeFirstSimbolToUpperCase(bannerHittext);//
 	//We create an object key - type of product, value - Filter function for this product
+
+
+	// The type of element is thrown in the filter
+	const [selectetItemType, setSelectedItemType] = useState(defaultItemType);
+	// Types of sorting conditions
+	const [selectetSortType, setSelectetSortType] = useState(sortTerms[0]);
+
+
+
 
 	const getNewItem: IGetFunItem = (items) =>
 		items.length === 0 ? items : items.filter(e => e.newitem);
-
 	const getHitItem: IGetFunItem = (items) =>
 		items.length === 0 ? items : items.filter(e => e.salehit);
-
 	const getTypeItem = (itemType: string): IGetFunItem => (items) =>
 		items.length === 0 ? items : items.filter(e => e.itemType === itemType);
-
+	//------------------
 	let actionsItemType: IGetFunObj = {
 		[defaultItemType]: (items) => items,
 		[newItemType]: getNewItem,
@@ -92,10 +91,24 @@ const ShowItemsWithFiltAndSort: FC<{ itemsDataList: string[] }> = ({ itemsDataLi
 			[changeFirstSimbolToUpperCase(objItemType[key])]: getTypeItem(`${key}`),
 		}
 	};
+	// console.log(defaultItemType);
+	// console.log(actionsItemType);
 	//----------------------
+	// Object where the key is the type of sorting. Value- Function for Finding
+	const actionSortType: IGetFunObj = {
+		[sortTerms[0]]: (items) =>
+			items.length === 0 ? items : items.sort((a, b) => (getDiscountPrise(b.prise, b.discount) - getDiscountPrise(a.prise, a.discount))),
+		[sortTerms[1]]: (items) =>
+			items.length === 0 ? items : items.sort((a, b) => (getDiscountPrise(a.prise, a.discount) - getDiscountPrise(b.prise, b.discount))),
+		[sortTerms[2]]: (items) =>
+			items.length === 0 ? items : items.sort((a, b) => (+b.starts - (+a.starts))),
+		[sortTerms[3]]: (items) =>
+			items.length === 0 ? items : items.sort((a, b) => (+b.reviews - (+a.reviews))),
 
-	// The type of element is thrown in the filter
-	const [selectetItemType, setSelectedItemType] = useState(defaultItemType);
+	};
+	//--------------------------
+
+
 
 	// An array of elected goods
 	const favoritedItems: IItemData[] = itemsDataList.map((e) => itemsData.filter(el => el.id === e)[0]);
@@ -111,29 +124,26 @@ const ShowItemsWithFiltAndSort: FC<{ itemsDataList: string[] }> = ({ itemsDataLi
 
 	const favoriteItemTypeArr = Array.from(favoriteItemType)
 
-	// List of goods after filtering
-	const itemsFilter = actionsItemType[selectetItemType](favoritedItems)
+
+
+
 
 
 	//------------------------------------------------------
-	// Types of sorting conditions
-	const [selectetSortType, setSelectetSortType] = useState(sortTerms[0]);
 
-	// Object where the key is the type of sorting. Value- Function for Finding
-	let actionSortType: IGetFunObj = {
-		[sortTerms[0]]: (items) =>
-			items.length === 0 ? items : items.sort((a, b) => (getDiscountPrise(b.prise, b.discount) - getDiscountPrise(a.prise, a.discount))),
-		[sortTerms[1]]: (items) =>
-			items.length === 0 ? items : items.sort((a, b) => (getDiscountPrise(a.prise, a.discount) - getDiscountPrise(b.prise, b.discount))),
-		[sortTerms[2]]: (items) =>
-			items.length === 0 ? items : items.sort((a, b) => (+b.starts - (+a.starts))),
-		[sortTerms[3]]: (items) =>
-			items.length === 0 ? items : items.sort((a, b) => (+b.reviews - (+a.reviews))),
 
-	};
+
+	// List of goods after filtering
+	const itemsFilter = actionsItemType[selectetItemType] ? actionsItemType[selectetItemType](favoritedItems) : favoritedItems;
 
 	// array of goods for display
-	const items = actionSortType[selectetSortType](itemsFilter);
+	const items = actionSortType[selectetSortType] ? (actionSortType[selectetSortType](itemsFilter)) : itemsFilter;
+
+
+
+
+
+
 
 	return (
 		<StyledFavoriteBox>

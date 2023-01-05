@@ -1,9 +1,12 @@
-import React, { FC, } from 'react';
+import React, { FC, useState } from 'react';
 
 import { Form, Formik } from 'formik';
 import styled from 'styled-components';
 
-import SelectTypeFilter from './PrivateOffice/SelectTypeFilter';
+import SelectTypeFilter from './SelectTypeFilter';
+import { useAppSelector } from '../redux/hooks';
+import { selectActivLng } from './../redux/LanguageSlice';
+import { useEffect } from 'react';
 
 
 interface IItemTypeFilter {
@@ -16,13 +19,33 @@ const StyledForm = styled(Form)`
 `;
 
 const ItemTypeFilter: FC<IItemTypeFilter> = ({ itemType, setSelectedItemType }) => {
+
+	const [isLangChange, setIsLangChange] = useState(false);
+
+	const aktivLang = useAppSelector(selectActivLng);
+
+	useEffect(() => {
+		setIsLangChange(true);
+	}, [aktivLang]);
+
+
+
 	return (
 		<Formik
 			initialValues={{ filterType: itemType[0], }}
-			onSubmit={(values) => { setSelectedItemType(values.filterType) }}>
+			onSubmit={(values, actions) => {
+
+				if (isLangChange) {
+					actions.resetForm();
+					setIsLangChange(false);
+				} else {
+					setSelectedItemType(values.filterType)
+				}
+
+			}}>
 			{() => (
 				<StyledForm>
-					<SelectTypeFilter name='filterType' itemTypeName={itemType} />
+					<SelectTypeFilter name='filterType' itemTypeName={itemType} isLangChange={isLangChange} />
 				</StyledForm>
 			)}
 		</Formik>

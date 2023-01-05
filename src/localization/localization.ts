@@ -17,6 +17,7 @@ import { PersonalDataEn, PersonalDataRu, PersonalDataUa } from "./localPersonalD
 import { StringifyOptions } from "querystring";
 import { changePasswortEn, changePasswortRu, changePasswortUa } from "./localChangePasswort";
 import { favoritsPrivatOfficenEn, favoritsPrivatOfficeRu, favoritsPrivatOfficeUa, favoritsSortEn, favoritsSortRu, favoritsSortUa } from "./localFavoritsPrivatOffice";
+import { favotitesEn, favotitesUa, favotitesRu } from './localFavorites';
 
 
 export interface IHeaderStings {
@@ -181,6 +182,11 @@ export interface IPrivatOffice {
 	favoritsSort: IFavoritsSort;
 };
 
+export interface IFavorites {
+	loginText: string;
+	btnText: string;
+}
+
 
 
 export interface IStrings {
@@ -191,6 +197,7 @@ export interface IStrings {
 	itemCard: IItemCard;
 	cart: ICart;
 	privatOffice: IPrivatOffice;
+	favorites: IFavorites;
 };
 
 
@@ -220,6 +227,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			favotites: favoritsPrivatOfficenEn,
 			favoritsSort: favoritsSortEn,
 		},
+		favorites: favotitesEn,
 	},
 	ua: {
 		header: headerTextUa,
@@ -241,6 +249,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			favotites: favoritsPrivatOfficeUa,
 			favoritsSort: favoritsSortUa,
 		},
+		favorites: favotitesUa,
 	},
 	ru: {
 		header: headerTextRu,
@@ -262,6 +271,7 @@ export let strings: IStringsWithMethods = new LocalizedStrings({
 			favotites: favoritsPrivatOfficeRu,
 			favoritsSort: favoritsSortRu,
 		},
+		favorites: favotitesRu,
 	},
 });
 
