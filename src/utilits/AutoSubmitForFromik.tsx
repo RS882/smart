@@ -7,7 +7,6 @@ const AutoSubmit = ({ isSubmit = true }: { isSubmit?: boolean }) => {
 	const { values, submitForm } = useFormikContext();
 	useEffect(() => {
 		submitForm();
-
 	}, [values, submitForm, isSubmit]);
 	return null;
 };

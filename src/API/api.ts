@@ -13,7 +13,7 @@ export const loginAPI = {
 	regUser: (regData: ValuesLog) => axios.post('users', regData),
 	putUserData: (userData: IUserDate) => axios.put(`users/${userData.id}`, userData),
 };
-
+ 
 export const itemAPI = {
 	getItem: (page: number = 1) => axios.get(`item`),
 };

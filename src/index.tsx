@@ -4,7 +4,6 @@ import AppContainer from './App';
 import './fonts.css';
 
 
-ReactDOM.render(<AppContainer />, document.getElementById('root')
-);
+ReactDOM.render(<AppContainer />, document.getElementById('root'));
 
 

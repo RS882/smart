@@ -14,7 +14,7 @@ const SelectTypeFilter = ({ itemTypeName, isLangChange, ...props }: { itemTypeNa
 	return (
 		<CartDateBox >
 			<StyledInputBox>
-				<StyledCitySelect  {...field} {...props}>	{optionElem}</StyledCitySelect>
+				<StyledCitySelect  >	{optionElem}</StyledCitySelect>
 				<StyledInputDateMask>{field.value}</StyledInputDateMask>
 			</StyledInputBox>
 			<AutoSubmitForFromik isSubmit={isLangChange} />
